@@ -6393,6 +6393,12 @@ textarea.form-control-lg {
           animation: placeholder-glow 2s ease-in-out infinite;
 }
 
+.div-align-center{
+  text-align: center;
+}
+
+
+
 @-webkit-keyframes placeholder-glow {
   50% {
     opacity: 0.2;
