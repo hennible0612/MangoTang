@@ -4036,6 +4036,7 @@ textarea.form-control-lg {
 }
 .tab-content > .active {
   display: block;
+
 }
 
 .navbar {
@@ -6731,6 +6732,10 @@ textarea.form-control-lg {
 
 .d-inline-block {
   display: inline-block !important;
+}
+
+.tab-font-color{
+  color: #1a1e21;
 }
 
 .d-block {
