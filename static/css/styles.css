@@ -3846,6 +3846,10 @@ textarea.form-control-lg {
   color: #adb5bd;
 }
 
+.dropdown-menu-size {
+  font-size: 1.25em;
+}
+
 .btn-group,
 .btn-group-vertical {
   position: relative;
@@ -6735,7 +6739,7 @@ textarea.form-control-lg {
 }
 
 .tab-font-color{
-  color: #1a1e21;
+  color: black;
 }
 
 .d-block {
