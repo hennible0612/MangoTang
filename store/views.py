@@ -10,6 +10,10 @@ def cart(request):
     context = {}
     return render(request, 'store/cart.html', context)
 
+def login(request):
+    context = {}
+    return render(request, 'store/login.html', context)
+
 
 def checkout(request):
     context = {}

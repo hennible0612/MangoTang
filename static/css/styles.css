@@ -11379,3 +11379,23 @@ textarea.form-control-lg {
 }
 
 
+a.nav-link-cart:link
+{
+   color: #fb3f00;
+   text-decoration: none;
+}
+a.nav-link-cart:visited
+{
+   color: #fb3f00;
+   text-decoration: none;
+}
+a.nav-link-cart:hover
+{
+   color: #fb3f00;
+   text-decoration: none;
+}
+a.nav-link-cart:active
+{
+   color: #fb3f00;
+   text-decoration: none;
+}
