@@ -8077,6 +8077,12 @@ textarea.form-control-lg {
 .p-5 {
     padding: 3rem !important;
 }
+.p-6 {
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+    padding-top: 3rem !important;
+}
+
 
 .px-0 {
     padding-right: 0 !important;
@@ -12043,4 +12049,8 @@ a.nav-link-cart:active {
   width: 350px;
   height: 200px;
   outline: dashed 1px black;
+}
+.div-register-term{
+    padding-left: 3em;
+    padding-bottom: 0.5em
 }
