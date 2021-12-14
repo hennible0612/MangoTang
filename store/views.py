@@ -18,6 +18,10 @@ def register(request):
     context = {}
     return render(request, 'store/register.html', context)
 
+def mypage(request):
+    context = {}
+    return render(request, 'store/mypage.html', context)
+
 
 def checkout(request):
     context = {}
