@@ -3,24 +3,6 @@
 
 
 {% block content %}
-    {#  <body class="text-center">#}
-    {#    <form class="form-signin">#}
-    {#      <img class="mb-4" src="{% static 'nscreen_logo/5_망고땡_로고(영문)_정사각.png'%}" alt="" width="72" height="72">#}
-    {#      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>#}
-    {##}
-    {#      <label for="inputEmail" class="sr-only">Email address</label>#}
-    {#      <input type="email" id="inputEmail"  style="width:20%" placeholder="Email address" required="" autofocus=""><br>#}
-    {#      <label for="inputPassword" class="sr-only">Password</label>#}
-    {#      <input type="password" id="inputPassword" style="width:20%" placeholder="Password" required="">#}
-    {##}
-    {#        <div class="checkbox mb-3">#}
-    {#        <label>#}
-    {#          <input type="checkbox" value="remember-me"> Remember me#}
-    {#        </label>#}
-    {#      </div>#}
-    {#      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>#}
-    {#      <p class="mt-5 mb-3 text-muted">© 2017-2018</p>#}
-    {#    </form>#}
     <section class="vh-100" style="background-color: #eee;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -43,7 +25,7 @@
                             <!-- checkbox -->
                             <div class="flex-column">
 
-                                <a href="#!" class='nav-link-cart' style="padding-right: 10px">회원가입</a>
+                                <a href="{% url 'register' %}" class='nav-link-cart' style="padding-right: 10px">회원가입</a>
                                 <a href="#!" class='nav-link-cart' style="padding-right:10px;">비밀번호찾기</a>
                                 <a href="#!" class='nav-link-cart'>아이디찾기</a>
 
