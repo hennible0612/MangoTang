@@ -4126,6 +4126,9 @@ textarea.form-control-lg {
 .dropdown-menu-size {
     font-size: 1.25em;
 }
+.dropdown-menu-size-customer {
+    font-size: 1.00em;
+}
 
 .btn-group,
 .btn-group-vertical {
