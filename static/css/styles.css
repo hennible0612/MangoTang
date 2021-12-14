@@ -12030,3 +12030,17 @@ a.nav-link-cart:active {
     color: #ee7d18;
     text-decoration: none;
 }
+.center-login {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+}
+.container-center {
+  font-family: arial;
+  font-size: 24px;
+  margin: 25px;
+  width: 350px;
+  height: 200px;
+  outline: dashed 1px black;
+}
