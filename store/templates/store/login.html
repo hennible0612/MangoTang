@@ -3,24 +3,75 @@
 
 
 {% block content %}
-  <body class="text-center">
-    <form class="form-signin">
-      <img class="mb-4" src="{% static 'nscreen_logo/5_망고땡_로고(영문)_정사각.png'%}" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
-    </form>
+    {#  <body class="text-center">#}
+    {#    <form class="form-signin">#}
+    {#      <img class="mb-4" src="{% static 'nscreen_logo/5_망고땡_로고(영문)_정사각.png'%}" alt="" width="72" height="72">#}
+    {#      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>#}
+    {##}
+    {#      <label for="inputEmail" class="sr-only">Email address</label>#}
+    {#      <input type="email" id="inputEmail"  style="width:20%" placeholder="Email address" required="" autofocus=""><br>#}
+    {#      <label for="inputPassword" class="sr-only">Password</label>#}
+    {#      <input type="password" id="inputPassword" style="width:20%" placeholder="Password" required="">#}
+    {##}
+    {#        <div class="checkbox mb-3">#}
+    {#        <label>#}
+    {#          <input type="checkbox" value="remember-me"> Remember me#}
+    {#        </label>#}
+    {#      </div>#}
+    {#      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>#}
+    {#      <p class="mt-5 mb-3 text-muted">© 2017-2018</p>#}
+    {#    </form>#}
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <h3 class="mb-5">로그인</h3>
+
+                            <div class="form-outline mb-4">
+                                <input type="email" placeholder="이메일" id="typeemailx-2"
+                                       class="form-control form-control-lg"/>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="password" placeholder="비밀번호" id="typepasswordx-2"
+                                       class="form-control form-control-lg"/>
+                            </div>
+
+                            <!-- checkbox -->
+                            <div class="flex-column">
+
+                                <a href="#!" class='nav-link-cart' style="padding-right: 10px">회원가입</a>
+                                <a href="#!" class='nav-link-cart' style="padding-right:10px;">비밀번호찾기</a>
+                                <a href="#!" class='nav-link-cart'>아이디찾기</a>
 
 
-</body>
+                            </div>
+                            <br>
+                            <button class="btn btn-primary btn-lg btn-block"
+                                    style="width:20em; background-color:#ee7d18 " type="submit">login
+                            </button>
+
+                            <hr class="my-4">
+
+                            <button class="btn btn-lg btn-block btn-primary"
+                                    style="background-color: #dd4b39; width: 20em;" type="submit"><i
+                                    class="fab fa-google me-2"></i> sign in with google
+                            </button>
+                            <button class="btn btn-lg btn-block btn-primary mb-2"
+                                    style="background-color: #3b5998; width: 20em;" type="submit"><i
+                                    class="fab fa-facebook-f me-2"></i>sign in with facebook
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    </body>
 
 {% endblock %}
