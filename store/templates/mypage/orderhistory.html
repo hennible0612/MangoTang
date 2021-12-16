@@ -1,9 +1,35 @@
 {% extends 'store/mypage.html' %}
 {% load static %}
 {% block mypage %}
-<div class="container">
-    주문내역
-    <hr>
+    <div class="container">
+        주문내역
+        <hr>
+        <div class="container"><!--주문내역 컨테이너-->
+            <div class="container-orderlist" style="height: 10rem">
+                <div class="item-orderlist-picture" style="background-color: red;">
+                    <a href="#">
+                        <img class="card-img-top" src="https://dummyimage.com/1000x1000/dee2e6/6c757d.jpg" alt="..."/>
+                    </a>
+                </div>
+                <div class="item-orderlist-info" style="background-color:green;">
+                    <div>
+                        잘풀리는집 리얼 실키 미용티슈 2겹
+                    </div>
+                    <div>
+                        9억원
+                    </div>
 
-</div>
+                </div>
+
+                <div class="item-orderlist-button" style="background-color:blue;">
+                    <button>배송조회</button>
+                    <button>교환, 반품 신청</button>
+                    <button>리뷰 작성하기</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
 {% endblock mypage %}

@@ -8147,6 +8147,11 @@ textarea.form-control-lg {
     padding-bottom: 3rem !important;
 }
 
+.py-6 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+}
+
 .pt-0 {
     padding-top: 0 !important;
 }
@@ -12200,4 +12205,26 @@ a.nav-link-mypage:hover {
 a.nav-link-mypage:active {
     color: black;
     text-decoration: none;
+}
+
+.container-orderlist {
+	display: flex; /*display 형식 그리드 */
+    flex-direction: row; /*row로 정렬 */
+    flex-wrap: wrap; /* 자동 줄바꿈*/
+    /*justify-content: center; !*중앙 정렬*!*/
+    /*align-items: stretch; !*아이템들 수직축 방향정렬 *!*/
+	/* display: inline-flex;*/
+}
+
+.item-orderlist-picture{
+        flex-basis: 20%;
+
+}
+.item-orderlist-info{
+        flex-basis: 60%;
+
+}
+.item-orderlist-button{
+        flex-basis: 20%;
+
 }
