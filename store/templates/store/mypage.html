@@ -4,13 +4,86 @@
 {% block content %}
     <section class="py-6 ">
         <div class="container">
-            <div class="container-mypage ">
-                <div class="item-mypage-user">helloflex</div>
-
-            </div>
             <div class="container-mypage">
-                <div class="item-mypage-list">helloflex</div>
-                <div class="item-mypage-info">abc</div>
+                <div class=" item-mypage-info-holder" style="background-color: #eccccf">
+                    <div class="container">
+                        <i class="far fa-address-card"></i>
+                        <b>사용자 이름</b>
+                    </div>
+                </div>
+                <div class=" item-mypage-info-holder" style="background-color: #bfd1ec">
+                    <div class="container">
+
+                        <i class="fas fa-truck"></i>
+                        <b>배송</b>
+                    </div>
+                </div>
+                <div class=" item-mypage-info-holder" style="background-color: #b02a37">
+                    <div class="container">
+
+                        <i class="fas fa-money-bill-alt"></i>
+                        <b>포인트</b>
+                    </div>
+
+                </div>
+                <div class=" item-mypage-info-holder" style="background-color: #bebebf">
+                    <div class="container">
+
+                        <i class="fas fa-percent"></i>
+                        <b>쿠폰</b>
+                    </div>
+
+                </div>
+                <div class=" item-mypage-info-holder" style="background-color: #bb2d3b">
+                    <div class="container">
+                        <i class="fas fa-question-circle"></i>
+                        <b>1:1 문의</b>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container-mypage" style="background-color: #b6effb">
+                <div class="item-mypage-list ">
+                    <nav class="sb-sidenav  " id="sidenavAccordion">
+                        <div class="sb-sidenav-menu" style="width: 10em; background-color: #bfd1ec">
+                            <div class="nav">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                   data-bs-target="#collapseLayouts" aria-expanded="false"
+                                   aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"></div>
+                                    주문관리
+                                    <div class="sb-sidenav-collapse-arrow"></div>
+                                </a>
+
+                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                                     data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="#">주문/배송내역</a>
+                                        <a class="nav-link" href="#">주문취소내역</a>
+                                        <a class="nav-link" href="#">교환반품내역</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link" href="#">
+                                    찜내역
+                                </a>
+
+
+                                <a class="nav-link" href="#">
+                                    <div class="sb-nav-link-icon"></div>
+                                    Charts
+                                </a>
+                                <a class="nav-link" href="#">
+                                    <div class="sb-nav-link-icon"></div>
+                                    Tables
+                                </a>
+                            </div>
+                        </div>
+
+                    </nav>
+
+                </div>
+                <div class="item-mypage-info" style="background-color: #ee7d18">abc</div>
 
             </div>
         </div>
@@ -30,7 +103,7 @@
 {#            <div class="item">I</div>#}
 {#        </div>#}
 {#    </section>#}
-
+{##}
 {#    <section class="py-6">#}
 {##}
 {#        <div id="layoutSidenav"  class="container px-4 px-lg-5 mt-5 ">#}
