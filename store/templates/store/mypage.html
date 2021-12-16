@@ -4,6 +4,7 @@
 {% block content %}
     <section class="py-6 ">
         <div class="container">
+            <!-- 사용자 이름, 배송, 포인트, 쿠폰 1:1문의 바 -->
             <div class="container-mypage">
                 <div class=" item-mypage-info-holder">
                     <div class="container" style="flex-direction: column; ">
@@ -106,10 +107,10 @@
                 </div>
             </div>
 
-
+            <!-- 리스트 메뉴 -->
             <div class="container-mypage" style=" height: 90rem">
                 <div class="item-mypage-list ">
-                    <nav class="sb-sidenav  " id="sidenavAccordion">
+                    <nav class="sb-sidenav" >
                         <div class="sb-sidenav-menu" style="width: 10em;">
                             <div class="nav">
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -121,47 +122,54 @@
                                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                                      data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link nav-link-mypage" href="#">주문/배송내역</a>
-                                        <a class="nav-link nav-link-mypage" href="#">주문취소내역</a>
-                                        <a class="nav-link nav-link-mypage" href="#">교환반품내역</a>
+                                        <a class="nav-link nav-link-mypage" href="{% url 'orderhistory' %}" >주문/배송내역</a>
+                                        <a class="nav-link nav-link-mypage" href="{% url 'ordercancel' %}">주문취소내역</a>
+                                        <a class="nav-link nav-link-mypage" href="{% url 'orderrefund' %}">교환반품내역</a>
                                     </nav>
                                 </div>
                                 <hr>
-                                <a class="nav-link nav-link-mypage" href="#">찜내역</a>
+                                <a class="nav-link nav-link-mypage" href="{% url 'favoritelist' %}">찜내역</a>
 
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="#">포인트
+                                <a class="nav-link nav-link-mypage" href="{% url 'pointlist' %}">포인트
                                 </a>
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="#">쿠폰
+                                <a class="nav-link nav-link-mypage" href="{% url 'couponlist' %}">쿠폰
                                 </a>
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="#">구매 후기
+                                <a class="nav-link nav-link-mypage" href="{% url 'reviewlist' %}">구매 후기
                                 </a>
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="#">환불 서비스
+                                <a class="nav-link nav-link-mypage" href="{% url 'refundlist' %}">환불 서비스
                                 </a>
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="#">1:1문의 내역
+                                <a class="nav-link nav-link-mypage" href="{% url 'qnalist' %}">1:1문의 내역
                                 </a>
+
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="#">상품 후기</a>
-                                <hr>
-
-                                <a class="nav-link nav-link-mypage" href="#">회원 정보 수정</a>
+                                <a class="nav-link nav-link-mypage" href="{% url 'userinfo' %}">회원 정보 수정</a>
                             </div>
                         </div>
 
                     </nav>
 
                 </div>
-                <div class="item-mypage-info" style="background-color: #ee5d18">abc</div>
+                <div class="item-mypage-info">
+                    {% block mypage %}
+{#                    <div class="container">#}
+{#                        sdsfsdfsdfsdf#}
+{#                        <hr>#}
+{##}
+{#                    </div>#}
+                    {% endblock mypage %}
+
+                </div>
 
             </div>
         </div>
