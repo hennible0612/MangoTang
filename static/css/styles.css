@@ -23869,23 +23869,6 @@ body {
 }
 
 
-/*.container-mypage {*/
-/*        !*width: 768px;*!*/
-/*display: grid;*/
-/*  grid-template-columns: 200px 200px 200px;*/
-/*    grid-template-rows: 200px 200px 200px;*/
-
-/*  !*grid-template-columns: 1fr 1fr 1fr; *!*/
-/*  !*  grid-template-rows: 1fr 1fr 1fr;*!*/
-
-/*}*/
-
-/*.item-mypage:nth-child(1){*/
-/*	grid-column-start: 1;*/
-/*	grid-column-end: 3;*/
-/*	grid-row-start: 1;*/
-/*	grid-row-end: 2;*/
-/*}*/
 
 .container-mypage {
 	display: flex; /*display 형식 그리드 */
@@ -23925,4 +23908,25 @@ body {
     /*padding : 5rem;*/
     /*align-self: center;*/
     width: 100px;
+}
+
+
+a.nav-link-mypage:link {
+    color: black;
+    text-decoration: none;
+}
+
+a.nav-link-mypage:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a.nav-link-mypage:hover {
+    color: black;
+    text-decoration: none;
+}
+
+a.nav-link-mypage:active {
+    color: black;
+    text-decoration: none;
 }
