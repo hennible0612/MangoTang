@@ -19674,7 +19674,9 @@ textarea.form-control-lg {
   padding-bottom: 3rem !important;
 }
 .py-6 {
-  padding-bottom: 3rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+
 }
 
 .pt-0 {
@@ -23867,4 +23869,44 @@ body {
 }
 
 
+/*.container-mypage {*/
+/*        !*width: 768px;*!*/
+/*display: grid;*/
+/*  grid-template-columns: 200px 200px 200px;*/
+/*    grid-template-rows: 200px 200px 200px;*/
 
+/*  !*grid-template-columns: 1fr 1fr 1fr; *!*/
+/*  !*  grid-template-rows: 1fr 1fr 1fr;*!*/
+
+/*}*/
+
+/*.item-mypage:nth-child(1){*/
+/*	grid-column-start: 1;*/
+/*	grid-column-end: 3;*/
+/*	grid-row-start: 1;*/
+/*	grid-row-end: 2;*/
+/*}*/
+
+.container-mypage {
+	display: flex; /*display 형식 그리드 */
+    flex-direction: row; /*row로 정렬 */
+    flex-wrap: wrap; /* 자동 줄바꿈*/
+    /*justify-content: center; !*중앙 정렬*!*/
+    /*align-items: stretch; !*아이템들 수직축 방향정렬 *!*/
+	/* display: inline-flex; */
+}
+.item-mypage-user{
+    padding : 1rem;
+    flex-basis: 100%;
+    /*width: 100px;*/
+}
+.item-mypage-list{
+    padding : 1rem;
+    flex-basis: 20%;
+    /*width: 100px;*/
+}
+.item-mypage-info{
+    padding : 1rem;
+    flex-basis: 80%;
+    /*width: 100px;*/
+}

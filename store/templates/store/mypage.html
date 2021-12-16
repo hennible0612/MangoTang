@@ -2,69 +2,97 @@
 
 {% load static %}
 {% block content %}
-    <section class="py-6">
+    <section class="py-6 ">
+        <div class="container">
+            <div class="container-mypage ">
+                <div class="item-mypage-user">helloflex</div>
 
-        <div id="layoutSidenav"  class="container px-4 px-lg-5 mt-5 ">
-            <div>
-                <nav class="sb-sidenav  " id="sidenavAccordion">
-                    <div class="sb-sidenav-menu" style="width: 10em; background-color: #bfd1ec">
-                        <div class="nav">
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                               data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                주문관리
-                                <div class="sb-sidenav-collapse-arrow"></div>
-                            </a>
-
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                                 data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">주문/배송내역</a>
-                                    <a class="nav-link" href="#">주문취소내역</a>
-                                    <a class="nav-link" href="#">교환반품내역</a>
-                                </nav>
-                            </div>
-                             <a class="nav-link" href="#">
-                                찜내역
-                            </a>
-
-
-
-
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"></div>
-                                Tables
-                            </a>
-                        </div>
-                    </div>
-
-                </nav>
             </div>
+            <div class="container-mypage">
+                <div class="item-mypage-list">helloflex</div>
+                <div class="item-mypage-info">abc</div>
 
-
-            <div class="justify-content-center container tab-pane active"> <!-- id="layoutSidenav_content"  -->
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Sidenav Light</h1>
-
-                        <div class="card ">
-                            <div class="card-body">
-                                This page is an example of using the light side navigation option. By appending the
-                                <code>.sb-sidenav-light</code>
-                                class to the
-                                <code>.sb-sidenav</code>
-                                class, the side navigation will take on a light color scheme. The
-                                <code>.sb-sidenav-dark</code>
-                                is also available for a darker option.
-                            </div>
-                        </div>
-                    </div>
-                </main>
             </div>
         </div>
     </section>
 {% endblock content %}
+{# 그리드 #}
+{#    <section class="py-6 ">#}
+{#        <div class="container-mypage justify-content-center">#}
+{#            <div class="item-mypage">A</div>#}
+{#            <div class="item">B</div>#}
+{#            <div class="item">C</div>#}
+{#            <div class="item">D</div>#}
+{#            <div class="item">E</div>#}
+{#            <div class="item">F</div>#}
+{#            <div class="item">G</div>#}
+{#            <div class="item">H</div>#}
+{#            <div class="item">I</div>#}
+{#        </div>#}
+{#    </section>#}
+
+{#    <section class="py-6">#}
+{##}
+{#        <div id="layoutSidenav"  class="container px-4 px-lg-5 mt-5 ">#}
+{#            <div>#}
+{#                <nav class="sb-sidenav  " id="sidenavAccordion">#}
+{#                    <div class="sb-sidenav-menu" style="width: 10em; background-color: #bfd1ec">#}
+{#                        <div class="nav">#}
+{#                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"#}
+{#                               data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">#}
+{#                                <div class="sb-nav-link-icon"></div>#}
+{#                                주문관리#}
+{#                                <div class="sb-sidenav-collapse-arrow"></div>#}
+{#                            </a>#}
+{##}
+{#                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"#}
+{#                                 data-bs-parent="#sidenavAccordion">#}
+{#                                <nav class="sb-sidenav-menu-nested nav">#}
+{#                                    <a class="nav-link" href="#">주문/배송내역</a>#}
+{#                                    <a class="nav-link" href="#">주문취소내역</a>#}
+{#                                    <a class="nav-link" href="#">교환반품내역</a>#}
+{#                                </nav>#}
+{#                            </div>#}
+{#                             <a class="nav-link" href="#">#}
+{#                                찜내역#}
+{#                            </a>#}
+{##}
+{##}
+{##}
+{##}
+{#                            <a class="nav-link" href="#">#}
+{#                                <div class="sb-nav-link-icon"></div>#}
+{#                                Charts#}
+{#                            </a>#}
+{#                            <a class="nav-link" href="#">#}
+{#                                <div class="sb-nav-link-icon"></div>#}
+{#                                Tables#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                </nav>#}
+{#            </div>#}
+{##}
+{##}
+{#            <div class="justify-content-center container tab-pane active"> <!-- id="layoutSidenav_content"  -->#}
+{#                <main>#}
+{#                    <div class="container-fluid px-4">#}
+{#                        <h1 class="mt-4">Sidenav Light</h1>#}
+{##}
+{#                        <div class="card ">#}
+{#                            <div class="card-body">#}
+{#                                This page is an example of using the light side navigation option. By appending the#}
+{#                                <code>.sb-sidenav-light</code>#}
+{#                                class to the#}
+{#                                <code>.sb-sidenav</code>#}
+{#                                class, the side navigation will take on a light color scheme. The#}
+{#                                <code>.sb-sidenav-dark</code>#}
+{#                                is also available for a darker option.#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </main>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
