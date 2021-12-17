@@ -63,104 +63,54 @@
 
         <hr>
         <div class="item">
-            <table>
-                <tr>
-                    <th style="width: 25%">
-                        받는 사람
-                    </th>
-                    <th>
-                        홍성우
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        연락처
-                    </th>
-                    <th>
-                        010-1234-1234
-                    </th>
-                </tr>
+            <div class="container-orderdetail" style="display: flex">
+                <div class="item-orderdetail-topic">받는 사람</div>
+                <div class="item-orderdetail-info">홍성우</div>
 
-                <tr>
-                    <th>
-                        받는주소
-                    </th>
-                    <th>
-                        서울특별기 강남구 일원로 9길 48 심플하우스 2층 관리실 (일원동)
-                    </th>
-
-                </tr>
-                <tr>
-                    <th>
-                        배송요청사항
-                    </th>
-                    <th>
-                        2층 관리실 앞
-                    </th>
-                </tr>
-            </table>
-            <!-- 쿠폰, 할인 -->
+            </div>
+            <div class="container-orderdetail">
+                <div class="item-orderdetail-topic">연락처</div>
+                <div class="item-orderdetail-info"> 010-1234-1234</div>
+            </div>
+            <div class="container-orderdetail">
+                <div class="item-orderdetail-topic">받는주소</div>
+                <div class="item-orderdetail-info">서울특별기 강남구 일원로 9길 48 심플하우스 2층 관리실 (일원동)</div>
+            </div>
+            <div class="container-orderdetail">
+                <div class="item-orderdetail-topic">배송요청사항</div>
+                <div class="item-orderdetail-info"> 2층 관리실 앞</div>
+            </div>
         </div>
         <hr style="clear: both; visibility: hidden;">
 
         <span><h5><b>결제 정보</b></h5></span>
-
         <hr>
         <div class="item">
-            <table>
-                <tr>
-                    <th style="width: 25%">
-                        결제 수단
-                    </th>
-                    <th>
-                        카카오뱅크카드 일시불
-                    </th>
-                </tr>
-                <tr>
-                    <th >
-                        쿠폰할인
-                    </th>
-                    <th>
-                        0
-                    </th>
-                </tr>
-                <tr>
-                    <th >
-                        마일리지 할인
-                    </th>
-                    <th>
-                        0
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        총 상품 가격
-                    </th>
-                    <th>
-                        <b>50,000원</b>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        배송비
-                    </th>
-                    <th>
-                        <b>5000원</b>
-                    </th>
-                </tr>
+            <div class="container-orderdetail" style="display: flex">
+                <div class="item-orderdetail-topic">결제 수단</div>
+                <div class="item-orderdetail-info">카카오뱅크카드 일시불</div>
 
-                <tr>
-                    <th>
-                        총 결제금액
-                    </th>
-                    <th>
-                        <b>55,000원</b>
-                    </th>
-
-                </tr>
-
-            </table>
-
+            </div>
+            <div class="container-orderdetail">
+                <div class="item-orderdetail-topic">마일리지 할인</div>
+                <div class="item-orderdetail-info">0</div>
+            </div>
+            <div class="container-orderdetail">
+                <div class="item-orderdetail-topic">쿠폰할인</div>
+                <div class="item-orderdetail-info">0</div>
+            </div>
+            <div class="container-orderdetail">
+                <div class="item-orderdetail-topic">배송비</div>
+                <div class="item-orderdetail-info">5000원</div>
+            </div>
+            <hr class="hr-orderdetail-totalpay">
+            <div class="container-orderdetail">
+                <div class="item-orderdetail-topic">총 결제금액</div>
+                <div class="item-orderdetail-info"><b>55,000원</b></div>
+            </div>
         </div>
     </div>
+
+
+
 {% endblock mypage %}
