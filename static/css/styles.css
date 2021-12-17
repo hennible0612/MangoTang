@@ -12210,7 +12210,6 @@ a.nav-link-mypage:active {
 .container-orderlist {
 	display: flex; /*display 형식 그리드 */
     flex-direction: row; /*row로 정렬 */
-    flex-wrap: wrap; /* 자동 줄바꿈*/
     /*justify-content: center; !*중앙 정렬*!*/
     /*align-items: stretch; !*아이템들 수직축 방향정렬 *!*/
 	/* display: inline-flex;*/
@@ -12221,10 +12220,11 @@ a.nav-link-mypage:active {
 
 }
 .item-orderlist-info{
-        flex-basis: 60%;
+        flex-basis: 30%;
 
 }
 .item-orderlist-button{
         flex-basis: 20%;
 
 }
+
