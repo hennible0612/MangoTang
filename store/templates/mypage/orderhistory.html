@@ -7,7 +7,40 @@
             <hr>
         </div>
 
-        <div class=" item" style="background-color: red; height: 13rem;"><!--주문내역 컨테이너-->
+        <div class=" container" style="background-color: red; height: 13rem;"><!--주문내역 컨테이너-->
+            <div class="item" style="background-color: #b6effb">
+                <div><h4>2021/12/20<a href="#" style="float: right">주문 상세보기</a></h4>
+                </div>
+            </div>
+            <div class="item" style="background-color: #eccccf; padding: 10px; height: 200px">
+                <div class="container-orderlist" style="background-color: grey; flex-direction: row;">
+
+                    <div class="item-orderlist-picture">
+                        <img src="https://dummyimage.com/200x180/dee2e6/6c757d.jpg" alt="..."/>
+                    </div>
+
+                    <div class="item-orderlist-info"style=" margin: 10px;">
+                        <span style="font-size: 25px; ">배송상태</span>
+                        <span ><img  src="{% static 'images/dot.png'%}" width="9" height="9"></span>
+                        <span style="font-size: 25px; padding-bottom: 5px">2012/12/21 도착 </span>
+                                                <hr>
+                        <h4>메디플라워 더 시크릿가든 5종 핸드크림 + 쇼핑백</h4>
+                        <span>50,000원<span>1개</span> </span>
+
+                    </div>
+
+                    <div class="item-orderlist-button" style="background-color:blue;">
+                        <button>배송조회</button>
+                        <button>교환, 반품 신청</button>
+                        <button>리뷰 작성하기</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class=" container" style="background-color: red; height: 13rem;"><!--주문내역 컨테이너-->
             <div style="background-color: #b6effb">
                 <div><h4>2021/12/20<a href="#" style="float: right">주문 상세보기</a></h4>
                 </div>
@@ -18,8 +51,16 @@
                     <div class="item-orderlist-picture">
                         <img src="https://dummyimage.com/200x180/dee2e6/6c757d.jpg" alt="..."/>
                     </div>
-                        <div class="item-orderlist-info"><h4>2012/12/21 도착 </h4></div>
-                        <div class="item-orderlist-info"><h4>배송 상태 </h4></div>
+
+                    <div class="item-orderlist-info"style=" margin: 10px;">
+                        <span style="font-size: 25px; ">배송상태</span>
+                        <span ><img  src="{% static 'images/dot.png'%}" width="9" height="9"></span>
+                        <span style="font-size: 25px; padding-bottom: 5px">2012/12/21 도착 </span>
+                                                <hr>
+                        <h4>메디플라워 더 시크릿가든 5종 핸드크림 + 쇼핑백</h4>
+                        <span>50,000원<span>1개</span> </span>
+
+                    </div>
 
                     <div class="item-orderlist-button" style="background-color:blue;">
                         <button>배송조회</button>
