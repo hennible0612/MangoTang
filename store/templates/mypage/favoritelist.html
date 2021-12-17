@@ -1,9 +1,26 @@
 {% extends 'store/mypage.html' %}
 {% load static %}
 {% block mypage %}
-<div class="container">
-    찜목록
-    <hr>
-
-</div>
+    <div class="container">
+        <div class="container" style=" height: 90rem"> <!--전체 컨테이너-->
+            <div class="item">
+                <h3>찜 목록</h3>
+                <hr>
+                <div class=" container" style=" height: 13rem;background-color: #eccccf">
+                    <input class='item' type="checkbox" id="vehicle1" >
+                    <div class="container-orderdetail" style=" background-color: purple">
+                        <div class="item-orderlist-picture" style="background-color: red">
+                            r
+                        </div>
+                        <div class="item-orderlist-info" style="background-color: green">
+                            g
+                        </div>
+                        <div class="item-orderlist-button" style="background-color: blue">
+                            b
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock mypage %}
