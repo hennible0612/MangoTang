@@ -27,4 +27,7 @@ urlpatterns = [
 	path('mypage/userinfo', views.userinfo, name="userinfo"),
 	path('mypage/reviewlist', views.reviewlist, name="reviewlist"),
 
+
+	path('mypage/orderlist/orderdetail', views.orderdetail, name="orderdetail"), #주문번호로 변경
+
 ]

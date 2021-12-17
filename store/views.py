@@ -88,3 +88,7 @@ def reviewlist(request):
 def userinfo(request):
     context = {}
     return render(request, 'mypage/userinfo.html',context)
+
+def orderdetail(request):
+    context = {}
+    return render(request, 'mypage/orderdetail.html',context)
