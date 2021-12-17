@@ -12044,6 +12044,25 @@ a.nav-link-cart:active {
     color: #ee7d18;
     text-decoration: none;
 }
+a.orderlist-detail:link {
+    color: #ee7d18;
+    text-decoration: none;
+}
+
+a.orderlist-detail:visited {
+    color: #ee7d18;
+    text-decoration: none;
+}
+
+a.orderlist-detail:hover {
+    color: #ee7d18;
+    text-decoration: none;
+}
+
+a.orderlist-detail:active {
+    color: #ee7d18;
+    text-decoration: none;
+}
 .center-login {
   margin: auto;
   width: 60%;
@@ -12210,9 +12229,6 @@ a.nav-link-mypage:active {
 .container-orderlist {
 	display: flex; /*display 형식 그리드 */
     flex-direction: row; /*row로 정렬 */
-    /*justify-content: center; !*중앙 정렬*!*/
-    /*align-items: stretch; !*아이템들 수직축 방향정렬 *!*/
-	 display: inline-flex;
 }
 
 .item-orderlist-picture{
@@ -12237,5 +12253,14 @@ a.nav-link-mypage:active {
     padding-top: 10px;
   justify-content: center;
   align-items: center;
-  border: 7px solid green;
+  border: 7px;
+}
+
+#rcorners2 {
+  border-radius: 25px;
+  border: 2px solid #ee7d18;
+  /*padding: 10px;*/
+  width: 900px;
+  height: 300px;
+      box-shadow: 2px 5px #888888;
 }
