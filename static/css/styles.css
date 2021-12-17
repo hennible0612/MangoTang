@@ -12212,7 +12212,7 @@ a.nav-link-mypage:active {
     flex-direction: row; /*row로 정렬 */
     /*justify-content: center; !*중앙 정렬*!*/
     /*align-items: stretch; !*아이템들 수직축 방향정렬 *!*/
-	/* display: inline-flex;*/
+	 display: inline-flex;
 }
 
 .item-orderlist-picture{
@@ -12228,3 +12228,14 @@ a.nav-link-mypage:active {
 
 }
 
+.container-order-option{
+
+}
+
+.center-orderlist-option {
+  display: flex;
+    padding-top: 10px;
+  justify-content: center;
+  align-items: center;
+  border: 7px solid green;
+}
