@@ -1,26 +1,89 @@
 {% extends 'store/mypage.html' %}
 {% load static %}
 {% block mypage %}
-    <div class="container">
-        <div class="container" style=" height: 90rem"> <!--전체 컨테이너-->
-            <div class="item">
-                <h3>찜 목록</h3>
-                <hr>
-                <div class=" container" style=" height: 13rem;background-color: #eccccf">
-                    <input class='item' type="checkbox" id="vehicle1" >
-                    <div class="container-orderdetail" style=" background-color: purple">
-                        <div class="item-orderlist-picture" style="background-color: red">
-                            r
+    <div class="container" style=" height: 90rem"> <!--전체 컨테이너-->
+        <div class="item">
+            <h3>찜 목록</h3>
+            <hr>
+        </div>
+        <div class="item">
+            <div class="container" style=" height: 25px;">
+                <input class='item-favorite-check' type="checkbox" style=" width : 20px; height: 20px">
+                전체 선택
+                <button class=" btn btn-outline-dark flex-shrink-0 " style=" width:150px; ">
+                    선택 삭제하기기                </button>
+            </div>
+        </div>
+        <hr>
+        <div class="item">
+
+
+            <div class=" container" style=" height: 10rem;">
+                <div class="container-orderdetail">
+                    <input class='item-favorite-check' type="checkbox" style=" width : 20px; height: 20px">
+
+                    <div class="item-favorite-picture">
+                        <div class="item-orderlist-picture">
+                            <img src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg" alt="..."/>
                         </div>
-                        <div class="item-orderlist-info" style="background-color: green">
-                            g
+                    </div>
+
+                    <div class="item-favorite-info">
+                        {#                            <hr style="    clear: both; visibility: hidden;">#}
+                        <h5>메디플라워 더 시크릿가든 5종 핸드크림 </h5>
+                        <span>50,000원<span>1개</span> </span>
+                    </div>
+                    <div class="item-favorite-button">
+                        <div class="center-orderlist-option">
+                            <button class=" btn btn-outline-dark flex-shrink-0 " style=" width:150px; ">
+                                장바구니 담기
+                            </button>
                         </div>
-                        <div class="item-orderlist-button" style="background-color: blue">
-                            b
+                        <div class="center-orderlist-option">
+
+                            <button class=" btn btn-outline-dark flex-shrink-0 "
+                                    style=" width:150px; outline-offset: 10px; ">
+                                삭제
+                            </button>
                         </div>
+
                     </div>
                 </div>
             </div>
+            <hr class="hr-favorite-list">
+            <div class=" container" style=" height: 10rem;">
+                <div class="container-orderdetail">
+                    <input class='item-favorite-check' type="checkbox" style=" width : 20px; height: 20px">
+
+                    <div class="item-favorite-picture">
+                        <div class="item-orderlist-picture">
+                            <img src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg" alt="..."/>
+                        </div>
+                    </div>
+
+                    <div class="item-favorite-info">
+                        {#                            <hr style="    clear: both; visibility: hidden;">#}
+                        <h5>메디플라워 더 시크릿가든 5종 핸드크림 </h5>
+                        <span>50,000원<span>1개</span> </span>
+                    </div>
+                    <div class="item-favorite-button">
+                        <div class="center-orderlist-option">
+                            <button class=" btn btn-outline-dark flex-shrink-0 " style=" width:150px; ">
+                                장바구니 담기
+                            </button>
+                        </div>
+                        <div class="center-orderlist-option">
+
+                            <button class=" btn btn-outline-dark flex-shrink-0 "
+                                    style=" width:150px; outline-offset: 10px; ">
+                                삭제
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-favorite-list">
         </div>
     </div>
 {% endblock mypage %}

@@ -12286,3 +12286,31 @@ a.nav-link-mypage:active {
   border-style: inset;
   border-width: 1px;
 }
+.item-favorite-check{
+        flex-basis: 3%;
+
+}
+.item-favorite-picture{
+        flex-basis: 20%;
+
+}
+.item-favorite-info{
+    flex-basis: 62%;
+    margin-left: 20px;
+    margin-top: 30px;
+
+
+}
+.item-favorite-button{
+        flex-basis: 15%;
+
+}
+.hr-favorite-list{
+          display: block;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
