@@ -1,7 +1,25 @@
 {% extends 'store/customerservice.html' %}
 {% load static %}
 {% block customerservice %}
-    <div class="container">
+
+    <div class="container-customerservice-question">
+        <hr>
+        <input class="item" style="width: 1000px; height: 70px; "maxlength="50" placeholder="제목"><br>
+        <hr>
+        <textarea class="item" style="width: 1000px; height: 700px;" placeholder="질문 내용"></textarea>
+
+        <hr>
+
 
     </div>
+    <div>
+        <button>파일선택</button>
+        <br>
+    </div>
+    <div style="padding-top: 20px">
+        <button class="block-submit">등록</button>
+
+    </div>
+
+
 {% endblock customerservice %}

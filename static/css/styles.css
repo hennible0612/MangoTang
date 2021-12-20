@@ -12356,3 +12356,25 @@ a.nav-link-mypage:active {
     line-height: 80px;
     height: 80px;
 }
+.container-customerservice-question{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    /*height: 13rem;*/
+}
+.block-submit {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}

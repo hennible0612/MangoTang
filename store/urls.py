@@ -16,6 +16,7 @@ urlpatterns = [
 
 	path('customerservice/', views.customerservice, name="customerservice"),
 	path('customerservice/faq', views.faq, name="faq"),
+	path('customerservice/onetoone', views.onetoone, name="onetoone"),
 
 
 
