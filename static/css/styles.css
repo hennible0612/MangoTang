@@ -12037,9 +12037,26 @@ textarea.form-control-lg {
   height: 200px;
   outline: dashed 1px black;
 }
+.container-center-customerservice {
+
+    display: block;
+    align-content: center;
+
+}
+.container-center-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /*align-content: center;*/
+    height: 13rem;
+
+}
 .div-register-term{
     padding-left: 3em;
-    padding-bottom: 0.5em
+    padding-bottom: 0.5em;
+    justify-content: center;
+
 }
 
 .collapse:not(.show) {
@@ -12318,4 +12335,19 @@ a.nav-link-mypage:active {
 .container-point-topic{
     display: flex;
     justify-content: space-between;
+}
+.item-customerservice-search-holder{
+    height: 13rem;
+    flex-basis: 80%;
+
+}
+.item-customerservice-title{
+    padding : 1rem;
+    height: 13rem;
+    flex-basis: 20%;
+
+}
+.item-customerservice-search{
+    flex-basis: auto;
+    vertical-align:middle;
 }

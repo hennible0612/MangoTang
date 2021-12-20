@@ -3,14 +3,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <div class="bg-light container px-4 px-lg-5">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5" style="">
-                        <li class="nav-item"><a href="{% url 'orderhistory' %}" class="nav-link dropdown-menu-size-customer">마이페이지</a></li>
-                        <li class="nav-item"><a href="{% url 'orderhistory' %}"class="nav-link dropdown-menu-size-customer">주문내역</a></li>
-                        <li class="nav-item"><a href="{% url 'customerservice' %}" class="nav-link dropdown-menu-size-customer">고객센터</a></li>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5" style="">
+            <li class="nav-item"><a href="{% url 'orderhistory' %}"
+                                    class="nav-link dropdown-menu-size-customer">마이페이지</a></li>
+            <li class="nav-item"><a href="{% url 'orderhistory' %}"
+                                    class="nav-link dropdown-menu-size-customer">주문내역</a></li>
+            <li class="nav-item"><a href="{% url 'customerservice' %}"
+                                    class="nav-link dropdown-menu-size-customer">고객센터</a></li>
 
-                        <li class="nav-item"><a href="{% url 'login' %}" class="nav-link dropdown-menu-size-customer">로그인</a></li>
+            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link dropdown-menu-size-customer">로그인</a></li>
 
-            </ul>
+        </ul>
     </div>
 </nav>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,16 +54,16 @@
                 <button class="btn" type="submit"></button>
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
-                            </form>
+            </form>
 
-                <button class="btn btn-outline-dark" type="submit">
-                    <i class="bi-cart-fill me-1"></i>
-                    <a href="{% url 'checkout' %}" class="nav-link-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </a>
+            <button class="btn btn-outline-dark" type="submit">
+                <i class="bi-cart-fill me-1"></i>
+                <a href="{% url 'checkout' %}" class="nav-link-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </a>
 
-                </button>
+            </button>
         </div>
     </div>
 </nav>

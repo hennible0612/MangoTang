@@ -1,5 +1,85 @@
 {% extends 'store/main.html' %}
+
 {% load static %}
 {% block content %}
-    <h3>customerservice</h3>
+    <section class="py-5 ">
+        <div class="container">
+            <!-- 사용자 이름, 배송, 포인트, 쿠폰 1:1문의 바 -->
+            <div class="container-mypage">
+                <div class=" item-customerservice-title" style="background-color: orange">
+                    <div class="container-center-customerservice">
+                        <br>
+                        <h2 class="item" style="text-align: center; color: white">고객 센터</h2>
+                        <h4 class="item" style="text-align: center; color: white">1234-1234</h4>
+                        <h6 class="item" style="text-align: center; color: white">평일 10:00~18:00(점심시간 13:00~14:00)</h6>
+                    </div>
+
+
+                </div>
+                <div class=" item-customerservice-search-holder" style="background-color: #f7f7f7">
+                    <div class="container-center-search">
+                        <div class="item"><b>FAQ검색</b></div>
+                        <form class="d-flex">
+                            <button class="btn" type="submit"></button>
+                            <input class="form-control me-2" style="width: 500px" type="search" placeholder="FAQ 검색" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 리스트 메뉴 -->
+            <div class="container-mypage" style=" height: 90rem">
+                <div class="item-mypage-list ">
+                    <nav class="sb-sidenav">
+                        <div class="sb-sidenav-menu" style="width: 10em;">
+                            <div class="nav">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                   data-bs-target="#collapseLayouts" aria-expanded="false"
+                                   aria-controls="collapseLayouts">
+                                    <text style="color: black">FAQ</text>
+                                </a>
+
+                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                                     data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link nav-link-mypage" href="#">BEST10</a>
+                                        <a class="nav-link nav-link-mypage" href="#">주문/결제</a>
+                                        <a class="nav-link nav-link-mypage" href="#">배송</a>
+                                        <a class="nav-link nav-link-mypage" href="#">취소/교환/반품</a>
+                                        <a class="nav-link nav-link-mypage" href="#">서비스기타</a>
+                                    </nav>
+                                </div>
+                                <hr>
+
+
+                                <a class="nav-link nav-link-mypage" href="#">1:1 문의
+                                </a>
+                                <hr>
+
+
+                                <a class="nav-link nav-link-mypage" href="#">공지사항
+                                </a>
+                            </div>
+                        </div>
+
+                    </nav>
+
+                </div>
+                <div class="item-mypage-info">
+                    {% block mypage %}
+                        {#                    <div class="container">#}
+                        {#                        sdsfsdfsdfsdf#}
+                        {#                        <hr>#}
+                        {##}
+                        {#                    </div>#}
+                    {% endblock mypage %}
+
+                </div>
+
+            </div>
+        </div>
+    </section>
 {% endblock content %}
