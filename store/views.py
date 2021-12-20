@@ -43,6 +43,10 @@ def onetoone(request):
     context = {}
     return render(request, 'customerservice/onetoonequestion.html', context)
 
+def notice(request):
+    context = {}
+    return render(request, 'customerservice/notice.html', context)
+
 
 def product_detail(request):
     context = {}

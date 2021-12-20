@@ -1,0 +1,40 @@
+{% extends 'store/customerservice.html' %}
+{% load static %}
+{% block customerservice %}
+    <div class="container">
+
+        <div class="item">
+            <span><h3>공지사항</h3></span>
+            <hr>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">등록일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>가격문의</td>
+                <td>2021.9.24</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>날짜문의</td>
+                <td>2021.9.30</td>
+
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>그냥 문의</td>
+                <td>2021.10.1</td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock customerservice %}
