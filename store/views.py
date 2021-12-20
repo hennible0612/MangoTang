@@ -30,6 +30,9 @@ def mypage(request):
 def checkout(request):
     context = {}
     return render(request, 'store/checkout.html', context)
+def customerservice(request):
+    context = {}
+    return render(request, 'store/customerservice.html', context)
 
 
 def product_detail(request):
