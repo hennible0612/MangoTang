@@ -36,6 +36,9 @@ class Product(models.Model):
     second_title = models.CharField(max_length=200)
     shipment_price = models.IntegerField(blank=True)
     hash_tag = models.CharField(max_length=200)
+
+
+    option_bool = models.BooleanField(default=False, blank=False, null=True)
     option1 = models.CharField(max_length=200, null=True, blank=True)
     option2 = models.CharField(max_length=200, null=True, blank=True)
     option3 = models.CharField(max_length=200, null=True, blank=True)

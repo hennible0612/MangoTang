@@ -35,6 +35,7 @@
 
 
                     <!-- 옵션 -->
+                    {% if product.option_bool == True %}
                         <div class="dropdown d-flex w3-container">
                             <p class="lead" style="padding-right:10px;">옵션 선택: </p>
 
@@ -47,6 +48,8 @@
                                 <li><a class="dropdown-item">바나나</a></li>
                             </ul>
                         </div>
+                    {% endif %}
+
                     <br>
 
                     <div class="d-flex">
