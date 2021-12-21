@@ -14,7 +14,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <a href="{% url 'product_detail' %}">
+{#                        <a href="/product_detail/{{ product.seller_code }}">#}
+                        <a href="{% url 'product_detail' product.seller_code %}">
                             <img class="card-img-top" src="https://dummyimage.com/1000x1000/dee2e6/6c757d.jpg" alt="..."/>
                         </a>
                         <!-- Product details-->

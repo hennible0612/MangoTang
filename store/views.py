@@ -9,6 +9,13 @@ def store(request):
     context = {'products':products}
     return render(request, 'store/store.html', context)
 
+def product_detail(request, seller_code):
+    print(seller_code)
+    product = Product.objects.get(seller_code=seller_code)
+    context = {'product': product}
+
+    return render(request, 'store/productdetail.html', context)
+
 
 def cart(request):
     context = {}
@@ -51,9 +58,7 @@ def notice(request):
     return render(request, 'customerservice/notice.html', context)
 
 
-def product_detail(request):
-    context = {}
-    return render(request, 'store/productdetail.html', context)
+
 
 
 
