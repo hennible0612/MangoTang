@@ -25,6 +25,9 @@ class Customer(models.Model):
 class Product(models.Model):
     product_name = models.CharField(max_length=200)
     price = models.FloatField()
+    image_detail = models.ImageField(null=True,blank=True)
+    image_title = models.ImageField(null=True,blank=True)
+    image_introduce = models.ImageField(null=True,blank=True)
     seller_code = models.IntegerField(null=False)
     price_discount = models.IntegerField(null=True)
     discount = models.IntegerField(null=True)
@@ -40,6 +43,7 @@ class Product(models.Model):
     option5 = models.CharField(max_length=200, null=True, blank=True)
     collection_tag = models.CharField(max_length=200, null=True)
     item_company = models.CharField(null=False,max_length=200)
+    product_status = models.BooleanField(default=False, blank=False, null=True)
 
 
     def __str__(self):

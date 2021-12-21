@@ -9,15 +9,15 @@
 
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
                 {% for product in products %}
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
 {#                        <a href="/product_detail/{{ product.seller_code }}">#}
                         <a href="{% url 'product_detail' product.seller_code %}">
-                            <img class="card-img-top" src="https://dummyimage.com/1000x1000/dee2e6/6c757d.jpg" alt="..."/>
+                            <img class="card-img-top" src={{ product.image_title.url}}/>
                         </a>
+{#<img src={{ product.image_detail.url}}>#}
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
