@@ -36,14 +36,19 @@ class Product(models.Model):
     second_title = models.CharField(max_length=200)
     shipment_price = models.IntegerField(blank=True)
     hash_tag = models.CharField(max_length=200)
-
-
     option_bool = models.BooleanField(default=False, blank=False, null=True)
-    option1 = models.CharField(max_length=200, null=True, blank=True)
-    option2 = models.CharField(max_length=200, null=True, blank=True)
-    option3 = models.CharField(max_length=200, null=True, blank=True)
-    option4 = models.CharField(max_length=200, null=True, blank=True)
-    option5 = models.CharField(max_length=200, null=True, blank=True)
+    option1 = models.ForeignKey("Product", on_delete=models.CASCADE, null=True, blank=True, related_name="op1")
+    option2 = models.ForeignKey("Product", on_delete=models.CASCADE, null=True, blank=True, related_name="op2")
+    option3 = models.ForeignKey("Product", on_delete=models.CASCADE, null=True, blank=True, related_name="op3")
+    option4 = models.ForeignKey("Product", on_delete=models.CASCADE, null=True, blank=True, related_name="op4")
+    option5 = models.ForeignKey("Product", on_delete=models.CASCADE, null=True, blank=True, related_name="op5")
+
+
+    # option1 = models.CharField(max_length=200, null=True, blank=True)
+    # option2 = models.CharField(max_length=200, null=True, blank=True)
+    # option3 = models.CharField(max_length=200, null=True, blank=True)
+    # option4 = models.CharField(max_length=200, null=True, blank=True)
+    # option5 = models.CharField(max_length=200, null=True, blank=True)
     collection_tag = models.CharField(max_length=200, null=True)
     item_company = models.CharField(null=False,max_length=200)
     product_status = models.BooleanField(default=False, blank=False, null=True)
