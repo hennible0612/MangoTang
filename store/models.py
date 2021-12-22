@@ -88,3 +88,4 @@ class Carosel(models.Model):
     image = models.ImageField(null=True,blank=True)
     banner_title = models.CharField(max_length=200, null=True, blank=True)
     banner_description = models.CharField(max_length=200, null=True, blank=True)
+    href = models.CharField(max_length=200,default='#', null=True, blank=False)

@@ -18,15 +18,19 @@
             {% else %}
                 <div class="carousel-item">
             {% endif %}
-        <img src={{ carousels.image.url }}  class="d-block" style="width:100%">
+        <a href= {{ carousels.href }}>
+
+            <img src={{ carousels.image.url }}  class="d-block" style="width:100%">
+        </a>
+
         <div class="carousel-caption">
             <h3>{{ carousels.banner_title }}</h3>
             <p>{{ carousels.banner_description }}</p>
         </div>
         </div>
+
         {% endfor %}
         </div>
-
         <!-- Left and right controls/icons -->
         <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -37,11 +41,3 @@
     </div>
 
 
-    {#<header class="bg-dark py-5">#}
-    {#    <div class="container px-4 px-lg-5 my-5">#}
-    {#        <div class="text-center text-white">#}
-    {#            <h1 class="display-4 fw-bolder">망고땡</h1>#}
-    {#            <p class="lead fw-normal text-white-50 mb-0">가나다라마바사아자차카타파하</p>#}
-    {#        </div>#}
-    {#    </div>#}
-{#</header>#}
