@@ -12,49 +12,36 @@
 
     <!-- The slideshow/carousel -->
     <div class="carousel-inner">
-        <div class="carousel-item active">
+        {% for carousels in carousel %}
+            {% if forloop.counter == 1 %}
+                <div class="carousel-item active">
+            {% else %}
+                <div class="carousel-item">
+            {% endif %}
+        <img src={{ carousels.image.url }}  class="d-block" style="width:100%">
+        <div class="carousel-caption">
+            <h3>{{ carousels.banner_title }}</h3>
+            <p>{{ carousels.banner_description }}</p>
+        </div>
+        </div>
+        {% endfor %}
+        </div>
 
-            <img src="https://dummyimage.com/2000x400/dee2e6/6c757d.jpg" alt="Los Angeles" class="d-block"
-                 style="width:100%">
-            <div class="carousel-caption">
-                <h3>Los Angeles</h3>
-                <p>We had such a great time in LA!</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-
-            <img src="https://dummyimage.com/2000x400/dee2e6/6c757d.jpg" alt="Los Angeles" class="d-block"
-                 style="width:100%">
-            <div class="carousel-caption">
-                <h3>Chicago</h3>
-                <p>Thank you, Chicago!</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://dummyimage.com/2000x400/dee2e6/6c757d.jpg" alt="Los Angeles" class="d-block"
-                 style="width:100%">
-            <div class="carousel-caption">
-                <h3>New York</h3>
-                <p>We love the Big Apple!</p>
-            </div>
-        </div>
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
 
-    <!-- Left and right controls/icons -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-</div>
 
-
-{#<header class="bg-dark py-5">#}
-{#    <div class="container px-4 px-lg-5 my-5">#}
-{#        <div class="text-center text-white">#}
-{#            <h1 class="display-4 fw-bolder">망고땡</h1>#}
-{#            <p class="lead fw-normal text-white-50 mb-0">가나다라마바사아자차카타파하</p>#}
-{#        </div>#}
-{#    </div>#}
+    {#<header class="bg-dark py-5">#}
+    {#    <div class="container px-4 px-lg-5 my-5">#}
+    {#        <div class="text-center text-white">#}
+    {#            <h1 class="display-4 fw-bolder">망고땡</h1>#}
+    {#            <p class="lead fw-normal text-white-50 mb-0">가나다라마바사아자차카타파하</p>#}
+    {#        </div>#}
+    {#    </div>#}
 {#</header>#}

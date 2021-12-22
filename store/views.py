@@ -4,9 +4,10 @@ from .models import *
 # Create your views here.
 def store(request):
     products = Product.objects.all() #product 정보 다가져옴
+    carousel = Carosel.objects.all() #캐러솔 가져옴
 
+    context = {'products': products, 'carousel': carousel}
 
-    context = {'products':products}
     return render(request, 'store/store.html', context)
 
 def product_detail(request, seller_code):
