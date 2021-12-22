@@ -37,6 +37,7 @@ class Product(models.Model):
     shipment_price = models.IntegerField(blank=True)
     hash_tag = models.CharField(max_length=200)
     option_bool = models.BooleanField(default=False, blank=False, null=True)
+    option_total = models.IntegerField(blank=True, null=True)
     option1 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op1")
     option2 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op2")
     option3 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op3")
