@@ -2,23 +2,24 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Customer(models.Model):
-
     GENDER_CHOICES = (
-        ('M','Male'),
-        ('M','Female'),
-        ('N','Unknown'),
+        ('M', 'Male'),
+        ('M', 'Female'),
+        ('N', 'Unknown'),
     )
 
-    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE) #Customer 하나당 User하나
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)  # Customer 하나당 User하나
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=200)
     phone_number = models.CharField(max_length=50, null=False)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     mileage = models.IntegerField()
     join_date = models.DateField()
+
     def __str__(self):
         return self.name
 
@@ -26,9 +27,9 @@ class Customer(models.Model):
 class Product(models.Model):
     product_name = models.CharField(max_length=200)
     price = models.FloatField()
-    image_detail = models.ImageField(null=True,blank=True)
-    image_title = models.ImageField(null=True,blank=True)
-    image_introduce = models.ImageField(null=True,blank=True)
+    image_detail = models.ImageField(null=True, blank=True)
+    image_title = models.ImageField(null=True, blank=True)
+    image_introduce = models.ImageField(null=True, blank=True)
     seller_code = models.IntegerField(null=False)
     price_discount = models.IntegerField(null=True)
     discount = models.IntegerField(null=True)
@@ -45,7 +46,7 @@ class Product(models.Model):
     option4 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op4")
     option5 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op5")
     collection_tag = models.CharField(max_length=200, null=True)
-    item_company = models.CharField(null=False,max_length=200)
+    item_company = models.CharField(null=False, max_length=200)
     product_status = models.BooleanField(default=False, blank=False, null=True)
 
     @property
@@ -56,12 +57,13 @@ class Product(models.Model):
             url_introduce = self.image_introduce.url
         except:
             url_detail = ''
-            url_title= ''
-            url_introduce= ''
+            url_title = ''
+            url_introduce = ''
         return url_detail, url_title, url_introduce
 
     def __str__(self):
         return self.product_name
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
@@ -74,9 +76,23 @@ class Order(models.Model):
     order_number = models.IntegerField(null=True, blank=True)
     total_fee = models.IntegerField(null=True, blank=True)
 
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
+        total = sum([item.get_total for item in orderitems])  # 다더함함
+        return total
+
+
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+
 
     def __str__(self):
         return " 주문자 : " + self.customer.email
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -86,6 +102,12 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.product.product_name
+
+    @property
+    def get_total(self):
+        total = self.product.price_discount * self.quantity
+        return total
+
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
@@ -99,20 +121,23 @@ class ShippingAddress(models.Model):
     def __str__(self):
         return self.address
 
+
 class Carosel(models.Model):
-    image = models.ImageField(null=True,blank=True)
+    image = models.ImageField(null=True, blank=True)
     banner_title = models.CharField(max_length=200, null=True, blank=True)
     banner_description = models.CharField(max_length=200, null=True, blank=True)
-    href = models.CharField(max_length=200,default='#', null=True, blank=False)
+    href = models.CharField(max_length=200, default='#', null=True, blank=False)
+
 
 class ProductReview(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True)
-    customer = models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
 
-    star_rating = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True, null=True)
+    star_rating = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True,
+                                      null=True)
     short_review = models.CharField(max_length=50, null=True, blank=True)
     long_review = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(null=True,blank=True)
+    image = models.ImageField(null=True, blank=True)
     review_bool = models.BooleanField(default=False, blank=False, null=True)
 
     def __str__(self):
