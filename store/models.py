@@ -69,20 +69,23 @@ class Order(models.Model):
     order_status = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=100, null=True)
     payment_state = models.BooleanField(default=False)
-    shipping_fee = models.IntegerField(null=True)
+    shipping_fee = models.IntegerField(null=True, blank=True)
     track_number = models.IntegerField(null=True, blank=True)
-    order_number = models.IntegerField(null=True)
-    total_fee = models.IntegerField(null=True)
+    order_number = models.IntegerField(null=True, blank=True)
+    total_fee = models.IntegerField(null=True, blank=True)
 
 
     def __str__(self):
-        return str(self.id)
+        return " 주문자 : " + self.customer.email
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.product.product_name
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
