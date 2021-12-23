@@ -1,43 +1,83 @@
 {% load static %}
 <!--https://www.w3schools.com/bootstrap5/bootstrap_carousel.php-->
 <!-- Carousel -->
-<div id="demo" class="carousel slide" data-bs-ride="carousel">
+<div id="demo" id= myCarousel' class="carousel slide" data-bs-ride="carousel">
 
     <!-- Indicators/dots -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-    </div>
+{#    <div class="carousel-indicators" id="carousel">#}
+        {#    {% for i in range( 0, carousel_length) %}#}
+        {#        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>#}
+        {#        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>#}
+        {#        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>#}
+        {#        {% endfor %}#}
+        {#        {% for carousels in carousel %}#}
+        {#            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>#}
+        {##}
+        {#        {% endfor %}#}
+{#    </div>#}
 
     <!-- The slideshow/carousel -->
     <div class="carousel-inner">
         {% for carousels in carousel %}
-            {% if forloop.counter == 1 %}
-                <div class="carousel-item active">
-            {% else %}
-                <div class="carousel-item">
-            {% endif %}
-        <a href= {{ carousels.href }}>
+            <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                <a href= {{ carousels.href }}>
 
-            <img src={{ carousels.image.url }}  class="d-block" style="width:100%">
-        </a>
+                    <img src={{ carousels.image.url }}  class="d-block" style="width:100%">
+                </a>
 
-        <div class="carousel-caption">
-            <h3>{{ carousels.banner_title }}</h3>
-            <p>{{ carousels.banner_description }}</p>
-        </div>
-        </div>
+                <div class="carousel-caption">
+                    <h3>{{ carousels.banner_title }}</h3>
+                    <p>{{ carousels.banner_description }}</p>
+                </div>
+            </div>
 
         {% endfor %}
-        </div>
-        <!-- Left and right controls/icons -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
     </div>
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" onclick="back()" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" style="background-color: black"></span>
+    </button>
+    <button class="carousel-control-next" type="button" onclick="front()" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon" style="background-color: black"></span>
+    </button>
 
+</div>
+
+<script type="text/javascript">
+    {#for (var i = 0; i < '{{carousel_length}}'; i++) {#}
+        {#console.log('{{carousel_length}}')#}
+        {#console.log(i)#}
+    {#    if (i != 0) {#}
+    {##}
+    {#        document.getElementById("carousel").innerHTML += '<button type="button" data-bs-target="#demo" data-bs-slide-to=slide ></button>';#}
+    {##}
+    {#    } else {#}
+    {##}
+    {#       document.getElementById("carousel").innerHTML += '<button   type="button" data-bs-target="#demo" data-bs-slide-to=slide class="active"></button>';#}
+    {##}
+    {#    }#}
+    {##}
+
+    {#document.getElementById("carousel").innerHTML +=  '<button  type="button" data-bs-target="#demo" data-bs-slide-to="2" ></button>';#}
+    {#document.getElementById("carousel").innerHTML +=  '<button  type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>';#}
+
+
+    var count = 0
+
+    function back() {
+        console.log("back")
+        if (count > 0) {
+            count -= 1
+
+        }
+        console.log(count)
+    }
+
+    function front() {
+        console.log("front")
+        count += 1
+        console.log(count)
+    }
+
+</script>
 

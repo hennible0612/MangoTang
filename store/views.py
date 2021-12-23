@@ -5,8 +5,9 @@ from .models import *
 def store(request):
     products = Product.objects.all() #product 정보 다가져옴
     carousel = Carosel.objects.all() #캐러솔 가져옴
+    carousel_length = len(carousel)
 
-    context = {'products': products, 'carousel': carousel}
+    context = {'products': products, 'carousel': carousel, 'carousel_length':carousel_length}
 
     return render(request, 'store/store.html', context)
 
