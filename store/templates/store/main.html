@@ -13,11 +13,30 @@
     <!-- main.css 상속용 -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <!-- Font Awesome Icon Library -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <!--CDN 링크 -->
 
     <!-- user 로그인 확인 -->
     <script type="text/javascript">
-        var user= '{{ request.user }}'
+        var user = '{{ request.user }}'
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getToken('csrftoken')
     </script>
 </head>
 <body>
@@ -31,8 +50,8 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="{% static 'js/cart.js' %}">
-    </script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}">
+</script>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; (주) 엔스크린</p></div>
