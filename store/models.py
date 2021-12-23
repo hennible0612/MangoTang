@@ -98,5 +98,7 @@ class ProductReview(models.Model):
     short_review = models.CharField(max_length=50, null=True, blank=True)
     long_review = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True,blank=True)
-    review_bool = models.BooleanField(default=False)
+    review_bool = models.BooleanField(default=False, blank=False, null=True)
 
+    def __str__(self):
+        return " 주문자 : " + self.customer.email + " 주소  : " + self.short_review

@@ -14,7 +14,9 @@ def store(request):
 def product_detail(request, seller_code):
     print(seller_code)
     product = Product.objects.get(seller_code=seller_code)
-    context = {'product': product}
+    product_review = ProductReview.objects.get(product.seller_code)
+
+    context = {'product': product, 'product_review':product_review}
 
     return render(request, 'store/productdetail.html', context)
 
