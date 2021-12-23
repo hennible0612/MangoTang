@@ -10,9 +10,12 @@
                                     class="nav-link dropdown-menu-size-customer">주문내역</a></li>
             <li class="nav-item"><a href="{% url 'faq' %}"
                                     class="nav-link dropdown-menu-size-customer">고객센터</a></li>
-
-            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link dropdown-menu-size-customer">로그인</a></li>
-
+            {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'logout' %}">{{ user.username }} (로그아웃)</a>
+            {% else %}
+                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link dropdown-menu-size-customer">로그인</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

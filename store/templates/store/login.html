@@ -10,31 +10,40 @@
                     <div class="card shadow-2-strong" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center" style="padding: 10px">
 
+
                             <h3 class="mb-5">로그인</h3>
+                            <form method="post" class="post-form" action="{% url 'login' %}">
+                                {% csrf_token %}
 
-                            <div class="form-outline mb-4">
-                                <input type="email" placeholder="이메일" id="typeemailx-2"
-                                       class="form-control form-control-lg"/>
-                            </div>
+                                {% include "store/form_errors.html" %}
+                                <div class="form-group">
+                                    <label for="username">사용자ID</label>
+                                    <input class="form-control form-control-lg" type="text" placeholder="아이디" class="form-control" name="username" id="username"
+                                           value="{{ form.username.value|default_if_none:'' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">비밀번호</label>
+                                    <input class="form-control form-control-lg" type="password" placeholder="비밀번호" class="form-control" name="password" id="password"
+                                           value="{{ form.password.value|default_if_none:'' }}">
+                                </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="password" placeholder="비밀번호" id="typepasswordx-2"
-                                       class="form-control form-control-lg"/>
-                            </div>
+                                <!-- checkbox -->
+                                <div class="flex-column">
 
-                            <!-- checkbox -->
-                            <div class="flex-column">
-
-                                <a href="{% url 'register' %}" class='nav-link-cart' style="padding-right: 10px">회원가입</a>
-                                <a href="#!" class='nav-link-cart' style="padding-right:10px;">비밀번호찾기</a>
-                                <a href="#!" class='nav-link-cart'>아이디찾기</a>
+                                    <a href="{% url 'register' %}" class='nav-link-cart' style="padding-right: 10px">회원가입</a>
+                                    <a href="#!" class='nav-link-cart' style="padding-right:10px;">비밀번호찾기</a>
+                                    <a href="#!" class='nav-link-cart'>아이디찾기</a>
 
 
-                            </div><br>
-                            <button class="btn btn-primary btn-block"
-                                    style="width:20em; background-color:#ee7d18" type="submit">login
-                            </button>
-                                                        <hr class="my-4 ">
+                                </div>
+                                <br>
+                                <button class="btn btn-primary btn-block"
+                                        style="width:20em; background-color:#ee7d18" type="submit">login
+                                </button>
+                            </form>
+
+
+                            <hr class="my-4 ">
                             <div style="padding-bottom: 5px; ">
                                 <button class="btn  btn-block btn-primary"
                                         style="background-color: #dd4b39; width: 20em;" type="submit"><i

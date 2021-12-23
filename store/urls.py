@@ -1,13 +1,13 @@
 from django.urls import path
-
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-
+	path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 	path('', views.store, name="store"),
 	path('cart/', views.cart, name="cart"),
 	path('checkout/', views.checkout, name="checkout"),
-	path('login/', views.login, name="login"),
+	path('login/', auth_views.LoginView.as_view(template_name='store/login.html'), name="login"),
 	path('register/', views.register, name="register"),
 	path('mypage/', views.mypage, name="mypage"),
 	path('product_detail/<int:seller_code>/', views.product_detail, name="product_detail"), #아이디로 바꾸자
