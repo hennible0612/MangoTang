@@ -1,7 +1,11 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from .models import *
 
 # Create your views here.
+"""
+스토어 메인화면
+"""
 def store(request):
     products = Product.objects.all() #product 정보 다가져옴
     carousel = Carosel.objects.all() #캐러솔 가져옴
@@ -23,7 +27,9 @@ def product_detail(request, seller_code):
     context = {'product': product}
     return render(request, 'store/productdetail.html', context)
 
-
+"""
+카트
+"""
 def cart(request):
     if request.user.is_authenticated: #로그인 유저일시
         customer = request.user.customer
@@ -53,7 +59,9 @@ def mypage(request):
     context = {}
     return render(request, 'store/mypage.html', context)
 
-
+"""
+결제 화면
+"""
 def checkout(request):
     if request.user.is_authenticated:  # 로그인 유저일시
         customer = request.user.customer
@@ -65,6 +73,13 @@ def checkout(request):
 
     context = {'items': items, 'order': order}
     return render(request, 'store/checkout.html', context)
+
+"""
+장바구니에 물품 추가 JSON 응답
+"""
+def updateItem(request):
+    return JsonResponse('Item was added', safe=False)
+
 
 def customerservice(request):
     context = {}

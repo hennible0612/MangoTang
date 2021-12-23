@@ -11,7 +11,7 @@ urlpatterns = [
 	path('register/', views.register, name="register"),
 	path('mypage/', views.mypage, name="mypage"),
 	path('product_detail/<int:seller_code>/', views.product_detail, name="product_detail"), #아이디로 바꾸자
-
+	path('update_item/', views.updateItem, name="update_item"), # 장바구니 추가 요청 url
 
 
 	path('customerservice/', views.customerservice, name="customerservice"),
