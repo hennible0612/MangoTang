@@ -48,6 +48,17 @@ class Product(models.Model):
     item_company = models.CharField(null=False,max_length=200)
     product_status = models.BooleanField(default=False, blank=False, null=True)
 
+    @property
+    def imageURL(self):
+        try:
+            url_detail = self.image_detail.url
+            url_title = self.image_title.url
+            url_introduce = self.image_introduce.url
+        except:
+            url_detail = ''
+            url_title= ''
+            url_introduce= ''
+        return url_detail, url_title, url_introduce
 
     def __str__(self):
         return self.product_name
@@ -94,6 +105,7 @@ class Carosel(models.Model):
 class ProductReview(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
+
     star_rating = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True, null=True)
     short_review = models.CharField(max_length=50, null=True, blank=True)
     long_review = models.CharField(max_length=200, null=True, blank=True)

@@ -12,12 +12,15 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 def product_detail(request, seller_code):
-    print(seller_code)
     product = Product.objects.get(seller_code=seller_code)
-    product_review = ProductReview.objects.get(product.seller_code)
 
-    context = {'product': product, 'product_review':product_review}
+    # review = ProductReview.objects.all(product.product_name)
+    # print(review)
+    # print(ProductReview.objects.get(product.product_name))
 
+
+
+    context = {'product': product}
     return render(request, 'store/productdetail.html', context)
 
 
