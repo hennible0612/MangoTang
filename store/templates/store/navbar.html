@@ -16,6 +16,10 @@
                 <li class="nav-item"><a href="{% url 'login' %}" class="nav-link dropdown-menu-size-customer">로그인</a>
                 </li>
             {% endif %}
+            {% if user.is_superuser %}
+                        <a class="nav-link" href="admin">어드민페이지</a>
+            {% endif %}
+
         </ul>
     </div>
 </nav>
