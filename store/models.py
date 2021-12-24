@@ -1,6 +1,9 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+
 
 
 # Create your models here.
@@ -13,9 +16,11 @@ class Customer(models.Model):
     )
 
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)  # Customer 하나당 User하나
+
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=200)
     phone_number = models.CharField(max_length=50, null=False)
+    birth_date = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     mileage = models.IntegerField()
     join_date = models.DateField()
