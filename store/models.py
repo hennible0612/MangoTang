@@ -2,11 +2,16 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import forms
 
 
-
-
-# Create your models here.
+# class UserForm(UserCreationForm):
+#     email = forms.EmailField(label="이메일")
+#
+#     class Meta:
+#         model = User
+#         fields = ("username", "password1", "password2", "email")
+# # Create your models here.
 
 class Customer(models.Model):
     GENDER_CHOICES = (
@@ -24,6 +29,8 @@ class Customer(models.Model):
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     mileage = models.IntegerField()
     join_date = models.DateField()
+    address1 = models.CharField(max_length=200, null=False)
+    address2 = models.CharField(max_length=200, null=False)
 
     def __str__(self):
         return self.name
@@ -80,6 +87,14 @@ class Order(models.Model):
     track_number = models.IntegerField(null=True, blank=True)
     order_number = models.IntegerField(null=True, blank=True)
     total_fee = models.IntegerField(null=True, blank=True)
+
+    recipent_address1 = models.CharField(max_length=200, null=False)
+    recipent_address2 = models.CharField(max_length=200, null=False)
+    recipent_number = models.CharField(max_length=50, null=False)
+    recipent_name = models.CharField(max_length=50, null=False)
+    order_request = models.CharField(max_length=100, null=False)
+    orderer_number = models.CharField(max_length=100, null=False)
+    orderer_name = models.CharField(max_length=100, null=False)
 
     @property
     def get_cart_total(self):
