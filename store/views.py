@@ -1,5 +1,5 @@
 import json
-
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -71,6 +71,11 @@ def login(request):
 
 def register(request):
     context = {}
+    print('register')
+    user = User.objects.create_user(username='eee',
+                                    email='jlennon@beatles.com',
+                                    password='glass onion')
+    customer, created = Customer.objects.get_or_create(user=user, name='johnnn', email='jle@gmail.com',phone_number='0001')
     return render(request, 'store/register.html', context)
 
 

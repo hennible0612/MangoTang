@@ -5,13 +5,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import forms
 
 
-# class UserForm(UserCreationForm):
-#     email = forms.EmailField(label="이메일")
-#
-#     class Meta:
-#         model = User
-#         fields = ("username", "password1", "password2", "email")
-# # Create your models here.
+class UserForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        fields = ("username", "password1", "password2")
+# Create your models here.
 
 class Customer(models.Model):
     GENDER_CHOICES = (
