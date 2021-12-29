@@ -73,7 +73,6 @@ def user_login(request):
 def register(request):
 
     if request.method == "POST":
-        print('register')
 
         form = UserForm(request.POST)
         if form.is_valid():
@@ -82,9 +81,13 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             email = form.cleaned_data.get('email')
             name = form.cleaned_data.get('name')
+            phone_number = form.cleaned_data.get('phone_number')
+
+            address1 = form.cleaned_data.get('address1')
+            address2 = form.cleaned_data.get('address2')
             user = User.objects.get(username=username)
 
-            Customer.objects.get_or_create(user=user, name=name, email=email, phone_number='0001')
+            Customer.objects.get_or_create(user=user, name=name, email=email, phone_number=phone_number,address1=address1,address2=address2)
 
             user = authenticate(username=username, password=raw_password)  # 사용자 인증
             login(request, user)  # 로그인
@@ -93,12 +96,6 @@ def register(request):
         form = UserForm()
 
     return render(request, 'store/register.html', {'form': form})
-    # context = {}
-
-    # user = User.objects.create_user(username='eee',
-    #                                 email='jlennon@beatles.com',
-    #                                 password='glass onion')
-    # return render(request, 'store/register.html', context)
 
 
 def mypage(request):

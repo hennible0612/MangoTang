@@ -10,9 +10,12 @@ class UserForm(UserCreationForm):
     name = forms.CharField(label="이름")
 
     email = forms.EmailField(label="이메일")
+    phone_number = forms.CharField(label="전화번호")
+    address1 = forms.CharField(label="주소")
+    address2 = forms.CharField(label="상세주소")
     class Meta:
         model = User
-        fields = ("username", "password1", "password2","name", "email")
+        fields = ("username", "password1", "password2","name", "email","phone_number", "address1", "address2")
 # Create your models here.
 
 class Customer(models.Model):
@@ -29,10 +32,10 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=50, null=False)
     # birth_date = models.DateField(blank=True, null=True)
     # gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
-    # mileage = models.IntegerField()
+    mileage = models.IntegerField(null=True, blank=True)
     # join_date = models.DateField()
-    # address1 = models.CharField(max_length=200, null=False)
-    # address2 = models.CharField(max_length=200, null=False)
+    address1 = models.CharField(max_length=200, null=False)
+    address2 = models.CharField(max_length=200, null=False)
 
     def __str__(self):
         return self.name
