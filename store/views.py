@@ -2,7 +2,8 @@ import json
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
-
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 from .models import *
 
 # Create your views here.
@@ -64,19 +65,40 @@ def cart(request):
     return render(request, 'store/cart.html', context)
 
 
-def login(request):
+def user_login(request):
     context = {}
     return render(request, 'store/login.html', context)
 
 
 def register(request):
-    context = {}
-    print('register')
-    user = User.objects.create_user(username='eee',
-                                    email='jlennon@beatles.com',
-                                    password='glass onion')
-    customer, created = Customer.objects.get_or_create(user=user, name='johnnn', email='jle@gmail.com',phone_number='0001')
-    return render(request, 'store/register.html', context)
+
+    if request.method == "POST":
+        print('register')
+
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            email = form.cleaned_data.get('email')
+            name = form.cleaned_data.get('name')
+            user = User.objects.get(username=username)
+
+            Customer.objects.get_or_create(user=user, name=name, email=email, phone_number='0001')
+
+            user = authenticate(username=username, password=raw_password)  # 사용자 인증
+            login(request, user)  # 로그인
+            return redirect('store')
+    else:
+        form = UserForm()
+
+    return render(request, 'store/register.html', {'form': form})
+    # context = {}
+
+    # user = User.objects.create_user(username='eee',
+    #                                 email='jlennon@beatles.com',
+    #                                 password='glass onion')
+    # return render(request, 'store/register.html', context)
 
 
 def mypage(request):
