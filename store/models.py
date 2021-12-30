@@ -8,7 +8,6 @@ from django import forms
 
 class UserForm(UserCreationForm):
     name = forms.CharField(label="이름")
-
     email = forms.EmailField(label="이메일")
     phone_number = forms.CharField(label="전화번호")
     address1 = forms.CharField(label="주소")
