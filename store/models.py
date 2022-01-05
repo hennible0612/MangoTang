@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
@@ -161,8 +163,9 @@ class ProductReview(models.Model):
                                       null=True)
     short_review = models.CharField(max_length=50, null=True, blank=True)
     long_review = models.CharField(max_length=200, null=True, blank=True)
+    date_added = models.DateField(default = datetime.now())
+
     image = models.ImageField(null=True, blank=True)
     review_bool = models.BooleanField(default=False, blank=False, null=True)
-
     def __str__(self):
         return " 주문자 : " + self.customer.email + " 주소  : " + self.short_review

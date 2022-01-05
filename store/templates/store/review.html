@@ -3,7 +3,6 @@
     <table class="table">
         <thead class="table-light">
         <tr>
-            <th>번호</th>
             <th>고객만족도</th>
             <th>구매후기</th>
             <th>작성자</th>
@@ -15,7 +14,6 @@
 
             <tr>
 
-                <td>{{ review.id }}</td>
                 <td>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -25,7 +23,7 @@
                 </td>
                 <td>{{ review.short_review }}</td>
                 <td>{{ review.customer.email}}</td>
-                <td>2021.08.26</td>
+                <td>{{ review.date_added}}</td>
             </tr>
         {% endfor %}
         {#      <tr>#}

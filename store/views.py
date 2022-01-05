@@ -40,10 +40,10 @@ def product_detail(request, seller_code):
     # review = ProductReview.objects.all(product=product) #없을 안가져옴
 
     reviews = product.productreview_set.all() #없을때 에러처리
-    print(reviews)
+    print(len(reviews))
 
 
-    context = {'product': product, 'reviews': reviews }
+    context = {'product': product, 'reviews': reviews, 'total_review':len(reviews)}
     return render(request, 'store/productdetail.html', context)
 
 
