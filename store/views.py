@@ -36,11 +36,14 @@ def store(request):
 def product_detail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
 
-    # review = ProductReview.objects.all(product.product_name)
-    # print(review)
-    # print(ProductReview.objects.get(product.product_name))
+    # review = ProductReview.objects.get(product.product_name)
+    # review = ProductReview.objects.all(product=product) #없을 안가져옴
 
-    context = {'product': product}
+    reviews = product.productreview_set.all() #없을때 에러처리
+    print(reviews)
+
+
+    context = {'product': product, 'reviews': reviews }
     return render(request, 'store/productdetail.html', context)
 
 
