@@ -17,7 +17,7 @@
                 </li>
             {% endif %}
             {% if user.is_superuser %}
-                        <a class="nav-link" href="admin">어드민페이지</a>
+                        <a class="nav-link" href={% url 'admin:index' %}>어드민페이지</a>
             {% endif %}
 
         </ul>
