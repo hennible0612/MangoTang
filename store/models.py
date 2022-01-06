@@ -1,11 +1,10 @@
 from datetime import datetime
 
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
-
 
 
 class UserForm(UserCreationForm):
@@ -14,9 +13,12 @@ class UserForm(UserCreationForm):
     phone_number = forms.CharField(label="전화번호")
     address1 = forms.CharField(label="주소")
     address2 = forms.CharField(label="상세주소")
+
     class Meta:
         model = User
-        fields = ("username", "password1", "password2","name", "email","phone_number", "address1", "address2")
+        fields = ("username", "password1", "password2", "name", "email", "phone_number", "address1", "address2")
+
+
 # Create your models here.
 
 class Customer(models.Model):
@@ -108,13 +110,11 @@ class Order(models.Model):
         total = sum([item.get_total for item in orderitems])  # 다더함함
         return total
 
-
     @property
     def get_cart_items(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.quantity for item in orderitems])
         return total
-
 
     def __str__(self):
         return " 주문자 : " + self.customer.email
@@ -163,9 +163,9 @@ class ProductReview(models.Model):
                                       null=True)
     short_review = models.CharField(max_length=50, null=True, blank=True)
     long_review = models.CharField(max_length=200, null=True, blank=True)
-    date_added = models.DateField(default = datetime.now())
-
+    date_added = models.DateField(default=datetime.now())
     image = models.ImageField(null=True, blank=True)
     review_bool = models.BooleanField(default=False, blank=False, null=True)
+
     def __str__(self):
         return " 주문자 : " + self.customer.email + " 주소  : " + self.short_review

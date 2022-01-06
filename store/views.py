@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .models import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 """
@@ -35,14 +36,17 @@ def store(request):
 
 def product_detail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
-
-    # review = ProductReview.objects.get(product.product_name)
-    # review = ProductReview.objects.all(product=product) #없을 안가져옴
-
-    reviews = product.productreview_set.all() #없을때 에러처리
+    review_page = request.GET.get('page',1) # 리뷰 페이지
 
 
-    context = {'product': product, 'reviews': reviews, 'total_review':len(reviews)}
+
+    reviews = product.productreview_set.all().order_by('-date_added')
+
+    #리뷰 페이징
+    review_paginator = Paginator(reviews,5)
+    review_obj = review_paginator.get_page(review_page)
+
+    context = {'product': product,'review_page ':review_page, 'review_obj':review_obj, 'total_review':len(reviews)}
     return render(request, 'store/productdetail.html', context)
 
 
