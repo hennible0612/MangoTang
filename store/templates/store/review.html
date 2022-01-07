@@ -13,7 +13,9 @@
         </tr>
         </thead>
         <tbody>
+
         {% for review in review_obj %}
+
             <tr>
                 <td>
                     <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
@@ -62,9 +64,12 @@
                     </td>
                 {% endif %}
 
-                <td>{{ review.short_review }}</td>
+                <td><a class="button" onclick="morecomment()">{{ review.short_review }}</a></td>
                 <td>{{ review.customer.email }}</td>
                 <td>{{ review.date_added }}</td>
+            </tr>
+            <tr id="moreComment" style="visibility: collapse">
+                <td colspan="5">sdfsdfsdsdfsdfsdfsdf</td>
             </tr>
         {% endfor %}
 
@@ -117,5 +122,11 @@
     var reviews = '{{ reviews.star_rating }}'
     console.log('{{ reviews.star_rating }}')
     console.log(reviews)
+
+    function morecomment() {
+        document.getElementById("moreComment").style.visibility = "visible"
+        console.log('morecomment')
+        {#element.style.visibility = show;#}
+    }
 
 </script>
