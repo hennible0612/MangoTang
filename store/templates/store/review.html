@@ -66,13 +66,18 @@
 
                 <td><a data-id="moreComment{{ forloop.counter }}" class="button more-comment"
                        href="javascript:void(0)"> {{ review.short_review }}</a></td>
-                <td>{{ review.customer.email }}</td>
+                <td>{{ review.customer.user }}</td>
                 <td>{{ review.date_added }}</td>
             </tr>
             <tr id="moreComment{{ forloop.counter }}" style="visibility: collapse">
-                <td colspan="2"><img class="card-img-top"  height="200" width="200" src={{ review.imageURL }}></td>
+                {% if  review.imageURL == "" %}
+                    <td colspan="5">{{ review.long_review }}</td>
 
-                <td colspan="3">{{ review.long_review }}</td>
+                {% else %}
+                    <td colspan="2"><img class="card-img-top" height="200" width="200" src={{ review.imageURL }}></td>
+
+                    <td colspan="3">{{ review.long_review }}</td>
+                {% endif %}
             </tr>
         {% endfor %}
 
