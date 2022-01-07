@@ -167,5 +167,15 @@ class ProductReview(models.Model):
     image = models.ImageField(null=True, blank=True)
     review_bool = models.BooleanField(default=False, blank=False, null=True)
 
+
+    @property
+    def imageURL(self):
+        try:
+            url_image = self.image.url
+        except:
+            url_image = ''
+
+        return url_image
+
     def __str__(self):
         return " 주문자 : " + self.customer.email + " 주소  : " + self.short_review
