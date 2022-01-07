@@ -64,12 +64,12 @@
                     </td>
                 {% endif %}
 
-                <td><a class="button" onclick="morecomment()">{{ review.short_review }}</a></td>
+                <td><a class="button more-comment" href="javascript:void(0)"> {{ review.short_review }}</a></td>
                 <td>{{ review.customer.email }}</td>
                 <td>{{ review.date_added }}</td>
             </tr>
-            <tr id="moreComment" style="visibility: collapse">
-                <td colspan="5">sdfsdfsdsdfsdfsdfsdf</td>
+            <tr id="moreComment{{ forloop.counter }}" style="visibility: collapse">
+                <td colspan="5">{{ review.long_review }}</td>
             </tr>
         {% endfor %}
 
@@ -119,14 +119,6 @@
 </ul>
 <!-- 페이징처리 끝 -->
 <script type="text/javascript">
-    var reviews = '{{ reviews.star_rating }}'
-    console.log('{{ reviews.star_rating }}')
-    console.log(reviews)
 
-    function morecomment() {
-        document.getElementById("moreComment").style.visibility = "visible"
-        console.log('morecomment')
-        {#element.style.visibility = show;#}
-    }
 
 </script>
