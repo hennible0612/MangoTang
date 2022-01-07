@@ -5,7 +5,14 @@ for (var i = 0; i < updateBtns.length; i++) {//for문을 돌리는 이유는 모
     console.log("updateBtns")
 	updateBtns[i].addEventListener('click', function(e){ //클릭시 function 실행
         e.preventDefault();
-        console.log('product detail clicked')
+        var trId = this.dataset.id;
+        if (document.getElementById(trId).style.visibility == "collapse") {
+            document.getElementById(trId).style.visibility = "visible";
+
+        } else {
+            document.getElementById(trId).style.visibility = "collapse"
+        }
+
 
 	})
 }
