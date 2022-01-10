@@ -8,4 +8,5 @@ admin.site.register(OrderItem)
 admin.site.register(ShippingAddress)
 admin.site.register(Carosel)
 admin.site.register(ProductReview)
+admin.site.register(ProductQuestion)
 

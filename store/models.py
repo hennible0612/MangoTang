@@ -177,13 +177,25 @@ class ProductReview(models.Model):
         return url_image
 
     def __str__(self):
-        return " 주문자 : " + self.customer.email + " 주소  : " + self.short_review
+        return " 주문자 : " + self.customer.email + " 주소  : " + self.short_review + self.review_bool
 
 class ProductQuestion(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
-    question_body = models.CharField(max_length=150, null=True, blank=True)
+    question_body = models.CharField(max_length=150, null=True, blank=False)
+    question_answer = models.CharField(max_length=200, null=True, blank=True)
     date_added = models.DateField(default=datetime.now)
     image = models.ImageField(null=True, blank=True)
-    question_state = models.BooleanField(default=False, blank=False, null=True)
-    question_public = models.BooleanField(default=False, blank=False, null=True)
+    question_state = models.BooleanField(default=False, blank=False)
+    question_public = models.BooleanField(default=False, blank=False)
+
+    def __str__(self):
+        return " 주문자 : " + self.question_body
+
+    def imageURL(self):
+        try:
+            url_image = self.image.url
+        except:
+            url_image = ''
+
+        return url_image

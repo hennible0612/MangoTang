@@ -37,16 +37,22 @@ def store(request):
 def product_detail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
     review_page = request.GET.get('page',1) # 리뷰 페이지
-
-
+    question_page = request.GET.get('page',1) # 리뷰 페이지
 
     reviews = product.productreview_set.all().order_by('-date_added')
-
+    questions = product.productquestion_set.all().order_by('-date_added')
+    print(questions)
     #리뷰 페이징
     review_paginator = Paginator(reviews,5)
     review_obj = review_paginator.get_page(review_page)
 
-    context = {'product': product,'review_page ':review_page, 'review_obj':review_obj, 'total_review':len(reviews)}
+    #제품 질문 페이징
+    # question_paginator = Paginator(reviews,5)
+    # question_obj = review_paginator.get_page(question_paginator)
+    #, 'question_obj':question_obj
+    context = {'product': product,'review_page':review_page, 'review_obj':review_obj
+        ,'question_page':question_page,'questions':questions,'total_review':len(reviews)
+        ,'total_question':len(questions)}
     return render(request, 'store/productdetail.html', context)
 
 

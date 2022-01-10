@@ -1,3 +1,4 @@
+{#{% load store_filter %}#}
 {% load static %}
 <div class="container mt-3">
 
@@ -5,7 +6,6 @@
     <table class="table">
         <thead class="table-light">
         <tr>
-            <th>문의유형</th>
             <th>답변상태</th>
             <th>제목</th>
             <th>문의자</th>
@@ -13,28 +13,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>기타</td>
-            <td class="text-warning">[답변실패]</td>
-            <td>왜 이렇게 맛이 없나요?</td>
-            <td>john****</td>
-            <td>2021.08.26</td>
-        </tr>
-        <tr>
-            <td>배송</td>
-            <td class="text-success">[답변완료]</td>
-            <td>배송 잘못 왔어요</td>
-            <td>who****</td>
-            <td>2021.08.26</td>
-        </tr>
-        <tr>
-            <td>문의</td>
-            <td class="text-warning">[답변대기중]</td>
-            <td>유통기한이 언제까지인가요?</td>
-            <td>mer****</td>
-            <td>2021.08.26</td>
-        </tr>
+{#        question 이라고 하면 에러도 안뜨고 출력됨 question은 장고에 기본 내장된 기능이라서 에러#}
+        {% for product_quesiton in questions %}
+            <tr>
+                {% if product_quesiton.question_state is True %}
+                    <td class="text-success">[답변완료]</td>
+                {% elif product_quesiton.question_state is False %}
+                    <td class="text-warning">[답변대기중]</td>
+                {% endif %}
+                <td>{{ product_quesiton.question_body }}</td>
+                <td>{{ product_quesiton.customer.user}}</td>
+                <td>{{ product_quesiton.date_added }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
 </div>
+
