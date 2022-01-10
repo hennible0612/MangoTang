@@ -178,3 +178,12 @@ class ProductReview(models.Model):
 
     def __str__(self):
         return " 주문자 : " + self.customer.email + " 주소  : " + self.short_review
+
+class ProductQuestion(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    question_body = models.CharField(max_length=150, null=True, blank=True)
+    date_added = models.DateField(default=datetime.now)
+    image = models.ImageField(null=True, blank=True)
+    question_state = models.BooleanField(default=False, blank=False, null=True)
+    question_public = models.BooleanField(default=False, blank=False, null=True)
