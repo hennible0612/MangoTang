@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for product_quesiton in questions %}
+        {% for product_quesiton in question_obj %}
             <tr>
                 {% if product_quesiton.question_state is True and product_quesiton.question_public is True %}
                     <td class="text-success">[답변완료]</td>
@@ -50,3 +50,41 @@
 
 </div>
 
+<!-- 페이징처리 시작 -->
+<ul class="pagination justify-content-center">
+    <!-- 이전페이지 -->
+    {% if question_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ question_obj.previous_question_page }}">이전</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+    {% endif %}
+    <!-- 페이지리스트 -->
+    {% for question_page in question_obj.paginator.page_range %}
+        {% if question_page >= question_obj.number|add:-5 and question_page <= question_obj.number|add:5 %}
+            {% if question_page == question_obj.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="?page={{ question_page }}">{{ question_page }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ question_page }}">{{ question_page }}</a>
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <!-- 다음페이지 -->
+    {% if question_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ question_obj.next_question_page }}">다음</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+    {% endif %}
+</ul>
+<!-- 페이징처리 끝 -->

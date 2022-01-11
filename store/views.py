@@ -44,18 +44,18 @@ def product_detail(request, seller_code):
 
     reviews = product.productreview_set.all().order_by('-date_added')
     questions = product.productquestion_set.all().order_by('-date_added')
-    print(questions)
+
     #리뷰 페이징
     review_paginator = Paginator(reviews,5)
     review_obj = review_paginator.get_page(review_page)
 
-    #제품 질문 페이징
-    # question_paginator = Paginator(reviews,5)
-    # question_obj = review_paginator.get_page(question_paginator)
-    #, 'question_obj':question_obj
+    # 제품 질문 페이징
+    question_paginator = Paginator(questions,5)
+    question_obj = question_paginator.get_page(question_page)
+    #
     context = {'product': product,'review_page':review_page, 'review_obj':review_obj
         ,'question_page':question_page,'questions':questions,'total_review':len(reviews)
-        ,'total_question':len(questions), 'current_user':current_user}
+        ,'total_question':len(questions), 'question_obj':question_obj}
     return render(request, 'store/productdetail.html', context)
 
 

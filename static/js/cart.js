@@ -12,8 +12,6 @@ for (i = 0; i < updateBtns.length; i++) {
         } else {
             updateUserOrder(productId, action);
         }
-
-
     });
 }
 
