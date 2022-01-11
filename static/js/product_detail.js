@@ -8,7 +8,6 @@ for (var i = 0; i < updateBtns.length; i++) {//for문을 돌리는 이유는 모
         var trId = this.dataset.id;
         if (document.getElementById(trId).style.visibility == "collapse") {
             document.getElementById(trId).style.visibility = "visible";
-
         } else {
             document.getElementById(trId).style.visibility = "collapse"
         }

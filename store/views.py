@@ -36,6 +36,9 @@ def store(request):
 
 def product_detail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
+    current_user = request.user
+
+
     review_page = request.GET.get('page',1) # 리뷰 페이지
     question_page = request.GET.get('page',1) # 리뷰 페이지
 
@@ -52,7 +55,7 @@ def product_detail(request, seller_code):
     #, 'question_obj':question_obj
     context = {'product': product,'review_page':review_page, 'review_obj':review_obj
         ,'question_page':question_page,'questions':questions,'total_review':len(reviews)
-        ,'total_question':len(questions)}
+        ,'total_question':len(questions), 'current_user':current_user}
     return render(request, 'store/productdetail.html', context)
 
 
@@ -148,7 +151,7 @@ def updateItem(request):
 
     customer = request.user.customer  # 현재 customer
     product = Product.objects.get(id=productId)  # 해당하는 productId가져옴
-    order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체 만들거나 가져옴 상태 False
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
 
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)#해당 orderd와 해당 product를 가지고 있는 orderitem 생성
 
