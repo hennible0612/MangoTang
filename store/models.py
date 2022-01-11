@@ -177,7 +177,7 @@ class ProductReview(models.Model):
         return url_image
 
     def __str__(self):
-        return " 주문자 : " + self.customer.email + " 주소  : " + self.short_review + self.review_bool
+        return " 주문자 : " + self.customer.email + " 리뷰  : " + self.short_review
 
 class ProductQuestion(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
@@ -190,7 +190,7 @@ class ProductQuestion(models.Model):
     question_public = models.BooleanField(default=False, blank=False)
 
     def __str__(self):
-        return " 주문자 : " + self.question_body
+        return " 질문 : " + self.question_body
 
     def imageURL(self):
         try:

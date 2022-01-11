@@ -23,15 +23,24 @@
 
                 {% elif product_quesiton.question_state is True and product_quesiton.question_public is False %}
                     <td class="text-success">[답변완료]</td>
-                    <td><i class="fas fa-lock"></i> 비공개 질문입니다.</td>
+                    {% if user == product_quesiton.customer.user %}
+                        <td><a data-id="answer{{ forloop.counter }}" class="button more-comment"
+                               href="javascript:void(0)">{{ product_quesiton.question_body }}</a></td>
+                    {% else %}
+                        <td><i class="fas fa-lock"></i> 비공개 질문입니다.</td>
+
+                    {% endif %}
+
 
                 {% elif product_quesiton.question_state is False and product_quesiton.question_public is False %}
                     <td class="text-warning">[답변대기중]</td>
-                    <td><i class="fas fa-lock"></i> 비공개 질문입니다.</td>
-                    {% if current_user == product_quesiton.customer.user %}
-                        <td><i class="fas fa-lock"></i> 글쓴 유저이다.</td>
+                    {% if user == product_quesiton.customer.user %}
+                        <td>{{ product_quesiton.question_body }}</td>
+                    {% else %}
+                        <td><i class="fas fa-lock"></i> 비공개 질문입니다.</td>
 
                     {% endif %}
+
                 {% elif product_quesiton.question_state is False and product_quesiton.question_public is True %}
                     <td class="text-warning">[답변대기중]</td>
                     <td>{{ product_quesiton.question_body }}</td>
