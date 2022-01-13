@@ -12383,9 +12383,36 @@ a.nav-link-mypage:active {
 
 
 
+.hr-option{
+          display: block;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
 
+.container-option{
+    justify-content: space-between;
+    display: flex;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
+}
 
+.item-option-title{
+    flex-basis: 100%;
+}
 
+.item-option-quantity{
+flex-basis: 60%;
+}
+.item-option-cost{
+    flex-basis: 20%;
+}
+.item-option-cost{
+    flex-basis: 10%;
+}
 
 
 

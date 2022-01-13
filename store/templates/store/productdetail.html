@@ -45,7 +45,7 @@
                                 :: 필수 옵션 ::
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <!-- 이부분좀 나중에 리팩토링 하자 -->
+                                <!-- 이부분좀 나중에 리팩토링 하자 -->
                                 {% if product.option1 != Null %}
                                     <li><a class="dropdown-item">{{ product.option1.product_name }}</a></li>
                                 {% endif %}
@@ -68,30 +68,62 @@
                             </ul>
                         </div>
                     {% endif %}
-
                     <br>
 
-                    <div class="d-flex">
-                        <div class="quantity buttons_added">
-                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max=""
-                                                                                name="quantity" value="1" title="Qty"
-                                                                                class="input-text qty text" size="4"
-                                                                                pattern="" inputmode=""><input
-                                type="button" value="+" class="plus">
+                    {% if product.option_bool == True %}
+                        <!-- 옵션 -->
+                        <div class="container-option"
+                             style="background-color: #f9f9fa;  border-style: outset; border-width: 1px;">
+                            <div class="item-option-title" style="padding-top: 5px; padding-left: 5px">옵션이 름 옵션이름 옵션이름
+                                옵션이름 옵션이름 옵션이름 옵션이름
+                            </div>
+                            <hr class="hr-option item-option-title">
+                            <div class="quantity buttons_added item-option-quantity ">
+                                <input type="button" value="-" class="minus">
+                                <input type="number" step="1" min="1"
+                                       max=""
+                                       name="quantity" value="1"
+                                       title="Qty"
+                                       class="input-text qty text"
+                                       size="4"
+                                       pattern="" inputmode="">
+                                <input type="button" value="+" class="plus">
+
+                            </div>
+                            <label class="item-option-cost" style="padding-top: 5px">9000원</label>
+                            <i class="far fa-times-circle item-option-cost" style="padding-top: 10px"></i>
                         </div>
-                        <div style="padding-right:10px;">
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                카트에 넣기
-                            </button>
+
+                    {% else %}
+                        <div class="d-flex">
+                            <div class="quantity buttons_added">
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1"
+                                                                                    max=""
+                                                                                    name="quantity" value="1"
+                                                                                    title="Qty"
+                                                                                    class="input-text qty text" size="4"
+                                                                                    pattern="" inputmode="">
+                                <input type="button" value="+" class="plus">
+                            </div>
+                            <div style="padding-right:10px;">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    카트에 넣기
+                                </button>
+                            </div>
+                            <div style="padding-right:10px;">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    바로 구매하기
+                                </button>
+                            </div>
                         </div>
-                        <div style="padding-right:10px;">
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                바로 구매하기
-                            </button>
-                        </div>
-                    </div>
+                    {% endif %}
+                    {#                    {% else %}#}
+                    {#                        <label class="center"><b>필수 옵션을 선택해주세요!</b></label>#}
+                    {##}
+                    {#                    {% endif %}#}
+
                 </div>
             </div>
         </div>
