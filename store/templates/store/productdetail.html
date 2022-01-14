@@ -47,28 +47,28 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <!-- 이부분좀 나중에 리팩토링 하자 -->
-                                {% for i in product.option_total|options %}
-                                    <li><a class="dropdown-item">{{ i }}</a></li>
+{#                                {% for i in product.option_total|options %}#}
+{#                                    <li><a class="dropdown-item">{{ i }}</a></li>#}
+{#                                {% endfor %}#}
 
-                                {% endfor %}
                                 {% if product.option1 != Null %}
-                                    <li><a class="dropdown-item">{{ product.option1.product_name }}</a></li>
+                                    <li><a class="dropdown-item add-option">{{ product.option1.product_name }}</a></li>
                                 {% endif %}
                                 {% if product.option2 != Null %}
 
-                                    <li><a class="dropdown-item">{{ product.option2.product_name }}</a></li>
+                                    <li><a class="dropdown-item add-option">{{ product.option2.product_name }}</a></li>
                                 {% endif %}
                                 {% if product.option3 != Null %}
 
-                                    <li><a class="dropdown-item">{{ product.option3.product_name }}</a></li>
+                                    <li><a class="dropdown-item add-option">{{ product.option3.product_name }}</a></li>
                                 {% endif %}
                                 {% if product.option4 != Null %}
 
-                                    <li><a class="dropdown-item">{{ product.option4.product_name }}</a></li>
+                                    <li><a class="dropdown-item add-option">{{ product.option4.product_name }}</a></li>
                                 {% endif %}
                                 {% if product.option5 != Null %}
 
-                                    <li><a class="dropdown-item">{{ product.option5.product_name }}</a></li>
+                                    <li><a class="dropdown-item add-option">{{ product.option5.product_name }}</a></li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -77,6 +77,9 @@
 
                     {% if product.option_bool == True %}
                         <!-- 옵션 -->
+                        <div id="option_list">
+
+                        </div>
                         <div class="container-option"
                              style="background-color: #f9f9fa;  border-style: outset; border-width: 1px;">
                             <div class="item-option-title" style="padding-top: 5px; padding-left: 5px">옵션이 름 옵션이름 옵션이름
