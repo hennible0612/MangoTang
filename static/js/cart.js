@@ -24,7 +24,7 @@ function updateUserOrder(productId, action) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken':csrftoken,
+            'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify({'productId': productId, 'action': action})
     })
@@ -35,3 +35,15 @@ function updateUserOrder(productId, action) {
             location.reload()
         });
 }
+
+
+// $.ajax({
+//     url: 'http://127.0.0.1:8000/productDetail/12312/?page=3',
+//     type: 'GET'
+// }).done(function (data) {
+//     console.log(data)
+//     console.log("성공")
+// }).fail(function () {
+//     console.log("실패")
+// })
+//

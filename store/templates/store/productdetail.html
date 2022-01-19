@@ -50,7 +50,10 @@
 {#                                {% for i in product.option_total|options %}#}
 {#                                    <li><a class="dropdown-item">{{ i }}</a></li>#}
 {#                                {% endfor %}#}
-
+                                <select class="form-control" id="option1">
+                                  <option>모자</option>
+                                  <option>셔츠</option>
+                                </select>
                                 {% if product.option1 != Null %}
                                     <li><a class="dropdown-item add-option">{{ product.option1.product_name }}</a></li>
                                 {% endif %}
@@ -176,7 +179,6 @@
             </div>
         </div>
     </div>
-
 
 
 

@@ -89,7 +89,7 @@
     <!-- 이전페이지 -->
     {% if review_obj.has_previous %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ review_obj.previous_review_page }}">이전</a>
+            <a class="page-link" href="?page={{ review_obj.previous_page_number }}">이전</a>
         </li>
     {% else %}
         <li class="page-item disabled">
@@ -104,7 +104,7 @@
                     <a class="page-link" href="?page={{ review_page }}">{{ review_page }}</a>
                 </li>
             {% else %}
-                <li class="page-item">
+                <li class="page-item" name="test">
                     <a class="page-link" href="?page={{ review_page }}">{{ review_page }}</a> <!-- url, 페이지, id 태그 위치 가기 -->
                 </li>
             {% endif %}
@@ -113,7 +113,7 @@
     <!-- 다음페이지 -->
     {% if review_obj.has_next %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ review_obj.next_review_page }}">다음</a>
+            <a class="page-link" href="?page={{ review_obj.next_page_number }}">다음</a>
         </li>
     {% else %}
         <li class="page-item disabled">
@@ -122,7 +122,10 @@
     {% endif %}
 </ul>
 <!-- 페이징처리 끝 -->
-<script type="text/javascript">
+<script>
+{#    {{  review_obj }}#}
+{#    obj = '{{ reviews }}'#}
+{#    console.log(obj);#}
 
-
+{#obj.forEach.#}
 </script>

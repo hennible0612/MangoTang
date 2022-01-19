@@ -6,7 +6,10 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .models import *
 from django.core.paginator import Paginator
+from django.core import serializers
 
+import io
+from rest_framework.parsers import JSONParser
 # Create your views here.
 """
 스토어 메인화면
@@ -34,9 +37,8 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 
-def product_detail(request, seller_code):
+def productDetail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
-    current_user = request.user
 
 
     review_page = request.GET.get('page',1) # 리뷰 페이지
@@ -52,10 +54,10 @@ def product_detail(request, seller_code):
     # 제품 질문 페이징
     question_paginator = Paginator(questions,5)
     question_obj = question_paginator.get_page(question_page)
-    #
+
     context = {'product': product,'review_page':review_page, 'review_obj':review_obj
         ,'question_page':question_page,'questions':questions,'total_review':len(reviews)
-        ,'total_question':len(questions), 'question_obj':question_obj}
+        ,'total_question':len(questions), 'question_obj':question_obj,'reviews':reviews}
     return render(request, 'store/productdetail.html', context)
 
 
@@ -165,6 +167,22 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+def getReview(request):
+    seller_code = 12312;
+    product = Product.objects.get(seller_code=seller_code)
+    reviews = product.productreview_set.all().order_by('-date_added')
+
+
+    # data = JSONParser().parse(reviews)
+    # print(data)
+    json_obj = serializers.serialize('json', reviews)
+    print(json_obj)
+    # json_obj = list(reviews)
+    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
+
+
 
 
 def customerservice(request):
