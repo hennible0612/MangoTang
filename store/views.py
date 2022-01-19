@@ -170,11 +170,10 @@ def updateItem(request):
 
 def getReview(request):
     seller_code = 12312;
+
+
     product = Product.objects.get(seller_code=seller_code)
     reviews = product.productreview_set.all().order_by('-date_added')
-
-
-    # data = JSONParser().parse(reviews)
     # print(data)
     json_obj = serializers.serialize('json', reviews)
     print(json_obj)
