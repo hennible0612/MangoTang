@@ -128,7 +128,7 @@
     {#$('.next').click(function (e) });{#}
     {#    e.preventDefault()#}
 
-    var url = /get_review/
+    var url = "/productDetail/get_review/{{ product.seller_code }}/"
     fetch(url, { //fetch는 promise based이다. 즉, then과 catch를 사용할 수 있다.
         method: 'POST',
         headers: { //json을 주기 위해서 fectch에게 headers를 사용해서 json을 준다는거 말해줘야한다.
@@ -138,15 +138,8 @@
         body: JSON.stringify({'seller_code': seller_code})
     })
 
-    $.ajax({
-        url: '/get_review/',
-        type: 'POST'
-    }).done(function (data) {
-        console.log(data)
-        console.log("성공")
-    }).fail(function () {
-        console.log("실패")
-    })
+
+
 
 
     {#.then((response) => { //promise란 말그대로 약속, resolve혹은 reject를 받고난후 then실행#}

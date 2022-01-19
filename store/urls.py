@@ -11,8 +11,13 @@ urlpatterns = [
 	path('register/', views.register, name="register"),
 	path('mypage/', views.mypage, name="mypage"),
 	path('productDetail/<int:seller_code>/', views.productDetail, name="product_detail"),
+	path('productDetail/review/<int:seller_code>/', views.productDetail, name="product_review"),
 
-	path('get_review/', views.getReview, name="get_review"), #
+
+
+	path('productDetail/get_review/<int:seller_code>/', views.getReview, name="getReview"),
+
+	# path('get_review/', views.getReview, name="getReview"), #전체 리뷰를 가져오는 url
 
 	path('update_item/', views.updateItem, name="update_item"), # 장바구니 추가 요청 url
 

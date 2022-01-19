@@ -1,15 +1,13 @@
 import json
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from .models import *
-from django.core.paginator import Paginator
-from django.core import serializers
 
-import io
-from rest_framework.parsers import JSONParser
+from django.contrib.auth import authenticate, login
+from django.core import serializers
+from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+
+from .models import *
+
 # Create your views here.
 """
 스토어 메인화면
@@ -17,7 +15,6 @@ from rest_framework.parsers import JSONParser
 
 
 def store(request):
-
     if request.user.is_authenticated:  # 로그인 유저일시
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)
@@ -32,7 +29,7 @@ def store(request):
     carousel = Carosel.objects.all()  # 캐러솔 가져옴
     carousel_length = len(carousel)
 
-    context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length, 'cartItems':cartItems}
+    context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length, 'cartItems': cartItems}
 
     return render(request, 'store/store.html', context)
 
@@ -40,24 +37,23 @@ def store(request):
 def productDetail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
 
-
-    review_page = request.GET.get('page',1) # 리뷰 페이지
-    question_page = request.GET.get('page',1) # 리뷰 페이지
+    review_page = request.GET.get('page', 1)  # 리뷰 페이지
+    question_page = request.GET.get('page', 1)  # 리뷰 페이지
 
     reviews = product.productreview_set.all().order_by('-date_added')
     questions = product.productquestion_set.all().order_by('-date_added')
 
-    #리뷰 페이징
-    review_paginator = Paginator(reviews,5)
+    # 리뷰 페이징
+    review_paginator = Paginator(reviews, 5)
     review_obj = review_paginator.get_page(review_page)
 
     # 제품 질문 페이징
-    question_paginator = Paginator(questions,5)
+    question_paginator = Paginator(questions, 5)
     question_obj = question_paginator.get_page(question_page)
 
-    context = {'product': product,'review_page':review_page, 'review_obj':review_obj
-        ,'question_page':question_page,'questions':questions,'total_review':len(reviews)
-        ,'total_question':len(questions), 'question_obj':question_obj,'reviews':reviews}
+    context = {'product': product, 'review_page': review_page, 'review_obj': review_obj
+        , 'question_page': question_page, 'questions': questions, 'total_review': len(reviews)
+        , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews}
     return render(request, 'store/productdetail.html', context)
 
 
@@ -77,7 +73,7 @@ def cart(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems':cartItems}
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
 
     return render(request, 'store/cart.html', context)
 
@@ -88,7 +84,6 @@ def user_login(request):
 
 
 def register(request):
-
     if request.method == "POST":
 
         form = UserForm(request.POST)
@@ -103,7 +98,8 @@ def register(request):
             address2 = form.cleaned_data.get('address2')
             user = User.objects.get(username=username)
 
-            Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number,address1=address1,address2=address2)
+            Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number, address1=address1,
+                                    address2=address2)
 
             user = authenticate(username=username, password=raw_password)  # 사용자 인증
             login(request, user)  # 로그인
@@ -135,7 +131,7 @@ def checkout(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems':cartItems}
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/checkout.html', context)
 
 
@@ -155,35 +151,52 @@ def updateItem(request):
     product = Product.objects.get(id=productId)  # 해당하는 productId가져옴
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)#해당 orderd와 해당 product를 가지고 있는 orderitem 생성
+    orderItem, created = OrderItem.objects.get_or_create(order=order,
+                                                         product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
 
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
-    orderItem.save() #DB에 저장
+    orderItem.save()  # DB에 저장
 
     if orderItem.quantity <= 0:
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
 
-def getReview(request):
 
-    # seller_code = '12312'
-    data = json.loads(request.body)  # JSON body data에저장
-    seller_code = data['seller_code']
+# def getReview(request):
+#
+#
+#     # json_obj = []
+#     if request.method == "POST":
+#         data = json.loads(request.body)  # JSON body data에저장
+#         seller_code = data['seller_code']
+#         product = Product.objects.get(seller_code=seller_code)
+#         reviews = product.productreview_set.all().order_by('-date_added')
+#         # print(data)
+#         json_obj = serializers.serialize('json', reviews)
+#         print(seller_code)
+#         print(json_obj)
+#         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+#     else:
+#         print("hello get")
+#         # return JsonResponse(json_obj, safe=False)
+#     # json_obj = list(reviews)
+
+def getReview(request,seller_code):
+    # data = json.loads(request.body)  # JSON body data에저장
+    # seller_code1 = data['seller_code']
+    #
+    # print(seller_code1)
+    # print(seller_code)
     product = Product.objects.get(seller_code=seller_code)
     reviews = product.productreview_set.all().order_by('-date_added')
-    # print(data)
     json_obj = serializers.serialize('json', reviews)
-    print(seller_code)
-    print(json_obj)
-    # json_obj = list(reviews)
+    # print(seller_code)
+    # print(json_obj)
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
-
-
-
 
 
 def customerservice(request):
