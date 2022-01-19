@@ -169,13 +169,15 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 def getReview(request):
-    seller_code = 12312;
 
-
+    # seller_code = '12312'
+    data = json.loads(request.body)  # JSON body data에저장
+    seller_code = data['seller_code']
     product = Product.objects.get(seller_code=seller_code)
     reviews = product.productreview_set.all().order_by('-date_added')
     # print(data)
     json_obj = serializers.serialize('json', reviews)
+    print(seller_code)
     print(json_obj)
     # json_obj = list(reviews)
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
