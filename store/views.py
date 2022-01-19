@@ -34,6 +34,12 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 
+"""
+제품 설명
+메인화면에서 클릭시 이동할 제품 페이지
+"""
+
+
 def productDetail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
 
@@ -58,7 +64,7 @@ def productDetail(request, seller_code):
 
 
 """
-카트
+내 카트
 """
 
 
@@ -78,9 +84,19 @@ def cart(request):
     return render(request, 'store/cart.html', context)
 
 
+"""
+로그인 요청 처리
+"""
+
+
 def user_login(request):
     context = {}
     return render(request, 'store/login.html', context)
+
+
+"""
+회원가입 요청 처리
+"""
 
 
 def register(request):
@@ -108,11 +124,6 @@ def register(request):
         form = UserForm()
 
     return render(request, 'store/register.html', {'form': form})
-
-
-def mypage(request):
-    context = {}
-    return render(request, 'store/mypage.html', context)
 
 
 """
@@ -166,37 +177,26 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 
-# def getReview(request):
-#
-#
-#     # json_obj = []
-#     if request.method == "POST":
-#         data = json.loads(request.body)  # JSON body data에저장
-#         seller_code = data['seller_code']
-#         product = Product.objects.get(seller_code=seller_code)
-#         reviews = product.productreview_set.all().order_by('-date_added')
-#         # print(data)
-#         json_obj = serializers.serialize('json', reviews)
-#         print(seller_code)
-#         print(json_obj)
-#         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
-#     else:
-#         print("hello get")
-#         # return JsonResponse(json_obj, safe=False)
-#     # json_obj = list(reviews)
+"""
+제품 리뷰 API
+"""
 
-def getReview(request,seller_code):
-    # data = json.loads(request.body)  # JSON body data에저장
-    # seller_code1 = data['seller_code']
-    #
-    # print(seller_code1)
-    # print(seller_code)
+
+def getReview(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
     reviews = product.productreview_set.all().order_by('-date_added')
     json_obj = serializers.serialize('json', reviews)
-    # print(seller_code)
-    # print(json_obj)
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
+
+"""
+내페이지
+"""
+
+
+def mypage(request):
+    context = {}
+    return render(request, 'store/mypage.html', context)
 
 
 def customerservice(request):
