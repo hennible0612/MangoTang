@@ -185,23 +185,17 @@ def updateItem(request):
 def getReview(request, seller_code, page):
 
     product = Product.objects.get(seller_code=seller_code)
-    # reviews = product.productreview_set.all().order_by('-date_added')
-    # json_obj = serializers.serialize('json', reviews)
 
 
-    # print(product)
-
-    #------------------
     review_page = request.GET.get('page', page)  # 리뷰 페이지
     reviews = product.productreview_set.all().order_by('-date_added') # 여기에 모든 리뷰 들어있음
 
-    # 리뷰 페이징
     review_paginator = Paginator(reviews, 5)
     review_obj = review_paginator.get_page(review_page)
 
 
     json_obj = serializers.serialize('json', review_obj) #페이징된값
-    #-----------
+
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
