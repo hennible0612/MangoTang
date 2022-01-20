@@ -178,14 +178,17 @@ def updateItem(request):
 
 
 """
-제품 리뷰 API
+제품 리뷰 가져오는 API
 """
 
 
-def getReview(request, seller_code):
+def getReview(request, seller_code, page):
+
     product = Product.objects.get(seller_code=seller_code)
     reviews = product.productreview_set.all().order_by('-date_added')
     json_obj = serializers.serialize('json', reviews)
+
+    
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 

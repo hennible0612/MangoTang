@@ -22,7 +22,8 @@ urlpatterns = [
 	#제품 상세페이지
 	path('productDetail/<int:seller_code>/', views.productDetail, name="product_detail"),
 	#제품 리뷰 API
-	path('productDetail/get_review/<int:seller_code>/', views.getReview, name="getReview"),
+	# path('productDetail/get_review/<int:seller_code>/', views.getReview, name="getReview"),
+	path('productDetail/get_review/<int:seller_code>/<int:page>/', views.getReview, name="getReview"),
 
 	# 내페이지
 	path('mypage/', views.mypage, name="mypage"),
