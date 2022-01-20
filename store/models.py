@@ -162,7 +162,7 @@ class ProductReview(models.Model):
                                       null=True)
     short_review = models.CharField(max_length=50, null=True, blank=True)
     long_review = models.CharField(max_length=200, null=True, blank=True)
-    date_added = models.DateField(default=datetime.now)
+    date_added = models.DateTimeField(default=datetime.now)
     image = models.ImageField(null=True, blank=True)
     review_bool = models.BooleanField(default=False, blank=False, null=True)
 
