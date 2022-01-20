@@ -47,6 +47,7 @@ function updateUserOrder(productId, action) {
 //     console.log("실패")
 // })
 // //
+
 $.ajax({
     url: '/productDetail/get_review/1004/1',
     type: 'GET'
