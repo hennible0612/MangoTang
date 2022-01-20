@@ -23,7 +23,7 @@ urlpatterns = [
 	path('productDetail/<int:seller_code>/', views.productDetail, name="product_detail"),
 	#제품 리뷰 API
 	# path('productDetail/get_review/<int:seller_code>/', views.getReview, name="getReview"),
-	path('productDetail/get_review/<int:seller_code>/<int:page>/', views.getReview, name="getReview"),
+	path('product/review/<int:seller_code>/<int:page>/', views.getReview, name="getReview"),
 
 	# 내페이지
 	path('mypage/', views.mypage, name="mypage"),

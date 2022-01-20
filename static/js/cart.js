@@ -48,12 +48,12 @@ function updateUserOrder(productId, action) {
 // })
 // //
 
-$.ajax({
-    url: '/productDetail/get_review/1004/1',
-    type: 'GET'
-}).done(function (data) {
-    console.log(data)
-    console.log("성공")
-}).fail(function () {
-    console.log("실패")
-})
+// $.ajax({
+//     url: '/productDetail/get_review/1004/1',
+//     type: 'GET'
+// }).done(function (data) {
+//     console.log(data)
+//     console.log("성공")
+// }).fail(function () {
+//     console.log("실패")
+// })
