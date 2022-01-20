@@ -1,21 +1,6 @@
-{% load store_filter %}
-{% load static %}
-<div class="container mt-3">
-    <table class="table">
-        <thead class="table-light">
-        <tr>
-            <th>번호</th>
-
-            <th>고객만족도</th>
-            <th>구매후기</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        </thead>
-        <tbody>
         {% for review in review_obj %}
             <tr>
-                <td id="reviewNumber">
+                <td>
                     <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
                     {{ review_obj.paginator.count|sub:review_obj.start_index|sub:forloop.counter0|add:1 }}
                 </td>
@@ -61,18 +46,12 @@
                         <span class="fa fa-star "></span>
                     </td>
                 {% endif %}
-                <td>
-                    <a id="reviewShort" data-id="moreComment{{ forloop.counter }}" class="button more-comment"
-                       href="javascript:void(0)"> {{ review.short_review }}</a>
-                </td>
-                <td>
-                    <text id="reviewId">{{ review.customer.user }}</text>
-                </td>
-                <td>
-                    <text id="reviewDate">{{ review.date_added }}</text>
-                </td>
+                <td><a data-id="moreComment{{ forloop.counter }}" class="button more-comment"
+                       href="javascript:void(0)"> {{ review.short_review }}</a></td>
+                <td>{{ review.customer.user }}</td>
+                <td>{{ review.date_added }}</td>
             </tr>
-            <tr id="moreComment{{ forloop.counter }}" class="reviewLong" style="visibility: collapse">
+            <tr id="moreComment{{ forloop.counter }}" style="visibility: collapse">
                 {% if  review.imageURL == "" %}
                     <td colspan="5">{{ review.long_review }}</td>
 
@@ -85,66 +64,42 @@
         {% endfor %}
 
 
-        </tbody>
 
-    </table>
 
-</div>
-<!-- 페이징처리 시작 -->
-<ul class="pagination justify-content-center">
-    <!-- 이전페이지 -->
-{#    {% if review_obj.has_previous %}#}
-{#        <li class="page-item">#}
-{#            <a class="page-link">이전</a>#}
-{#        </li>#}
-{#    {% else %}#}
-{#        <li class="page-item disabled">#}
-{#            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>#}
-{#        </li>#}
-{#    {% endif %}#}
+
+
+<!-- 페이지 목록 -->
+
+ {% if review_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link">이전</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+    {% endif %}
     <!-- 페이지리스트 -->
     {% for review_page in review_obj.paginator.page_range %}
         {% if review_page >= review_obj.number|add:-5 and review_page <= review_obj.number|add:5 %}
             {% if review_page == review_obj.number %}
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" data-page="{{ review_page }}">{{ review_page }}</a>
+                    <a class="page-link">{{ review_page }}</a>
                 </li>
             {% else %}
                 <li class="page-item" name="test">
-                    <a class="page-link" data-page="{{ review_page }}">{{ review_page }}</a> <!-- url, 페이지, id 태그 위치 가기 -->
+                    <a class="page-link">{{ review_page }}</a> <!-- url, 페이지, id 태그 위치 가기 -->
                 </li>
             {% endif %}
         {% endif %}
     {% endfor %}
     <!-- 다음페이지 -->
-{#    {% if review_obj.has_next %}#}
-{#        <li class="page-item next">#}
-{#            <a class="page-link">다음</a>#}
-{#        </li>#}
-{#    {% else %}#}
-{#        <li class="page-item disabled">#}
-{#            <a class="page-link next" tabindex="-1" aria-disabled="true" href="#">다음</a>#}
-{#        </li>#}
-{#    {% endif %}#}
-</ul>
-<!-- 페이징처리 끝 -->
-<script>
-
-
-
-
-
-    var seller_code = '{{ product.seller_code }}'
-
-    $.ajax({
-        url: '/product/review/{{ product.seller_code }}/1/',
-        type: 'GET'
-    }).done(function (data) {
-        console.log(data)
-        console.log("성공")
-    }).fail(function () {
-        console.log("실패")
-    })
-
-</script>
-
+    {% if review_obj.has_next %}
+        <li class="page-item next">
+            <a class="page-link">다음</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <a class="page-link next" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+    {% endif %}

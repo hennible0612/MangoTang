@@ -183,7 +183,6 @@ def updateItem(request):
 
 
 def getReview(request, seller_code, page):
-
     product = Product.objects.get(seller_code=seller_code)
 
 
