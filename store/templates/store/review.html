@@ -3,104 +3,24 @@
 <div class="container mt-3">
     <table class="table">
         <thead class="table-light">
-
         <tr id="product-review-topic">
-
 
         </tr>
         <tr>
             <th>번호</th>
-
             <th>고객만족도</th>
 
             <th>구매후기</th>
 
-
             <th>작성자</th>
 
-
             <th>작성일</th>
-
 
         </tr>
         </thead>
         <tbody id="product-reivew">
 
-
-        {#        {% for review in review_obj %}#}
-        {#            <tr>#}
-        {#                <td id="reviewNumber">#}
-        {#                    <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->#}
-        {#                    {{ review_obj.paginator.count|sub:review_obj.start_index|sub:forloop.counter0|add:1 }}#}
-        {#                </td>#}
-        {#                {% if review.star_rating == 5 %}#}
-        {#                    <td>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                    </td>#}
-        {#                {% elif review.star_rating == 4 %}#}
-        {#                    <td>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                    </td>#}
-        {#                {% elif review.star_rating == 3 %}#}
-        {#                    <td>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                    </td>#}
-        {##}
-        {#                {% elif review.star_rating == 2 %}#}
-        {#                    <td>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                    </td>#}
-        {#                {% else %}#}
-        {#                    <td>#}
-        {#                        <span class="fa fa-star checked"></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                        <span class="fa fa-star "></span>#}
-        {#                    </td>#}
-        {#                {% endif %}#}
-        {#                <td>#}
-        {#                    <a id="reviewShort" data-id="moreComment{{ forloop.counter }}" class="button more-comment"#}
-        {#                       href="javascript:void(0)"> {{ review.short_review }}</a>#}
-        {#                </td>#}
-        {#                <td>#}
-        {#                    <text id="reviewId">{{ review.customer.user }}</text>#}
-        {#                </td>#}
-        {#                <td>#}
-        {#                    <text id="reviewDate">{{ review.date_added }}</text>#}
-        {#                </td>#}
-        {#            </tr>#}
-        {#            <tr id="moreComment{{ forloop.counter }}" class="reviewLong" style="visibility: collapse">#}
-        {#                {% if  review.imageURL == "" %}#}
-        {#                    <td colspan="5">{{ review.long_review }}</td>#}
-        {##}
-        {#                {% else %}#}
-        {#                    <td colspan="2"><img class="card-img-top" height="200" width="200" src={{ review.imageURL }}></td>#}
-        {##}
-        {#                    <td colspan="3">{{ review.long_review }}</td>#}
-        {#                {% endif %}#}
-        {#            </tr>#}
-        {#        {% endfor %}#}
-
-
         </tbody>
-
     </table>
 
 </div>
@@ -121,10 +41,10 @@
         {% if review_page >= review_obj.number|add:-5 and review_page <= review_obj.number|add:5 %}
             {% if review_page == review_obj.number %}
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" data-page="{{ review_page }}">{{ review_page }}</a>
+                    <a class="page-link review-page{{ review_page }}" data-page="{{ review_page }}">{{ review_page }}</a>
                 </li>
             {% else %}
-                <li class="page-item" name="test">
+                <li class="page-item review-page" name="test">
                     <a class="page-link" data-page="{{ review_page }}">{{ review_page }}</a>
                     <!-- url, 페이지, id 태그 위치 가기 -->
                 </li>
@@ -144,12 +64,12 @@
 </ul>
 <!-- 페이징처리 끝 -->
 <script>
-    {#var seller_code = '{{ product.seller_code }}'#}
-    var temp = '{{ review_obj }}'
-    console.log(typeof temp)
-    var obj = JSON.stringify(temp)
 
-    console.log(obj)
+    $('.review-page').click(function (e) {
+        $('.page-item').removeClass('active')
+        {#$(e.target).addClass('active')#}
+
+    });
 
     $.ajax({
         url: '/product/review/{{ product.seller_code }}/1/',
@@ -173,17 +93,6 @@
         })
     });
 
-    $(".page-link").click(function () {
-        var page = this.dataset.page;
-        $.ajax({
-            url: '/product/review/{{ product.seller_code }}/' + page + '/',
-            type: 'GET'
-        }).done(function (data) {
-            nextReview(data, page)
-        }).fail(function () {
-            console.log("실패")
-        })
-    });
 
     function nextReview(data, page) {
         $('#product-reivew').html('');
