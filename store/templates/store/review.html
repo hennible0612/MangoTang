@@ -145,16 +145,28 @@
     });
 
     function nextReview(data, page) {
-        {#console.log(data)#}
+
+
         $.each(jQuery.parseJSON(data), function (id, data) {
             {#console.log(data)#}
-            $.each(data, function (id, data){
-                console.log(data)
-            });
+            console.log(data)
+            console.log(data)
+            console.log("product : ", data.fields.product)
+            console.log("customer : ", data.fields.customer)
+            console.log("date_added : ", data.fields.date_added)
+            console.log("long_review : ", data.fields.long_review)
+            console.log("review_bool : ", data.fields.review_bool)
+            console.log("short_review : ", data.fields.short_review)
+            console.log("star_rating : ", data.fields.star_rating)
+            console.log("-" * 100)
+            {#$.each(data, function (id, data) {   });#}
+
+
+
+
+
             {#console.log(pk.fields.customer)#}
             {#$.each(pk, function (customer, date_added, image, product, review_bool, review_bool, star_rating) {console.log(pk[product])});#}
-
-
 
 
         });
