@@ -189,9 +189,9 @@ def getReview(request, seller_code, page):
     review_page = request.GET.get('page', page)  # 리뷰 페이지
     reviews = product.productreview_set.all().order_by('-date_added') # 여기에 모든 리뷰 들어있음
 
+
     review_paginator = Paginator(reviews, 5)
     review_obj = review_paginator.get_page(review_page)
-
 
     json_obj = serializers.serialize('json', review_obj) #페이징된값
 

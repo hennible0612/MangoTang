@@ -157,7 +157,6 @@ class Carosel(models.Model):
 class ProductReview(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
-
     star_rating = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True,
                                       null=True)
     short_review = models.CharField(max_length=50, null=True, blank=True)
