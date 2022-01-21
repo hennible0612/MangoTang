@@ -43,6 +43,8 @@ def store(request):
 def productDetail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
 
+
+
     review_page = request.GET.get('page', 1)  # 리뷰 페이지
     question_page = request.GET.get('page', 1)  # 리뷰 페이지
 

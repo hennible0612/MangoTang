@@ -145,7 +145,11 @@
 <!-- 페이징처리 끝 -->
 <script>
     {#var seller_code = '{{ product.seller_code }}'#}
+    var temp = '{{ review_obj }}'
+    console.log(typeof temp)
+    var obj = JSON.stringify(temp)
 
+    console.log(obj)
 
     $.ajax({
         url: '/product/review/{{ product.seller_code }}/1/',
@@ -182,20 +186,18 @@
     });
 
     function nextReview(data, page) {
-        {#var template = `<th>번호</th><th>고객만족도</th><th>구매후기</th><th>작성자</th><th>작성일</th>`#}
-        {#$('#product-review-topic').append(template);#}
         $('#product-reivew').html('');
 
         $.each(jQuery.parseJSON(data), function (id, data) {
             stars = getStars(data.fields.star_rating)
-            console.log("product : ", data.fields.product)
-            console.log("customer : ", data.fields.customer)
-            console.log("date_added : ", data.fields.date_added)
-            console.log("long_review : ", data.fields.long_review)
-            console.log("review_bool : ", data.fields.review_bool)
-            console.log("short_review : ", data.fields.short_review)
-            console.log("star_rating : ", data.fields.star_rating)
-            console.log("-" * 100)
+            {#console.log("product : ", data.fields.product)#}
+            {#console.log("customer : ", data.fields.customer)#}
+            {#console.log("date_added : ", data.fields.date_added)#}
+            {#console.log("long_review : ", data.fields.long_review)#}
+            {#console.log("review_bool : ", data.fields.review_bool)#}
+            {#console.log("short_review : ", data.fields.short_review)#}
+            {#console.log("star_rating : ", data.fields.star_rating)#}
+            {#console.log("-" * 100)#}
             $('#product-reivew').append(`<tr><td>1</td><td>${stars}</td><td>${data.fields.short_review}</td><td>${data.fields.customer}</td><td>${data.fields.date_added}</td><tr>`);
 
             {#$.each(data, function (id, data) {   });#}
