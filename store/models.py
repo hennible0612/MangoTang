@@ -181,7 +181,7 @@ class ProductReview(models.Model):
         return url_image
 
     def __str__(self):
-        return " 주문자 : " + self.customer.name + " 리뷰  : " + self.short_review
+        return " 주문자 : " + self.customer.name + " 제품이름: "+self.product.product_name +" 리뷰  : " + self.short_review
 
 class ProductQuestion(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
