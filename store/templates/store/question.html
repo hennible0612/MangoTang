@@ -89,9 +89,15 @@
 </ul>
 <!-- 페이징처리 끝 -->
 <script>
+    var token = '{{csrf_token}}';
+
     $.ajax({
-        url: '/product/question/12312/1/',
-        type: 'GET'
+        headers: { "X-CSRFToken": token },
+        url: '/product/question/{{ product.seller_code }}/1/',
+        type: 'POST',
+        dataType: "json",
+        data: JSON.stringify('{{ user }}'),
+
     }).done(function (data) {
         nextQuestion(data, 1)
     }).fail(function () {

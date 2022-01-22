@@ -206,14 +206,12 @@ def getReview(request, seller_code, page):
 
 
 def getQuestion(request, seller_code, page):
+    data = json.loads(request.body)  # 현재 유저 받아옴
     product = Product.objects.get(seller_code=seller_code)
 
 
     question_page = request.GET.get('page', page)  # 리뷰 페이지
     questions = product.productquestion_set.all().order_by('-date_added') # 여기에 모든 리뷰 들어있음
-
-
-
 
     question_pageinator = Paginator(questions, 5)
     question_obj = question_pageinator.get_page(question_page)
