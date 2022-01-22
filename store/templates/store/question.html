@@ -88,3 +88,31 @@
     {% endif %}
 </ul>
 <!-- 페이징처리 끝 -->
+<script>
+    $.ajax({
+        url: '/product/question/12312/1/',
+        type: 'GET'
+    }).done(function (data) {
+        nextQuestion(data, 1)
+    }).fail(function () {
+        console.log("실패")
+    })
+
+    function nextQuestion(data, page) {
+        var counter = 0
+        $('#product-reivew').html('');
+        $.each(jQuery.parseJSON(data), function (id, data) {
+            console.log('{{ user }}')
+
+            console.log("question_body", data.fields.question_body)
+            console.log("question_answer", data.fields.question_answer)
+            console.log("date_added", data.fields.date_added)
+            console.log("question_state", data.fields.question_state)
+            console.log("question_public", data.fields.question_public)
+            counter++
+
+        });
+
+    }
+
+</script>

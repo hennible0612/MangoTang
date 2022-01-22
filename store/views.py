@@ -43,8 +43,6 @@ def store(request):
 def productDetail(request, seller_code):
     product = Product.objects.get(seller_code=seller_code)
 
-
-
     review_page = request.GET.get('page', 1)  # 리뷰 페이지
     question_page = request.GET.get('page', 1)  # 리뷰 페이지
 
@@ -187,29 +185,42 @@ def updateItem(request):
 def getReview(request, seller_code, page):
     product = Product.objects.get(seller_code=seller_code)
 
-
     review_page = request.GET.get('page', page)  # 리뷰 페이지
     reviews = product.productreview_set.all().order_by('-date_added') # 여기에 모든 리뷰 들어있음
-
-    # for name in reviews: #모들 리뷰
-    #     print("이름", name.get_user_name)
-
 
     review_paginator = Paginator(reviews, 5)
     review_obj = review_paginator.get_page(review_page)
 
-    returned_obj = {}
-
-    # for page in review_obj:
-    #     print(page.get_user_name)
     for review in review_obj:
-        review.review_user_name = review.customer.name
-        review.image_url = review.imageURL
-        print(review.image_url)
-
-
+        review.review_user_name = review.customer.name #해당 id의 user이름을 가지고 와서 DB에 저장
+        review.image_url = review.imageURL #해당 리뷰의 imageURL을 가져와서 DB에 저장
 
     json_obj = serializers.serialize('json', review_obj) #페이징된값
+
+
+    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
+"""
+제품 질문 가져오는 API
+"""
+
+
+def getQuestion(request, seller_code, page):
+    product = Product.objects.get(seller_code=seller_code)
+
+
+    question_page = request.GET.get('page', page)  # 리뷰 페이지
+    questions = product.productquestion_set.all().order_by('-date_added') # 여기에 모든 리뷰 들어있음
+
+    print(questions)
+
+    for question in questions:
+        print(question)
+
+    question_pageinator = Paginator(questions, 5)
+    question_obj = question_pageinator.get_page(question_page)
+
+    json_obj = serializers.serialize('json', question_obj) #페이징된값
 
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})

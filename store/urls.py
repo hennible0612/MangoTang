@@ -25,6 +25,9 @@ urlpatterns = [
 	# path('productDetail/get_review/<int:seller_code>/', views.getReview, name="getReview"),
 	path('product/review/<int:seller_code>/<int:page>/', views.getReview, name="getReview"),
 
+	# 제품 문의 API
+	path('product/question/<int:seller_code>/<int:page>/', views.getQuestion, name="getQuestion"),
+
 	# 내페이지
 	path('mypage/', views.mypage, name="mypage"),
 
