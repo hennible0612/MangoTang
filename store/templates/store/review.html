@@ -64,7 +64,6 @@
 </ul>
 <!-- 페이징처리 끝 -->
 <script>
-
     $('.review-page').click(function (e) {
         $('.page-item').removeClass('active')
         {#$(e.target).addClass('active')#}
@@ -98,6 +97,7 @@
         $('#product-reivew').html('');
 
         $.each(jQuery.parseJSON(data), function (id, data) {
+            console.log(data)
             stars = getStars(data.fields.star_rating)
             {#console.log("product : ", data.fields.product)#}
             {#console.log("customer : ", data.fields.customer)#}
@@ -107,6 +107,8 @@
             {#console.log("short_review : ", data.fields.short_review)#}
             {#console.log("star_rating : ", data.fields.star_rating)#}
             {#console.log("-" * 100)#}
+
+
             $('#product-reivew').append(`<tr><td>1</td><td>${stars}</td><td>${data.fields.short_review}</td><td>${data.fields.customer}</td><td>${data.fields.date_added}</td><tr>`);
 
             {#$.each(data, function (id, data) {   });#}
