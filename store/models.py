@@ -166,6 +166,7 @@ class ProductReview(models.Model):
     review_bool = models.BooleanField(default=False, blank=False, null=True)
 
 
+
     @property
     def get_user_name(self):
         return self.customer.name
