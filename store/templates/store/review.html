@@ -101,10 +101,16 @@
 
         $.each(jQuery.parseJSON(data), function (id, data) {
             stars = getStars(data.fields.star_rating)
-            console.log(data.image)
-
-            $('#product-reivew').append(`<tr><td>1</td><td>${stars}</td><td><a data-id="moreComment${counter}" class="button more-comment" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td><tr>
+            if (data.fields.image_url == "") {
+                $('#product-reivew').append(`<tr><td>1</td><td>${stars}</td><td><a data-id="moreComment${counter}" class="button more-comment" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td><tr>
                                         <tr id="moreComment${counter}" style="display: none"><td colspan="5">${data.fields.long_review}</td></tr>`);
+
+            } else {
+                $('#product-reivew').append(`<tr><td>1</td><td>${stars}</td><td><a data-id="moreComment${counter}" class="button more-comment" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td><tr>
+                                        <tr id="moreComment${counter}" style="display: none"><td colspan="2"><img class="card-img-top" height="200" width="200" src=${data.fields.image_url}></td><td colspan="3">${data.fields.long_review}</td></tr>`);
+            }
+
+
             counter++
 
         });
@@ -112,7 +118,7 @@
             e.preventDefault();
             var data = this.dataset.id
 
-            $('#'+data).toggle()
+            $('#' + data).toggle()
         });
     }
 
