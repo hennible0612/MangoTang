@@ -165,7 +165,7 @@ class ProductReview(models.Model):
     image = models.ImageField(null=True, blank=True)
     review_bool = models.BooleanField(default=False, blank=False, null=True)
 
-
+    review_user_name = models.CharField(default="",blank=True,null=True, max_length=200)
 
     @property
     def get_user_name(self):
@@ -180,8 +180,8 @@ class ProductReview(models.Model):
 
         return url_image
 
-    # def __str__(self):
-    #     return " 주문자 : " + self.customer.name + " 리뷰  : " + self.short_review
+    def __str__(self):
+        return " 주문자 : " + self.customer.name + " 리뷰  : " + self.short_review
 
 class ProductQuestion(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
