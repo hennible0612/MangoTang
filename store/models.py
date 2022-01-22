@@ -188,14 +188,15 @@ class ProductQuestion(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     question_body = models.CharField(max_length=150, null=True, blank=False)
     question_answer = models.CharField(max_length=200, null=True, blank=True)
-    date_added = models.DateField(default=datetime.now)
+    date_added = models.DateTimeField(default=datetime.now)
     image = models.ImageField(null=True, blank=True)
     question_state = models.BooleanField(default=False, blank=False)
     question_public = models.BooleanField(default=False, blank=False)
 
+    review_user_name = models.CharField(default="",blank=True,null=True, max_length=200)
 
     def __str__(self):
-        return " 질문 : " + self.question_body
+        return " 질문 : " + self.question_body + " 질문자 : " + self.customer.name
 
     def imageURL(self):
         try:

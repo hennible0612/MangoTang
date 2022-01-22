@@ -212,13 +212,14 @@ def getQuestion(request, seller_code, page):
     question_page = request.GET.get('page', page)  # 리뷰 페이지
     questions = product.productquestion_set.all().order_by('-date_added') # 여기에 모든 리뷰 들어있음
 
-    print(questions)
 
-    for question in questions:
-        print(question)
+
 
     question_pageinator = Paginator(questions, 5)
     question_obj = question_pageinator.get_page(question_page)
+
+    for review in question_obj:
+        review.review_user_name = review.customer.name
 
     json_obj = serializers.serialize('json', question_obj) #페이징된값
 
