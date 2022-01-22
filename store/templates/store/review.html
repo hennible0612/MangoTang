@@ -20,6 +20,7 @@
         </thead>
         <tbody id="product-reivew">
 
+
         </tbody>
     </table>
 
@@ -41,7 +42,8 @@
         {% if review_page >= review_obj.number|add:-5 and review_page <= review_obj.number|add:5 %}
             {% if review_page == review_obj.number %}
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link review-page{{ review_page }}" data-page="{{ review_page }}">{{ review_page }}</a>
+                    <a class="page-link review-page{{ review_page }}"
+                       data-page="{{ review_page }}">{{ review_page }}</a>
                 </li>
             {% else %}
                 <li class="page-item review-page" name="test">
@@ -94,37 +96,34 @@
 
 
     function nextReview(data, page) {
+        var counter = 0
         $('#product-reivew').html('');
 
         $.each(jQuery.parseJSON(data), function (id, data) {
-            console.log(data)
             stars = getStars(data.fields.star_rating)
-            {#console.log("product : ", data.fields.product)#}
-            {#console.log("customer : ", data.fields.customer)#}
-            {#console.log("date_added : ", data.fields.date_added)#}
-            {#console.log("long_review : ", data.fields.long_review)#}
-            {#console.log("review_bool : ", data.fields.review_bool)#}
-            {#console.log("short_review : ", data.fields.short_review)#}
-            {#console.log("star_rating : ", data.fields.star_rating)#}
-            {#console.log("-" * 100)#}
+            console.log(counter)
+            $('#product-reivew').append(`<tr><td>1</td><td>${stars}</td><td><a data-id="moreComment${counter}" class="button more-comment" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td><tr>
+                                        <tr id="moreComment${counter}" style="display: none"><td colspan="5">${data.fields.long_review}</td></tr>`);
+            counter++
 
+        });
+        $(".more-comment").click(function (e) {
+            e.preventDefault();
+            var data = this.dataset.id
 
-            $('#product-reivew').append(`<tr><td>1</td><td>${stars}</td><td>${data.fields.short_review}</td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td><tr>`);
-
-            {#$.each(data, function (id, data) {   });#}
-            {#console.log(pk.fields.customer)#}
-            {#$.each(pk, function (customer, date_added, image, product, review_bool, review_bool, star_rating) {console.log(pk[product])});#}
+            $('#'+data).toggle()
         });
     }
 
+
     function getStars(value) {
         var stars = ""
-        for(var i=0; i< value; i++){
+        for (var i = 0; i < value; i++) {
             stars += '<span class="fa fa-star checked"></span>'
         }
         while (value < 5) {
             stars += '<span class="fa fa-star"></span>'
-            value ++
+            value++
         }
         return stars;
     }
