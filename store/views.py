@@ -204,7 +204,8 @@ def getReview(request, seller_code, page):
     #     print(page.get_user_name)
     for review in review_obj:
         review.review_user_name = review.customer.name
-        print(review.imageURL)
+        review.image_url = review.imageURL
+        print(review.image_url)
 
 
 

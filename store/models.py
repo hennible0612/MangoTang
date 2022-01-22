@@ -166,7 +166,7 @@ class ProductReview(models.Model):
     review_bool = models.BooleanField(default=False, blank=False, null=True)
 
     review_user_name = models.CharField(default="",blank=True,null=True, max_length=200)
-
+    image_url = models.CharField(default="",blank=True,null=True, max_length=200)
     @property
     def get_user_name(self):
         return self.customer.name
@@ -192,6 +192,7 @@ class ProductQuestion(models.Model):
     image = models.ImageField(null=True, blank=True)
     question_state = models.BooleanField(default=False, blank=False)
     question_public = models.BooleanField(default=False, blank=False)
+
 
     def __str__(self):
         return " 질문 : " + self.question_body
