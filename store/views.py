@@ -203,8 +203,8 @@ def getReview(request, seller_code, page):
     # for page in review_obj:
     #     print(page.get_user_name)
     for review in review_obj:
-        print("유저이름", review.review_user_name)
-        print(review.customer.name)
+        review.review_user_name = review.customer.name
+
 
 
     json_obj = serializers.serialize('json', review_obj) #페이징된값
