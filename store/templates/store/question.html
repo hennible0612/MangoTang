@@ -75,7 +75,7 @@
 
     function nextQuestion(data, page) {
         var counter = 0
-        $('#product-reivew').html('');
+        $('#product-question').html('');
         $.each(jQuery.parseJSON(data), function (id, data) {
 
             if (data.fields.question_state == true && data.fields.question_public == true) {

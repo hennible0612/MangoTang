@@ -7,7 +7,6 @@
 
         </tr>
         <tr>
-{#            <th>번호</th>#}
             <th>고객만족도</th>
 
             <th>구매후기</th>
@@ -96,26 +95,26 @@
 
 
     function nextReview(data, page) {
-        var counter = 0
+        var counterReview = 0
         $('#product-reivew').html('');
 
         $.each(jQuery.parseJSON(data), function (id, data) {
             stars = getStars(data.fields.star_rating)
             if (data.fields.image_url == "") {
-                $('#product-reivew').append(`<td>${stars}</td><td><a data-id="moreComment${counter}" class="button more-comment-review" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td><tr>
-                                        <tr id="moreComment${counter}" style="display: none"><td colspan="5">${data.fields.long_review}</td></tr>`);
+                $('#product-reivew').append(`<tr><td>${stars}</td><td><a data-id="moreComment${counterReview}" class="button more-comment-review" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td></tr>
+                                        <tr id="moreComment${counterReview}" style="display: none"><td colspan="4">${data.fields.long_review}</td></tr>`);
 
             } else {
-                $('#product-reivew').append(`<tr><td>${stars}</td><td><a data-id="moreComment${counter}" class="button more-comment-review" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td><tr>
-                                        <tr id="moreComment${counter}" style="display: none"><td colspan="2"><img class="card-img-top" height="200" width="200" src=${data.fields.image_url}></td><td colspan="3">${data.fields.long_review}</td></tr>`);
+                $('#product-reivew').append(`<tr><td>${stars}</td><td><a data-id="moreComment${counterReview}" class="button more-comment-review" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td></tr>
+                                        <tr id="moreComment${counterReview}" style="display: none"><td colspan="2"><img class="card-img-top" height="200" width="200" src=${data.fields.image_url}></td><td colspan="2">${data.fields.long_review}</td></tr>`);
             }
-            counter++
+            counterReview++
+            console.log(data.fields.short_review)
 
         });
         $(".more-comment-review").click(function (e) {
             e.preventDefault();
             var data = this.dataset.id
-
             $('#' + data).toggle()
         });
     }
