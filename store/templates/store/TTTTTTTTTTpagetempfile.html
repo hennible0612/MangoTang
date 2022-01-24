@@ -109,3 +109,37 @@
             <a class="page-link next" tabindex="-1" aria-disabled="true" href="#">다음</a>
         </li>
     {% endif %}
+
+
+        {% for product_quesiton in question_obj %}
+            <tr>
+                {% if product_quesiton.question_state is True and product_quesiton.question_public is True %}
+                    <td class="text-success">[답변완료]</td>
+                    <td><a data-id="answer{{ forloop.counter }}" class="button more-comment"
+                           href="javascript:void(0)">{{ product_quesiton.question_body }}</a></td>
+                {% elif product_quesiton.question_state is True and product_quesiton.question_public is False %}
+                    <td class="text-success">[답변완료]</td>
+                    {% if user == product_quesiton.customer.user %}
+                        <td><a data-id="answer{{ forloop.counter }}" class="button more-comment"
+                               href="javascript:void(0)">{{ product_quesiton.question_body }}</a></td>
+                    {% else %}
+                        <td><i class="fas fa-lock"></i> 비공개 질문입니다.</td>
+                    {% endif %}
+                {% elif product_quesiton.question_state is False and product_quesiton.question_public is False %}
+                    <td class="text-warning">[답변대기중]</td>
+                    {% if user == product_quesiton.customer.user %}
+                        <td>{{ product_quesiton.question_body }}</td>
+                    {% else %}
+                        <td><i class="fas fa-lock"></i> 비공개 질문입니다.</td>
+                    {% endif %}
+                {% elif product_quesiton.question_state is False and product_quesiton.question_public is True %}
+                    <td class="text-warning">[답변대기중]</td>
+                    <td>{{ product_quesiton.question_body }}</td>
+                {% endif %}
+                <td>{{ product_quesiton.customer.user }}</td>
+                <td>{{ product_quesiton.date_added }}</td>
+            </tr>
+            <tr id="answer{{ forloop.counter }}" style="visibility: collapse">
+                <td colspan="4">{{ product_quesiton.question_answer }}</td>
+            </tr>
+        {% endfor %}

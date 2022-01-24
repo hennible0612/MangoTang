@@ -206,7 +206,7 @@ def getReview(request, seller_code, page):
 
 
 def getQuestion(request, seller_code, page):
-    data = json.loads(request.body)  # 현재 유저 받아옴
+    current_user = json.loads(request.body)  # 현재 유저 받아옴
     product = Product.objects.get(seller_code=seller_code)
 
 
@@ -216,8 +216,15 @@ def getQuestion(request, seller_code, page):
     question_pageinator = Paginator(questions, 5)
     question_obj = question_pageinator.get_page(question_page)
 
-    for review in question_obj:
-        review.review_user_name = review.customer.name
+
+
+    for question in question_obj:
+        print(question.customer.name)
+        if(question.question_public == False and current_user != question.customer.name ):
+            question.question_body = "비공개 질문"
+
+
+
 
     json_obj = serializers.serialize('json', question_obj) #페이징된값
 

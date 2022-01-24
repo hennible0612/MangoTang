@@ -12,39 +12,9 @@
             <th>등록일</th>
         </tr>
         </thead>
-        <tbody>
-        {% for product_quesiton in question_obj %}
-            <tr>
-                {% if product_quesiton.question_state is True and product_quesiton.question_public is True %}
-                    <td class="text-success">[답변완료]</td>
-                    <td><a data-id="answer{{ forloop.counter }}" class="button more-comment"
-                           href="javascript:void(0)">{{ product_quesiton.question_body }}</a></td>
-                {% elif product_quesiton.question_state is True and product_quesiton.question_public is False %}
-                    <td class="text-success">[답변완료]</td>
-                    {% if user == product_quesiton.customer.user %}
-                        <td><a data-id="answer{{ forloop.counter }}" class="button more-comment"
-                               href="javascript:void(0)">{{ product_quesiton.question_body }}</a></td>
-                    {% else %}
-                        <td><i class="fas fa-lock"></i> 비공개 질문입니다.</td>
-                    {% endif %}
-                {% elif product_quesiton.question_state is False and product_quesiton.question_public is False %}
-                    <td class="text-warning">[답변대기중]</td>
-                    {% if user == product_quesiton.customer.user %}
-                        <td>{{ product_quesiton.question_body }}</td>
-                    {% else %}
-                        <td><i class="fas fa-lock"></i> 비공개 질문입니다.</td>
-                    {% endif %}
-                {% elif product_quesiton.question_state is False and product_quesiton.question_public is True %}
-                    <td class="text-warning">[답변대기중]</td>
-                    <td>{{ product_quesiton.question_body }}</td>
-                {% endif %}
-                <td>{{ product_quesiton.customer.user }}</td>
-                <td>{{ product_quesiton.date_added }}</td>
-            </tr>
-            <tr id="answer{{ forloop.counter }}" style="visibility: collapse">
-                <td colspan="4">{{ product_quesiton.question_answer }}</td>
-            </tr>
-        {% endfor %}
+        <tbody id="product-question">
+
+
         </tbody>
     </table>
 
@@ -53,15 +23,15 @@
 <!-- 페이징처리 시작 -->
 <ul class="pagination justify-content-center">
     <!-- 이전페이지 -->
-    {% if question_obj.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ question_obj.previous_question_page }}">이전</a>
-        </li>
-    {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-        </li>
-    {% endif %}
+{#    {% if question_obj.has_previous %}#}
+{#        <li class="page-item">#}
+{#            <a class="page-link" href="?page={{ question_obj.previous_question_page }}">이전</a>#}
+{#        </li>#}
+{#    {% else %}#}
+{#        <li class="page-item disabled">#}
+{#            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>#}
+{#        </li>#}
+{#    {% endif %}#}
     <!-- 페이지리스트 -->
     {% for question_page in question_obj.paginator.page_range %}
         {% if question_page >= question_obj.number|add:-5 and question_page <= question_obj.number|add:5 %}
@@ -77,15 +47,15 @@
         {% endif %}
     {% endfor %}
     <!-- 다음페이지 -->
-    {% if question_obj.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ question_obj.next_question_page }}">다음</a>
-        </li>
-    {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-        </li>
-    {% endif %}
+{#    {% if question_obj.has_next %}#}
+{#        <li class="page-item">#}
+{#            <a class="page-link" href="?page={{ question_obj.next_question_page }}">다음</a>#}
+{#        </li>#}
+{#    {% else %}#}
+{#        <li class="page-item disabled">#}
+{#            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>#}
+{#        </li>#}
+{#    {% endif %}#}
 </ul>
 <!-- 페이징처리 끝 -->
 <script>
@@ -97,7 +67,6 @@
         type: 'POST',
         dataType: "json",
         data: JSON.stringify('{{ user }}'),
-
     }).done(function (data) {
         nextQuestion(data, 1)
     }).fail(function () {
@@ -108,15 +77,27 @@
         var counter = 0
         $('#product-reivew').html('');
         $.each(jQuery.parseJSON(data), function (id, data) {
-            console.log('{{ user }}')
 
+            if (data.fields.question_state == true) {
+                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counter}" class="button more-comment"
+                           href="javascript:void(0)">${data.fields.question_body}</a></td><td>${ data.fields.review_user_name }</td>
+                <td>${ data.fields.date_added }</td></tr>`);
+            } else {
+                             $('#product-question').append(`<tr><td class="text-warning">[답변대기중]</td><td><a data-id="answer${counter}" class="button more-comment"
+                           href="javascript:void(0)">${data.fields.question_body}</a></td><td>${ data.fields.review_user_name }</td>
+                <td>${ data.fields.date_added }</td></tr>`);
+            }
+
+            console.log('{{ user }}');
             console.log("question_body", data.fields.question_body)
             console.log("question_answer", data.fields.question_answer)
             console.log("date_added", data.fields.date_added)
             console.log("question_state", data.fields.question_state)
             console.log("question_public", data.fields.question_public)
-            console.log("question_public", data.fields.review_user_name)
-            console.log("question_public", data.fields.product_question)
+            console.log("review_user_name", data.fields.review_user_name)
+            console.log("product_question", data.fields.product_question)
+
+
             counter++
 
         });
