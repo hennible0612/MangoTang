@@ -74,25 +74,30 @@
     })
 
     function nextQuestion(data, page) {
-        var counter = 0
-        $('#product-question').html('');
+        var counterQuestion = 0
+        $('#product-quesiton').html('');
         $.each(jQuery.parseJSON(data), function (id, data) {
 
             if (data.fields.question_state == true && data.fields.question_public == true) {
-                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counter}" class="button more-comment"
+                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counterQuestion}" class="button more-comment-question"
                            href="javascript:void(0)">${data.fields.question_body}</a></td><td>${data.fields.review_user_name}</td>
-                <td>${data.fields.date_added}</td></tr>`);
+                <td>${data.fields.date_added}</td></tr>
+            <tr id="answer${counterQuestion}" style="display: none"><td colspan="4">${data.fields.question_answer}</td></tr>`);
             } else if (data.fields.question_state == true && data.fields.question_public == false && data.fields.review_user_name == user) {
-                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counter}" class="button more-comment"
+                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counterQuestion}" class="button more-comment-question"
                            href="javascript:void(0)">${data.fields.question_body}</a></td><td>${data.fields.review_user_name}</td>
-                <td>${data.fields.date_added}</td></tr>`);
+                <td>${data.fields.date_added}</td></tr>
+            <tr id="answer${counterQuestion}" style="display: none"><td colspan="4">${data.fields.question_answer}</td></tr>`);
             } else if (data.fields.question_state == true && data.fields.question_public == false) {
                 $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><i class="fas fa-lock"></i> ${data.fields.question_body}</td><td>${data.fields.review_user_name}</td>
                 <td>${data.fields.date_added}</td></tr>`);
             } else if (data.fields.question_state == false && data.fields.question_public == true) {
                 $('#product-question').append(`<tr><td class="text-warning">[답변대기중]</td><td>${data.fields.question_body}</a></td><td>${data.fields.review_user_name}</td>
                 <td>${data.fields.date_added}</td></tr>`);
-            } else if (data.fields.question_state == false && data.fields.question_public == false) {
+            } else if (data.fields.question_state == false && data.fields.question_public == false && data.fields.review_user_name == user ) {
+                $('#product-question').append(`<tr><td class="text-warning">[답변대기중]</td><td> ${data.fields.question_body}</td><td>${data.fields.review_user_name}</td>
+                <td>${data.fields.date_added}</td></tr>`);
+            }else if (data.fields.question_state == false && data.fields.question_public == false) {
                 $('#product-question').append(`<tr><td class="text-warning">[답변대기중]</td><td><i class="fas fa-lock"></i> ${data.fields.question_body}</td><td>${data.fields.review_user_name}</td>
                 <td>${data.fields.date_added}</td></tr>`);
             }
@@ -106,9 +111,14 @@
             console.log("review_user_name", data.fields.review_user_name)
             console.log("product_question", data.fields.product_question)
 
+            counterQuestion++
 
-            counter++
+        });
+        $(".more-comment-question").click(function (e) {
+            e.preventDefault();
+            var data = this.dataset.id
 
+            $('#' + data).toggle()
         });
 
     }
