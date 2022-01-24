@@ -219,7 +219,7 @@ def getQuestion(request, seller_code, page):
 
 
     for question in question_obj:
-        print(question.customer.name)
+        question.review_user_name = question.customer.name  # 해당 id의 user이름을 가지고 와서 객체에 저장
         if(question.question_public == False and current_user != question.customer.name ):
             question.question_body = "비공개 질문"
 
