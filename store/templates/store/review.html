@@ -41,12 +41,12 @@
         {% if review_page >= review_obj.number|add:-5 and review_page <= review_obj.number|add:5 %}
             {% if review_page == review_obj.number %}
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link review-page{{ review_page }}"
+                    <a class="page-link page-link-review review-page{{ review_page }}"
                        data-page="{{ review_page }}">{{ review_page }}</a>
                 </li>
             {% else %}
                 <li class="page-item review-page" name="test">
-                    <a class="page-link" data-page="{{ review_page }}">{{ review_page }}</a>
+                    <a class="page-link page-link-review" data-page="{{ review_page }}">{{ review_page }}</a>
                     <!-- url, 페이지, id 태그 위치 가기 -->
                 </li>
             {% endif %}
@@ -81,7 +81,7 @@
     })
 
 
-    $(".page-link").click(function () {
+    $(".page-link-review").click(function () {
         var page = this.dataset.page;
         $.ajax({
             url: '/product/review/{{ product.seller_code }}/' + page + '/',

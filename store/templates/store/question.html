@@ -37,11 +37,13 @@
         {% if question_page >= question_obj.number|add:-5 and question_page <= question_obj.number|add:5 %}
             {% if question_page == question_obj.number %}
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="?page={{ question_page }}">{{ question_page }}</a>
+                    <a class="page-link page-link-quesiton review-page{{ question_page }}"
+                       data-page="{{ question_page }}">{{ question_page }}</a>
                 </li>
             {% else %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ question_page }}">{{ question_page }}</a>
+                    <a class="page-link page-link-quesiton" data-page="{{ question_page }}">{{ question_page }}</a>
+
                 </li>
             {% endif %}
         {% endif %}
@@ -61,6 +63,11 @@
 <script>
     var token = '{{csrf_token}}';
 
+    $('.review-page').click(function (e) {
+        $('.page-item').removeClass('active')
+        {#$(e.target).addClass('active')#}
+
+    });
     $.ajax({
         headers: {"X-CSRFToken": token},
         url: '/product/question/{{ product.seller_code }}/1/',
@@ -73,9 +80,24 @@
         console.log("실패")
     })
 
+    $(".page-link-quesiton").click(function () {
+        var page = this.dataset.page;
+        $.ajax({
+            headers: {"X-CSRFToken": token},
+            url: '/product/question/{{ product.seller_code }}/' + page + '/',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify('{{ user }}'),
+        }).done(function (data) {
+            nextQuestion(data, page)
+        }).fail(function () {
+            console.log("실패")
+        })
+    });
+
     function nextQuestion(data, page) {
         var counterQuestion = 0
-        $('#product-quesiton').html('');
+        $('#product-question').html('');
         $.each(jQuery.parseJSON(data), function (id, data) {
 
             if (data.fields.question_state == true && data.fields.question_public == true) {
@@ -94,30 +116,19 @@
             } else if (data.fields.question_state == false && data.fields.question_public == true) {
                 $('#product-question').append(`<tr><td class="text-warning">[답변대기중]</td><td>${data.fields.question_body}</a></td><td>${data.fields.review_user_name}</td>
                 <td>${data.fields.date_added}</td></tr>`);
-            } else if (data.fields.question_state == false && data.fields.question_public == false && data.fields.review_user_name == user ) {
+            } else if (data.fields.question_state == false && data.fields.question_public == false && data.fields.review_user_name == user) {
                 $('#product-question').append(`<tr><td class="text-warning">[답변대기중]</td><td> ${data.fields.question_body}</td><td>${data.fields.review_user_name}</td>
                 <td>${data.fields.date_added}</td></tr>`);
-            }else if (data.fields.question_state == false && data.fields.question_public == false) {
+            } else if (data.fields.question_state == false && data.fields.question_public == false) {
                 $('#product-question').append(`<tr><td class="text-warning">[답변대기중]</td><td><i class="fas fa-lock"></i> ${data.fields.question_body}</td><td>${data.fields.review_user_name}</td>
                 <td>${data.fields.date_added}</td></tr>`);
             }
-
-            console.log('{{ user }}');
-            console.log("question_body", data.fields.question_body)
-            console.log("question_answer", data.fields.question_answer)
-            console.log("date_added", data.fields.date_added)
-            console.log("question_state", data.fields.question_state)
-            console.log("question_public", data.fields.question_public)
-            console.log("review_user_name", data.fields.review_user_name)
-            console.log("product_question", data.fields.product_question)
-
             counterQuestion++
 
         });
         $(".more-comment-question").click(function (e) {
             e.preventDefault();
             var data = this.dataset.id
-
             $('#' + data).toggle()
         });
 
