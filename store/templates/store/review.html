@@ -40,12 +40,12 @@
     {% for review_page in review_obj.paginator.page_range %}
         {% if review_page >= review_obj.number|add:-5 and review_page <= review_obj.number|add:5 %}
             {% if review_page == review_obj.number %}
-                <li class="page-item active" aria-current="page">
+                <li class="review-page-item review-page active" aria-current="page">
                     <a class="page-link page-link-review review-page{{ review_page }}"
                        data-page="{{ review_page }}">{{ review_page }}</a>
                 </li>
             {% else %}
-                <li class="page-item review-page" name="test">
+                <li class="review-page-item review-page" name="test">
                     <a class="page-link page-link-review" data-page="{{ review_page }}">{{ review_page }}</a>
                     <!-- url, 페이지, id 태그 위치 가기 -->
                 </li>
@@ -66,8 +66,9 @@
 <!-- 페이징처리 끝 -->
 <script>
     $('.review-page').click(function (e) {
-        $('.page-item').removeClass('active')
-        {#$(e.target).addClass('active')#}
+        $('.review-page-item').removeClass('active')
+        {#var page = this.dataset.page;#}
+        {#console.log(typeof page)#}
 
     });
 
@@ -109,7 +110,6 @@
                                         <tr id="moreComment${counterReview}" style="display: none"><td colspan="2"><img class="card-img-top" height="200" width="200" src=${data.fields.image_url}></td><td colspan="2">${data.fields.long_review}</td></tr>`);
             }
             counterReview++
-            console.log(data.fields.short_review)
 
         });
         $(".more-comment-review").click(function (e) {

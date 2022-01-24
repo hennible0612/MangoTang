@@ -36,13 +36,13 @@
     {% for question_page in question_obj.paginator.page_range %}
         {% if question_page >= question_obj.number|add:-5 and question_page <= question_obj.number|add:5 %}
             {% if question_page == question_obj.number %}
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link page-link-quesiton review-page{{ question_page }}"
+                <li class="question-page-item active question-page" aria-current="page">
+                    <a class="page-link page-link-question question-page{{ question_page }}"
                        data-page="{{ question_page }}">{{ question_page }}</a>
                 </li>
             {% else %}
-                <li class="page-item">
-                    <a class="page-link page-link-quesiton" data-page="{{ question_page }}">{{ question_page }}</a>
+                <li class="question-page-item page-item question-page">
+                    <a class="page-link page-link-question" data-page="{{ question_page }}">{{ question_page }}</a>
 
                 </li>
             {% endif %}
@@ -63,8 +63,12 @@
 <script>
     var token = '{{csrf_token}}';
 
-    $('.review-page').click(function (e) {
-        $('.page-item').removeClass('active')
+    $('.question-page').click(function (e) {
+        $('.question-page-item').removeClass('active')
+
+        {#let a = $('.page-link-question').data('page');#}
+        {#console.log(parseInt(a))#}
+
         {#$(e.target).addClass('active')#}
 
     });
@@ -80,7 +84,7 @@
         console.log("실패")
     })
 
-    $(".page-link-quesiton").click(function () {
+    $(".page-link-question").click(function () {
         var page = this.dataset.page;
         $.ajax({
             headers: {"X-CSRFToken": token},
