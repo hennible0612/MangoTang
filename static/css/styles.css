@@ -12384,7 +12384,7 @@ a.nav-link-mypage:active {
 
 
 .hr-option{
-          display: block;
+    display: block;
   margin-top: 0.4em;
   margin-bottom: 0.4em;
   margin-left: auto;
@@ -12394,27 +12394,43 @@ a.nav-link-mypage:active {
 }
 
 .container-option{
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    /*justify-content: center;*/
+    justify-content: flex-start;
+    /* justify-content: space-between; */
     display: flex;
     /*flex-direction: column;*/
     flex-wrap: wrap;
+    height: 5em;
+      border-radius: 5px;
+  border: 2px solid;
+  /*padding: 20px;*/
 }
 
 .item-option-title{
-    flex-basis: 100%;
+    flex-basis: 90%;
 }
-
-.item-option-quantity{
-flex-basis: 60%;
-}
-.item-option-cost{
-    flex-basis: 20%;
-}
-.item-option-cost{
+.item-option-exit{
     flex-basis: 10%;
 }
 
+.item-option-quantity{
+    flex-basis: 85%;
+}
+.item-option-cost{
+    flex-basis: 15%;
+}
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 
 
