@@ -33,24 +33,22 @@
 
                     <p class="lead">배송비: {{ product.shipment_price }}원 (50,000원 이상 무료)</p>
 
-
                     <!-- 옵션 -->
                     {% if product.option_bool == True %}
                         <div class="d-flex w3-container">
-                            <select class="form-control" id="option1">
+                            <select class="form-control select" id="option1">
                                 <option value="" selected disabled hidden>선택해주세요.</option>
                                 {% if product.option1 != Null %}
-                                    <option>{{ product.option1.product_name }}</option>
+                                    <option data-link="1">{{ product.option1.product_name }}</option>
                                 {% endif %}
                                 {% if product.option2 != Null %}
-                                    <option>{{ product.option2.product_name }}</option>
+                                    <option data-link="2">{{ product.option2.product_name }}</option>
                                 {% endif %}
                                 {% if product.option3 != Null %}
-                                    <option>{{ product.option3.product_name }}</option>
+                                    <option data-link="3">{{ product.option3.product_name }}</option>
                                 {% endif %}
                                 {% if product.option4 != Null %}
                                     <option>{{ product.option4.product_name }}</option>
-
                                 {% endif %}
                                 {% if product.option5 != Null %}
                                     <option>{{ product.option5.product_name }}</option>
@@ -63,7 +61,7 @@
                     {% if product.option_bool == True %}
                         {% if product.option1 != Null %}
                             <div class="container-option"
-                                 style="background-color: #f9f9fa; display: none; border-style: outset; border-width: 1px;  margin-bottom: 5px" >
+                                 style="background-color: #f9f9fa; display: none; border-style: outset; border-width: 1px;  margin-bottom: 5px">
 
                                 <div class="item-option-title" style="padding-left: 20px; padding-top: 5px">
                                     {{ product.option1.product_name }}
@@ -300,9 +298,6 @@
         </div>
     </div>
 
-
-
-
     <!-- 관련 상품 -->
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
@@ -417,5 +412,14 @@
             </div>
         </div>
     </section>
+    <script>
 
+        $('#option1').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
+            var data = $("option").data("link");
+            var data = this.dataset.link;
+
+            console.log(data)
+
+        });
+    </script>
 {% endblock content %}
