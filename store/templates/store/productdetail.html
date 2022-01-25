@@ -37,20 +37,16 @@
                     <!-- 옵션 -->
                     {% if product.option_bool == True %}
                         <div class="d-flex w3-container">
-
                             <select class="form-control" id="option1">
                                 <option value="" selected disabled hidden>선택해주세요.</option>
-
                                 {% if product.option1 != Null %}
                                     <option>{{ product.option1.product_name }}</option>
                                 {% endif %}
                                 {% if product.option2 != Null %}
                                     <option>{{ product.option2.product_name }}</option>
-
                                 {% endif %}
                                 {% if product.option3 != Null %}
                                     <option>{{ product.option3.product_name }}</option>
-
                                 {% endif %}
                                 {% if product.option4 != Null %}
                                     <option>{{ product.option4.product_name }}</option>
@@ -58,7 +54,6 @@
                                 {% endif %}
                                 {% if product.option5 != Null %}
                                     <option>{{ product.option5.product_name }}</option>
-
                                 {% endif %}
                             </select>
 
@@ -66,43 +61,154 @@
                     {% endif %}
                     <br>
                     {% if product.option_bool == True %}
-                        <!-- 옵션 -->
-                        {#                        <div id="option_list">#}
-                        {##}
-                        {#                        </div>#}
-                        {#                        <div style="height: 1000px; background-color: black" >#}
-                        <div class="container-option"
-                             style="background-color: #f9f9fa;  border-style: outset; border-width: 1px;  margin-bottom: 5px">
+                        {% if product.option1 != Null %}
+                            <div class="container-option"
+                                 style="background-color: #f9f9fa; display: none; border-style: outset; border-width: 1px;  margin-bottom: 5px" >
 
-                            <div class="item-option-title" style="padding-left: 20px; padding-top: 5px">
-                                assdfsdfsdf sdf sd fsd dsf
+                                <div class="item-option-title" style="padding-left: 20px; padding-top: 5px">
+                                    {{ product.option1.product_name }}
+                                </div>
+                                <div class="item-option-exit" style="padding-top: 5px">
+                                    <i class="far fa-times-circle" style="padding-top: 10px"></i>
+                                </div>
+                                <div class="item-option-quantity" style="padding-left: 15px; ">
+                                    <input type="button" value="-" class="minus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                    <input type="number" step="1" min="1"
+                                           max="99"
+                                           name="quantity" value="1"
+                                           title="Qty"
+                                           size="2"
+                                           pattern="" inputmode=""
+                                           style="width: 30px; text-align:center">
+                                    <input type="button" value="+" class="plus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                </div>
+                                <div class="item-option-cost">
+                                    <label class="item-option-cost"
+                                           style="padding-top: 5px">{{ product.option1.price | floatformat:0 }}원</label>
+                                </div>
                             </div>
-                            <div class="item-option-exit" style="padding-top: 5px">
-                                <i class="far fa-times-circle" style="padding-top: 10px"></i>
+                        {% endif %}
+                        {% if product.option2 != Null %}
+                            <div class="container-option"
+                                 style="background-color: #f9f9fa; display: none; border-style: outset; border-width: 1px;  margin-bottom: 5px">
+
+                                <div class="item-option-title" style="padding-left: 20px; padding-top: 5px">
+                                    {{ product.option2.product_name }}
+                                </div>
+                                <div class="item-option-exit" style="padding-top: 5px">
+                                    <i class="far fa-times-circle" style="padding-top: 10px"></i>
+                                </div>
+                                <div class="item-option-quantity" style="padding-left: 15px; ">
+                                    <input type="button" value="-" class="minus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                    <input type="number" step="1" min="1"
+                                           max="99"
+                                           name="quantity" value="1"
+                                           title="Qty"
+                                           size="2"
+                                           pattern="" inputmode=""
+                                           style="width: 30px; text-align:center">
+                                    <input type="button" value="+" class="plus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                </div>
+                                <div class="item-option-cost">
+                                    <label class="item-option-cost"
+                                           style="padding-top: 5px">{{ product.option2.price | floatformat:0 }}원</label>
+                                </div>
                             </div>
-                            <div class="item-option-quantity" style="padding-left: 15px; ">
-                                <input type="button" value="-" class="minus"
-                                       style="  border-radius: 25px; border: 2px solid #f9f9fa;">
-                                <input type="number" step="1" min="1"
-                                       max="99"
-                                       name="quantity" value="1"
-                                       title="Qty"
-                                       size="2"
-                                       pattern="" inputmode=""
-                                       style="width: 30px; text-align:center">
-                                <input type="button" value="+" class="plus"
-                                       style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                        {% endif %}
+                        {% if product.option3 != Null %}
+                            <div class="container-option"
+                                 style="background-color: #f9f9fa; display: none; border-style: outset; border-width: 1px;  margin-bottom: 5px">
+
+                                <div class="item-option-title" style="padding-left: 20px; padding-top: 5px">
+                                    {{ product.option3.product_name }}
+                                </div>
+                                <div class="item-option-exit" style="padding-top: 5px">
+                                    <i class="far fa-times-circle" style="padding-top: 10px"></i>
+                                </div>
+                                <div class="item-option-quantity" style="padding-left: 15px; ">
+                                    <input type="button" value="-" class="minus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                    <input type="number" step="1" min="1"
+                                           max="99"
+                                           name="quantity" value="1"
+                                           title="Qty"
+                                           size="2"
+                                           pattern="" inputmode=""
+                                           style="width: 30px; text-align:center">
+                                    <input type="button" value="+" class="plus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                </div>
+                                <div class="item-option-cost">
+                                    <label class="item-option-cost"
+                                           style="padding-top: 5px">{{ product.option3.price | floatformat:0 }}원</label>
+                                </div>
                             </div>
-                            <div class="item-option-cost">
-                                <label class="item-option-cost" style="padding-top: 5px">100000원</label>
+                        {% endif %}
+
+                        {% if product.option4 != Null %}
+                            <div class="container-option"
+                                 style="background-color: #f9f9fa; display: none; border-style: outset; border-width: 1px;  margin-bottom: 5px">
+
+                                <div class="item-option-title" style="padding-left: 20px; padding-top: 5px">
+                                    {{ product.option4.product_name }}
+                                </div>
+                                <div class="item-option-exit" style="padding-top: 5px">
+                                    <i class="far fa-times-circle" style="padding-top: 10px"></i>
+                                </div>
+                                <div class="item-option-quantity" style="padding-left: 15px; ">
+                                    <input type="button" value="-" class="minus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                    <input type="number" step="1" min="1"
+                                           max="99"
+                                           name="quantity" value="1"
+                                           title="Qty"
+                                           size="2"
+                                           pattern="" inputmode=""
+                                           style="width: 30px; text-align:center">
+                                    <input type="button" value="+" class="plus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                </div>
+                                <div class="item-option-cost">
+                                    <label class="item-option-cost"
+                                           style="padding-top: 5px">{{ product.option4.price | floatformat:0 }}원</label>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
 
+                        {% if product.option5 != Null %}
+                            <div class="container-option"
+                                 style="background-color: #f9f9fa; display: none; border-style: outset; border-width: 1px;  margin-bottom: 5px">
 
+                                <div class="item-option-title" style="padding-left: 20px; padding-top: 5px">
+                                    {{ product.option5.product_name }}
+                                </div>
+                                <div class="item-option-exit" style="padding-top: 5px">
+                                    <i class="far fa-times-circle" style="padding-top: 10px"></i>
+                                </div>
+                                <div class="item-option-quantity" style="padding-left: 15px; ">
+                                    <input type="button" value="-" class="minus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                    <input type="number" step="1" min="1"
+                                           max="99"
+                                           name="quantity" value="1"
+                                           title="Qty"
+                                           size="2"
+                                           pattern="" inputmode=""
+                                           style="width: 30px; text-align:center">
+                                    <input type="button" value="+" class="plus"
+                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                </div>
+                                <div class="item-option-cost">
+                                    <label class="item-option-cost"
+                                           style="padding-top: 5px">{{ product.option5.price | floatformat:0 }}원</label>
+                                </div>
+                            </div>
+                        {% endif %}
 
-
-
-                        
                         <div class="d-flex" style="margin-top: 10px">
 
                             <div style="padding-right:10px;">
