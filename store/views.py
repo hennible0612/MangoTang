@@ -58,12 +58,13 @@ def productDetail(request, seller_code):
     question_obj = question_paginator.get_page(question_page)
 
     if(product.option_bool == True):
-        print("option_bool is true")
-
+        options = product.productoption_set.all()
+    else:
+        options = None
 
     context = {'product': product, 'review_page': review_page, 'review_obj': review_obj
         , 'question_page': question_page, 'questions': questions, 'total_review': len(reviews)
-        , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews}
+        , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews, 'options':options}
     return render(request, 'store/productdetail.html', context)
 
 
