@@ -5,7 +5,6 @@
     <!-- Product section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
-
             <div class="row gx-4 gx-lg-5 "> <!--align-items-center-->
                 <div class="col-md-6">
                     <img class="card-img-top mb-5 mb-md-0"
@@ -20,7 +19,6 @@
                     <!-- 가격 -->
                     <div class="d-flex">
                         <p class="text-decoration-line-through">{{ product.price | floatformat:0 }} </p>
-
                     </div>
                     <div class="d-flex">
                         <p class="fs-2">{{ product.price_discount | floatformat:0 }}</p>
@@ -36,12 +34,11 @@
                     <!-- 옵션 -->
                     {% if product.option_bool == True %}
                         <div class="d-flex w3-container">
-                            <select class="form-control select" id="option1">
+                            <select class="form-control select option-selector" id="option1">
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option data-product{{ option.option_sellercode }}>{{ option.option_name }}</option>
-
+                                    <option class="" data-product="{{ option.option_seller_code }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
                             </select>
@@ -49,7 +46,7 @@
                         <br>
 
                         {% for option in options %}
-                            <div class="container-option"
+                            <div class="container-option {{ option.option_seller_code }}"
                                  style="background-color: #f9f9fa; display: none; border-style: outset; border-width: 1px;  margin-bottom: 5px">
 
                                 <div class="item-option-title" style="padding-left: 20px; padding-top: 5px">
@@ -72,13 +69,11 @@
                                            style="  border-radius: 25px; border: 2px solid #f9f9fa;">
                                 </div>
                                 <div class="item-option-cost">
-                                    <label
-                                           style="padding-top: 5px">{{ option.option_price | floatformat:0 }}원</label>
+                                    <label style="padding-top: 5px">{{ option.option_price | floatformat:0 }}원</label>
                                 </div>
                             </div>
                         {% endfor %}
                     {% endif %}
-
                     <div class="d-flex">
                         <div class="quantity buttons_added">
                             <input type="button" value="-" class="minus"><input type="number" step="1" min="1"
@@ -102,17 +97,10 @@
                             </button>
                         </div>
                     </div>
-                    {#                    {% endif %}#}
-                    {#                    {% else %}#}
-                    {#                        <label class="center"><b>필수 옵션을 선택해주세요!</b></label>#}
-                    {##}
-                    {#                    {% endif %}#}
-
                 </div>
             </div>
         </div>
     </section>
-
 
     <!--탭-->
     <div class="container mt-3">
@@ -269,12 +257,13 @@
     </section>
     <script>
 
-        $('#option1').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
-            var data = $("option").data("link");
-            var data = this.dataset.link;
+        $('.option-selector').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
+            {#var value = $(this).val() #} {# select 의 이름을 가져옴 #}
+            var subValue = $(this).find("option:selected").data("product");
 
-            console.log(data)
+            $('.'+subValue).show()
 
         });
+
     </script>
 {% endblock content %}
