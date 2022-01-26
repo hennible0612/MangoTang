@@ -45,12 +45,12 @@ class Customer(models.Model):
 
 class Product(models.Model):
     product_name = models.CharField(max_length=200)
-    price = models.FloatField()
+    price = models.FloatField(null=False, blank=False)
     image_detail = models.ImageField(null=True, blank=True)
     image_title = models.ImageField(null=True, blank=True)
     image_introduce = models.ImageField(null=True, blank=True)
-    seller_code = models.IntegerField(null=False)
-    price_discount = models.IntegerField(null=True)
+    seller_code = models.CharField(max_length=50, null=False, blank=False)
+    price_discount = models.FloatField(null=True)
     discount = models.IntegerField(null=True)
     stock = models.IntegerField()
     first_title = models.CharField(max_length=200)
@@ -58,12 +58,12 @@ class Product(models.Model):
     shipment_price = models.IntegerField(blank=True)
     hash_tag = models.CharField(max_length=200)
     option_bool = models.BooleanField(default=False, blank=False, null=True)
-    option_total = models.IntegerField(blank=True, null=True)
-    option1 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op1")
-    option2 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op2")
-    option3 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op3")
-    option4 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op4")
-    option5 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op5")
+    # option_total = models.IntegerField(blank=True, null=True)
+    # option1 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op1")
+    # option2 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op2")
+    # option3 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op3")
+    # option4 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op4")
+    # option5 = models.ForeignKey("Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="op5")
     collection_tag = models.CharField(max_length=200, null=True)
     item_company = models.CharField(null=False, max_length=200)
     product_status = models.BooleanField(default=False, blank=False, null=True)
@@ -118,10 +118,19 @@ class Order(models.Model):
     def __str__(self):
         return " 주문자 : " + self.customer.email
 
+class ProductOption(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    option_name = models.CharField(max_length=200)
+    option_seller_code = models.CharField(max_length=50, null=False, blank=False)
+    option_price = models.FloatField(null=False, blank=False)
+    option_stock = models.IntegerField()
+    option_status = models.BooleanField(default=False, blank=False, null=True)
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    # product_option = models.ForeignKey(ProductOption, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
@@ -205,3 +214,4 @@ class ProductQuestion(models.Model):
             url_image = ''
 
         return url_image
+
