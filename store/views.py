@@ -158,13 +158,11 @@ def checkout(request):
 
 def updateItem(request):
     data = json.loads(request.body)  # JSON body data에저장
-    productId = data['productId']  # 각각 body에 있는 필요한 값저장
+    seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
     action = data['action']
-    print('Action:', action)  #
-    print('Product:', productId)  # 장고 default id 가져옴
 
     customer = request.user.customer  # 현재 customer
-    product = Product.objects.get(id=productId)  # 해당하는 productId가져옴
+    product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
 
     orderItem, created = OrderItem.objects.get_or_create(order=order,

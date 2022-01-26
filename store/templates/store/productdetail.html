@@ -40,12 +40,11 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option>{{ option.option_name }}</option>
+                                    <option data-product{{ option.option_sellercode }}>{{ option.option_name }}</option>
 
                                 {% endfor %}
 
                             </select>
-
                         </div>
                         <br>
 
@@ -79,7 +78,7 @@
                             </div>
                         {% endfor %}
                     {% endif %}
-                
+
                     <div class="d-flex">
                         <div class="quantity buttons_added">
                             <input type="button" value="-" class="minus"><input type="number" step="1" min="1"
