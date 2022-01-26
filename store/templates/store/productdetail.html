@@ -38,7 +38,8 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option class="" data-product="{{ option.option_seller_code }}">{{ option.option_name }}</option>
+                                    <option class=""
+                                            data-product="{{ option.option_seller_code }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
                             </select>
@@ -73,30 +74,48 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        <div class="d-flex">
+
+                            <div style="padding-right:10px;">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    카트에 넣기
+                                </button>
+                            </div>
+                            <div style="padding-right:10px;">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    바로 구매하기
+                                </button>
+                            </div>
+                        </div>
+
+                    {% else %}
+                        <div class="d-flex">
+                            <div class="quantity buttons_added">
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1"
+                                                                                    max=""
+                                                                                    name="quantity" value="1"
+                                                                                    title="Qty"
+                                                                                    class="input-text qty text" size="4"
+                                                                                    pattern="" inputmode="">
+                                <input type="button" value="+" class="plus">
+                            </div>
+                            <div style="padding-right:10px;">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    카트에 넣기
+                                </button>
+                            </div>
+                            <div style="padding-right:10px;">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    바로 구매하기
+                                </button>
+                            </div>
+                        </div>
                     {% endif %}
-                    <div class="d-flex">
-                        <div class="quantity buttons_added">
-                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1"
-                                                                                max=""
-                                                                                name="quantity" value="1"
-                                                                                title="Qty"
-                                                                                class="input-text qty text" size="4"
-                                                                                pattern="" inputmode="">
-                            <input type="button" value="+" class="plus">
-                        </div>
-                        <div style="padding-right:10px;">
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                카트에 넣기
-                            </button>
-                        </div>
-                        <div style="padding-right:10px;">
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                바로 구매하기
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -261,7 +280,7 @@
             {#var value = $(this).val() #} {# select 의 이름을 가져옴 #}
             var subValue = $(this).find("option:selected").data("product");
 
-            $('.'+subValue).show()
+            $('.' + subValue).show()
 
         });
 
