@@ -12536,8 +12536,19 @@ input[type=number] {
 .chg-quantity:hover{
 	opacity: .6;
 }
+.container-detail-cart {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
 
-
+.item-detail-cart {
+    flex-basis: 40%;
+}
+.item-detail-total {
+    flex-basis: 60%;
+}
 /*.hidden{*/
 /*	display: none!important;*/
 /*}*/
