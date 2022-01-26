@@ -12415,10 +12415,11 @@ a.nav-link-mypage:active {
 }
 
 .item-option-quantity{
-    flex-basis: 85%;
+    flex-basis: 80%;
 }
 .item-option-cost{
-    flex-basis: 15%;
+    flex-basis: 20%;
+    text-align: center;
 }
 
 input::-webkit-outer-spin-button,
