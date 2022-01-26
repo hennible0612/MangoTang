@@ -57,6 +57,10 @@ def productDetail(request, seller_code):
     question_paginator = Paginator(questions, 5)
     question_obj = question_paginator.get_page(question_page)
 
+    if(product.option_bool == True):
+        print("option_bool is true")
+
+
     context = {'product': product, 'review_page': review_page, 'review_obj': review_obj
         , 'question_page': question_page, 'questions': questions, 'total_review': len(reviews)
         , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews}

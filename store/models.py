@@ -126,6 +126,8 @@ class ProductOption(models.Model):
     option_stock = models.IntegerField()
     option_status = models.BooleanField(default=False, blank=False, null=True)
 
+    def __str__(self):
+        return " 옵션이름 : " + self.option_name
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
