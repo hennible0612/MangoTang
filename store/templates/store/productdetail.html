@@ -60,7 +60,7 @@
                                     {#                                    <input type="button" value="-" class="minus"#}
                                     {#                                           style="  border-radius: 30px; border: 1px solid #f9f9fa;">#}
                                     <i type="button" class="fas fa-minus option-minus"
-                                       data-id="{{ forloop.counter0 }}"></i>
+                                       data-id="{{ forloop.counter0 }}" data-price="{{ option.option_price }}"></i>
                                     <input type="number" step="1" min="1"
                                            max="99"
                                            name="quantity" value="1"
@@ -70,7 +70,7 @@
                                            style="width: 30px; text-align:center"
                                            class="option_quantity{{ forloop.counter0 }}" readonly>
                                     <i type="button" class="fas fa-plus option-plus"
-                                       data-id="{{ forloop.counter0 }}"></i>
+                                       data-id="{{ forloop.counter0 }}" data-price="{{ option.option_price }}"></i>
                                     {#                                    <input type="button" value="+" class="plus"#}
                                     {#                                           style="  border-radius: 30px; border: 1px solid #f9f9fa;">#}
                                 </div>
@@ -92,7 +92,8 @@
                                 </button>
                             </div>
                             <div style="text-align: center">
-                                <p style="color: #ee7d18; font-size: 1.5rem">100,000원</p>
+                                <p style="color: #ee7d18; font-size: 1.5rem"
+                                   class="total-option-price">{{ product.price_discount | floatformat:0 }}원</p>
                             </div>
                         </div>
 
@@ -284,14 +285,15 @@
         </div>
     </section>
     <script>
-
+        var price = '{{ product.price }}'
+        var discount = '{{ product.discount }}'
+        var totalPrice = ((discount / 100) * price)
         $('.option-selector').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
             {#var value = $(this).val() #} {# select 의 이름을 가져옴 #}
             var sellerCode = $(this).find("option:selected").data("product");
-
             $('.' + sellerCode).show()
-            console.log(sellerCode)
         });
+
 
         $(document).ready(function () { //DOM이 준비가 되면
             $('.plus').click(function (e) {
@@ -307,31 +309,43 @@
             });
             $('.option-plus').click(function (e) {
                 var optionId = $(this).data("id");
+                var optionPrice = $(this).data("price");
+
                 var currentVal = parseInt($('.option_quantity' + optionId).val());
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
-                    {#changeTotalPrice(currentVal + 1)#}
+                    optionTotalPrice(currentVal + 1, optionPrice)
                 }
-                {#console.log(currentVal);#}
 
+            });
+            $('.option-minus').click(function (e) {
+                var optionId = $(this).data("id");
+                var optionPrice = $(this).data("price");
+                var currentVal = parseInt($('.option_quantity' + optionId).val());
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    $('.option_quantity' + optionId).val(currentVal - 1);
+                    optionTotalPrice(currentVal - 1, optionPrice)
+                }
             });
 
             $('.minus').click(function (e) {
                 e.preventDefault();
                 var currentVal = parseInt($('.product-quantity').val());
                 if (!isNaN(currentVal) && currentVal > 1) {
-                    // Decrement one
                     $('.product-quantity').val(currentVal - 1);
                     changeTotalPrice(currentVal - 1)
 
                 }
             });
-
             function changeTotalPrice(currentVal) {
-                var price = '{{ product.price }}'
-                var discount = '{{ product.discount }}'
-                var discountedPrice = ((discount / 100) * price)
-                $('.total-price').html(parseInt(discountedPrice) * currentVal + "원")
+
+                $('.total-price').html(parseInt(totalPrice) * currentVal + "원")
+            }
+
+
+            function optionTotalPrice(currentVal, optionPrice) {
+                totalPrice += parseInt(optionPrice)
+                $('.total-option-price').html(parseInt(totalPrice) + "원")
             }
 
 
