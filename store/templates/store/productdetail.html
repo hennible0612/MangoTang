@@ -131,7 +131,6 @@
             </div>
         </div>
     </section>
-
     <!--탭-->
     <div class="container mt-3">
         <!-- 옵션들 -->
@@ -294,7 +293,6 @@
             $('.' + sellerCode).show()
         });
 
-
         $(document).ready(function () { //DOM이 준비가 되면
             $('.plus').click(function (e) {
                 e.preventDefault();
@@ -307,6 +305,7 @@
                 }
 
             });
+
             $('.option-plus').click(function (e) {
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
@@ -318,6 +317,7 @@
                 }
 
             });
+
             $('.option-minus').click(function (e) {
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
@@ -337,11 +337,11 @@
 
                 }
             });
+
             function changeTotalPrice(currentVal) {
 
                 $('.total-price').html(parseInt(totalPrice) * currentVal + "원")
             }
-
 
             function optionTotalPrice(currentVal, optionPrice) {
                 totalPrice += parseInt(optionPrice)
