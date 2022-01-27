@@ -54,11 +54,12 @@
                                     {{ option.option_name }}
                                 </div>
                                 <div class="item-option-exit" style="padding-top: 5px">
-                                    <i class="far fa-times-circle" style="padding-top: 10px"></i>
+                                    <i type="button" class="far fa-times-circle" style="padding-top: 10px"></i>
                                 </div>
                                 <div class="item-option-quantity" style="padding-left: 15px; ">
-                                    <input type="button" value="-" class="minus"
-                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                    {#                                    <input type="button" value="-" class="minus"#}
+                                    {#                                           style="  border-radius: 30px; border: 1px solid #f9f9fa;">#}
+                                    <i type="button" class="fas fa-minus"></i>
                                     <input type="number" step="1" min="1"
                                            max="99"
                                            name="quantity" value="1"
@@ -66,8 +67,9 @@
                                            size="2"
                                            pattern="" inputmode=""
                                            style="width: 30px; text-align:center">
-                                    <input type="button" value="+" class="plus"
-                                           style="  border-radius: 25px; border: 2px solid #f9f9fa;">
+                                    <i type="button" class="fas fa-plus"></i>
+                                    {#                                    <input type="button" value="+" class="plus"#}
+                                    {#                                           style="  border-radius: 30px; border: 1px solid #f9f9fa;">#}
                                 </div>
                                 <div class="item-option-cost">
                                     <label style="padding-top: 5px">{{ option.option_price | floatformat:0 }}원</label>
@@ -86,20 +88,21 @@
                                     바로 구매하기
                                 </button>
                             </div>
-                            <div style="padding-left:200px;">
-                                <p>100,000원</p>
+                            <div style="text-align: center">
+                                <p style="color: #ee7d18; font-size: 1.5rem">100,000원</p>
                             </div>
                         </div>
 
                     {% else %}
                         <div class="d-flex">
                             <div class="quantity buttons_added">
-                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1"
-                                                                                    max=""
-                                                                                    name="quantity" value="1"
-                                                                                    title="Qty"
-                                                                                    class="input-text qty text" size="4"
-                                                                                    pattern="" inputmode="">
+                                <input type="button" value="-" class="minus">
+                                <input type="number" step="1" min="1"
+                                       max=""
+                                       name="quantity" value="1"
+                                       title="Qty"
+                                       class="input-text qty text" size="4"
+                                       pattern="" inputmode="">
                                 <input type="button" value="+" class="plus">
                             </div>
                             <div style="padding-right:10px;">
@@ -114,7 +117,9 @@
                                     바로 구매하기
                                 </button>
                             </div>
-
+                            <div style="text-align: center">
+                                <p style="color: #ee7d18; font-size: 1.5rem">100,000원</p>
+                            </div>
                         </div>
                     {% endif %}
 
@@ -161,7 +166,6 @@
             </div>
         </div>
     </div>
-
     <!-- 관련 상품 -->
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
@@ -280,11 +284,50 @@
 
         $('.option-selector').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
             {#var value = $(this).val() #} {# select 의 이름을 가져옴 #}
-            var subValue = $(this).find("option:selected").data("product");
+            var sellerCode = $(this).find("option:selected").data("product");
 
-            $('.' + subValue).show()
-
+            $('.' + sellerCode).show()
+            console.log(sellerCode)
         });
+
+        jQuery(document).ready(function () {
+            // This button will increment the value
+            $('.plus').click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+
+                // Get the field name
+                fieldName = $(this).attr('quantity-field');
+                // Get its current value
+                var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+                // If is not undefined
+                if (!isNaN(currentVal)) {
+                    // Increment
+                    $('input[name=' + fieldName + ']').val(currentVal + 1);
+                } else {
+                    // Otherwise put a 0 there
+                    $('input[name=' + fieldName + ']').val(0);
+                }
+            });
+            // This button will decrement the value till 0
+            $('[data-quantity="minus"]').click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                fieldName = $(this).attr('data-field');
+                // Get its current value
+                var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+                // If it isn't undefined or its greater than 0
+                if (!isNaN(currentVal) && currentVal > 0) {
+                    // Decrement one
+                    $('input[name=' + fieldName + ']').val(currentVal - 1);
+                } else {
+                    // Otherwise put a 0 there
+                    $('input[name=' + fieldName + ']').val(0);
+                }
+            });
+        });
+
 
     </script>
 {% endblock content %}
