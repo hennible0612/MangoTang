@@ -29,7 +29,7 @@
                     <hr>
                     <!-- 배송비 -->
 
-                    <p class="lead">배송비: {{ product.shipment_price }}원 (50,000원 이상 무료)</p>
+                    <p class="lead">배송비: {{ product.shipment_price }}원 </p>
 
                     <!-- 옵션 -->
                     {% if product.option_bool == True %}
@@ -59,15 +59,18 @@
                                 <div class="item-option-quantity" style="padding-left: 15px; ">
                                     {#                                    <input type="button" value="-" class="minus"#}
                                     {#                                           style="  border-radius: 30px; border: 1px solid #f9f9fa;">#}
-                                    <i type="button" class="fas fa-minus"></i>
+                                    <i type="button" class="fas fa-minus option-minus"
+                                       data-id="{{ forloop.counter0 }}"></i>
                                     <input type="number" step="1" min="1"
                                            max="99"
                                            name="quantity" value="1"
                                            title="Qty"
                                            size="2"
                                            pattern="" inputmode=""
-                                           style="width: 30px; text-align:center">
-                                    <i type="button" class="fas fa-plus"></i>
+                                           style="width: 30px; text-align:center"
+                                           class="option_quantity{{ forloop.counter0 }}" readonly>
+                                    <i type="button" class="fas fa-plus option-plus"
+                                       data-id="{{ forloop.counter0 }}"></i>
                                     {#                                    <input type="button" value="+" class="plus"#}
                                     {#                                           style="  border-radius: 30px; border: 1px solid #f9f9fa;">#}
                                 </div>
@@ -118,7 +121,8 @@
                                 </button>
                             </div>
                             <div style="text-align: center">
-                                <p style="color: #ee7d18; font-size: 1.5rem">100,000원</p>
+                                <p style="color: #ee7d18; font-size: 1.5rem"
+                                   class="total-price">{{ product.price_discount | floatformat:0 }}원</p>
                             </div>
                         </div>
                     {% endif %}
@@ -290,32 +294,47 @@
         });
 
         $(document).ready(function () { //DOM이 준비가 되면
-            // This button will increment the value
             $('.plus').click(function (e) {
-                // Stop acting like a button
                 e.preventDefault();
-                // Get its current value
-                var currentVal = parseInt($('.product-quantity').val());
-                console.log(currentVal)
-                // If is not undefined
-                if (!isNaN(currentVal)) {
-                    // Increment
-                    $('.product-quantity').val(currentVal + 1);
-                }
-            });
-            // This button will decrement the value till 0
-            $('.minus').click(function (e) {
-                // Stop acting like a button
-                e.preventDefault();
-                // Get its current value
                 var currentVal = parseInt($('.product-quantity').val());
 
-                // If it isn't undefined or its greater than 0
+                if (!isNaN(currentVal)) {
+                    $('.product-quantity').val(currentVal + 1);
+                    changeTotalPrice(currentVal + 1)
+
+                }
+
+            });
+            $('.option-plus').click(function (e) {
+                var optionId = $(this).data("id");
+                var currentVal = parseInt($('.option_quantity' + optionId).val());
+                if (!isNaN(currentVal)) {
+                    $('.option_quantity' + optionId).val(currentVal + 1);
+                    {#changeTotalPrice(currentVal + 1)#}
+                }
+                {#console.log(currentVal);#}
+
+            });
+
+            $('.minus').click(function (e) {
+                e.preventDefault();
+                var currentVal = parseInt($('.product-quantity').val());
                 if (!isNaN(currentVal) && currentVal > 1) {
                     // Decrement one
                     $('.product-quantity').val(currentVal - 1);
+                    changeTotalPrice(currentVal - 1)
+
                 }
             });
+
+            function changeTotalPrice(currentVal) {
+                var price = '{{ product.price }}'
+                var discount = '{{ product.discount }}'
+                var discountedPrice = ((discount / 100) * price)
+                $('.total-price').html(parseInt(discountedPrice) * currentVal + "원")
+            }
+
+
         });
 
 
