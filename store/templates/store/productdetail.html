@@ -108,7 +108,8 @@
                                 <input type="button" value="+" class="plus">
                             </div>
                             <div style="padding-right:10px;">
-                                <button class="btn btn-outline-dark flex-shrink-0 add-to-cart" onclick="cartSnackbar()" data-code="{{ product.seller_code }}" type="button">
+                                <button class="btn btn-outline-dark flex-shrink-0 add-to-cart" onclick="cartSnackbar()"
+                                        data-code="{{ product.seller_code }}" type="button">
                                     <i class="bi-cart-fill me-1"></i>
                                     카트에 넣기
                                 </button>
@@ -283,7 +284,7 @@
 
     </section>
     <!--snack bar-->
-    <text id="snackbar">장바구니에 담겼습니다. <a class="nav-link-cart" href="/cart"> 바로 가기</a></text>
+    <text id="snackbar">장바구니에 담겼습니다. <a class="nav-link-cart" href={% url 'cart' %}> 바로 가기</a></text>
     <script>
         function cartSnackbar() {
             var x = document.getElementById("snackbar");
@@ -299,23 +300,32 @@
         var price = '{{ product.price }}'
         var discount = '{{ product.discount }}'
         var totalPrice = ((discount / 100) * price)
-        $('.option-selector').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
-            {#var value = $(this).val() #} {# select 의 이름을 가져옴 #}
-
-            var sellerCode = $(this).find("option:selected").data("product");
-            $('.' + sellerCode).show()
-        });
+        var token = '{{csrf_token}}';
 
         $(document).ready(function () { //DOM이 준비가 되면
             $('.add-to-cart').click(function (e) {
-
                 var sellerCode = "{{ product.seller_code }}"
                 var productAmount = $('.product-quantity').val();
-                console.log("셀러코드", sellerCode)
-                console.log("프로닥트 개수", productAmount)
+                var action = 'add'
+                $.ajax({
+                    headers: {"X-CSRFToken": token},
+                    url: '/update_item/',
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify({'sellerCode': sellerCode, 'action': action})
 
+                }).done(function () {
+                }).fail(function () {
+                    console.log("실패")
+                })
             });
 
+            $('.option-selector').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
+                {#var value = $(this).val() #} {# select 의 이름을 가져옴 #}
+
+                var sellerCode = $(this).find("option:selected").data("product");
+                $('.' + sellerCode).show()
+            });
 
             $('.plus').click(function (e) {
                 e.preventDefault();

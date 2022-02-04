@@ -158,6 +158,7 @@ def checkout(request):
 
 def updateItem(request):
     data = json.loads(request.body)  # JSON body data에저장
+
     seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
     action = data['action']
 
