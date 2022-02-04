@@ -37,18 +37,21 @@
                             <div style="flex:2"><p>{{ item.product.product_name }}</p></div>
                             <div style="flex:1"><p>{{ item.product.price_discount | floatformat:0 }}원</p></div>
                             <div style="flex:1">
-                                <p class="quantity quantity-total">{{ item.quantity }}</p>
+                                <p class="quantity quantity-total{{ forloop.counter0 }}">{{ item.quantity }}</p>
                                 <div class="quantity">
                                     <img class="chg-quantity update-cart-item"
+                                         data-quantity="quantity-total{{ forloop.counter0 }}"
                                          data-product="{{ item.product.seller_code }}"
                                          src="{% static  'images/arrow-up.png' %}" data-action="add">
 
                                     <img class="chg-quantity update-cart-item"
+                                         data-quantity="quantity-total{{ forloop.counter0 }}"
+
                                          data-product="{{ item.product.seller_code }}"
                                          src="{% static  'images/arrow-down.png' %}" data-action="remove">
                                 </div>
                             </div>
-                            <div style="flex:1"><p>{{ item.get_total|floatformat:0 }}원</p></div>
+                            <div  style="flex:1"><p>{{ item.get_total|floatformat:0 }}원</p></div>
                         </div>
                     {% endfor %}
                 </div>
@@ -58,6 +61,8 @@
     <script>
         $('.update-cart-item').click(function (e) {
             var sellerCode = $(this).data("product");
+            var itemQuantity = $(this).data("quantity");
+            var itemPriceTotal = $(this).data("quantity");
             var action = $(this).data("action");
             var productQuantity = 1
             $.ajax({
@@ -67,9 +72,8 @@
                 dataType: "json",
                 data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'quantity': productQuantity})
             }).done(function (data) {
-
-
-
+                $('.'+itemQuantity).html(data)
+                $('.'+).html()
             }).fail(function () {
 
             })
