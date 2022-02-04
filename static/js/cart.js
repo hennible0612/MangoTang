@@ -13,6 +13,7 @@
 //     });
 // }
 
+
 $('.update-cart').click(function (e) {
     var sellerCode = $(this).data("product");
     var action = $(this).data("action");// add가져옴 this는 클릭이 된애
@@ -22,7 +23,7 @@ $('.update-cart').click(function (e) {
         url: '/update_item/',
         type: 'POST',
         dataType: "json",
-        data: JSON.stringify({'sellerCode': sellerCode, 'action': 'set', 'quantity': productQuantity})
+        data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'quantity': productQuantity})
     }).done(function () {
     }).fail(function () {
     })

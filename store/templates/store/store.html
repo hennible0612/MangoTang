@@ -10,33 +10,47 @@
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 {% for product in products %}
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-{#                        <a href="/product_detail/{{ product.seller_code }}">#}
-                        <a onclick="test()" href="{% url 'product_detail' product.seller_code %}">
-                            <img class="card-img-top"  height="300" width="300" src={{ product.image_title.url}}/>
-                        </a>
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">{{ product.product_name }}</h5>
-                                <!-- Product price-->
-                                <h4>{{ product.price_discount | floatformat:0 }}원</h4><h5 class="text-decoration-line-through">{{ product.price | floatformat:0}}원</h5>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            {#                        <a href="/product_detail/{{ product.seller_code }}">#}
+                            <a onclick="test()" href="{% url 'product_detail' product.seller_code %}">
+                                <img class="card-img-top" height="300" width="300" src={{ product.image_title.url }}/>
+                            </a>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.product_name }}</h5>
+                                    <!-- Product price-->
+                                    <h4>{{ product.price_discount | floatformat:0 }}원</h4><h5
+                                        class="text-decoration-line-through">{{ product.price | floatformat:0 }}원</h5>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><button data-product="{{product.seller_code}}" data-action="add" class="btn btn-outline-dark mt-auto update-cart" >장바구니 추가</button>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <button data-product="{{ product.seller_code }}" onclick="cartSnackbar()" data-action="set"
+                                            class="btn btn-outline-dark mt-auto update-cart">장바구니 추가
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
     </section>
+    <text id="snackbar">장바구니에 담겼습니다. <a class="nav-link-cart" href={% url 'cart' %}> 바로 가기</a></text>
 
+    <script>
+        function cartSnackbar() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function () {
+                x.className = x.className.replace("show", "");
+            }, 3000);
+        }
+    </script>
 
 {% endblock content %}
