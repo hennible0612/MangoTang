@@ -162,6 +162,7 @@ def updateItem(request):
     seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
     action = data['action']
     quantity = data['quantity']
+
     customer = request.user.customer  # 현재 customer
     product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
@@ -178,11 +179,40 @@ def updateItem(request):
 
     orderItem.save()  # DB에 저장
 
-    if orderItem.quantity <= 0:
+    if int(orderItem.quantity) <= 0:
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
 
+
+def updateCartItem(request):
+    data = json.loads(request.body)  # JSON body data에저장
+
+    seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
+    action = data['action']
+    quantity = data['quantity']
+
+    customer = request.user.customer  # 현재 customer
+    product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
+
+    orderItem, created = OrderItem.objects.get_or_create(order=order,
+                                                         product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
+
+    if action == 'add':
+        orderItem.quantity = (orderItem.quantity + 1)
+    elif action == 'remove':
+        orderItem.quantity = (orderItem.quantity - 1)
+
+
+    orderItem.save()  # DB에 저장
+
+    if int(orderItem.quantity) <= 0:
+        orderItem.delete()
+
+    # json_obj = serializers.serialize('json', orderItem.quantity) #페이징된값
+    # print(json_obj)
+    return JsonResponse(orderItem.quantity, safe=False, json_dumps_params={'ensure_ascii': False})
 
 """
 제품 리뷰 가져오는 API

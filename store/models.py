@@ -115,8 +115,8 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderitems])
         return total
 
-    def __str__(self):
-        return " 주문자 : " + self.customer.email
+    # def __str__(self):
+    #     return " 주문자 : " + self.customer.email
 
 class ProductOption(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)

@@ -35,20 +35,44 @@
                         <div class="cart-row">
                             <div style="flex:2"><img class="row-image" src="{{ item.product.image_title.url }}"></div>
                             <div style="flex:2"><p>{{ item.product.product_name }}</p></div>
-                            <div style="flex:1"><p>{{item.product.price_discount | floatformat:0}}원</p></div>
+                            <div style="flex:1"><p>{{ item.product.price_discount | floatformat:0 }}원</p></div>
                             <div style="flex:1">
-                                <p class="quantity">{{ item.quantity }}</p>
+                                <p class="quantity quantity-total">{{ item.quantity }}</p>
                                 <div class="quantity">
-                                    <img class="chg-quantity update-cart" data-product="{{item.product.seller_code}}" src="{% static  'images/arrow-up.png' %}" data-action="add">
+                                    <img class="chg-quantity update-cart-item"
+                                         data-product="{{ item.product.seller_code }}"
+                                         src="{% static  'images/arrow-up.png' %}" data-action="add">
 
-                                    <img class="chg-quantity update-cart" data-product="{{item.product.seller_code}}" src="{% static  'images/arrow-down.png' %}" data-action="remove">
+                                    <img class="chg-quantity update-cart-item"
+                                         data-product="{{ item.product.seller_code }}"
+                                         src="{% static  'images/arrow-down.png' %}" data-action="remove">
                                 </div>
                             </div>
-                            <div style="flex:1"><p>{{item.get_total|floatformat:0}}원</p></div>
+                            <div style="flex:1"><p>{{ item.get_total|floatformat:0 }}원</p></div>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $('.update-cart-item').click(function (e) {
+            var sellerCode = $(this).data("product");
+            var action = $(this).data("action");
+            var productQuantity = 1
+            $.ajax({
+                headers: {"X-CSRFToken": csrftoken},
+                url: '/update-cart-item/',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'quantity': productQuantity})
+            }).done(function (data) {
+
+
+
+            }).fail(function () {
+
+            })
+        });
+    </script>
 {% endblock content %}

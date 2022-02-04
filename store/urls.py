@@ -9,6 +9,8 @@ urlpatterns = [
 	path('login/', auth_views.LoginView.as_view(template_name='store/login.html'), name="login"),
 	# 장바구니에 추가 요청
 	path('update_item/', views.updateItem, name="update_item"),
+	# 장바구니에 추가 요청
+	path('update-cart-item/', views.updateCartItem, name="update_cart_item"),
 
 	# 메인화면
 	path('', views.store, name="store"),
