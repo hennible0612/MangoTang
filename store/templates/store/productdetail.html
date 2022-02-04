@@ -38,8 +38,7 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option class=""
-                                            data-product="{{ option.option_seller_code }}">{{ option.option_name }}</option>
+                                    <option data-product="{{ option.option_seller_code }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
                             </select>
@@ -96,8 +95,7 @@
                                    class="total-option-price">{{ product.price_discount | floatformat:0 }}원</p>
                             </div>
                         </div>
-
-                    {% else %}
+                    {% else %} <!-- 옵션 없음 -->
                         <div class="d-flex">
                             <div class="quantity buttons_added">
                                 <input type="button" value="-" class="minus">
@@ -110,7 +108,7 @@
                                 <input type="button" value="+" class="plus">
                             </div>
                             <div style="padding-right:10px;">
-                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <button class="btn btn-outline-dark flex-shrink-0 add-to-cart" data-sellerCode="{{ product.seller_code }}" type="button">
                                     <i class="bi-cart-fill me-1"></i>
                                     카트에 넣기
                                 </button>
@@ -298,6 +296,21 @@
         });
 
         $(document).ready(function () { //DOM이 준비가 되면
+            $('.add-to-cart').click(function (e) {
+
+                var sellerCode = $(this).data("sellerCode");
+                var productAmount = $('.product-quantity').val();
+                console.log("셀러코드" , sellerCode)
+                console.log("프로닥트 개수", productAmount)
+
+            });
+
+
+
+
+
+
+
             $('.plus').click(function (e) {
                 e.preventDefault();
                 var currentVal = parseInt($('.product-quantity').val());
@@ -321,7 +334,15 @@
                 }
 
             });
+            $('.minus').click(function (e) {
+                e.preventDefault();
+                var currentVal = parseInt($('.product-quantity').val());
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    $('.product-quantity').val(currentVal - 1);
+                    changeTotalPrice(currentVal - 1)
 
+                }
+            });
             $('.option-minus').click(function (e) {
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
@@ -332,15 +353,7 @@
                 }
             });
 
-            $('.minus').click(function (e) {
-                e.preventDefault();
-                var currentVal = parseInt($('.product-quantity').val());
-                if (!isNaN(currentVal) && currentVal > 1) {
-                    $('.product-quantity').val(currentVal - 1);
-                    changeTotalPrice(currentVal - 1)
 
-                }
-            });
 
             function changeTotalPrice(currentVal) {
 
