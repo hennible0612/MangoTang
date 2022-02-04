@@ -305,17 +305,15 @@
         $(document).ready(function () { //DOM이 준비가 되면
             $('.add-to-cart').click(function (e) {
                 var sellerCode = "{{ product.seller_code }}"
-                var productAmount = $('.product-quantity').val();
+                var productQuantity = $('.product-quantity').val();
                 $.ajax({
                     headers: {"X-CSRFToken": token},
                     url: '/update_item/',
                     type: 'POST',
                     dataType: "json",
-                    data: JSON.stringify({'sellerCode': sellerCode, 'action': 'add'})
-
+                    data: JSON.stringify({'sellerCode': sellerCode, 'action': 'set', 'quantity':productQuantity})
                 }).done(function () {
                 }).fail(function () {
-                    console.log("실패")
                 })
             });
 

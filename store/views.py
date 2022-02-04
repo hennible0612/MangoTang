@@ -161,8 +161,7 @@ def updateItem(request):
 
     seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
     action = data['action']
-
-
+    quantity = data['quantity']
     customer = request.user.customer  # 현재 customer
     product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
@@ -174,6 +173,9 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
+    elif action == 'set':
+        orderItem.quantity = quantity
+
     orderItem.save()  # DB에 저장
 
     if orderItem.quantity <= 0:
