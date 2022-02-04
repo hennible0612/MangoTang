@@ -306,13 +306,12 @@
             $('.add-to-cart').click(function (e) {
                 var sellerCode = "{{ product.seller_code }}"
                 var productAmount = $('.product-quantity').val();
-                var action = 'add'
                 $.ajax({
                     headers: {"X-CSRFToken": token},
                     url: '/update_item/',
                     type: 'POST',
                     dataType: "json",
-                    data: JSON.stringify({'sellerCode': sellerCode, 'action': action})
+                    data: JSON.stringify({'sellerCode': sellerCode, 'action': 'add'})
 
                 }).done(function () {
                 }).fail(function () {

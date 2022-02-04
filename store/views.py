@@ -162,6 +162,7 @@ def updateItem(request):
     seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
     action = data['action']
 
+
     customer = request.user.customer  # 현재 customer
     product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
