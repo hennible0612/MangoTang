@@ -57,7 +57,8 @@
                             <div style="flex:1"><p
                                     class="item-cost-total{{ forloop.counter0 }}">{{ item.get_total|floatformat:0 }}원</p>
                             </div>
-                            <i type="button" data-code="{{ item.product.seller_code }}" data-loop ="{{ forloop.counter0 }}"
+                            <i type="button" data-code="{{ item.product.seller_code }}"
+                               data-loop="{{ forloop.counter0 }}"
                                class="fas fa-trash-alt delete-item"></i>
                         </div>
 
@@ -75,9 +76,12 @@
                 url: '/delete-cart-item/' + sellerCode + '/',
                 type: 'DELETE',
 
-            }).done(function () {
-                $(".cart-row"+loop).html("")
+            }).done(function (data) {
+                var info = JSON.parse(data)
 
+                $(".cart-row" + loop).html("")
+                $('.cart-quantity-total').html(info['orderItemTotal'])
+                $('.cart-price-total').text(info['orderItemPriceTotal'] + "원")
             }).fail(function () {
             });
 
