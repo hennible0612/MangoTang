@@ -12517,6 +12517,14 @@ input[type=number] {
     /*border-bottom: 1px solid #ececec;*/
 
 }
+.cart-option{
+	display: flex;
+    align-items: flex-stretch;
+    /*padding-bottom: 5px;*/
+    /*margin-bottom: 5px;*/
+    /*border-bottom: 1px solid #ececec;*/
+
+}
 
 .quantity{
 	display: inline-block;
