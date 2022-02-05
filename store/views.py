@@ -211,11 +211,25 @@ def updateCartItem(request):
     # if int(orderItem.quantity) <= 0:
     #     orderItem.delete()
 
-    print(orderItem.quantity)
-    print(orderItem.product.price_discount)
-    # json_obj = serializers.serialize('json', orderItem.quantity) #페이징된값
+    # print(orderItem.quantity)
+    # print(orderItem.product.price_discount)
+    # print(orderItem.get_total)
+    # print( order.get_cart_items )
+    # print( order.get_cart_total )
+    data = {
+        "itemQuantity": orderItem.quantity,
+        "itemDiscountPrice": orderItem.product.price_discount,
+        "itemPriceTotal":orderItem.get_total,
+        "orderItemTotal": order.get_cart_items,
+        "orderItemPriceTotal":order.get_cart_total
+
+    }
+    # print(data["item quantity"])
+    json_obj = json.dumps(data)
+    # json_obj = serializers.serialize('json', data) #페이징된값
     # print(json_obj)
-    return JsonResponse(orderItem.quantity, safe=False, json_dumps_params={'ensure_ascii': False})
+    # print(json_obj)
+    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 """
 제품 리뷰 가져오는 API

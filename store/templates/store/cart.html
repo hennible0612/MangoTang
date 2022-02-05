@@ -74,7 +74,8 @@
                 dataType: "json",
                 data: JSON.stringify({'sellerCode': sellerCode, 'action': action})
             }).done(function (data) {
-                $('.quantity-total' + loopCounter).html(data)
+                console.log(data)
+                {#$('.quantity-total' + loopCounter).html(data)#}
                 {#$('.'+'item-cost-total'+loopCounter).html('{{ item.get_total|floatformat:0 }}'+원)#}
                 {#$('.'+).html()#}
             }).fail(function () {
