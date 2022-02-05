@@ -37,21 +37,23 @@
                             <div style="flex:2"><p>{{ item.product.product_name }}</p></div>
                             <div style="flex:1"><p>{{ item.product.price_discount | floatformat:0 }}원</p></div>
                             <div style="flex:1">
-                                <p class="quantity quantity-total{{ forloop.counter0 }}">{{ item.quantity }}</p>
+                                <p class="quantity quantity-total{{ forloop.counter0 }}" data-test="{{ item.quantity }}">{{ item.quantity }}</p>
                                 <div class="quantity">
                                     <img class="chg-quantity update-cart-item"
-                                         data-quantity="quantity-total{{ forloop.counter0 }}"
+                                         data-quantity="{{ forloop.counter0 }}"
                                          data-product="{{ item.product.seller_code }}"
                                          src="{% static  'images/arrow-up.png' %}" data-action="add">
 
                                     <img class="chg-quantity update-cart-item"
-                                         data-quantity="quantity-total{{ forloop.counter0 }}"
+                                         data-quantity="{{ forloop.counter0 }}"
 
                                          data-product="{{ item.product.seller_code }}"
                                          src="{% static  'images/arrow-down.png' %}" data-action="remove">
                                 </div>
                             </div>
-                            <div  style="flex:1"><p>{{ item.get_total|floatformat:0 }}원</p></div>
+                            <div style="flex:1"><p
+                                    class="item-cost-total{{ forloop.counter0 }}">{{ item.get_total|floatformat:0 }}원</p>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
@@ -61,19 +63,20 @@
     <script>
         $('.update-cart-item').click(function (e) {
             var sellerCode = $(this).data("product");
-            var itemQuantity = $(this).data("quantity");
-            var itemPriceTotal = $(this).data("quantity");
+            var loopCounter = $(this).data("quantity");
             var action = $(this).data("action");
-            var productQuantity = 1
+            {#var currentQuantity = $(this).data("test");#}
+            {#console.log(typeof currentQuantity)#}
             $.ajax({
                 headers: {"X-CSRFToken": csrftoken},
                 url: '/update-cart-item/',
                 type: 'POST',
                 dataType: "json",
-                data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'quantity': productQuantity})
+                data: JSON.stringify({'sellerCode': sellerCode, 'action': action})
             }).done(function (data) {
-                $('.'+itemQuantity).html(data)
-                $('.'+).html()
+                $('.quantity-total' + loopCounter).html(data)
+                {#$('.'+'item-cost-total'+loopCounter).html('{{ item.get_total|floatformat:0 }}'+원)#}
+                {#$('.'+).html()#}
             }).fail(function () {
 
             })

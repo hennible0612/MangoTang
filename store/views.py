@@ -190,7 +190,7 @@ def updateCartItem(request):
 
     seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
     action = data['action']
-    quantity = data['quantity']
+    # quantity = data['quantity']
 
     customer = request.user.customer  # 현재 customer
     product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
@@ -198,8 +198,9 @@ def updateCartItem(request):
 
     orderItem, created = OrderItem.objects.get_or_create(order=order,
                                                          product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
-
-    if action == 'add':
+    if orderItem.quantity == 1 and action == 'remove':
+        pass
+    elif action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
@@ -207,9 +208,11 @@ def updateCartItem(request):
 
     orderItem.save()  # DB에 저장
 
-    if int(orderItem.quantity) <= 0:
-        orderItem.delete()
+    # if int(orderItem.quantity) <= 0:
+    #     orderItem.delete()
 
+    print(orderItem.quantity)
+    print(orderItem.product.price_discount)
     # json_obj = serializers.serialize('json', orderItem.quantity) #페이징된값
     # print(json_obj)
     return JsonResponse(orderItem.quantity, safe=False, json_dumps_params={'ensure_ascii': False})
