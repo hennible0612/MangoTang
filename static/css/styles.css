@@ -12514,7 +12514,7 @@ input[type=number] {
     align-items: flex-stretch;
     padding-bottom: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #ececec;
+    /*border-bottom: 1px solid #ececec;*/
 
 }
 

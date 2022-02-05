@@ -11,6 +11,8 @@ urlpatterns = [
 	path('update_item/', views.updateItem, name="update_item"),
 	# 장바구니에 추가 요청
 	path('update-cart-item/', views.updateCartItem, name="update_cart_item"),
+	# 장바구니에 추가 요청
+	path('delete-cart-item/<int:seller_code>/', views.deleteCartItem, name="delete_cart_item"),
 
 	# 메인화면
 	path('', views.store, name="store"),

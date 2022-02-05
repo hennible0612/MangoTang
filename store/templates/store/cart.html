@@ -12,8 +12,11 @@
                     <br>
                     <table class="table">
                         <tr>
-                            <th><h5>수량: <strong>{{ order.get_cart_items }}</strong></h5></th>
-                            <th><h5>총 결제금액:<strong> {{ order.get_cart_total|floatformat:0 }}원</strong></h5></th>
+                            <th><h5>수량: <strong class="cart-quantity-total">{{ order.get_cart_items }}</strong></h5>
+                            </th>
+                            <th><h5>총 결제금액: <strong
+                                    class="cart-price-total">{{ order.get_cart_total|floatformat:0 }}원</strong></h5>
+                            </th>
                             <th>
                                 <a style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">결제하기</a>
                             </th>
@@ -32,12 +35,12 @@
                         <div style="flex:1"><strong>합</strong></div>
                     </div>
                     {% for item in items %}
-                        <div class="cart-row">
+                        <div class="cart-row cart-row{{ forloop.counter0 }}">
                             <div style="flex:2"><img class="row-image" src="{{ item.product.image_title.url }}"></div>
                             <div style="flex:2"><p>{{ item.product.product_name }}</p></div>
                             <div style="flex:1"><p>{{ item.product.price_discount | floatformat:0 }}원</p></div>
                             <div style="flex:1">
-                                <p class="quantity quantity-total{{ forloop.counter0 }}" data-test="{{ item.quantity }}">{{ item.quantity }}</p>
+                                <p class="quantity quantity-total{{ forloop.counter0 }}">{{ item.quantity }}</p>
                                 <div class="quantity">
                                     <img class="chg-quantity update-cart-item"
                                          data-quantity="{{ forloop.counter0 }}"
@@ -54,13 +57,33 @@
                             <div style="flex:1"><p
                                     class="item-cost-total{{ forloop.counter0 }}">{{ item.get_total|floatformat:0 }}원</p>
                             </div>
+                            <i type="button" data-code="{{ item.product.seller_code }}" data-loop ="{{ forloop.counter0 }}"
+                               class="fas fa-trash-alt delete-item"></i>
                         </div>
+
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
     <script>
+        $('.delete-item').click(function (e) {
+            var sellerCode = $(this).data("code");
+            var loop = $(this).data("loop");
+            $.ajax({
+                headers: {"X-CSRFToken": csrftoken},
+                url: '/delete-cart-item/' + sellerCode + '/',
+                type: 'DELETE',
+
+            }).done(function () {
+                $(".cart-row"+loop).html("")
+
+            }).fail(function () {
+            });
+
+        });
+
+
         $('.update-cart-item').click(function (e) {
             var sellerCode = $(this).data("product");
             var loopCounter = $(this).data("quantity");
@@ -74,10 +97,12 @@
                 dataType: "json",
                 data: JSON.stringify({'sellerCode': sellerCode, 'action': action})
             }).done(function (data) {
-                console.log(data)
-                {#$('.quantity-total' + loopCounter).html(data)#}
-                {#$('.'+'item-cost-total'+loopCounter).html('{{ item.get_total|floatformat:0 }}'+원)#}
-                {#$('.'+).html()#}
+                var info = JSON.parse(data)
+                $('.quantity-total' + loopCounter).html(info['itemQuantity'])
+                $('.item-cost-total' + loopCounter).html(info['itemPriceTotal'] + "원")
+                $('.cart-quantity-total').html(info['orderItemTotal'])
+                $('.cart-price-total').text(info['orderItemPriceTotal'] + "원")
+
             }).fail(function () {
 
             })

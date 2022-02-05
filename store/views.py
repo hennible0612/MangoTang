@@ -184,7 +184,10 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+"""
+카트에서 업데이트 아이템
 
+"""
 def updateCartItem(request):
     data = json.loads(request.body)  # JSON body data에저장
 
@@ -224,12 +227,33 @@ def updateCartItem(request):
         "orderItemPriceTotal":order.get_cart_total
 
     }
-    # print(data["item quantity"])
     json_obj = json.dumps(data)
-    # json_obj = serializers.serialize('json', data) #페이징된값
-    # print(json_obj)
-    # print(json_obj)
+
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
+
+"""
+카트에서 아이템 삭제
+"""
+def deleteCartItem(request, seller_code):
+
+    customer = request.user.customer  # 현재 customer
+    product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
+    orderItem, created = OrderItem.objects.get_or_create(order=order,
+                                                         product=product)
+    orderItem.delete()
+
+
+    data = {
+        "orderItemTotal": order.get_cart_items,
+        "orderItemPriceTotal":order.get_cart_total
+    }
+    json_obj = json.dumps(data)
+
+    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
+
 
 """
 제품 리뷰 가져오는 API
