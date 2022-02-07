@@ -38,7 +38,8 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option data-product="{{ option.option_seller_code }}" data-counter="{{ forloop.counter0 }}">{{ option.option_name }}</option>
+                                    <option data-product="{{ option.option_seller_code }}"
+                                            data-counter="{{ forloop.counter0 }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
                             </select>
@@ -56,8 +57,6 @@
                                     <i type="button" class="far fa-times-circle" style="padding-top: 10px"></i>
                                 </div>
                                 <div class="item-option-quantity" style="padding-left: 15px; ">
-                                    {#                                    <input type="button" value="-" class="minus"#}
-                                    {#                                           style="  border-radius: 30px; border: 1px solid #f9f9fa;">#}
                                     <i type="button" class="fas fa-minus option-minus"
                                        data-id="{{ forloop.counter0 }}" data-price="{{ option.option_price }}"></i>
                                     <input type="number" step="1" min="1"
@@ -70,8 +69,6 @@
                                            class="option_quantity{{ forloop.counter0 }}" readonly>
                                     <i type="button" class="fas fa-plus option-plus"
                                        data-id="{{ forloop.counter0 }}" data-price="{{ option.option_price }}"></i>
-                                    {#                                    <input type="button" value="+" class="plus"#}
-                                    {#                                           style="  border-radius: 30px; border: 1px solid #f9f9fa;">#}
                                 </div>
                                 <div class="item-option-cost">
                                     <label style="padding-top: 5px">{{ option.option_price | floatformat:0 }}원</label>
@@ -296,15 +293,14 @@
             }, 3000);
         }
 
+        var itemObj = {};
+
         function addItem(sellerCode, id) {
-            console.log("Item added", sellerCode)
-            console.log("Item added", id)
-                            {#itemObj[id].sellerCode = sellerCode;#}
-            {#itemObj.sellerCode = sellerCode;#}
-            {#console.log(sellerCode)#}
+            var currentVal = parseInt($('.option_quantity' + id).val());
+            itemObj['sellerCode' + id] = sellerCode;
+            itemObj['itemQuantity' + id] = currentVal;
         }
 
-        var itemObj = {};
 
         var price = '{{ product.price }}'
         var discount = '{{ product.discount }}'
@@ -316,10 +312,8 @@
             $('.add-to-cart-option').click(function (e) {
                 cartSnackbar()
 
-                {#delete itemObj.time1#}
-
+                
             });
-
 
             $('.add-to-cart').click(function (e) {
                 var sellerCode = "{{ product.seller_code }}"
@@ -336,13 +330,11 @@
             });
 
             $('.option-selector').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
-                {#var value = $(this).val() #} {# select 의 이름을 가져옴 #}
 
                 var sellerCode = $(this).find("option:selected").data("product");
                 var counter = $(this).find("option:selected").data("counter");
-                {#var test = $(this).find("option:selected").data("counter")#}
-                {#console.log(test)#}
-                addItem(sellerCode,counter)
+
+                addItem(sellerCode, counter)
                 $('.' + sellerCode).show()
             });
 
@@ -363,19 +355,20 @@
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.product-quantity').val(currentVal - 1);
                     changeTotalPrice(currentVal - 1)
-
                 }
             });
             $('.option-plus').click(function (e) {
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
-
                 var currentVal = parseInt($('.option_quantity' + optionId).val());
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
                     optionTotalPrice(currentVal + 1, optionPrice)
-                }
 
+                    itemObj['itemQuantity' + optionId] = currentVal + 1;
+                    console.log(itemObj)
+
+                }
             });
 
             $('.option-minus').click(function (e) {
@@ -385,9 +378,10 @@
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.option_quantity' + optionId).val(currentVal - 1);
                     optionTotalPrice(currentVal - 1, optionPrice)
+                    itemObj['itemQuantity' + optionId] = currentVal - 1;
+                    console.log(itemObj)
                 }
             });
-
 
             function changeTotalPrice(currentVal) {
                 $('.total-price').html(parseInt(totalPrice) * currentVal + "원")
@@ -397,8 +391,6 @@
                 totalPrice += parseInt(optionPrice)
                 $('.total-option-price').html(parseInt(totalPrice) + "원")
             }
-
-
         });
 
 
