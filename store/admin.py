@@ -10,4 +10,5 @@ admin.site.register(Carosel)
 admin.site.register(ProductReview)
 admin.site.register(ProductQuestion)
 admin.site.register(ProductOption)
+admin.site.register(OrderItemOption)
 

@@ -38,7 +38,7 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option data-product="{{ option.option_seller_code }}">{{ option.option_name }}</option>
+                                    <option data-product="{{ option.option_seller_code }}" data-counter="{{ forloop.counter0 }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
                             </select>
@@ -81,7 +81,7 @@
                         <div class="d-flex">
 
                             <div style="padding-right:10px;">
-                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <button class="btn btn-outline-dark flex-shrink-0 add-to-cart-option" type="button">
                                     카트에 넣기
                                 </button>
                             </div>
@@ -95,7 +95,9 @@
                                    class="total-option-price">{{ product.price_discount | floatformat:0 }}원</p>
                             </div>
                         </div>
-                    {% else %} <!-- 옵션 없음 -->
+                    {% else %}
+
+                        <!-- 옵션 없음 -->
                         <div class="d-flex">
                             <div class="quantity buttons_added">
                                 <input type="button" value="-" class="minus">
@@ -294,7 +296,15 @@
             }, 3000);
         }
 
+        function addItem(sellerCode, id) {
+            console.log("Item added", sellerCode)
+            console.log("Item added", id)
+                            {#itemObj[id].sellerCode = sellerCode;#}
+            {#itemObj.sellerCode = sellerCode;#}
+            {#console.log(sellerCode)#}
+        }
 
+        var itemObj = {};
 
         var price = '{{ product.price }}'
         var discount = '{{ product.discount }}'
@@ -302,6 +312,15 @@
         var token = '{{csrf_token}}';
 
         $(document).ready(function () { //DOM이 준비가 되면
+
+            $('.add-to-cart-option').click(function (e) {
+                cartSnackbar()
+
+                {#delete itemObj.time1#}
+
+            });
+
+
             $('.add-to-cart').click(function (e) {
                 var sellerCode = "{{ product.seller_code }}"
                 var productQuantity = $('.product-quantity').val();
@@ -310,7 +329,7 @@
                     url: '/update_item/',
                     type: 'POST',
                     dataType: "json",
-                    data: JSON.stringify({'sellerCode': sellerCode, 'action': 'set', 'quantity':productQuantity})
+                    data: JSON.stringify({'sellerCode': sellerCode, 'action': 'set', 'quantity': productQuantity})
                 }).done(function () {
                 }).fail(function () {
                 })
@@ -320,6 +339,10 @@
                 {#var value = $(this).val() #} {# select 의 이름을 가져옴 #}
 
                 var sellerCode = $(this).find("option:selected").data("product");
+                var counter = $(this).find("option:selected").data("counter");
+                {#var test = $(this).find("option:selected").data("counter")#}
+                {#console.log(test)#}
+                addItem(sellerCode,counter)
                 $('.' + sellerCode).show()
             });
 
@@ -334,7 +357,15 @@
                 }
 
             });
+            $('.minus').click(function (e) {
+                e.preventDefault();
+                var currentVal = parseInt($('.product-quantity').val());
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    $('.product-quantity').val(currentVal - 1);
+                    changeTotalPrice(currentVal - 1)
 
+                }
+            });
             $('.option-plus').click(function (e) {
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
@@ -346,15 +377,7 @@
                 }
 
             });
-            $('.minus').click(function (e) {
-                e.preventDefault();
-                var currentVal = parseInt($('.product-quantity').val());
-                if (!isNaN(currentVal) && currentVal > 1) {
-                    $('.product-quantity').val(currentVal - 1);
-                    changeTotalPrice(currentVal - 1)
 
-                }
-            });
             $('.option-minus').click(function (e) {
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
@@ -367,7 +390,6 @@
 
 
             function changeTotalPrice(currentVal) {
-
                 $('.total-price').html(parseInt(totalPrice) * currentVal + "원")
             }
 

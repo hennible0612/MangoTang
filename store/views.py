@@ -57,14 +57,14 @@ def productDetail(request, seller_code):
     question_paginator = Paginator(questions, 5)
     question_obj = question_paginator.get_page(question_page)
 
-    if(product.option_bool == True):
+    if (product.option_bool == True):
         options = product.productoption_set.all()
     else:
         options = None
 
     context = {'product': product, 'review_page': review_page, 'review_obj': review_obj
         , 'question_page': question_page, 'questions': questions, 'total_review': len(reviews)
-        , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews, 'options':options}
+        , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews, 'options': options}
     return render(request, 'store/productdetail.html', context)
 
 
@@ -184,10 +184,13 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+
 """
 카트에서 업데이트 아이템
 
 """
+
+
 def updateCartItem(request):
     data = json.loads(request.body)  # JSON body data에저장
 
@@ -208,7 +211,6 @@ def updateCartItem(request):
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
 
-
     orderItem.save()  # DB에 저장
 
     # if int(orderItem.quantity) <= 0:
@@ -222,9 +224,9 @@ def updateCartItem(request):
     data = {
         "itemQuantity": orderItem.quantity,
         "itemDiscountPrice": orderItem.product.price_discount,
-        "itemPriceTotal":orderItem.get_total,
+        "itemPriceTotal": orderItem.get_total,
         "orderItemTotal": order.get_cart_items,
-        "orderItemPriceTotal":order.get_cart_total
+        "orderItemPriceTotal": order.get_cart_total
 
     }
     json_obj = json.dumps(data)
@@ -235,8 +237,9 @@ def updateCartItem(request):
 """
 카트에서 아이템 삭제
 """
-def deleteCartItem(request, seller_code):
 
+
+def deleteCartItem(request, seller_code):
     customer = request.user.customer  # 현재 customer
     product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
@@ -244,15 +247,13 @@ def deleteCartItem(request, seller_code):
                                                          product=product)
     orderItem.delete()
 
-
     data = {
         "orderItemTotal": order.get_cart_items,
-        "orderItemPriceTotal":order.get_cart_total
+        "orderItemPriceTotal": order.get_cart_total
     }
     json_obj = json.dumps(data)
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
-
 
 
 """
@@ -264,19 +265,19 @@ def getReview(request, seller_code, page):
     product = Product.objects.get(seller_code=seller_code)
 
     review_page = request.GET.get('page', page)  # 리뷰 페이지
-    reviews = product.productreview_set.all().order_by('-date_added') # 여기에 모든 리뷰 들어있음
+    reviews = product.productreview_set.all().order_by('-date_added')  # 여기에 모든 리뷰 들어있음
 
     review_paginator = Paginator(reviews, 5)
     review_obj = review_paginator.get_page(review_page)
 
     for review in review_obj:
-        review.review_user_name = review.customer.name #해당 id의 user이름을 가지고 와서 DB에 저장
-        review.image_url = review.imageURL #해당 리뷰의 imageURL을 가져와서 DB에 저장
+        review.review_user_name = review.customer.name  # 해당 id의 user이름을 가지고 와서 DB에 저장
+        review.image_url = review.imageURL  # 해당 리뷰의 imageURL을 가져와서 DB에 저장
 
-    json_obj = serializers.serialize('json', review_obj) #페이징된값
-
+    json_obj = serializers.serialize('json', review_obj)  # 페이징된값
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
 
 """
 제품 질문 가져오는 API
@@ -287,25 +288,18 @@ def getQuestion(request, seller_code, page):
     current_user = json.loads(request.body)  # 현재 유저 받아옴
     product = Product.objects.get(seller_code=seller_code)
 
-
     question_page = request.GET.get('page', page)  # 리뷰 페이지
-    questions = product.productquestion_set.all().order_by('-date_added') # 여기에 모든 리뷰 들어있음
+    questions = product.productquestion_set.all().order_by('-date_added')  # 여기에 모든 리뷰 들어있음
 
     question_pageinator = Paginator(questions, 5)
     question_obj = question_pageinator.get_page(question_page)
 
-
-
     for question in question_obj:
         question.review_user_name = question.customer.name  # 해당 id의 user이름을 가지고 와서 객체에 저장
-        if(question.question_public == False and current_user != question.customer.name ):
+        if (question.question_public == False and current_user != question.customer.name):
             question.question_body = "비공개 질문"
 
-
-
-
-    json_obj = serializers.serialize('json', question_obj) #페이징된값
-
+    json_obj = serializers.serialize('json', question_obj)  # 페이징된값
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 

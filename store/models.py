@@ -144,6 +144,10 @@ class OrderItem(models.Model):
         total = self.product.price_discount * self.quantity
         return total
 
+class OrderItemOption(models.Model):
+    order_item_option = models.ForeignKey(OrderItem, on_delete=models.SET_NULL, null=True)
+    product_option = models.ForeignKey(ProductOption, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
