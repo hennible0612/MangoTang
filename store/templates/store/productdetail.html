@@ -39,7 +39,7 @@
 
                                 {% for option in options %}
                                     <option data-product="{{ option.option_seller_code }}"
-                                            data-counter="{{ forloop.counter0 }}">{{ option.option_name }}</option>
+                                            data-id="{{ forloop.counter0 }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
                             </select>
@@ -54,7 +54,10 @@
                                     {{ option.option_name }}
                                 </div>
                                 <div class="item-option-exit" style="padding-top: 5px">
-                                    <i type="button" class="far fa-times-circle" style="padding-top: 10px"></i>
+                                    <!-- x -->
+                                    <i type="button" class="far fa-times-circle option-cancel"
+                                       data-id="{{ forloop.counter0 }}" data-code="{{ option.option_seller_code }}"
+                                       style="padding-top: 10px"></i>
                                 </div>
                                 <div class="item-option-quantity" style="padding-left: 15px; ">
                                     <i type="button" class="fas fa-minus option-minus"
@@ -293,12 +296,14 @@
             }, 3000);
         }
 
-        var itemObj = {};
+        var itemObj = {items: {}};
 
         function addItem(sellerCode, id) {
             var currentVal = parseInt($('.option_quantity' + id).val());
-            itemObj['sellerCode' + id] = sellerCode;
-            itemObj['itemQuantity' + id] = currentVal;
+            itemObj['optionBool'] = true;
+            itemObj['items']['sellerCode' + id] = sellerCode;
+            itemObj['items']['itemQuantity' + id] = currentVal;
+            console.log(itemObj)
         }
 
 
@@ -308,11 +313,15 @@
         var token = '{{csrf_token}}';
 
         $(document).ready(function () { //DOM이 준비가 되면
+            $('.option-cancel').click(function (e) {
+                console.log("cancel clicked")
+                var counter = $(this).data("id");
+                var sellerCode = $(this).data("code");
+                console.log(counter+"sdf"+sellerCode)
 
+            });
             $('.add-to-cart-option').click(function (e) {
                 cartSnackbar()
-
-                
             });
 
             $('.add-to-cart').click(function (e) {
@@ -332,7 +341,7 @@
             $('.option-selector').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
 
                 var sellerCode = $(this).find("option:selected").data("product");
-                var counter = $(this).find("option:selected").data("counter");
+                var counter = $(this).find("option:selected").data("id");
 
                 addItem(sellerCode, counter)
                 $('.' + sellerCode).show()
