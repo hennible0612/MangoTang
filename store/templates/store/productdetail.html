@@ -38,7 +38,7 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option data-product="{{ option.option_seller_code }}"
+                                    <option class="options" data-product="{{ option.option_seller_code }}"
                                             data-id="{{ forloop.counter0 }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
@@ -296,7 +296,10 @@
             }, 3000);
         }
 
-        var itemObj = {items: {}};
+        var itemObj = {
+            optionBool: false,
+            items: {}
+        };
 
         function addItem(sellerCode, id) {
             var currentVal = parseInt($('.option_quantity' + id).val());
@@ -317,7 +320,12 @@
                 console.log("cancel clicked")
                 var counter = $(this).data("id");
                 var sellerCode = $(this).data("code");
-                console.log(counter+"sdf"+sellerCode)
+                $('.' + sellerCode).hide()
+                $('.option_quantity' + counter).val(1);
+                delete itemObj['items']['sellerCode' + counter]
+                delete itemObj['items']['itemQuantity' + counter]
+                console.log(itemObj)
+                {#console.log(counter + "sdf" + sellerCode)#}
 
             });
             $('.add-to-cart-option').click(function (e) {
@@ -338,11 +346,17 @@
                 })
             });
 
-            $('.option-selector').on('change', function () { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
+            $('.option-selector').on('click', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
 
                 var sellerCode = $(this).find("option:selected").data("product");
                 var counter = $(this).find("option:selected").data("id");
+                addItem(sellerCode, counter)
+                $('.' + sellerCode).show()
+            });
+            $('.option-selector').on('click', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
 
+                var sellerCode = $(this).find("option:selected").data("product");
+                var counter = $(this).find("option:selected").data("id");
                 addItem(sellerCode, counter)
                 $('.' + sellerCode).show()
             });
@@ -373,7 +387,6 @@
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
                     optionTotalPrice(currentVal + 1, optionPrice)
-
                     itemObj['itemQuantity' + optionId] = currentVal + 1;
                     console.log(itemObj)
 
