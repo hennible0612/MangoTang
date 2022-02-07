@@ -347,19 +347,15 @@
             });
 
             $('.option-selector').on('click', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
-
+                $('.options:selected').click(function (e) {
+                    console.log("Sdfsdfsdfsdf")
+                });
                 var sellerCode = $(this).find("option:selected").data("product");
                 var counter = $(this).find("option:selected").data("id");
                 addItem(sellerCode, counter)
                 $('.' + sellerCode).show()
             });
-            $('.option-selector').on('click', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
 
-                var sellerCode = $(this).find("option:selected").data("product");
-                var counter = $(this).find("option:selected").data("id");
-                addItem(sellerCode, counter)
-                $('.' + sellerCode).show()
-            });
 
             $('.plus').click(function (e) {
                 e.preventDefault();
