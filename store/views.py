@@ -186,7 +186,22 @@ def updateItem(request):
 
         return JsonResponse('Item was added', safe=False)
     else:
-        print(data)
+        seller_code = data['itemSellercode']  # 각각 body에 있는 필요한 값저장
+        customer = request.user.customer  # 현재 customer
+        product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
+
+        orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+        options = product.productoption_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
+        # orderItemOptions = OrderItemOption.objects.get(orderItem=orderItem, productOption=options)
+
+        # for option in options:
+        #     print(option)
+
+        print(orderItem)
+
+        # orderItemOption, created = OrderItemOption.objects.get_or_create(orderItem=orderItem, product_option=product.product)
+
         return JsonResponse('err', safe=False)
 
 

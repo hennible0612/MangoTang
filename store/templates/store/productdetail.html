@@ -5,7 +5,7 @@
     <!-- Product section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 "> <!--align-items-center-->
+            <div class="row gx-4 gx-lg-5 "> <!--align-options-center-->
                 <div class="col-md-6">
                     <img class="card-img-top mb-5 mb-md-0"
                          src={{ product.image_title.url }}></div>
@@ -298,16 +298,16 @@
 
         var itemObj = {
             {#optionBool: false,#}
-            items: {}
+            itemSellercode: {{ product.seller_code }},
+            options: {}
         };
 
         function addItem(sellerCode, id) {
-            var currentVal = parseInt($('.option_quantity' + id).val());
-            delete itemObj['items']['itemQuantityundefined']
-            delete itemObj['items']['sellerCodeundefined']
+            delete itemObj['options']['itemQuantityundefined']
+            delete itemObj['options']['sellerCodeundefined']
             itemObj['option'] = 'true';
             itemObj['action'] = 'set'
-            itemObj['items']['sellerCode' + id] = sellerCode;
+            itemObj['options']['optionSellercode' + id] = sellerCode;
 
 
         }
@@ -324,9 +324,9 @@
                 var sellerCode = $(this).data("code");
                 $('.' + sellerCode).hide()
                 $('.option_quantity' + counter).val(1);
-                delete itemObj['items']['sellerCode' + counter]
-                delete itemObj['items']['itemQuantity' + counter]
-                const obj = itemObj['items']
+                delete itemObj['options']['optionSellercode' + counter]
+                delete itemObj['options']['itemQuantity' + counter]
+                const obj = itemObj['options']
                 if (Object.keys(obj).length === 0) {
                     itemObj['option'] = 'false';
                 }
@@ -374,8 +374,6 @@
                         'quantity': productQuantity,
                         'option': 'false'
                     })
-                }).done(function () {
-                }).fail(function () {
                 })
             });
 
@@ -413,7 +411,7 @@
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
                     optionTotalPrice(currentVal + 1, optionPrice)
-                    itemObj['items']['itemQuantity' + optionId] = currentVal + 1;
+                    itemObj['options']['itemQuantity' + optionId] = currentVal + 1;
 
                 }
             });
@@ -425,7 +423,7 @@
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.option_quantity' + optionId).val(currentVal - 1);
                     optionTotalPrice(currentVal - 1, optionPrice)
-                    itemObj['items']['itemQuantity' + optionId] = currentVal - 1;
+                    itemObj['options']['itemQuantity' + optionId] = currentVal - 1;
                 }
             });
 
