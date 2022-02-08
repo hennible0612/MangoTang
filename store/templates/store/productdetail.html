@@ -38,7 +38,7 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option class="options" data-product="{{ option.option_seller_code }}"
+                                    <option class="option-list" data-product="{{ option.option_seller_code }}"
                                             data-id="{{ forloop.counter0 }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
@@ -303,10 +303,12 @@
 
         function addItem(sellerCode, id) {
             var currentVal = parseInt($('.option_quantity' + id).val());
+            delete itemObj['items']['itemQuantityundefined']
+            delete itemObj['items']['sellerCodeundefined']
             itemObj['optionBool'] = true;
+            itemObj['action'] = 'set'
+
             itemObj['items']['sellerCode' + id] = sellerCode;
-            itemObj['items']['itemQuantity' + id] = currentVal;
-            console.log(itemObj)
         }
 
 
@@ -324,12 +326,15 @@
                 $('.option_quantity' + counter).val(1);
                 delete itemObj['items']['sellerCode' + counter]
                 delete itemObj['items']['itemQuantity' + counter]
-                console.log(itemObj)
-                {#console.log(counter + "sdf" + sellerCode)#}
+                const obj = itemObj['items']
+                if (Object.keys(obj).length === 0) {
+                    itemObj['optionBool'] = false;
+                }
 
             });
             $('.add-to-cart-option').click(function (e) {
                 cartSnackbar()
+                console.log(itemObj)
             });
 
             $('.add-to-cart').click(function (e) {
@@ -347,9 +352,6 @@
             });
 
             $('.option-selector').on('click', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
-                $('.options:selected').click(function (e) {
-                    console.log("Sdfsdfsdfsdf")
-                });
                 var sellerCode = $(this).find("option:selected").data("product");
                 var counter = $(this).find("option:selected").data("id");
                 addItem(sellerCode, counter)
@@ -383,8 +385,7 @@
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
                     optionTotalPrice(currentVal + 1, optionPrice)
-                    itemObj['itemQuantity' + optionId] = currentVal + 1;
-                    console.log(itemObj)
+                    itemObj['items']['itemQuantity' + optionId] = currentVal + 1;
 
                 }
             });
@@ -396,8 +397,7 @@
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.option_quantity' + optionId).val(currentVal - 1);
                     optionTotalPrice(currentVal - 1, optionPrice)
-                    itemObj['itemQuantity' + optionId] = currentVal - 1;
-                    console.log(itemObj)
+                    itemObj['items']['itemQuantity' + optionId] = currentVal - 1;
                 }
             });
 
