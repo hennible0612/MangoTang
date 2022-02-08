@@ -158,31 +158,38 @@ def checkout(request):
 
 def updateItem(request):
     data = json.loads(request.body)  # JSON body data에저장
+    option = data["option"]
+    if (option == 'false'):
 
-    seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
-    action = data['action']
-    quantity = data['quantity']
+        seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
+        action = data['action']
+        quantity = data['quantity']
 
-    customer = request.user.customer  # 현재 customer
-    product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
-    order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
+        customer = request.user.customer  # 현재 customer
+        product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order,
-                                                         product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
+        orderItem, created = OrderItem.objects.get_or_create(order=order,
+                                                             product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
 
-    if action == 'add':
-        orderItem.quantity = (orderItem.quantity + 1)
-    elif action == 'remove':
-        orderItem.quantity = (orderItem.quantity - 1)
-    elif action == 'set':
-        orderItem.quantity = quantity
+        if action == 'add':
+            orderItem.quantity = (orderItem.quantity + 1)
+        elif action == 'remove':
+            orderItem.quantity = (orderItem.quantity - 1)
+        elif action == 'set':
+            orderItem.quantity = quantity
 
-    orderItem.save()  # DB에 저장
+        orderItem.save()  # DB에 저장
 
-    if int(orderItem.quantity) <= 0:
-        orderItem.delete()
+        if int(orderItem.quantity) <= 0:
+            orderItem.delete()
 
-    return JsonResponse('Item was added', safe=False)
+        return JsonResponse('Item was added', safe=False)
+    else:
+        print(data)
+        return JsonResponse('err', safe=False)
+
+
 
 
 """

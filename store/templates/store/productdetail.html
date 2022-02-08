@@ -297,7 +297,7 @@
         }
 
         var itemObj = {
-            optionBool: false,
+            {#optionBool: false,#}
             items: {}
         };
 
@@ -305,10 +305,11 @@
             var currentVal = parseInt($('.option_quantity' + id).val());
             delete itemObj['items']['itemQuantityundefined']
             delete itemObj['items']['sellerCodeundefined']
-            itemObj['optionBool'] = true;
+            itemObj['option'] = 'true';
             itemObj['action'] = 'set'
-
             itemObj['items']['sellerCode' + id] = sellerCode;
+
+
         }
 
 
@@ -319,7 +320,6 @@
 
         $(document).ready(function () { //DOM이 준비가 되면
             $('.option-cancel').click(function (e) {
-                console.log("cancel clicked")
                 var counter = $(this).data("id");
                 var sellerCode = $(this).data("code");
                 $('.' + sellerCode).hide()
@@ -328,13 +328,36 @@
                 delete itemObj['items']['itemQuantity' + counter]
                 const obj = itemObj['items']
                 if (Object.keys(obj).length === 0) {
-                    itemObj['optionBool'] = false;
+                    itemObj['option'] = 'false';
                 }
-
             });
+
             $('.add-to-cart-option').click(function (e) {
                 cartSnackbar()
-                console.log(itemObj)
+                if (itemObj['option'] === 'true') {
+                    $.ajax({
+                        headers: {"X-CSRFToken": token},
+                        url: '/update_item/',
+                        type: 'POST',
+                        dataType: "json",
+                        data: JSON.stringify(itemObj)
+                    })
+                } else {
+                    var sellerCode = "{{ product.seller_code }}"
+                    var productQuantity = 1
+                    $.ajax({
+                        headers: {"X-CSRFToken": token},
+                        url: '/update_item/',
+                        type: 'POST',
+                        dataType: "json",
+                        data: JSON.stringify({
+                            'sellerCode': sellerCode,
+                            'action': 'set',
+                            'quantity': productQuantity,
+                            'option': 'false'
+                        })
+                    })
+                }
             });
 
             $('.add-to-cart').click(function (e) {
@@ -345,7 +368,12 @@
                     url: '/update_item/',
                     type: 'POST',
                     dataType: "json",
-                    data: JSON.stringify({'sellerCode': sellerCode, 'action': 'set', 'quantity': productQuantity})
+                    data: JSON.stringify({
+                        'sellerCode': sellerCode,
+                        'action': 'set',
+                        'quantity': productQuantity,
+                        'option': 'false'
+                    })
                 }).done(function () {
                 }).fail(function () {
                 })

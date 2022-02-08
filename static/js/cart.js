@@ -23,7 +23,7 @@ $('.update-cart').click(function (e) {
         url: '/update_item/',
         type: 'POST',
         dataType: "json",
-        data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'quantity': productQuantity})
+        data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'quantity': productQuantity,'option':'false'})
     }).done(function () {
     }).fail(function () {
     })
