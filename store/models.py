@@ -146,10 +146,12 @@ class OrderItem(models.Model):
         return total
 
 class OrderItemOption(models.Model):
-    order_item_option = models.ForeignKey(OrderItem, on_delete=models.SET_NULL, null=True)
-    product_option = models.ForeignKey(ProductOption, on_delete=models.SET_NULL, null=True)
+    order_item_option = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True)
+    product_option = models.ForeignKey(ProductOption, on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
 
+    def __str__(self):
+        return self.product_option.option_name
 
 
 class ShippingAddress(models.Model):

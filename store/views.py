@@ -79,6 +79,19 @@ def cart(request):
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)
         items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
         cartItems = order.get_cart_items
+        for item in items:
+            itemOption = OrderItemOption.objects.filter(order_item_option=item)
+            for i in itemOption:
+                print(i)
+        # itemOption = items.orderitemoption_set.all()
+        # options = OrderItemOption.GET()
+        # orderItem = OrderItemOption.objects.get()
+
+        # print(orderItem)
+        # print(options)
+        # itemOptions = items.productquestion_set
+        # itemOptions = OrderItemOption.objects.get(orderItem=items)
+        # print(itemOptions)
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
