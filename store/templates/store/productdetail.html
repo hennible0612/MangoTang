@@ -299,15 +299,18 @@
         var itemObj = {
             {#optionBool: false,#}
             itemSellercode: {{ product.seller_code }},
-            options: {}
+            options: {},
+            quantity: {}
         };
 
         function addItem(sellerCode, id) {
-            delete itemObj['options']['itemQuantityundefined']
+            delete itemObj['quantity']['itemQuantityundefined']
             delete itemObj['options']['sellerCodeundefined']
             itemObj['option'] = 'true';
             itemObj['action'] = 'set'
             itemObj['options']['optionSellercode' + id] = sellerCode;
+
+            itemObj['quantity']['itemQuantity' + id] = parseInt($('.option_quantity' + id).val());
 
 
         }
@@ -325,7 +328,7 @@
                 $('.' + sellerCode).hide()
                 $('.option_quantity' + counter).val(1);
                 delete itemObj['options']['optionSellercode' + counter]
-                delete itemObj['options']['itemQuantity' + counter]
+                delete itemObj['quantity']['itemQuantity' + counter]
                 const obj = itemObj['options']
                 if (Object.keys(obj).length === 0) {
                     itemObj['option'] = 'false';
@@ -411,7 +414,7 @@
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
                     optionTotalPrice(currentVal + 1, optionPrice)
-                    itemObj['options']['itemQuantity' + optionId] = currentVal + 1;
+                    itemObj['quantity']['itemQuantity' + optionId] = currentVal + 1;
 
                 }
             });
@@ -423,7 +426,7 @@
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.option_quantity' + optionId).val(currentVal - 1);
                     optionTotalPrice(currentVal - 1, optionPrice)
-                    itemObj['options']['itemQuantity' + optionId] = currentVal - 1;
+                    itemObj['quantity']['itemQuantity' + optionId] = currentVal - 1;
                 }
             });
 
