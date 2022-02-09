@@ -135,6 +135,7 @@ class OrderItem(models.Model):
     # product_option = models.ForeignKey(ProductOption, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    item_option_bool = models.BooleanField(default=False, blank=False, null=True)
 
     def __str__(self):
         return self.product.product_name
@@ -148,7 +149,6 @@ class OrderItemOption(models.Model):
     order_item_option = models.ForeignKey(OrderItem, on_delete=models.SET_NULL, null=True)
     product_option = models.ForeignKey(ProductOption, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
-    item_option_bool = models.BooleanField(default=False, blank=False, null=True)
 
 
 
