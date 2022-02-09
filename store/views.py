@@ -81,8 +81,10 @@ def cart(request):
         cartItems = order.get_cart_items
         for item in items:
             itemOption = OrderItemOption.objects.filter(order_item_option=item)
-            for i in itemOption:
-                print(i)
+            # for i in itemOption:
+            #     print(i)
+
+
         # itemOption = items.orderitemoption_set.all()
         # options = OrderItemOption.GET()
         # orderItem = OrderItemOption.objects.get()
@@ -97,7 +99,7 @@ def cart(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption':itemOption}
 
     return render(request, 'store/cart.html', context)
 
