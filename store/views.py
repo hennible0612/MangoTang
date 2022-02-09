@@ -193,14 +193,31 @@ def updateItem(request):
 
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
         options = product.productoption_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
-
         # orderItemOptions = OrderItemOption.objects.get(orderItem=orderItem, productOption=options)
 
         # for option in options:
-        #     print(option)
-        for datas in data['options']:
-            print(data['options'][datas])
-            
+        # print(data)
+        # length = len(data["options"])
+        # for i in range(len(data["options"])):
+        #     print(i)
+            # optionItem = OrderItemOption(orderItem=orderItem)
+
+        for x,y in zip(data['options'],data['quantity']):
+            sellerCode = data['options'][x]
+            options = ProductOption.objects.get(option_seller_code=str(sellerCode))
+            orderItemOption = OrderItemOption.objects.create(order_item_option=orderItem, product_option=options)
+            orderItemOption.quantity = data['quantity'][y]
+            orderItemOption.save()
+            print(data['options'][x])
+            print(data['quantity'][y])
+
+        # for datas in data['options']:
+        #     print(data['options'][datas])
+        # for datas in data['quantity']:
+        #     print(data['quantity'][datas])
+
+
+
 
 
         # for datas in data:
