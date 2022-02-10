@@ -150,6 +150,11 @@ class OrderItemOption(models.Model):
     product_option = models.ForeignKey(ProductOption, on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
 
+    @property
+    def get_total(self):
+        total = self.product_option.option_price * self.quantity
+        return total
+
     def __str__(self):
         return self.product_option.option_name
 

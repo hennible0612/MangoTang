@@ -103,16 +103,16 @@
                                     <div class="cart-option">
                                         <div style="flex:2"></div>
                                         <div style="flex:2"><p>{{ options.product_option.option_name}}</p></div>
-                                        <div style="flex:1"><p>{{ options.product_option.option_price }}원</p></div>
+                                        <div style="flex:1"><p>{{ options.product_option.option_price|floatformat:0 }}원</p></div>
                                         <div style="flex:1">
-                                            <p class="quantity quantity-total{{ forloop.counter0 }}">{{ options.quantity }}</p>
+                                            <p class="quantity option-total{{ forloop.counter0 }}">{{ options.quantity }}</p>
                                             <div class="quantity">
-                                                <img class="chg-quantity update-cart-item"
+                                                <img class="chg-quantity update-cart-item-option"
                                                      data-quantity="{{ forloop.counter0 }}"
                                                      data-product="{{ options.product_option.option_seller_code }}"
                                                      src="{% static  'images/arrow-up.png' %}" data-action="add">
 
-                                                <img class="chg-quantity update-cart-item"
+                                                <img class="chg-quantity update-cart-item-option"
                                                      data-quantity="{{ forloop.counter0 }}"
 
                                                      data-product="{{ options.product_option.option_seller_code }}"
@@ -120,7 +120,7 @@
                                             </div>
                                         </div>
                                         <div style="flex:1"><p
-                                                class="item-cost-total{{ forloop.counter0 }}">234345원</p>
+                                                class="option-item-cost-total{{ forloop.counter0 }}">{{ options.get_total|floatformat:0 }}원</p>
                                         </div>
                                         <i type="button" data-code="{{ item.product.seller_code }}"
                                            data-loop="{{ forloop.counter0 }}"
@@ -185,3 +185,15 @@
         });
     </script>
 {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
