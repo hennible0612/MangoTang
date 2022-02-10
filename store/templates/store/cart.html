@@ -94,11 +94,15 @@
                                        data-loop="{{ forloop.counter0 }}"
                                        class="fas fa-trash-alt delete-item"></i>
                                 </div>
+                                {% if itemOption != none %}
+                                                                        {% endif %}
+
                                 {% for options in itemOption %}
                                     <div class="cart-option">
                                         <div style="flex:2"></div>
-                                        <div style="flex:2"><p>{{ options.product_option.option_name}}</p></div>
-                                        <div style="flex:1"><p>{{ options.product_option.option_price|floatformat:0 }}원</p></div>
+                                        <div style="flex:2"><p>{{ options.product_option.option_name }}</p></div>
+                                        <div style="flex:1">
+                                            <p>{{ options.product_option.option_price|floatformat:0 }}원</p></div>
                                         <div style="flex:1">
                                             <p class="quantity item-option-total{{ forloop.counter0 }}">{{ options.quantity }}</p>
                                             <div class="quantity">
@@ -161,7 +165,7 @@
                 url: '/update-cart-item/',
                 type: 'POST',
                 dataType: "json",
-                data: JSON.stringify({'sellerCode': sellerCode, 'action': action,'option':false})
+                data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'option': false})
             }).done(function (data) {
                 var info = JSON.parse(data)
                 $('.quantity-total' + loopCounter).html(info['itemQuantity'])
@@ -183,9 +187,10 @@
                 url: '/update-cart-item/',
                 type: 'POST',
                 dataType: "json",
-                data: JSON.stringify({'sellerCode': sellerCode, 'action': action,'option':true})
+                data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'option': true})
             }).done(function (data) {
                 console.log('sdfsdsdffdssdf')
+
                 {#var info = JSON.parse(data)#}
                 {#$('.quantity-total' + loopCounter).html(info['itemQuantity'])#}
                 {#$('.item-cost-total' + loopCounter).html(info['itemPriceTotal'] + "원")#}
@@ -194,7 +199,6 @@
             }).fail(function () {
 
             })
-
 
 
         });

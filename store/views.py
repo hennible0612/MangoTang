@@ -79,8 +79,15 @@ def cart(request):
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)
         items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
         cartItems = order.get_cart_items
-        for item in items:
-            itemOption = OrderItemOption.objects.filter(order_item_option=item)
+
+        print(items)
+        if (items == '<QuerySet []>'):
+            print("sdf")
+        if (items != None):
+            for item in items:
+                itemOption = OrderItemOption.objects.filter(order_item_option=item)
+        else:
+            itemOption=[]
 
     else:
         items = []
@@ -266,6 +273,26 @@ def updateCartItem(request):
 
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
+        seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
+        action = data['action']
+        customer = request.user.customer  # 현재 customer
+        # product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
+        orderItem= OrderItem.objects.get(order=order)
+        print(orderItem)
+
+        # options = ProductOption.objects.get(option_seller_code=seller_code)
+        # print(options)
+        # orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
+        # print(orderItemOption)
+        if orderItem.quantity == 1 and action == 'remove':
+            pass
+        elif action == 'add':
+            print('add')
+        elif action == 'remove':
+            print('sub')
+
+
         return JsonResponse("Sdfds", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
