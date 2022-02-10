@@ -65,8 +65,8 @@
                             </div>
                         {% else %}
 
-                            <div>
-                                <div class="cart-row cart-row">
+                            <div class=" cart-row{{ forloop.counter0 }}"">
+                                <div class="cart-row">
                                     <div style="flex:2"><img class="row-image"
                                                              src="{{ item.product.image_title.url }}">
                                     </div>
@@ -94,36 +94,36 @@
                                        data-loop="{{ forloop.counter0 }}"
                                        class="fas fa-trash-alt delete-item"></i>
                                 </div>
-                                {% if itemOption != none %}
-                                                                        {% endif %}
-
                                 {% for options in itemOption %}
-                                    <div class="cart-option">
-                                        <div style="flex:2"></div>
-                                        <div style="flex:2"><p>{{ options.product_option.option_name }}</p></div>
-                                        <div style="flex:1">
-                                            <p>{{ options.product_option.option_price|floatformat:0 }}원</p></div>
-                                        <div style="flex:1">
-                                            <p class="quantity item-option-total{{ forloop.counter0 }}">{{ options.quantity }}</p>
-                                            <div class="quantity">
-                                                <img class="chg-quantity update-cart-item-option"
-                                                     data-quantity="{{ forloop.counter0 }}"
-                                                     data-product="{{ options.product_option.option_seller_code }}"
-                                                     src="{% static  'images/arrow-up.png' %}" data-action="add">
+                                    <div>
+                                        <div class="cart-option cart-option{{ forloop.counter0 }}">
+                                            <div style="flex:2"></div>
+                                            <div style="flex:2"><p>{{ options.product_option.option_name }}</p></div>
+                                            <div style="flex:1">
+                                                <p>{{ options.product_option.option_price|floatformat:0 }}원</p></div>
+                                            <div style="flex:1">
+                                                <p class="quantity item-option-total{{ forloop.counter0 }}">{{ options.quantity }}</p>
+                                                <div class="quantity">
+                                                    <img class="chg-quantity update-cart-item-option"
+                                                         data-quantity="{{ forloop.counter0 }}"
+                                                         data-product="{{ options.product_option.option_seller_code }}"
+                                                         src="{% static  'images/arrow-up.png' %}" data-action="add">
 
-                                                <img class="chg-quantity update-cart-item-option"
-                                                     data-quantity="{{ forloop.counter0 }}"
+                                                    <img class="chg-quantity update-cart-item-option"
+                                                         data-quantity="{{ forloop.counter0 }}"
 
-                                                     data-product="{{ options.product_option.option_seller_code }}"
-                                                     src="{% static  'images/arrow-down.png' %}" data-action="remove">
+                                                         data-product="{{ options.product_option.option_seller_code }}"
+                                                         src="{% static  'images/arrow-down.png' %}"
+                                                         data-action="remove">
+                                                </div>
                                             </div>
+                                            <div style="flex:1"><p
+                                                    class="item-option-cost-total{{ forloop.counter0 }}">{{ options.get_total|floatformat:0 }}원</p>
+                                            </div>
+                                            <i type="button" data-code="{{ options.product_option.option_seller_code }}"
+                                               data-loop="{{ forloop.counter0 }}"
+                                               class="fas fa-trash-alt delete-item-option"></i>
                                         </div>
-                                        <div style="flex:1"><p
-                                                class="item-option-cost-total{{ forloop.counter0 }}">{{ options.get_total|floatformat:0 }}원</p>
-                                        </div>
-                                        <i type="button" data-code="{{ item.product.seller_code }}"
-                                           data-loop="{{ forloop.counter0 }}"
-                                           class="fas fa-trash-alt delete-option-item"></i>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -154,6 +154,29 @@
             }).fail(function () {
             });
         });
+        $('.delete-item-option').click(function (e) {
+            console.log("저기")
+            var loop = $(this).data("loop");
+            var sellerCode = $(this).data("code");
+            $(".cart-option" + loop).html("")
+
+            console.log(loop)
+            console.log(sellerCode)
+            {#var sellerCode = $(this).data("code");#}
+            {#var loop = $(this).data("loop");#}
+            {#$.ajax({#}
+            {#    headers: {"X-CSRFToken": csrftoken},#}
+            {#    url: '/delete-cart-item/' + sellerCode + '/',#}
+            {#    type: 'DELETE',}).done(function (data) {#}
+            {##}
+            {#    var info = JSON.parse(data)#}
+            {#    $(".cart-row" + loop).html("")#}
+            {#    $(".item-divider" + loop).remove()#}
+            {#    $('.cart-quantity-total').html(info['orderItemTotal'])#}
+            {#    $('.cart-price-total').text(info['orderItemPriceTotal'] + "원")}).fail(function () {            });#}
+
+
+        });
 
 
         $('.update-cart-item').click(function (e) {
@@ -180,8 +203,6 @@
             var sellerCode = $(this).data("product");
             var loopCounter = $(this).data("quantity");
             var action = $(this).data("action");
-
-
             $.ajax({
                 headers: {"X-CSRFToken": csrftoken},
                 url: '/update-cart-item/',
@@ -189,12 +210,10 @@
                 dataType: "json",
                 data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'option': true})
             }).done(function (data) {
-
                 var info = JSON.parse(data)
                 $('.item-option-total' + loopCounter).html(info['itemOptionQuantity'])
-                $('.item-option-cost-total' + loopCounter).html((info['itemOptionPrice']*info['itemOptionQuantity']) + "원")
-                {#$('.cart-quantity-total').html(info['orderItemTotal'])#}
-                $('.cart-price-total').text((info['orderItemPriceTotal']+(info['itemOptionPrice']*info['itemOptionQuantity'])) + "원")
+                $('.item-option-cost-total' + loopCounter).html((info['itemOptionPrice'] * info['itemOptionQuantity']) + "원")
+                $('.cart-price-total').text((info['orderItemPriceTotal'] + (info['itemOptionPrice'] * info['itemOptionQuantity'])) + "원")
             }).fail(function () {
 
             })
