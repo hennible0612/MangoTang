@@ -145,6 +145,8 @@
                 headers: {"X-CSRFToken": csrftoken},
                 url: '/delete-cart-item/' + sellerCode + '/',
                 type: 'DELETE',
+                dataType: "json",
+                data: JSON.stringify({'option': false})
             }).done(function (data) {
                 var info = JSON.parse(data)
                 $(".cart-row" + loop).html("")
@@ -155,26 +157,18 @@
             });
         });
         $('.delete-item-option').click(function (e) {
-            console.log("저기")
             var loop = $(this).data("loop");
             var sellerCode = $(this).data("code");
-            $(".cart-option" + loop).html("")
 
-            console.log(loop)
-            console.log(sellerCode)
             $.ajax({
                 headers: {"X-CSRFToken": csrftoken},
                 url: '/delete-cart-item/' + sellerCode + '/',
                 type: 'DELETE',
                 dataType: "json",
-                {#data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'option': false})#}
+                data: JSON.stringify({'option': true})
             }).done(function (data) {
-                {##}
-                {#var info = JSON.parse(data)#}
-                {#$(".cart-row" + loop).html("")#}
-                {#$(".item-divider" + loop).remove()#}
-                {#$('.cart-quantity-total').html(info['orderItemTotal'])#}
-                {#$('.cart-price-total').text(info['orderItemPriceTotal'] + "원")#}
+                $(".cart-option" + loop).html("")
+                $('.cart-price-total').text(info['orderItemPriceTotal'] + "원")
             }).fail(function () {
 
             })

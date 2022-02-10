@@ -80,7 +80,7 @@ def cart(request):
         items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
         cartItems = order.get_cart_items
 
-        if(bool(items)==True):
+        if (bool(items) == True):
             for item in items:
                 itemOption = OrderItemOption.objects.filter(order_item_option=item)
         else:
@@ -91,7 +91,7 @@ def cart(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption':itemOption}
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
 
     return render(request, 'store/cart.html', context)
 
@@ -200,22 +200,17 @@ def updateItem(request):
         orderItem.item_option_bool = True
         orderItem.save()
 
-        for x,y in zip(data['options'],data['quantity']):
+        for x, y in zip(data['options'], data['quantity']):
             sellerCode = data['options'][x]
             options = ProductOption.objects.get(option_seller_code=str(sellerCode))
             orderItemOption = OrderItemOption.objects.create(order_item_option=orderItem, product_option=options)
             orderItemOption.quantity = data['quantity'][y]
             orderItemOption.save()
 
-
         # for datas in data['options']:
         #     print(data['options'][datas])
         # for datas in data['quantity']:
         #     print(data['quantity'][datas])
-
-
-
-
 
         # for datas in data:
         #     print(datas['options'])
@@ -237,7 +232,7 @@ def updateItem(request):
 def updateCartItem(request):
     data = json.loads(request.body)  # JSON body data에저장
     option = data['option']
-    if (option==False):
+    if (option == False):
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
         # quantity = data['quantity']
@@ -278,7 +273,6 @@ def updateCartItem(request):
 
         options = ProductOption.objects.get(option_seller_code=seller_code)
         orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
-        print(orderItemOption)
         if orderItemOption.quantity == 1 and action == 'remove':
             pass
         elif action == 'add':
@@ -302,23 +296,40 @@ def updateCartItem(request):
 
 
 def deleteCartItem(request, seller_code):
+    data = json.loads(request.body)  # JSON body data에저장
+    option = data['option']
+    if (option == False):
+        customer = request.user.customer  # 현재 customer
+        product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
+        orderItem, created = OrderItem.objects.get_or_create(order=order,
+                                                             product=product)
+        orderItem.delete()
 
+        data = {
+            "orderItemTotal": order.get_cart_items,
+            "orderItemPriceTotal": order.get_cart_total
+        }
+        json_obj = json.dumps(data)
 
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+    else:
+        # 각각 body에 있는 필요한 값저장
+        customer = request.user.customer  # 현재 customer
+        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
+        orderItem = OrderItem.objects.get(order=order)
 
-    customer = request.user.customer  # 현재 customer
-    product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
-    order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
-    orderItem, created = OrderItem.objects.get_or_create(order=order,
-                                                         product=product)
-    orderItem.delete()
+        seller_code = data['sellerCode']  #아이템 옵션의 제품 id값줘야함
 
-    data = {
-        "orderItemTotal": order.get_cart_items,
-        "orderItemPriceTotal": order.get_cart_total
-    }
-    json_obj = json.dumps(data)
+        options = ProductOption.objects.get(option_seller_code=seller_code)
+        orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
+        orderItemOption.delete()
+        data = {
+            "orderItemPriceTotal": order.get_cart_total
+        }
+        json_obj = json.dumps(data)
 
-    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+        return JsonResponse("sdfsdf", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 """
