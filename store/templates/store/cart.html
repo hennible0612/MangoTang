@@ -66,66 +66,66 @@
                         {% else %}
 
                             <div class=" cart-row{{ forloop.counter0 }}"">
-                                <div class="cart-row">
-                                    <div style="flex:2"><img class="row-image"
-                                                             src="{{ item.product.image_title.url }}">
-                                    </div>
-                                    <div style="flex:2"><p>{{ item.product.product_name }}</p></div>
-                                    <div style="flex:1"><p>{{ item.product.price_discount | floatformat:0 }}원</p></div>
-                                    <div style="flex:1">
-                                        <p class="quantity quantity-total{{ forloop.counter0 }}">{{ item.quantity }}</p>
-                                        <div class="quantity">
-                                            <img class="chg-quantity update-cart-item"
-                                                 data-quantity="{{ forloop.counter0 }}"
-                                                 data-product="{{ item.product.seller_code }}"
-                                                 src="{% static  'images/arrow-up.png' %}" data-action="add">
-                                            <img class="chg-quantity update-cart-item"
-                                                 data-quantity="{{ forloop.counter0 }}"
-                                                 data-product="{{ item.product.seller_code }}"
-                                                 src="{% static  'images/arrow-down.png' %}" data-action="remove">
-                                        </div>
-                                    </div>
-                                    <div style="flex:1"><p
-                                            class="item-cost-total{{ forloop.counter0 }}">{{ item.get_total|floatformat:0 }}원</p>
-                                    </div>
-
-
-                                    <i type="button" data-code="{{ item.product.seller_code }}"
-                                       data-loop="{{ forloop.counter0 }}"
-                                       class="fas fa-trash-alt delete-item"></i>
+                            <div class="cart-row">
+                                <div style="flex:2"><img class="row-image"
+                                                         src="{{ item.product.image_title.url }}">
                                 </div>
-                                {% for options in itemOption %}
-                                    <div>
-                                        <div class="cart-option cart-option{{ forloop.counter0 }}">
-                                            <div style="flex:2"></div>
-                                            <div style="flex:2"><p>{{ options.product_option.option_name }}</p></div>
-                                            <div style="flex:1">
-                                                <p>{{ options.product_option.option_price|floatformat:0 }}원</p></div>
-                                            <div style="flex:1">
-                                                <p class="quantity item-option-total{{ forloop.counter0 }}">{{ options.quantity }}</p>
-                                                <div class="quantity">
-                                                    <img class="chg-quantity update-cart-item-option"
-                                                         data-quantity="{{ forloop.counter0 }}"
-                                                         data-product="{{ options.product_option.option_seller_code }}"
-                                                         src="{% static  'images/arrow-up.png' %}" data-action="add">
-
-                                                    <img class="chg-quantity update-cart-item-option"
-                                                         data-quantity="{{ forloop.counter0 }}"
-
-                                                         data-product="{{ options.product_option.option_seller_code }}"
-                                                         src="{% static  'images/arrow-down.png' %}"
-                                                         data-action="remove">
-                                                </div>
-                                            </div>
-                                            <div style="flex:1"><p
-                                                    class="item-option-cost-total{{ forloop.counter0 }}">{{ options.get_total|floatformat:0 }}원</p>
-                                            </div>
-                                            <i type="button" data-code="{{ options.product_option.option_seller_code }}"
-                                               data-loop="{{ forloop.counter0 }}"
-                                               class="fas fa-trash-alt delete-item-option"></i>
-                                        </div>
+                                <div style="flex:2"><p>{{ item.product.product_name }}</p></div>
+                                <div style="flex:1"><p>{{ item.product.price_discount | floatformat:0 }}원</p></div>
+                                <div style="flex:1">
+                                    <p class="quantity quantity-total{{ forloop.counter0 }}">{{ item.quantity }}</p>
+                                    <div class="quantity">
+                                        <img class="chg-quantity update-cart-item"
+                                             data-quantity="{{ forloop.counter0 }}"
+                                             data-product="{{ item.product.seller_code }}"
+                                             src="{% static  'images/arrow-up.png' %}" data-action="add">
+                                        <img class="chg-quantity update-cart-item"
+                                             data-quantity="{{ forloop.counter0 }}"
+                                             data-product="{{ item.product.seller_code }}"
+                                             src="{% static  'images/arrow-down.png' %}" data-action="remove">
                                     </div>
-                                {% endfor %}
+                                </div>
+                                <div style="flex:1"><p
+                                        class="item-cost-total{{ forloop.counter0 }}">{{ item.get_total|floatformat:0 }}원</p>
+                                </div>
+
+
+                                <i type="button" data-code="{{ item.product.seller_code }}"
+                                   data-loop="{{ forloop.counter0 }}"
+                                   class="fas fa-trash-alt delete-item"></i>
+                            </div>
+                            {% for options in itemOption %}
+                                <div>
+                                    <div class="cart-option cart-option{{ forloop.counter0 }}">
+                                        <div style="flex:2"></div>
+                                        <div style="flex:2"><p>{{ options.product_option.option_name }}</p></div>
+                                        <div style="flex:1">
+                                            <p>{{ options.product_option.option_price|floatformat:0 }}원</p></div>
+                                        <div style="flex:1">
+                                            <p class="quantity item-option-total{{ forloop.counter0 }}">{{ options.quantity }}</p>
+                                            <div class="quantity">
+                                                <img class="chg-quantity update-cart-item-option"
+                                                     data-quantity="{{ forloop.counter0 }}"
+                                                     data-product="{{ options.product_option.option_seller_code }}"
+                                                     src="{% static  'images/arrow-up.png' %}" data-action="add">
+
+                                                <img class="chg-quantity update-cart-item-option"
+                                                     data-quantity="{{ forloop.counter0 }}"
+
+                                                     data-product="{{ options.product_option.option_seller_code }}"
+                                                     src="{% static  'images/arrow-down.png' %}"
+                                                     data-action="remove">
+                                            </div>
+                                        </div>
+                                        <div style="flex:1"><p
+                                                class="item-option-cost-total{{ forloop.counter0 }}">{{ options.get_total|floatformat:0 }}원</p>
+                                        </div>
+                                        <i type="button" data-code="{{ options.product_option.option_seller_code }}"
+                                           data-loop="{{ forloop.counter0 }}"
+                                           class="fas fa-trash-alt delete-item-option"></i>
+                                    </div>
+                                </div>
+                            {% endfor %}
                             </div>
                         {% endif %}
 
@@ -133,9 +133,9 @@
                         <hr class="item-divider{{ forloop.counter0 }}">
                     {% endfor %}
 
-                </div>
             </div>
         </div>
+    </div>
     </div>
     <script>
         $('.delete-item').click(function (e) {
@@ -162,23 +162,23 @@
 
             console.log(loop)
             console.log(sellerCode)
-            {#var sellerCode = $(this).data("code");#}
-            {#var loop = $(this).data("loop");#}
-            {#$.ajax({#}
-            {#    headers: {"X-CSRFToken": csrftoken},#}
-            {#    url: '/delete-cart-item/' + sellerCode + '/',#}
-            {#    type: 'DELETE',}).done(function (data) {#}
-            {##}
-            {#    var info = JSON.parse(data)#}
-            {#    $(".cart-row" + loop).html("")#}
-            {#    $(".item-divider" + loop).remove()#}
-            {#    $('.cart-quantity-total').html(info['orderItemTotal'])#}
-            {#    $('.cart-price-total').text(info['orderItemPriceTotal'] + "원")}).fail(function () {            });#}
+            $.ajax({
+                headers: {"X-CSRFToken": csrftoken},
+                url: '/delete-cart-item/' + sellerCode + '/',
+                type: 'DELETE',
+                dataType: "json",
+                {#data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'option': false})#}
+            }).done(function (data) {
+                {##}
+                {#var info = JSON.parse(data)#}
+                {#$(".cart-row" + loop).html("")#}
+                {#$(".item-divider" + loop).remove()#}
+                {#$('.cart-quantity-total').html(info['orderItemTotal'])#}
+                {#$('.cart-price-total').text(info['orderItemPriceTotal'] + "원")#}
+            }).fail(function () {
 
-
+            })
         });
-
-
         $('.update-cart-item').click(function (e) {
             var sellerCode = $(this).data("product");
             var loopCounter = $(this).data("quantity");

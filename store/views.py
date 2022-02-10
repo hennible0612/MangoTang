@@ -289,8 +289,6 @@ def updateCartItem(request):
         data = {
             "itemOptionQuantity": orderItemOption.quantity,
             "itemOptionPrice": orderItemOption.product_option.option_price,
-            # "itemPriceTotal": orderItem.get_total,
-            # "orderItemTotal": order.get_cart_items,
             "orderItemPriceTotal": order.get_cart_total
 
         }
@@ -304,6 +302,9 @@ def updateCartItem(request):
 
 
 def deleteCartItem(request, seller_code):
+
+
+
     customer = request.user.customer  # 현재 customer
     product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
