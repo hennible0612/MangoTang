@@ -81,19 +81,7 @@ def cart(request):
         cartItems = order.get_cart_items
         for item in items:
             itemOption = OrderItemOption.objects.filter(order_item_option=item)
-            # for i in itemOption:
-            #     print(i)
 
-
-        # itemOption = items.orderitemoption_set.all()
-        # options = OrderItemOption.GET()
-        # orderItem = OrderItemOption.objects.get()
-
-        # print(orderItem)
-        # print(options)
-        # itemOptions = items.productquestion_set
-        # itemOptions = OrderItemOption.objects.get(orderItem=items)
-        # print(itemOptions)
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
@@ -245,45 +233,40 @@ def updateItem(request):
 
 def updateCartItem(request):
     data = json.loads(request.body)  # JSON body data에저장
+    option = data['option']
+    if (option==False):
+        seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
+        action = data['action']
+        # quantity = data['quantity']
 
-    seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
-    action = data['action']
-    # quantity = data['quantity']
+        customer = request.user.customer  # 현재 customer
+        product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
 
-    customer = request.user.customer  # 현재 customer
-    product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
-    order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
+        orderItem, created = OrderItem.objects.get_or_create(order=order,
+                                                             product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
+        if orderItem.quantity == 1 and action == 'remove':
+            pass
+        elif action == 'add':
+            orderItem.quantity = (orderItem.quantity + 1)
+        elif action == 'remove':
+            orderItem.quantity = (orderItem.quantity - 1)
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order,
-                                                         product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
-    if orderItem.quantity == 1 and action == 'remove':
-        pass
-    elif action == 'add':
-        orderItem.quantity = (orderItem.quantity + 1)
-    elif action == 'remove':
-        orderItem.quantity = (orderItem.quantity - 1)
+        orderItem.save()  # DB에 저장
 
-    orderItem.save()  # DB에 저장
+        data = {
+            "itemQuantity": orderItem.quantity,
+            "itemDiscountPrice": orderItem.product.price_discount,
+            "itemPriceTotal": orderItem.get_total,
+            "orderItemTotal": order.get_cart_items,
+            "orderItemPriceTotal": order.get_cart_total
 
-    # if int(orderItem.quantity) <= 0:
-    #     orderItem.delete()
+        }
+        json_obj = json.dumps(data)
 
-    # print(orderItem.quantity)
-    # print(orderItem.product.price_discount)
-    # print(orderItem.get_total)
-    # print( order.get_cart_items )
-    # print( order.get_cart_total )
-    data = {
-        "itemQuantity": orderItem.quantity,
-        "itemDiscountPrice": orderItem.product.price_discount,
-        "itemPriceTotal": orderItem.get_total,
-        "orderItemTotal": order.get_cart_items,
-        "orderItemPriceTotal": order.get_cart_total
-
-    }
-    json_obj = json.dumps(data)
-
-    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+    else:
+        return JsonResponse("Sdfds", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 """
