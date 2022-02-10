@@ -80,16 +80,19 @@ def cart(request):
         items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
         cartItems = order.get_cart_items
 
-        print(items)
-        if (items == '<QuerySet []>'):
-            print("sdf")
-        if (items != None):
+        print(bool(items))
+        if(bool(items)==True):
             for item in items:
                 itemOption = OrderItemOption.objects.filter(order_item_option=item)
         else:
-            itemOption=[]
+            itemOption = []
+
+
+
+
 
     else:
+        print("익명")
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
