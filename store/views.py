@@ -80,17 +80,11 @@ def cart(request):
         items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
         cartItems = order.get_cart_items
 
-        print(bool(items))
         if(bool(items)==True):
             for item in items:
                 itemOption = OrderItemOption.objects.filter(order_item_option=item)
         else:
             itemOption = []
-
-
-
-
-
     else:
         print("익명")
         items = []
@@ -134,7 +128,6 @@ def register(request):
 
             Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number, address1=address1,
                                     address2=address2)
-
             user = authenticate(username=username, password=raw_password)  # 사용자 인증
             login(request, user)  # 로그인
             return redirect('store')
@@ -281,22 +274,28 @@ def updateCartItem(request):
         customer = request.user.customer  # 현재 customer
         # product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
-        orderItem= OrderItem.objects.get(order=order)
-        print(orderItem)
+        orderItem = OrderItem.objects.get(order=order)
 
-        # options = ProductOption.objects.get(option_seller_code=seller_code)
-        # print(options)
-        # orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
-        # print(orderItemOption)
-        if orderItem.quantity == 1 and action == 'remove':
+        options = ProductOption.objects.get(option_seller_code=seller_code)
+        orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
+        print(orderItemOption)
+        if orderItemOption.quantity == 1 and action == 'remove':
             pass
         elif action == 'add':
-            print('add')
+            orderItemOption.quantity = orderItemOption.quantity + 1
         elif action == 'remove':
-            print('sub')
+            orderItemOption.quantity = orderItemOption.quantity - 1
+        orderItemOption.save()
+        data = {
+            "itemOptionQuantity": orderItemOption.quantity,
+            "itemOptionPrice": orderItemOption.product_option.option_price,
+            # "itemPriceTotal": orderItem.get_total,
+            # "orderItemTotal": order.get_cart_items,
+            "orderItemPriceTotal": order.get_cart_total
 
-
-        return JsonResponse("Sdfds", safe=False, json_dumps_params={'ensure_ascii': False})
+        }
+        json_obj = json.dumps(data)
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 """

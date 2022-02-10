@@ -119,7 +119,7 @@
                                             </div>
                                         </div>
                                         <div style="flex:1"><p
-                                                class="option-item-cost-total{{ forloop.counter0 }}">{{ options.get_total|floatformat:0 }}원</p>
+                                                class="item-option-cost-total{{ forloop.counter0 }}">{{ options.get_total|floatformat:0 }}원</p>
                                         </div>
                                         <i type="button" data-code="{{ item.product.seller_code }}"
                                            data-loop="{{ forloop.counter0 }}"
@@ -189,13 +189,12 @@
                 dataType: "json",
                 data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'option': true})
             }).done(function (data) {
-                console.log('sdfsdsdffdssdf')
 
-                {#var info = JSON.parse(data)#}
-                {#$('.quantity-total' + loopCounter).html(info['itemQuantity'])#}
-                {#$('.item-cost-total' + loopCounter).html(info['itemPriceTotal'] + "원")#}
+                var info = JSON.parse(data)
+                $('.item-option-total' + loopCounter).html(info['itemOptionQuantity'])
+                $('.item-option-cost-total' + loopCounter).html((info['itemOptionPrice']*info['itemOptionQuantity']) + "원")
                 {#$('.cart-quantity-total').html(info['orderItemTotal'])#}
-                {#$('.cart-price-total').text(info['orderItemPriceTotal'] + "원")#}
+                $('.cart-price-total').text((info['orderItemPriceTotal']+(info['itemOptionPrice']*info['itemOptionQuantity'])) + "원")
             }).fail(function () {
 
             })
