@@ -318,10 +318,12 @@ def deleteCartItem(request, seller_code):
         customer = request.user.customer  # 현재 customer
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
         orderItem = OrderItem.objects.get(order=order)
+        option_code = data['optionCode']
 
-        seller_code = data['sellerCode']  #아이템 옵션의 제품 id값줘야함
-
-        options = ProductOption.objects.get(option_seller_code=seller_code)
+        # print(option_code)
+        # print(seller_code)
+        options = ProductOption.objects.get(option_seller_code=option_code)
+        print(options)
         orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
         orderItemOption.delete()
         data = {
@@ -329,7 +331,7 @@ def deleteCartItem(request, seller_code):
         }
         json_obj = json.dumps(data)
 
-        return JsonResponse("sdfsdf", safe=False, json_dumps_params={'ensure_ascii': False})
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 """

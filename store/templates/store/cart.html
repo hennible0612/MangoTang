@@ -120,7 +120,8 @@
                                         <div style="flex:1"><p
                                                 class="item-option-cost-total{{ forloop.counter0 }}">{{ options.get_total|floatformat:0 }}원</p>
                                         </div>
-                                        <i type="button" data-code="{{ options.product_option.option_seller_code }}"
+                                        <i type="button" data-option="{{ options.product_option.option_seller_code }}"
+                                           data-code="{{ item.product.seller_code }}"
                                            data-loop="{{ forloop.counter0 }}"
                                            class="fas fa-trash-alt delete-item-option"></i>
                                     </div>
@@ -159,14 +160,15 @@
         $('.delete-item-option').click(function (e) {
             var loop = $(this).data("loop");
             var sellerCode = $(this).data("code");
-
+            var optionCode = $(this).data("option");
             $.ajax({
                 headers: {"X-CSRFToken": csrftoken},
                 url: '/delete-cart-item/' + sellerCode + '/',
                 type: 'DELETE',
                 dataType: "json",
-                data: JSON.stringify({'option': true})
+                data: JSON.stringify({'option': true, 'optionCode': optionCode})
             }).done(function (data) {
+                var info = JSON.parse(data)
                 $(".cart-option" + loop).html("")
                 $('.cart-price-total').text(info['orderItemPriceTotal'] + "원")
             }).fail(function () {
