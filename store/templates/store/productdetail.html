@@ -38,7 +38,7 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option class="option-list" data-product="{{ option.option_seller_code }}"
+                                    <option class="option-list" data-product="{{ option.option_seller_code }}" data-price="{{ option.option_price }}"
                                             data-id="{{ forloop.counter0 }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
@@ -57,6 +57,7 @@
                                     <!-- x -->
                                     <i type="button" class="far fa-times-circle option-cancel"
                                        data-id="{{ forloop.counter0 }}" data-code="{{ option.option_seller_code }}"
+                                       data-price="{{ option.option_price }}"
                                        style="padding-top: 10px"></i>
                                 </div>
                                 <div class="item-option-quantity" style="padding-left: 15px; ">
@@ -313,17 +314,15 @@
         };
 
         function addItem(sellerCode, id) {
-            delete itemObj['quantity']['itemQuantityundefined']
-            delete itemObj['options']['sellerCodeundefined']
+            {#delete itemObj['quantity']['itemQuantityundefined']#}
+            {#delete itemObj['options']['sellerCodeundefined']#}
             itemObj['option'] = 'true';
             itemObj['action'] = 'set'
             itemObj['options']['optionSellercode' + id] = sellerCode;
-
             itemObj['quantity']['itemQuantity' + id] = parseInt($('.option_quantity' + id).val());
 
 
         }
-
 
         var price = '{{ product.price }}'
         var discount = '{{ product.discount }}'
@@ -389,9 +388,12 @@
                 })
             });
 
-            $('.option-selector').on('click', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
+            $('.option-selector').on('input', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
                 var sellerCode = $(this).find("option:selected").data("product");
                 var counter = $(this).find("option:selected").data("id");
+                var optionPrice = $(this).find("option:selected").data("price");
+
+                changeTotalPrice(totalPrice, optionPrice, "add")
                 addItem(sellerCode, counter)
                 $('.' + sellerCode).show()
             });
@@ -402,7 +404,6 @@
                 var currentVal = parseInt($('.product-quantity').val());
                 var price = $(this).data("price");
                 var action = "add"
-
 
                 if (!isNaN(currentVal)) {
                     $('.product-quantity').val(currentVal + 1);
@@ -430,7 +431,7 @@
 
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
-                    optionTotalPrice(currentVal + 1, optionPrice,action)
+                    changeTotalPrice(currentVal + 1, optionPrice, action)
                     itemObj['quantity']['itemQuantity' + optionId] = currentVal + 1;
 
                 }
@@ -444,7 +445,7 @@
 
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.option_quantity' + optionId).val(currentVal - 1);
-                    optionTotalPrice(currentVal - 1, optionPrice,action)
+                    changeTotalPrice(currentVal - 1, optionPrice, action)
                     itemObj['quantity']['itemQuantity' + optionId] = currentVal - 1;
                 }
             });
@@ -461,17 +462,6 @@
 
             }
 
-            function optionTotalPrice(currentVal, optionPrice, action) {
-                if (action == "add") {
-                    totalPrice += parseInt(optionPrice);
-
-                } else {
-                    totalPrice -= parseInt(optionPrice);
-
-                }
-                $('.total-option-price').html(parseInt(totalPrice) + "원")
-
-            }
         });
 
 
