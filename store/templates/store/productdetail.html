@@ -79,7 +79,16 @@
                             </div>
                         {% endfor %}
                         <div class="d-flex">
-
+                            <div class="quantity buttons_added">
+                                <input type="button" value="-" class="minus" data-price="{{ product.price_discount }}">
+                                <input type="number" step="1" min="1"
+                                       max=""
+                                       name="quantity" value="1"
+                                       title="Qty"
+                                       class="input-text qty text product-quantity" size="4"
+                                       pattern="" inputmode="" readonly>
+                                <input type="button" value="+" class="plus" data-price="{{ product.price_discount }}">
+                            </div>
                             <div style="padding-right:10px;">
                                 <button class="btn btn-outline-dark flex-shrink-0 add-to-cart-option" type="button">
                                     카트에 넣기
@@ -92,7 +101,7 @@
                             </div>
                             <div style="text-align: center">
                                 <p style="color: #ee7d18; font-size: 1.5rem"
-                                   class="total-option-price">{{ product.price_discount | floatformat:0 }}원</p>
+                                   class="total-option-price total-price">{{ product.price_discount | floatformat:0 }}원</p>
                             </div>
                         </div>
                     {% else %}
@@ -391,10 +400,13 @@
             $('.plus').click(function (e) {
                 e.preventDefault();
                 var currentVal = parseInt($('.product-quantity').val());
+                var price = $(this).data("price");
+                var action = "add"
+
 
                 if (!isNaN(currentVal)) {
                     $('.product-quantity').val(currentVal + 1);
-                    changeTotalPrice(currentVal + 1)
+                    changeTotalPrice(currentVal + 1, price, action, action)
 
                 }
 
@@ -402,18 +414,23 @@
             $('.minus').click(function (e) {
                 e.preventDefault();
                 var currentVal = parseInt($('.product-quantity').val());
+                var price = $(this).data("price");
+                var action = "minus"
+
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.product-quantity').val(currentVal - 1);
-                    changeTotalPrice(currentVal - 1)
+                    changeTotalPrice(currentVal - 1, price, action)
                 }
             });
             $('.option-plus').click(function (e) {
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
                 var currentVal = parseInt($('.option_quantity' + optionId).val());
+                var action = "add"
+
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
-                    optionTotalPrice(currentVal + 1, optionPrice)
+                    optionTotalPrice(currentVal + 1, optionPrice,action)
                     itemObj['quantity']['itemQuantity' + optionId] = currentVal + 1;
 
                 }
@@ -423,20 +440,37 @@
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
                 var currentVal = parseInt($('.option_quantity' + optionId).val());
+                var action = "minus"
+
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.option_quantity' + optionId).val(currentVal - 1);
-                    optionTotalPrice(currentVal - 1, optionPrice)
+                    optionTotalPrice(currentVal - 1, optionPrice,action)
                     itemObj['quantity']['itemQuantity' + optionId] = currentVal - 1;
                 }
             });
 
-            function changeTotalPrice(currentVal) {
-                $('.total-price').html(parseInt(totalPrice) * currentVal + "원")
+            function changeTotalPrice(currentVal, price, action) {
+                if (action == "add") {
+                    totalPrice += parseInt(price);
+
+                } else {
+                    totalPrice -= parseInt(price);
+
+                }
+                $('.total-price').html(parseInt(totalPrice) + "원");
+
             }
 
-            function optionTotalPrice(currentVal, optionPrice) {
-                totalPrice += parseInt(optionPrice)
+            function optionTotalPrice(currentVal, optionPrice, action) {
+                if (action == "add") {
+                    totalPrice += parseInt(optionPrice);
+
+                } else {
+                    totalPrice -= parseInt(optionPrice);
+
+                }
                 $('.total-option-price').html(parseInt(totalPrice) + "원")
+
             }
         });
 
