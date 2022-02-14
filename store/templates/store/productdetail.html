@@ -38,7 +38,8 @@
                                 <option value="" selected disabled hidden>선택해주세요.</option>
 
                                 {% for option in options %}
-                                    <option class="option-list" data-product="{{ option.option_seller_code }}" data-price="{{ option.option_price }}"
+                                    <option class="option-list" data-product="{{ option.option_seller_code }}"
+                                            data-price="{{ option.option_price }}"
                                             data-id="{{ forloop.counter0 }}">{{ option.option_name }}</option>
                                 {% endfor %}
 
@@ -337,7 +338,7 @@
 
                 $('.' + sellerCode).hide()
 
-                changeTotalPrice(totalPrice,(optionPrice*optionQuantity),'minus')
+                changeTotalPrice(totalPrice, (optionPrice * optionQuantity), 'minus')
 
 
                 $('.option_quantity' + counter).val(1);
@@ -351,6 +352,8 @@
 
             $('.add-to-cart-option').click(function (e) {
                 cartSnackbar()
+                var productQuantity = $('.product-quantity').val();
+                itemObj.productQuantity = productQuantity
                 if (itemObj['option'] === 'true') {
                     $.ajax({
                         headers: {"X-CSRFToken": token},

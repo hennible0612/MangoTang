@@ -193,11 +193,17 @@ def updateItem(request):
         return JsonResponse('Item was added', safe=False)
     else:
         seller_code = data['itemSellercode']  # 각각 body에 있는 필요한 값저장
+
+        productQuantity= data['productQuantity']
+
         customer = request.user.customer  # 현재 customer
         product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
         orderItem.item_option_bool = True
+
+        orderItem.quantity = productQuantity
+
         orderItem.save()
 
         for x, y in zip(data['options'], data['quantity']):
@@ -266,6 +272,7 @@ def updateCartItem(request):
     else:
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
+
         customer = request.user.customer  # 현재 customer
         # product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
