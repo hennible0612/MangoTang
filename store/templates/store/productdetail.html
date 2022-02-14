@@ -314,8 +314,7 @@
         };
 
         function addItem(sellerCode, id) {
-            {#delete itemObj['quantity']['itemQuantityundefined']#}
-            {#delete itemObj['options']['sellerCodeundefined']#}
+
             itemObj['option'] = 'true';
             itemObj['action'] = 'set'
             itemObj['options']['optionSellercode' + id] = sellerCode;
@@ -333,7 +332,14 @@
             $('.option-cancel').click(function (e) {
                 var counter = $(this).data("id");
                 var sellerCode = $(this).data("code");
+                var optionPrice = $(this).data("price");
+                var optionQuantity = itemObj['quantity']['itemQuantity' + counter]
+
                 $('.' + sellerCode).hide()
+
+                changeTotalPrice(totalPrice,(optionPrice*optionQuantity),'minus')
+
+
                 $('.option_quantity' + counter).val(1);
                 delete itemObj['options']['optionSellercode' + counter]
                 delete itemObj['quantity']['itemQuantity' + counter]
