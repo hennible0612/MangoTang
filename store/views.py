@@ -203,7 +203,7 @@ def updateItem(request):
         for x, y in zip(data['options'], data['quantity']):
             sellerCode = data['options'][x]
             options = ProductOption.objects.get(option_seller_code=str(sellerCode))
-            orderItemOption = OrderItemOption.objects.create(order_item_option=orderItem, product_option=options)
+            orderItemOption,created = OrderItemOption.objects.get_or_create(order_item_option=orderItem, product_option=options)
             orderItemOption.quantity = data['quantity'][y]
             orderItemOption.save()
 
