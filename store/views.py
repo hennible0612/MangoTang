@@ -89,17 +89,14 @@ def cart(request):
         if (bool(items) == True): #카트 비어있는지 확인
 
             for item in items:
-                print(item)
                 itemOption += OrderItemOption.objects.filter(order_item_option=item)
         else:
             itemOption = []
 
-        print(itemOption)
 
-        for item in itemOption:
-            print(item)
+
+
     else:
-        print("익명")
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
@@ -234,20 +231,6 @@ def updateItem(request):
             orderItemOption,created = OrderItemOption.objects.get_or_create(order_item_option=orderItem, product_option=options)
             orderItemOption.quantity = data['quantity'][y]
             orderItemOption.save()
-
-        # for datas in data['options']:
-        #     print(data['options'][datas])
-        # for datas in data['quantity']:
-        #     print(data['quantity'][datas])
-
-        # for datas in data:
-        #     print(datas['options'])
-        #     print(datas["quantity"])
-        # print("---------------------------------")
-        # for key in data.keys():
-        #     print(key, ":", data[key])
-        # orderItemOption, created = OrderItemOption.objects.get_or_create(orderItem=orderItem, product_option=product.product)
-
         return JsonResponse('err', safe=False)
 
 
@@ -355,7 +338,6 @@ def deleteCartItem(request, seller_code):
 
         options = ProductOption.objects.get(option_seller_code=option_code)
         orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
-        print(orderItemOption)
         orderItemOption.delete()
         data = {
             "orderItemPriceTotal": order.get_total

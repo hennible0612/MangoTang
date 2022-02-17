@@ -208,10 +208,6 @@
             var loopCounter = $(this).data("quantity");
             var action = $(this).data("action");
             var code = $(this).data("code");
-            console.log(sellerCode)
-            console.log(loopCounter)
-            console.log(action)
-            console.log(code)
             $.ajax({
                 headers: {"X-CSRFToken": csrftoken},
                 url: '/update-cart-item/',
