@@ -294,11 +294,14 @@ def updateCartItem(request):
     else:
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
+        code = data['code'] # 부모 코드
 
         customer = request.user.customer  # 현재 customer
-        # product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+        product = Product.objects.get(seller_code=code)  # 해당하는 productId가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
-        orderItem = OrderItem.objects.get(order=order)
+
+
+        orderItem = OrderItem.objects.get(order=order, product=product)
 
         options = ProductOption.objects.get(option_seller_code=seller_code)
         orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
@@ -346,6 +349,7 @@ def deleteCartItem(request, seller_code):
         # 각각 body에 있는 필요한 값저장
         customer = request.user.customer  # 현재 customer
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
+        
         orderItem = OrderItem.objects.get(order=order)
         option_code = data['optionCode']
 

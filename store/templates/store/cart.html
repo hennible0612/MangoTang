@@ -94,9 +94,8 @@
                                        data-loop="{{ forloop.counter0 }}"
                                        class="fas fa-trash-alt delete-item"></i>
                                 </div>
-                                {#                            아이템 옵션 출력#}
+                                {#  아이템 옵션 출력#}
                                 {% for options in itemOption %}
-                                    {#                                {% if options.product.product_name == "핫백" %}#}
                                     {% if item.product.product_name == options.order_item_option.product.product_name %}
                                         <div>
                                             <div class="cart-option cart-option{{ forloop.counter0 }}">
@@ -112,13 +111,14 @@
                                                         <img class="chg-quantity update-cart-item-option"
                                                              data-quantity="{{ forloop.counter0 }}"
                                                              data-product="{{ options.product_option.option_seller_code }}"
+                                                             data-code="{{ item.product.seller_code }}"
                                                              src="{% static  'images/arrow-up.png' %}"
                                                              data-action="add">
 
                                                         <img class="chg-quantity update-cart-item-option"
                                                              data-quantity="{{ forloop.counter0 }}"
-
                                                              data-product="{{ options.product_option.option_seller_code }}"
+                                                             data-code="{{ item.product.seller_code }}"
                                                              src="{% static  'images/arrow-down.png' %}"
                                                              data-action="remove">
                                                     </div>
@@ -130,12 +130,11 @@
                                                    data-option="{{ options.product_option.option_seller_code }}"
                                                    data-code="{{ item.product.seller_code }}"
                                                    data-loop="{{ forloop.counter0 }}"
+
                                                    class="fas fa-trash-alt delete-item-option"></i>
                                             </div>
                                         </div>
                                     {% endif %}
-
-                                    {#                                {% endif %}#}
                                 {% endfor %}
                             </div>
                         {% endif %}
@@ -204,15 +203,21 @@
             })
         });
         $('.update-cart-item-option').click(function (e) {
+
             var sellerCode = $(this).data("product");
             var loopCounter = $(this).data("quantity");
             var action = $(this).data("action");
+            var code = $(this).data("code");
+            console.log(sellerCode)
+            console.log(loopCounter)
+            console.log(action)
+            console.log(code)
             $.ajax({
                 headers: {"X-CSRFToken": csrftoken},
                 url: '/update-cart-item/',
                 type: 'POST',
                 dataType: "json",
-                data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'option': true})
+                data: JSON.stringify({'sellerCode': sellerCode, 'action': action, 'option': true, 'code': code})
             }).done(function (data) {
                 var info = JSON.parse(data)
                 $('.item-option-total' + loopCounter).html(info['itemOptionQuantity'])
