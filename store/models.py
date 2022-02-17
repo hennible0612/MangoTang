@@ -154,6 +154,11 @@ class OrderItem(models.Model):
         return self.product.product_name
 
     @property
+    def get_option_bool(self):
+        return self.item_option_bool
+
+
+    @property
     def get_total(self):
         total = self.product.price_discount * self.quantity
         return total
