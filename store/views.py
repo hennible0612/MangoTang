@@ -86,7 +86,7 @@ def cart(request):
         #     else:
         #         print(item , "option is False")
 
-        if (bool(items) == True):
+        if (bool(items) == True): #카트 비어있는지 확인
 
             for item in items:
                 print(item)

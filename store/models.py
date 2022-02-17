@@ -183,7 +183,7 @@ class OrderItemOption(models.Model):
         return total
 
     def __str__(self):
-        return "옵션 이름: "+ self.product_option.option_name +" 옵션 가격: "+ str(self.get_total)
+        return "부모 아이템 이름: "+ str(self.order_item_option.product.product_name) + "옵션 이름: "+ self.product_option.option_name +" 옵션 가격: "+ str(self.get_total)
 
 
 class ShippingAddress(models.Model):
