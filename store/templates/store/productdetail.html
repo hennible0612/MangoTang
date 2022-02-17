@@ -321,7 +321,6 @@
             itemObj['options']['optionSellercode' + id] = sellerCode;
             itemObj['quantity']['itemQuantity' + id] = parseInt($('.option_quantity' + id).val());
 
-
         }
 
         var price = '{{ product.price }}'
@@ -350,36 +349,6 @@
                 }
             });
 
-            $('.add-to-cart-option').click(function (e) {
-                cartSnackbar()
-                var productQuantity = $('.product-quantity').val();
-                itemObj.productQuantity = productQuantity
-                if (itemObj['option'] === 'true') {
-                    $.ajax({
-                        headers: {"X-CSRFToken": token},
-                        url: '/update_item/',
-                        type: 'POST',
-                        dataType: "json",
-                        data: JSON.stringify(itemObj)
-                    })
-                } else {
-                    var sellerCode = "{{ product.seller_code }}"
-                    var productQuantity = 1
-                    $.ajax({
-                        headers: {"X-CSRFToken": token},
-                        url: '/update_item/',
-                        type: 'POST',
-                        dataType: "json",
-                        data: JSON.stringify({
-                            'sellerCode': sellerCode,
-                            'action': 'set',
-                            'quantity': productQuantity,
-                            'option': 'false'
-                        })
-                    })
-                }
-            });
-
             $('.add-to-cart').click(function (e) {
                 var sellerCode = "{{ product.seller_code }}"
                 var productQuantity = $('.product-quantity').val();
@@ -396,6 +365,41 @@
                     })
                 })
             });
+
+            $('.add-to-cart-option').click(function (e) {
+                cartSnackbar()
+                var productQuantity = $('.product-quantity').val(); //부모 의 갯수
+                itemObj.productQuantity = productQuantity
+                if (itemObj['option'] === 'true') {
+                    console.log("item has option")
+                    $.ajax({
+                        headers: {"X-CSRFToken": token},
+                        url: '/update_item/',
+                        type: 'POST',
+                        dataType: "json",
+                        data: JSON.stringify(itemObj)
+                    })
+                } else {
+                    var sellerCode = "{{ product.seller_code }}"
+                    var productQuantity = 1
+                    console.log("item has no option")
+
+                    $.ajax({
+                        headers: {"X-CSRFToken": token},
+                        url: '/update_item/',
+                        type: 'POST',
+                        dataType: "json",
+                        data: JSON.stringify({
+                            'sellerCode': sellerCode,
+                            'action': 'set',
+                            'quantity': productQuantity,
+                            'option': 'false'
+                        })
+                    })
+                }
+            });
+
+
 
             $('.option-selector').on('input', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때
                 var sellerCode = $(this).find("option:selected").data("product");
