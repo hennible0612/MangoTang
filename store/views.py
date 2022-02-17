@@ -349,18 +349,16 @@ def deleteCartItem(request, seller_code):
         # 각각 body에 있는 필요한 값저장
         customer = request.user.customer  # 현재 customer
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
-        
-        orderItem = OrderItem.objects.get(order=order)
+        product = Product.objects.get(seller_code=seller_code)
+        orderItem = OrderItem.objects.get(order=order, product=product)
         option_code = data['optionCode']
 
-        # print(option_code)
-        # print(seller_code)
         options = ProductOption.objects.get(option_seller_code=option_code)
-        print(options)
         orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
+        print(orderItemOption)
         orderItemOption.delete()
         data = {
-            "orderItemPriceTotal": order.get_cart_total
+            "orderItemPriceTotal": order.get_total
         }
         json_obj = json.dumps(data)
 
