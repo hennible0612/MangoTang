@@ -184,18 +184,14 @@ def updateItem(request):
     data = json.loads(request.body)  # JSON body data에저장
     option = data["option"]
     if (option == 'false'):
-
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
         quantity = data['quantity']
-
         customer = request.user.customer  # 현재 customer
         product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
-
         orderItem, created = OrderItem.objects.get_or_create(order=order,
                                                              product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
-
         if action == 'add':
             orderItem.quantity = (orderItem.quantity + 1)
         elif action == 'remove':
@@ -211,18 +207,13 @@ def updateItem(request):
         return JsonResponse('Item was added', safe=False)
     else:
         seller_code = data['itemSellercode']  # 옵션의 부모 제품 코드
-
         productQuantity= data['productQuantity'] #옵션의 부모 개수
-
         customer = request.user.customer  # 현재 customer
         product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
-
         orderItem.item_option_bool = True #이 orderitem의 옵션은 True이다.
-
         orderItem.quantity = productQuantity
-
         orderItem.save()
 
         for x, y in zip(data['options'], data['quantity']):
@@ -231,7 +222,7 @@ def updateItem(request):
             orderItemOption,created = OrderItemOption.objects.get_or_create(order_item_option=orderItem, product_option=options)
             orderItemOption.quantity = data['quantity'][y]
             orderItemOption.save()
-        return JsonResponse('err', safe=False)
+        return JsonResponse('Item was added', safe=False)
 
 
 """

@@ -308,7 +308,6 @@
         }
 
         var itemObj = {
-            {#optionBool: false,#}
             itemSellercode: {{ product.seller_code }},
             options: {},
             quantity: {}
@@ -338,7 +337,6 @@
                 $('.' + sellerCode).hide()
 
                 changeTotalPrice(totalPrice, (optionPrice * optionQuantity), 'minus')
-
 
                 $('.option_quantity' + counter).val(1);
                 delete itemObj['options']['optionSellercode' + counter]
