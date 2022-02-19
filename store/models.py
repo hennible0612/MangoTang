@@ -35,9 +35,9 @@ class Customer(models.Model):
     # birth_date = models.DateField(blank=True, null=True)
     # gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     mileage = models.IntegerField(null=True, blank=True)
-    # join_date = models.DateField()
-    address1 = models.CharField(max_length=200, null=False)
-    address2 = models.CharField(max_length=200, null=False)
+    join_date = models.DateTimeField(default=datetime.now)
+    # address1 = models.CharField(max_length=200, null=False)
+    # address2 = models.CharField(max_length=200, null=False)
 
     def __str__(self):
         return self.name

@@ -43,15 +43,15 @@
                                     <input type="text" class="form-control" name="phone_number" id="phone_number"
                                            value="{{ form.phone_number.value|default_if_none:'' }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="address1">주소</label>
-                                    <input type="text" class="form-control" name="address1" id="address1"
-                                           value="{{ form.address1.value|default_if_none:'' }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="address2">상세주소</label>
-                                    <input type="text" class="form-control" name="address2" id="address2"
-                                           value="{{ form.address2.value|default_if_none:'' }}">
+{#                                <div class="form-group">#}
+{#                                    <label for="address1">주소</label>#}
+{#                                    <input type="text" class="form-control" name="address1" id="address1"#}
+{#                                           value="{{ form.address1.value|default_if_none:'' }}">#}
+{#                                </div>#}
+{#                                <div class="form-group">#}
+{#                                    <label for="address2">상세주소</label>#}
+{#                                    <input type="text" class="form-control" name="address2" id="address2"#}
+{#                                           value="{{ form.address2.value|default_if_none:'' }}">#}
                                 </div>
                                 <button type="submit" class="btn btn-primary">생성하기</button>
                             </form>

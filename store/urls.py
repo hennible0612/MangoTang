@@ -32,6 +32,9 @@ urlpatterns = [
 	# 제품 문의 API
 	path('product/question/<int:seller_code>/<int:page>/', views.getQuestion, name="getQuestion"),
 
+	# 결제 성공
+	path('payment/success',views.paymentSuccess, name='paymentSuccess'),
+
 	# 내페이지
 	path('mypage/', views.mypage, name="mypage"),
 

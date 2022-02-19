@@ -94,7 +94,8 @@
 
                     <div class="mb-3">
                         <label for="address">주소</label>
-                        <input type="text" class="form-control" id="address_kakao" placeholder="주소" required="" readonly>
+                        <input type="text" class="form-control" id="address_kakao" placeholder="주소" required=""
+                               readonly>
                         <div class="invalid-feedback">
                             주소를 입력해주세요
                         </div>
@@ -102,17 +103,18 @@
 
                     <div class="mb-3">
                         <label for="address2">상세주소</label>
-                        <input type="text" class="form-control" id="address2" name="address_detail" placeholder="주소" required="">
+                        <input type="text" class="form-control" id="address2" name="address_detail" placeholder="주소"
+                               required="">
                         <div class="invalid-feedback">
                             상세주소를 입력해주세요
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="address2">상세주소</label>
+                        <label for="address2">전화번호</label>
                         <input type="text" class="form-control" name="address_detail" placeholder="전화번호" required="">
                         <div class="invalid-feedback">
-                            상세주소를 입력해주세요
+                            전화번호를 입력해주세요
                         </div>
                     </div>
 
@@ -163,58 +165,8 @@
 
                     <h4 class="mb-3">결제</h4>
 
-                    <div class="d-block my-3">
-                        <div class="custom-control custom-radio">
-                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked=""
-                                   required="">
-                            <label class="custom-control-label" for="credit">Credit card</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input"
-                                   required="">
-                            <label class="custom-control-label" for="debit">Debit card</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input"
-                                   required="">
-                            <label class="custom-control-label" for="paypal">PayPal</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="cc-name">Name on card</label>
-                            <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                            <small class="text-muted">Full name as displayed on card</small>
-                            <div class="invalid-feedback">
-                                Name on card is required
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="cc-number">Credit card number</label>
-                            <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                            <div class="invalid-feedback">
-                                Credit card number is required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-expiration">Expiration</label>
-                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                            <div class="invalid-feedback">
-                                Expiration date required
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-cvv">CVV</label>
-                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                            <div class="invalid-feedback">
-                                Security code required
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+
+                    <button class="btn btn-primary btn-lg btn-block" onclick="requestPay()" type="submit">결제하기</button>
                 </form>
             </div>
         </div>
@@ -232,20 +184,45 @@
         </footer>
     </div>
 
-    {#    <!-- Bootstrap core JavaScript#}
-    {#    ================================================== -->#}
-    {#    <!-- Placed at the end of the document so the pages load faster -->#}
-    {#    <script src="./Checkout example for Bootstrap_files/jquery-3.3.1.slim.min.js.다운로드"#}
-    {#            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"#}
-    {#            crossorigin="anonymous"></script>#}
-    {#    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>#}
-    {#    <script src="./Checkout example for Bootstrap_files/popper.min.js.다운로드"></script>#}
-    {#    <script src="./Checkout example for Bootstrap_files/bootstrap.min.js.다운로드"></script>#}
-    {#    <script src="./Checkout example for Bootstrap_files/holder.min.js.다운로드"></script>#}
-
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script>
+        var IMP = window.IMP; // 생략 가능
+        IMP.init("imp55124420"); // 예: imp00000000
+        function requestPay() {
+            {#IMP.request_pay(param, callback) //결제창 호출#}
+            IMP.request_pay({ // param
+                pg: "html5_inicis", //PG사
+                pay_method: "card", //결제 수단
+                merchant_uid: "ORD20180131-0000011", //주문번호
+                name: "노르웨이 회전 의자",//상품명
+                amount: 100, //가격
+                buyer_email: "gildong@gmail.com", //이메일
+                buyer_name: "홍길동", //이름
+                buyer_tel: "010-4242-4242", //전화번호
+                buyer_addr: "서울특별시 강남구 신사동", //주소
+                buyer_postcode: "01181" //우편번호
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                    console.log("성공")
+                    rsp.imp_uid // 아임포트 고유 결제 번호
+                    rsp.merchant_uid //주문번호
+                    rsp.pay_method //결제수단
+                    var msg = '결제가 완료되었습니다.';
+                    msg += '고유ID : ' + rsp.imp_uid;
+                    msg += '상점 거래ID : ' + rsp.merchant_uid;
+                    msg += '결제 금액 : ' + rsp.paid_amount;
+                    msg += '카드 승인번호 : ' + rsp.apply_num;
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                }
+                alert(msg);
+            });
+        }
 
+    </script>
+    <script>
         window.onload = function () {
             document.getElementById("address_kakao").addEventListener("click", function () { //주소입력칸을 클릭하면
                 //카카오 지도 발생

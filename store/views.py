@@ -384,7 +384,15 @@ def getQuestion(request, seller_code, page):
     json_obj = serializers.serialize('json', question_obj)  # 페이징된값
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+"""
+결제 성공
+"""
 
+def paymentSuccess(request):
+
+    print("결제 성공")
+    json_obj = {}
+    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 """
 내페이지
