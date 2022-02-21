@@ -235,6 +235,7 @@ def updateCartItem(request):
     data = json.loads(request.body)  # JSON body data에저장
     option = data['option']
     if (option == False):
+        print("option == False")
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
         # quantity = data['quantity']
@@ -259,13 +260,16 @@ def updateCartItem(request):
             "itemDiscountPrice": orderItem.product.price_discount,
             "itemPriceTotal": orderItem.get_total,
             "orderItemTotal": order.get_cart_items,
-            "orderItemPriceTotal": order.get_cart_total
+            "orderItemPriceTotal": order.get_cart_total,
+            "cartTotal": order.get_total,
 
         }
         json_obj = json.dumps(data)
 
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
+        print("option == True")
+
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
         code = data['code'] # 부모 코드
@@ -289,7 +293,8 @@ def updateCartItem(request):
         data = {
             "itemOptionQuantity": orderItemOption.quantity,
             "itemOptionPrice": orderItemOption.product_option.option_price,
-            "orderItemPriceTotal": order.get_cart_total
+            "orderItemPriceTotal": order.get_cart_total,
+            "cartTotal": order.get_total,
 
         }
         json_obj = json.dumps(data)

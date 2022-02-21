@@ -197,7 +197,7 @@
                 $('.quantity-total' + loopCounter).html(info['itemQuantity'])
                 $('.item-cost-total' + loopCounter).html(info['itemPriceTotal'] + "원")
                 $('.cart-quantity-total').html(info['orderItemTotal'])
-                $('.cart-price-total').text(info['orderItemPriceTotal'] + "원")
+                $('.cart-price-total').text(info['cartTotal'] + "원")
             }).fail(function () {
 
             })
@@ -218,7 +218,9 @@
                 var info = JSON.parse(data)
                 $('.item-option-total' + loopCounter).html(info['itemOptionQuantity'])
                 $('.item-option-cost-total' + loopCounter).html((info['itemOptionPrice'] * info['itemOptionQuantity']) + "원")
-                $('.cart-price-total').text((info['orderItemPriceTotal'] + (info['itemOptionPrice'] * info['itemOptionQuantity'])) + "원")
+                {#$('.cart-price-total').text((info['orderItemPriceTotal'] + (info['itemOptionPrice'] * info['itemOptionQuantity'])) + "원")#}
+                $('.cart-price-total').text(info['cartTotal'] + "원")
+
             }).fail(function () {
 
             })

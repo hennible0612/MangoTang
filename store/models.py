@@ -122,7 +122,7 @@ class Order(models.Model):
         return total
 
     @property
-    def get_total(self):
+    def get_total(self): #옵션 포함 해당 order의 모든 가격
         orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
         total = sum([item.get_total for item in orderitems])  # 다더함함
         orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
