@@ -94,7 +94,6 @@ class Order(models.Model):
     track_number = models.IntegerField(null=True, blank=True)
     order_number = models.IntegerField(null=True, blank=True)
     total_fee = models.IntegerField(null=True, blank=True)
-
     recipent_address1 = models.CharField(max_length=200, null=False)
     recipent_address2 = models.CharField(max_length=200, null=False)
     recipent_number = models.CharField(max_length=50, null=False)

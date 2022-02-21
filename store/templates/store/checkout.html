@@ -31,18 +31,18 @@
 
 
 
-                        {% if item.item_option_bool == True %}
-                            {% for options in itemOption %}
-
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0">rjkskekfak</h6>
-                                        <small class="text-muted">수량: 34</small>
-                                    </div>
-                                    <span class="text-muted">345345원</span>
-                                </li>
-                            {% endfor %}
-                        {% endif %}
+{#                        {% if item.item_option_bool == True %}#}
+{#                            {% for options in itemOption %}#}
+{##}
+{#                                <li class="list-group-item d-flex justify-content-between lh-condensed">#}
+{#                                    <div>#}
+{#                                        <h6 class="my-0">{{ options.orderItem }}</h6>#}
+{#                                        <small class="text-muted">수량: 34</small>#}
+{#                                    </div>#}
+{#                                    <span class="text-muted">345345원</span>#}
+{#                                </li>#}
+{#                            {% endfor %}#}
+{#                        {% endif %}#}
                     {% endfor %}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>배송비: </span>

@@ -338,6 +338,14 @@ def deleteCartItem(request, seller_code):
         data = {
             "orderItemPriceTotal": order.get_total
         }
+        itemOption = orderItem.orderitemoption_set.all() #아이템 있는지 테스트용
+        if (bool(itemOption) == True):
+
+            pass
+        else:
+            orderItem.item_option_bool = False
+            orderItem.save()
+
         json_obj = json.dumps(data)
 
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
