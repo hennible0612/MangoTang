@@ -31,18 +31,22 @@
 
 
 
-{#                        {% if item.item_option_bool == True %}#}
-{#                            {% for options in itemOption %}#}
-{##}
-{#                                <li class="list-group-item d-flex justify-content-between lh-condensed">#}
-{#                                    <div>#}
-{#                                        <h6 class="my-0">{{ options.orderItem }}</h6>#}
-{#                                        <small class="text-muted">수량: 34</small>#}
-{#                                    </div>#}
-{#                                    <span class="text-muted">345345원</span>#}
-{#                                </li>#}
-{#                            {% endfor %}#}
-{#                        {% endif %}#}
+                        {% if item.item_option_bool == True %}
+
+                            {% for options in itemOption %}
+                                {% if item.product.product_name == options.order_item_option.product.product_name  %}
+                                <script>console.log("fuck you")</script>
+
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">ㄴ{{ options.product_option.option_name }}</h6>
+                                        <small class="text-muted">수량 : {{ options.quantity }}</small>
+                                    </div>
+                                    <span class="text-muted">{{ options.product_option.option_price|floatformat:0 }}원</span>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>배송비: </span>

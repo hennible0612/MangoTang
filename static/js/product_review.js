@@ -11,10 +11,7 @@ $(".page-link").click(function () {
 });
 
 function nextReview(data, page) {
-
-
     $.each(jQuery.parseJSON(data), function (id, data) {
-
         console.log(data)
         console.log(data)
         console.log("product : ", data.fields.product)
@@ -25,8 +22,6 @@ function nextReview(data, page) {
         console.log("short_review : ", data.fields.short_review)
         console.log("star_rating : ", data.fields.star_rating)
         console.log("-" * 100)
-
-
     });
 
 }

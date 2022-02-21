@@ -158,10 +158,10 @@ def checkout(request):
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)
         items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
         cartItems = order.get_cart_items
-
+        itemOption =[]
         if (bool(items) == True):
             for item in items:
-                itemOption = OrderItemOption.objects.filter(order_item_option=item)
+                itemOption += OrderItemOption.objects.filter(order_item_option=item)
         else:
             itemOption = []
 
