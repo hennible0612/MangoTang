@@ -34,16 +34,15 @@
                         {% if item.item_option_bool == True %}
 
                             {% for options in itemOption %}
-                                {% if item.product.product_name == options.order_item_option.product.product_name  %}
-                                <script>console.log("fuck you")</script>
+                                {% if item.product.product_name == options.order_item_option.product.product_name %}
 
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0">ㄴ{{ options.product_option.option_name }}</h6>
-                                        <small class="text-muted">수량 : {{ options.quantity }}</small>
-                                    </div>
-                                    <span class="text-muted">{{ options.product_option.option_price|floatformat:0 }}원</span>
-                                </li>
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                        <div>
+                                            <h6 class="my-0">ㄴ{{ options.product_option.option_name }}</h6>
+                                            <small class="text-muted">수량 : {{ options.quantity }}</small>
+                                        </div>
+                                        <span class="text-muted">{{ options.product_option.option_price|floatformat:0 }}원</span>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
@@ -170,7 +169,8 @@
                     <h4 class="mb-3">결제</h4>
 
 
-                    <button class="btn btn-primary btn-lg btn-block" onclick="requestPay()" type="submit">결제하기</button>
+                    {#                    <button class="btn btn-primary btn-lg btn-block" onclick="requestPay()" type="submit">결제하기</button>#}
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">결제하기</button>
                 </form>
             </div>
         </div>
@@ -225,21 +225,6 @@
             });
         }
 
-    </script>
-    <script>
-        window.onload = function () {
-            document.getElementById("address_kakao").addEventListener("click", function () { //주소입력칸을 클릭하면
-                //카카오 지도 발생
-                new daum.Postcode({
-                    oncomplete: function (data) { //선택시 입력값 세팅
-                        document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                        document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-                    }
-                }).open();
-            });
-        }
-    </script>
-    <script>
 
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
@@ -255,12 +240,28 @@
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
+                        } else {
+                            requestPay()
                         }
                         form.classList.add('was-validated');
                     }, false);
                 });
             }, false);
         })();
+
+
+        //카카오 주소 api
+        window.onload = function () {
+            document.getElementById("address_kakao").addEventListener("click", function () { //주소입력칸을 클릭하면
+                //카카오 지도 발생
+                new daum.Postcode({
+                    oncomplete: function (data) { //선택시 입력값 세팅
+                        document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                        document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                    }
+                }).open();
+            });
+        }
     </script>
     </body>
 
