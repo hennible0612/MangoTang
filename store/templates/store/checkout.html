@@ -79,14 +79,21 @@
                                placeholder=mango@mangotang.com>
                     </div>
                     <div class="row">
-                        <div class="col-md-9 mb-3">
+                        <div class="col-md-2 mb-3">
+                            <label for="address">우편</label>
+                            <input type="text" class="form-control address_kakao" name="post_code"
+                                   id="post_kakao" placeholder="우편"
+                                   required=""
+                                   readonly>
+                        </div>
+                        <div class="col-md-8 mb-3">
                             <label for="address">주소</label>
                             <input type="text" class="form-control address_kakao" name="recipent_address1"
                                    id="address_kakao" placeholder="주소"
                                    required=""
                                    readonly>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="addressButton">주소 찾기</label>
                             <br>
                             <button class="address_kakao" type="button" value="ignore" formnovalidate>검색</button>
@@ -190,8 +197,11 @@
                 body:JSON.stringify({'data':data})
             }).then((response) => response.json())
             .then((data) => {
+
                 console.log('Success:', data);
                 alert('Transaction completed');
+
+
             })
         }
 
@@ -242,6 +252,7 @@
             new daum.Postcode({
                 oncomplete: function (data) { //선택시 입력값 세팅
                     document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                    document.getElementById("post_kakao").value = data.zonecode; // 주소 넣기
                     document.querySelector("input[name=recipent_address2]").focus(); //상세입력 포커싱
                 }
             }).open();

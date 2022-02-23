@@ -404,7 +404,6 @@ def checkoutPayment(request):
     data = json.loads(request.body)
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-    print(data)
     order_id = str(customer.id) + str(datetime.now().timestamp())
     order_id = int(float(order_id))
 
@@ -421,9 +420,23 @@ def checkoutPayment(request):
     order.email = data['data']['email']
     order.save()
 
+    iamport_data= {
+        "merchant_uid" : order_id,
+        "name":"import",
+        "amount": order.get_total,
+        "buyer_email": data['data']['email'],
+        "buyer_name": data['data']['orderer_name'],
+        "buyer_tel": data['data']['orderer_number'],
+        "buyer_addr": data['data']['recipent_address1'],
 
 
-    return JsonResponse("checkout payment", safe=False, json_dumps_params={'ensure_ascii': False})
+
+    }
+
+
+    json_obj = json.dumps(data)
+
+    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': True})
 
 """
 결제 성공
