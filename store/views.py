@@ -1,10 +1,12 @@
 import json
+import math
 
 from django.contrib.auth import authenticate, login
 from django.core import serializers
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+import datetime
 
 from .models import *
 
@@ -400,9 +402,14 @@ def getQuestion(request, seller_code, page):
 
 def checkoutPayment(request):
     data = json.loads(request.body)
-
     customer = request.user.customer  # 현재 customer
-    print(customer.id)
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+
+    order_id = str(customer.id) + str(datetime.now().timestamp())
+    order_id = int(float(order_id))
+    order.total_fee = order.get_total
+    order.transaction_id = order_id
+    order.save()
 
 
     return JsonResponse("checkout payment", safe=False, json_dumps_params={'ensure_ascii': False})
