@@ -74,9 +74,9 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="email">이메일 <span class="text-muted">(선택사항)</span></label>
+                        <label for="email">이메일 <span class="text-muted"></span></label>
                         <input type="email" class="form-control" id="email" name="email"
-                               placeholder=mango@mangotang.com>
+                               placeholder=mango@mangotang.com required="">
                     </div>
                     <div class="row">
                         <div class="col-md-2 mb-3">
@@ -173,6 +173,7 @@
                 'orderer_name': null,
                 'recipent_name': null,
                 'email': null,
+                'post_code': null,
                 'recipent_address1': null,
                 'recipent_address2': null,
                 'recipent_number': null,
@@ -182,6 +183,7 @@
             data.orderer_name = form.orderer_name.value
             data.recipent_name = form.recipent_name.value
             data.email = form.email.value
+            data.post_code = form.post_code.value
             data.recipent_address1 = form.recipent_address1.value
             data.recipent_address2 = form.recipent_address2.value
             data.recipent_number = form.recipent_number.value

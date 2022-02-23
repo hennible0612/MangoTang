@@ -410,6 +410,7 @@ def checkoutPayment(request):
     order.total_fee = order.get_total
     order.order_number = order_id
     order.shipping_fee = order.get_deliver_price
+    order.post_code = data['data']['post_code']
     order.recipent_address1 = data['data']['recipent_address1']
     order.recipent_address2 = data['data']['recipent_address2']
     order.recipent_number = data['data']['recipent_number']

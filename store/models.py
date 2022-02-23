@@ -94,6 +94,8 @@ class Order(models.Model):
     order_number = models.IntegerField(null=True, blank=True)
     email = models.EmailField(null=True,blank=True)
     total_fee = models.IntegerField(null=True, blank=True)
+    post_code = models.CharField(max_length=200, null=True, blank=True)
+
     recipent_address1 = models.CharField(max_length=200, null=False)
     recipent_address2 = models.CharField(max_length=200, null=False)
     recipent_number = models.CharField(max_length=50, null=False)
