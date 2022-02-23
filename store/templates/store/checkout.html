@@ -56,15 +56,6 @@
                         <strong>{{ order.get_total|floatformat:0 }}원</strong>
                     </li>
                 </ul>
-
-                {#                <form class="card p-2">#}
-                {#                    <div class="input-group">#}
-                {#                        <input type="text" class="form-control" placeholder="Promo code">#}
-                {#                        <div class="input-group-append">#}
-                {#                            <button type="submit" class="btn btn-secondary">Redeem</button>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                </form>#}
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">-------------</h4>
@@ -72,54 +63,63 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="sender">보내는 사람</label>
-                            <input type="text" class="form-control" id="sender" placeholder="" value="" required="">
+                            <input type="text" class="form-control" id="sender" name="orderer_name" placeholder=""
+                                   value="" required="">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="receiver">받는 사람</label>
-                            <input type="text" class="form-control" id="receiver" placeholder="" value="" required="">
+                            <input type="text" class="form-control" id="receiver" name="recipent_name" placeholder=""
+                                   value="" required="">
 
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="email">이메일 <span class="text-muted">(선택사항)</span></label>
-                        <input type="email" class="form-control" id="email" placeholder=mango@mangotang.com>
+                        <input type="email" class="form-control" id="email" name="email"
+                               placeholder=mango@mangotang.com>
                     </div>
                     <div class="row">
                         <div class="col-md-9 mb-3">
                             <label for="address">주소</label>
-                            <input type="text" class="form-control address_kakao" id="address_kakao" placeholder="주소" required=""
+                            <input type="text" class="form-control address_kakao" name="recipent_address1"
+                                   id="address_kakao" placeholder="주소"
+                                   required=""
                                    readonly>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="addressButton">주소 찾기</label>
                             <br>
-                            <button class="address_kakao" type="button" value="ignore" formnovalidate >검색</button>
+                            <button class="address_kakao" type="button" value="ignore" formnovalidate>검색</button>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="address2">상세주소</label>
-                        <input type="text" class="form-control" id="address2" name="address_detail" placeholder="주소"
+                        <input type="text" class="form-control" name="recipent_address2" id="address2" placeholder="주소"
                                required="">
 
                     </div>
 
                     <div class="mb-3">
-                        <label for="address2">수령인 전화번호</label>
-                        <input type="text" maxlength="11" class="form-control" name="address_detail" placeholder="전화번호"
+                        <label for="receiver_number">수령인 전화번호</label>
+                        <input type="number" class="form-control" id="onlyNumber" name="recipent_number"
+                               placeholder="'-'을 제외한 휴대폰번호를 입력해주세요"
+                               maxlength="11" oninput="maxLengthCheck(this)"
                                required="">
 
                     </div>
 
                     <div class="mb-3">
-                        <label for="address2">주문자 전화번호</label>
-                        <input type="text" maxlength="11" class="form-control" name="address_detail" placeholder="전화번호"
+                        <label for="orderer_number">주문자 전화번호</label>
+                        <input type="number" class="form-control" id="onlyNumber2" name="orderer_number"
+                               placeholder="'-'을 제외한 휴대폰번호를 입력해주세요"
+                               maxlength="11" oninput="maxLengthCheck(this)"
                                required="">
 
                     </div>
 
                     <div class="mb-3">
                         <label for="order request">요청사항<span class="text-muted">(선택사항)</span></label>
-                        <input type="text" class="form-control" id="request" placeholder="요청사항">
+                        <input type="text" class="form-control" id="request" name="order_request" placeholder="요청사항">
                     </div>
 
 
@@ -155,11 +155,33 @@
         var form = document.getElementById('form')
         form.addEventListener('submit', function (e) { //결제 버튼 클릭시
             e.preventDefault()
-            console.log('Form submitted....')
-            {#requestPay()#}
-            {#document.getElementById('form-button').classList.add('hidden'); //Continue 버튼 hidden#}
-            {#document.getElementById('payment-info').classList.remove('hidden'); //#}
+
+            submitFormData();
+
+
         });
+
+        function submitFormData() {
+            var data = {
+                'orderer_name': null,
+                'recipent_name': null,
+                'email': null,
+                'recipent_address1': null,
+                'recipent_address2': null,
+                'recipent_number': null,
+                'orderer_number': null,
+                'order_request': null,
+            }
+            data.orderer_name = form.orderer_name.value
+            data.recipent_name = form.recipent_name.value
+            data.email = form.email.value
+            data.recipent_address1 = form.recipent_address1.value
+            data.recipent_address2 = form.recipent_address2.value
+            data.recipent_number = form.recipent_number.value
+            data.orderer_number = form.orderer_number.value
+            data.order_request = form.order_request.value
+
+        }
 
 
         var IMP = window.IMP; // 생략 가능
@@ -196,37 +218,23 @@
             });
         }
 
-        {#$('#address_kakao').click(function () {#}
-        {#    new daum.Postcode({#}
-        {#        oncomplete: function (data) { //선택시 입력값 세팅#}
-        {#            document.getElementById("address_kakao").value = data.address; // 주소 넣기#}
-        {#            document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱#}
-                    {#$('#address_kakao').prop('readonly',true)#}
-        {#        }#}
-        {#    }).open();        });#}
+        function maxLengthCheck(object) {
+            object.value = object.value.replace(/[^0-9]/gi, '');
+            if (object.value.length > object.maxLength) {
+                object.value = object.value.slice(0, object.maxLength)
+            }
+        }
+
+
 
         $('.address_kakao').click(function () {
             new daum.Postcode({
                 oncomplete: function (data) { //선택시 입력값 세팅
                     document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                    document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-                    {#$('#address_kakao').prop('readonly',true)#}
+                    document.querySelector("input[name=recipent_address2]").focus(); //상세입력 포커싱
                 }
             }).open();
         });
-        //카카오 주소 api
-        {#window.onload = function () {#}
-        {#    document.getElementById("address_kakao").addEventListener("click", function () { //주소입력칸을 클릭하면#}
-        {#        //카카오 지도 발생#}
-        {#        new daum.Postcode({#}
-        {#            oncomplete: function (data) { //선택시 입력값 세팅#}
-        {#                document.getElementById("address_kakao").value = data.address; // 주소 넣기#}
-        {#                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱#}
-                        {#$('#address_kakao').prop('readonly',true)#}
-        {#            }#}
-        {#        }).open();#}
-        {#    });        }#}
-
     </script>
     </body>
 
