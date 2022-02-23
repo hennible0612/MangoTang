@@ -180,7 +180,19 @@
             data.recipent_number = form.recipent_number.value
             data.orderer_number = form.orderer_number.value
             data.order_request = form.order_request.value
-
+            var url = 'payment/';
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'applicaiton/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body:JSON.stringify({'data':data})
+            }).then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                alert('Transaction completed');
+            })
         }
 
 
@@ -224,7 +236,6 @@
                 object.value = object.value.slice(0, object.maxLength)
             }
         }
-
 
 
         $('.address_kakao').click(function () {
