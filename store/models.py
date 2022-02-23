@@ -128,6 +128,12 @@ class Order(models.Model):
         optionTotal = sum([item.get_option_cart_total for item in orderitems])  # 다더함함
         return total + optionTotal
 
+    @property
+    def get_deliver_price(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_delivery_price for item in orderitems])
+        return total
+
     def __str__(self):
         return " 옵션이름 : " + str(self.get_cart_option_total)
 
@@ -156,6 +162,9 @@ class OrderItem(models.Model):
     def get_option_bool(self):
         return self.item_option_bool
 
+    @property
+    def get_delivery_price(self):
+        return self.product.shipment_price
 
     @property
     def get_total(self):

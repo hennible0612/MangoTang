@@ -14,8 +14,12 @@
                         <tr>
                             <th><h5>수량: <strong class="cart-quantity-total">{{ order.get_cart_items }}</strong></h5>
                             </th>
-                            <th><h5>총 결제금액: <strong
+                            <th><h5>총 제픔비: <strong
                                     class="cart-price-total">{{ order.get_total|floatformat:0 }}원</strong></h5>
+                            </th>
+                            <th>
+                            <th><h5>총 배송비: <strong
+                                    class="cart-price-total">{{ order.get_deliver_price |floatformat:0 }}원</strong></h5>
                             </th>
                             <th>
                                 <a style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">결제하기</a>

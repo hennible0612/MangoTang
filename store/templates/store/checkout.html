@@ -49,7 +49,7 @@
                     {% endfor %}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>배송비: </span>
-                        <strong>-원</strong>
+                        <strong>{{ order.get_deliver_price }}원</strong>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>총 금액: </span>

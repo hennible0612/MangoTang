@@ -410,6 +410,7 @@ def checkoutPayment(request):
 
     order.total_fee = order.get_total
     order.order_number = order_id
+    order.shipping_fee = order.get_deliver_price
     order.recipent_address1 = data['data']['recipent_address1']
     order.recipent_address2 = data['data']['recipent_address2']
     order.recipent_number = data['data']['recipent_number']
@@ -420,7 +421,7 @@ def checkoutPayment(request):
     order.email = data['data']['email']
     order.save()
 
-    
+
 
     return JsonResponse("checkout payment", safe=False, json_dumps_params={'ensure_ascii': False})
 
