@@ -404,13 +404,23 @@ def checkoutPayment(request):
     data = json.loads(request.body)
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-
+    print(data)
     order_id = str(customer.id) + str(datetime.now().timestamp())
     order_id = int(float(order_id))
+
     order.total_fee = order.get_total
-    order.transaction_id = order_id
+    order.order_number = order_id
+    order.recipent_address1 = data['data']['recipent_address1']
+    order.recipent_address2 = data['data']['recipent_address2']
+    order.recipent_number = data['data']['recipent_number']
+    order.orderer_number = data['data']['orderer_number']
+    order.order_request = data['data']['order_request']
+    order.recipent_name = data['data']['recipent_name']
+    order.orderer_name = data['data']['orderer_name']
+    order.email = data['data']['email']
     order.save()
 
+    
 
     return JsonResponse("checkout payment", safe=False, json_dumps_params={'ensure_ascii': False})
 
