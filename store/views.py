@@ -408,6 +408,8 @@ def checkoutPayment(request):
     order_id = str(customer.id) + str(datetime.now().timestamp())
     order_id = int(float(order_id))
 
+    name = order.get_all_item_name
+    print(name)
     order.total_fee = order.get_total
     order.order_number = order_id
     order.shipping_fee = order.get_deliver_price
@@ -422,7 +424,7 @@ def checkoutPayment(request):
     order.email = data['data']['email']
     order.save()
 
-    
+
     iamport_data = {
         "merchant_uid": order_id,
         "name": "import",

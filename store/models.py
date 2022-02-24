@@ -105,6 +105,14 @@ class Order(models.Model):
     orderer_name = models.CharField(max_length=100, null=False)
 
     @property
+    def get_all_item_name(self):
+        orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
+        data = ""
+        for name in orderitems:
+            data += name.get_name +", "
+        return data
+
+    @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
         total = sum([item.get_total for item in orderitems])  # 다더함함
@@ -158,6 +166,10 @@ class OrderItem(models.Model):
     item_option_bool = models.BooleanField(default=False, blank=False, null=True)
 
     def __str__(self):
+        return self.product.product_name
+
+    @property
+    def get_name(self):
         return self.product.product_name
 
     @property
