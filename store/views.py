@@ -88,7 +88,7 @@ def cart(request):
         #     else:
         #         print(item , "option is False")
 
-        if (bool(items) == True): #카트 비어있는지 확인
+        if (bool(items) == True):  # 카트 비어있는지 확인
 
             for item in items:
                 itemOption += OrderItemOption.objects.filter(order_item_option=item)
@@ -160,7 +160,7 @@ def checkout(request):
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)
         items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
         cartItems = order.get_cart_items
-        itemOption =[]
+        itemOption = []
         if (bool(items) == True):
             for item in items:
                 itemOption += OrderItemOption.objects.filter(order_item_option=item)
@@ -173,7 +173,7 @@ def checkout(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption':itemOption}
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
     return render(request, 'store/checkout.html', context)
 
 
@@ -209,19 +209,20 @@ def updateItem(request):
         return JsonResponse('Item was added', safe=False)
     else:
         seller_code = data['itemSellercode']  # 옵션의 부모 제품 코드
-        productQuantity= data['productQuantity'] #옵션의 부모 개수
+        productQuantity = data['productQuantity']  # 옵션의 부모 개수
         customer = request.user.customer  # 현재 customer
         product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
-        orderItem.item_option_bool = True #이 orderitem의 옵션은 True이다.
+        orderItem.item_option_bool = True  # 이 orderitem의 옵션은 True이다.
         orderItem.quantity = productQuantity
         orderItem.save()
 
         for x, y in zip(data['options'], data['quantity']):
             sellerCode = data['options'][x]
-            options = ProductOption.objects.get(option_seller_code=str(sellerCode)) #해당 sellercode의 옵션 가져오고
-            orderItemOption,created = OrderItemOption.objects.get_or_create(order_item_option=orderItem, product_option=options)
+            options = ProductOption.objects.get(option_seller_code=str(sellerCode))  # 해당 sellercode의 옵션 가져오고
+            orderItemOption, created = OrderItemOption.objects.get_or_create(order_item_option=orderItem,
+                                                                             product_option=options)
             orderItemOption.quantity = data['quantity'][y]
             orderItemOption.save()
         return JsonResponse('Item was added', safe=False)
@@ -274,12 +275,11 @@ def updateCartItem(request):
 
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
-        code = data['code'] # 부모 코드
+        code = data['code']  # 부모 코드
 
         customer = request.user.customer  # 현재 customer
         product = Product.objects.get(seller_code=code)  # 해당하는 productId가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
-
 
         orderItem = OrderItem.objects.get(order=order, product=product)
 
@@ -340,7 +340,7 @@ def deleteCartItem(request, seller_code):
         data = {
             "orderItemPriceTotal": order.get_total
         }
-        itemOption = orderItem.orderitemoption_set.all() #아이템 있는지 테스트용
+        itemOption = orderItem.orderitemoption_set.all()  # 아이템 있는지 테스트용
         if (bool(itemOption) == True):
 
             pass
@@ -400,6 +400,7 @@ def getQuestion(request, seller_code, page):
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
+
 def checkoutPayment(request):
     data = json.loads(request.body)
     customer = request.user.customer  # 현재 customer
@@ -421,32 +422,33 @@ def checkoutPayment(request):
     order.email = data['data']['email']
     order.save()
 
-    iamport_data= {
-        "merchant_uid" : order_id,
-        "name":"import",
+    
+    iamport_data = {
+        "merchant_uid": order_id,
+        "name": "import",
         "amount": order.get_total,
         "buyer_email": data['data']['email'],
         "buyer_name": data['data']['orderer_name'],
         "buyer_tel": data['data']['orderer_number'],
         "buyer_addr": data['data']['recipent_address1'],
 
-
-
     }
 
+    json_obj = json.dumps(iamport_data)
 
-    json_obj = json.dumps(data)
+    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
-    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': True})
 
 """
 결제 성공
 """
 
+
 def paymentSuccess(request):
     print("결제 성공")
     json_obj = {}
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
 
 """
 내페이지
