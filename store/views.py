@@ -439,12 +439,13 @@ def checkoutPayment(request):
     json_obj = json.dumps(iamport_data)
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
-def testPayment(request):
 
+def checkoutComplete(request):
+    data = json.loads(request.body)
+    print(data['imp_uid'])
+    print(data['merchant_uid'])
+    return JsonResponse("Helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
-
-    return render(request, 'store/test.html')
-    # return HttpResponse("hello world")
 
 
 """

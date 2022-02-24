@@ -30,9 +30,9 @@ urlpatterns = [
 
 	#결제 창
 	path('checkout/payment/', views.checkoutPayment, name="checkoutPayment"),
+	#결제 완료
+	path('checkout/complete/', views.checkoutComplete, name="checkoutComplete"),
 
-	#test결제 창
-	path('test/payment/', views.testPayment, name="testpay"),
 
 	# 제품 문의 API
 	path('product/question/<int:seller_code>/<int:page>/', views.getQuestion, name="getQuestion"),

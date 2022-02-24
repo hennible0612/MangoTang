@@ -173,18 +173,27 @@
                 buyer_postcode: buyer_postcode //우편번호
             }, function (rsp) { // callback
                 if (rsp.success) {
-                    console.log("성공")
-                    console.log(rsp.imp_uid,);
-                    console.log(rsp.merchant_uid);
-                    $.ajax({
-                        url: "/checkout/complete",
-                        method: "POST",
-                        headers: {"Content-Type": "application/json"},
-                        data: {
-                            imp_uid: rsp.imp_uid,
-                            merchant_uid: rsp.merchant_uid
-                        }
+                    {#console.log(typeof rsp.imp_uid);#}
+                    {#console.log(typeof rsp.merchant_uid);#}
+                    {#var imp_uid = rsp.imp_uid#}
+                    {#var merchant_uid = rsp.merchant_uid#}
+                    {#console.log(typeof imp_uid);#}
+                    {#console.log(typeof merchant_uid);#}
+                    var data = {
+                        'imp_uid': imp_uid,
+                        'merchant_uid': merchant_uid
+                    }
+                    jQuery.ajax({
+                        headers: {
+                            "X-CSRFToken": csrftoken,
+                            "Content-Type": "application/json",
+                        },
+                        url: "complete/",
+                        type: 'POST',
+                        dataType: "json",
+                        data: JSON.stringify({'imp_uid': rsp.imp_uid,'merchant_uid': rsp.merchant_uid})
                     })
+
                 } else {
                     var msg = '결제에 실패하였습니다.';
                     msg += '에러내용 : ' + rsp.error_msg;
@@ -217,10 +226,9 @@
             var url = 'payment/';
             fetch(url, {
                 method: 'POST',
-                headers: {"X-CSRFToken": token},
 
                 headers: {
-                    'Content-Type': 'applicaiton/json',
+                    'Content-Type': 'application/json',
                     "X-CSRFToken": token,
                 },
                 body: JSON.stringify({'data': data})
@@ -232,6 +240,7 @@
                         obj['buyer_name'], obj['buyer_tel'], obj['buyer_addr'], obj['post_code'])
                 })
         }
+
         var token = '{{csrf_token}}';
 
         var form = document.getElementById('form')
@@ -242,9 +251,6 @@
 
 
         });
-
-
-
 
 
     </script>

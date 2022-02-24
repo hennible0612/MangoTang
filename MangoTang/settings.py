@@ -52,6 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'MangoTang.urls'
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 TEMPLATES = [
     {
