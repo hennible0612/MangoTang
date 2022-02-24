@@ -28,8 +28,11 @@ urlpatterns = [
 	#제품 리뷰 API
 	path('product/review/<int:seller_code>/<int:page>/', views.getReview, name="getReview"),
 
-	#주문정보 업데이트
+	#결제 창
 	path('checkout/payment/', views.checkoutPayment, name="checkoutPayment"),
+
+	#test결제 창
+	path('test/payment/', views.testPayment, name="testpay"),
 
 	# 제품 문의 API
 	path('product/question/<int:seller_code>/<int:page>/', views.getQuestion, name="getQuestion"),

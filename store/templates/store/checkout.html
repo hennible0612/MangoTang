@@ -154,19 +154,44 @@
         </footer>
     </div>
 
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-    <script>
+    <script type=text/javascript>
+        function requestPay(merchant_uid, name, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, buyer_postcode) {
+            var IMP = window.IMP; // 생략 가능
+            IMP.init("imp55124420"); // 예: imp00000000l
 
-
-        var form = document.getElementById('form')
-        form.addEventListener('submit', function (e) { //결제 버튼 클릭시
-            e.preventDefault()
-
-            submitFormData();
-
-
-        });
+            {#IMP.request_pay(param, callback) //결제창 호출#}
+            IMP.request_pay({ // param
+                pg: "html5_inicis", //PG사
+                pay_method: "card", //결제 수단
+                merchant_uid: merchant_uid, //주문번호
+                name: name,//상품명
+                amount: amount, //가격
+                buyer_email: buyer_email, //이메일
+                buyer_name: buyer_name, //이름
+                buyer_tel: buyer_tel, //전화번호
+                buyer_addr: buyer_addr, //주소
+                buyer_postcode: buyer_postcode //우편번호
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                    console.log("성공")
+                    console.log(rsp.imp_uid,);
+                    console.log(rsp.merchant_uid);
+                    $.ajax({
+                        url: "/checkout/complete",
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        data: {
+                            imp_uid: rsp.imp_uid,
+                            merchant_uid: rsp.merchant_uid
+                        }
+                    })
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                }
+                alert(msg);
+            });
+        }
 
         function submitFormData() {
             var data = {
@@ -192,55 +217,38 @@
             var url = 'payment/';
             fetch(url, {
                 method: 'POST',
+                headers: {"X-CSRFToken": token},
+
                 headers: {
                     'Content-Type': 'applicaiton/json',
-                    'X-CSRFToken': csrftoken,
+                    "X-CSRFToken": token,
                 },
-                body:JSON.stringify({'data':data})
+                body: JSON.stringify({'data': data})
             }).then((response) => response.json())
-            .then((data) => {
-                obj = JSON.parse(data)
+                .then((data) => {
+                    obj = JSON.parse(data)
 
-                requestPay(obj['merchant_uid'],obj['name'],obj['amount'],obj['buyer_email'],
-                obj['buyer_name'],obj['buyer_tel'],obj['buyer_addr'],obj['post_code'])
-            })
+                    requestPay(obj['merchant_uid'], obj['name'], obj['amount'], obj['buyer_email'],
+                        obj['buyer_name'], obj['buyer_tel'], obj['buyer_addr'], obj['post_code'])
+                })
         }
+        var token = '{{csrf_token}}';
+
+        var form = document.getElementById('form')
+        form.addEventListener('submit', function (e) { //결제 버튼 클릭시
+            e.preventDefault()
+
+            submitFormData();
 
 
-        var IMP = window.IMP; // 생략 가능
-        IMP.init("imp55124420"); // 예: imp00000000
-        function requestPay(merchant_uid, name, amount, buyer_email, buyer_name,buyer_tel,buyer_addr, buyer_postcode) {
-            {#IMP.request_pay(param, callback) //결제창 호출#}
-            IMP.request_pay({ // param
-                pg: "html5_inicis", //PG사
-                pay_method: "card", //결제 수단
-                merchant_uid: merchant_uid, //주문번호
-                name: name,//상품명
-                amount: amount, //가격
-                buyer_email: buyer_email, //이메일
-                buyer_name: buyer_name, //이름
-                buyer_tel: buyer_tel, //전화번호
-                buyer_addr: buyer_addr, //주소
-                buyer_postcode: buyer_postcode //우편번호
-            }, function (rsp) { // callback
-                if (rsp.success) {
-                    console.log("성공")
-                    rsp.imp_uid // 아임포트 고유 결제 번호
-                    rsp.merchant_uid //주문번호
-                    rsp.pay_method //결제수단
-                    var msg = '결제가 완료되었습니다.';
-                    msg += '고유ID : ' + rsp.imp_uid;
-                    msg += '상점 거래ID : ' + rsp.merchant_uid;
-                    msg += '결제 금액 : ' + rsp.paid_amount;
-                    msg += '카드 승인번호 : ' + rsp.apply_num;
-                } else {
-                    var msg = '결제에 실패하였습니다.';
-                    msg += '에러내용 : ' + rsp.error_msg;
-                }
-                alert(msg);
-            });
-        }
+        });
 
+
+
+
+
+    </script>
+    <script type=text/javascript>
         function maxLengthCheck(object) {
             object.value = object.value.replace(/[^0-9]/gi, '');
             if (object.value.length > object.maxLength) {
@@ -259,6 +267,7 @@
             }).open();
         });
     </script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     </body>
 
 

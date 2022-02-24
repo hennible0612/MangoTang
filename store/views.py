@@ -4,7 +4,7 @@ import math
 from django.contrib.auth import authenticate, login
 from django.core import serializers
 from django.core.paginator import Paginator
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 import datetime
 
@@ -439,6 +439,12 @@ def checkoutPayment(request):
     json_obj = json.dumps(iamport_data)
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+def testPayment(request):
+
+
+
+    return render(request, 'store/test.html')
+    # return HttpResponse("hello world")
 
 
 """
