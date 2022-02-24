@@ -200,29 +200,28 @@
             }).then((response) => response.json())
             .then((data) => {
                 obj = JSON.parse(data)
-                console.log('Success:', obj);
-                alert('Transaction completed');
 
-
+                requestPay(obj['merchant_uid'],obj['name'],obj['amount'],obj['buyer_email'],
+                obj['buyer_name'],obj['buyer_tel'],obj['buyer_addr'],obj['post_code'])
             })
         }
 
 
         var IMP = window.IMP; // 생략 가능
         IMP.init("imp55124420"); // 예: imp00000000
-        function requestPay() {
+        function requestPay(merchant_uid, name, amount, buyer_email, buyer_name,buyer_tel,buyer_addr, buyer_postcode) {
             {#IMP.request_pay(param, callback) //결제창 호출#}
             IMP.request_pay({ // param
                 pg: "html5_inicis", //PG사
                 pay_method: "card", //결제 수단
-                merchant_uid: "ORD20180131-00000111", //주문번호
-                name: "노르웨이 회전 의자",//상품명
-                amount: 100, //가격
-                buyer_email: "gildong@gmail.com", //이메일
-                buyer_name: "홍길동", //이름
-                buyer_tel: "010-4242-4242", //전화번호
-                buyer_addr: "서울특별시 강남구 신사동", //주소
-                buyer_postcode: "01181" //우편번호
+                merchant_uid: merchant_uid, //주문번호
+                name: name,//상품명
+                amount: amount, //가격
+                buyer_email: buyer_email, //이메일
+                buyer_name: buyer_name, //이름
+                buyer_tel: buyer_tel, //전화번호
+                buyer_addr: buyer_addr, //주소
+                buyer_postcode: buyer_postcode //우편번호
             }, function (rsp) { // callback
                 if (rsp.success) {
                     console.log("성공")

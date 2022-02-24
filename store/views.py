@@ -409,7 +409,6 @@ def checkoutPayment(request):
     order_id = int(float(order_id))
 
     name = order.get_all_item_name
-    print(name)
     order.total_fee = order.get_total
     order.order_number = order_id
     order.shipping_fee = order.get_deliver_price
@@ -427,12 +426,13 @@ def checkoutPayment(request):
 
     iamport_data = {
         "merchant_uid": order_id,
-        "name": "import",
-        "amount": order.get_total,
+        "name": name,
+        "amount": order.get_total+order.get_deliver_price,
         "buyer_email": data['data']['email'],
         "buyer_name": data['data']['orderer_name'],
         "buyer_tel": data['data']['orderer_number'],
         "buyer_addr": data['data']['recipent_address1'],
+        "post_code": data['data']['post_code'],
 
     }
 
