@@ -1,5 +1,5 @@
 import json
-import math
+import requests
 
 from django.contrib.auth import authenticate, login
 from django.core import serializers
@@ -441,29 +441,50 @@ def checkoutPayment(request):
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
-import requests
 
-
+"""
+아임포트 토큰 가져오기
+"""
 def getToken():
-    req = 'https://api.iamport.kr/users/getToken'
+    url = 'https://api.iamport.kr/users/getToken'
 
     data = {
         'imp_key': settings.imp_key,
         'imp_secret': settings.imp_secret
     }
-    req = requests.post(req, data=data)
+    req = requests.post(url, data=data)
     access_res = req.json()
-    print(access_res)
 
     if access_res['code'] == 0:
         return access_res['response']['access_token']
     else:
         return None
 
+"""
+아임포트 결제 정보 확인
+"""
+def getPaymentData(access_res,imp_uid):
+    url = 'https://api.iamport.kr/payments/'+imp_uid
+    headers ={
+        "Authorization":access_res
+    }
+    req = requests.get(url,headers=headers)
+    access_res = req.json()
+
+    if access_res['code'] == 0:
+        return None
+    else:
+        return None
+
 
 def checkoutComplete(request):
     data = json.loads(request.body)
-    print(getToken())
+    imp_uid = data['imp_uid']
+    merchant_uid = data['merchant_uid']
+
+    access_res = getToken() #토큰 가져오기
+    getPaymentData(access_res,imp_uid) #아임포트 서버에서 결제 확인
+
 
     return JsonResponse("Helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
