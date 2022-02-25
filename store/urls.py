@@ -32,6 +32,8 @@ urlpatterns = [
 	path('checkout/payment/', views.checkoutPayment, name="checkoutPayment"),
 	#결제 완료
 	path('checkout/complete/', views.checkoutComplete, name="checkoutComplete"),
+	#결제 완료
+	path('checkout/complete/<int:orderId>/', views.checkoutSummery, name="checkoutSummery"),
 
 
 	# 제품 문의 API

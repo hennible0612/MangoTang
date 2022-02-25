@@ -512,7 +512,17 @@ def checkoutComplete(request):
         json_obj = json.dumps(iamportData)
 
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+"""
+결제 완료 요약
+"""
+def checkoutSummery(request, orderId):
+    data = json.loads(request.body)
 
+    print(orderId)
+    print(data)
+    context ={'data':data}
+
+    return render(request, 'store/checkoutsummery.html', context)
 
 """
 결제 성공

@@ -155,11 +155,28 @@
     </div>
 
     <script type=text/javascript>
+        function paymentComplete(data) {
+            url = "complete/" + data["response"]["merchant_uid"] + '/'
+            jQuery.ajax({
+                    headers: {
+                        "X-CSRFToken": csrftoken,
+                        "Content-Type": "application/json",
+                    },
+                    url: url,
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify(data)
+                }
+            ).done(function () {
+
+                console.log("redirect")
+                window.location.replace(url)
+            });
+        }
+
         function requestPay(merchant_uid, name, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, buyer_postcode) {
             var IMP = window.IMP; // 생략 가능
             IMP.init("imp55124420"); // 예: imp00000000l
-
-            {#IMP.request_pay(param, callback) //결제창 호출#}
             IMP.request_pay({ // param
                 pg: "html5_inicis", //PG사
                 pay_method: "card", //결제 수단
@@ -184,14 +201,14 @@
                         data: JSON.stringify({'imp_uid': rsp.imp_uid, 'merchant_uid': rsp.merchant_uid})
                     }).done(function (data) {
                         var info = JSON.parse(data)
-                        if (info["response"]["status"] == " paid") {
-                            console.log("paid");
-
+                        if (info["response"]["status"] == "paid") {
+                            alert("결제 성공");
+                            paymentComplete(info)
                         } else if (info["response"]["status"] == "forgery") {
                             alert("자바 스크립트 위조");
                             location.reload();
                         } else {
-                            alert(data["response"]["fail_reason"] + " 에러 지속시 고객센터에 문의 주세요");
+                            alert(info["response"]["fail_reason"] + " 에러 지속시 고객센터에 문의 주세요");
                         }
                     });
 
@@ -226,7 +243,6 @@
             var url = 'payment/';
             fetch(url, {
                 method: 'POST',
-
                 headers: {
                     'Content-Type': 'application/json',
                     "X-CSRFToken": token,
@@ -255,6 +271,7 @@
 
     </script>
     <script type=text/javascript>
+        //전화번호 정수만 입력했는지 확인
         function maxLengthCheck(object) {
             object.value = object.value.replace(/[^0-9]/gi, '');
             if (object.value.length > object.maxLength) {
@@ -262,12 +279,12 @@
             }
         }
 
-
+        //다음(카카오) 주소 api
         $('.address_kakao').click(function () {
             new daum.Postcode({
                 oncomplete: function (data) { //선택시 입력값 세팅
                     document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                    document.getElementById("post_kakao").value = data.zonecode; // 주소 넣기
+                    document.getElementById("post_kakao").value = data.zonecode; // 우편 번호 넣기
                     document.querySelector("input[name=recipent_address2]").focus(); //상세입력 포커싱
                 }
             }).open();
