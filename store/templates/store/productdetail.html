@@ -111,14 +111,14 @@
                         <!-- 옵션 없음 -->
                         <div class="d-flex">
                             <div class="quantity buttons_added">
-                                <input type="button" value="-" class="minus">
+                                <input type="button" value="-" class="minus" data-price="{{ product.price_discount }}">
                                 <input type="number" step="1" min="1"
                                        max=""
                                        name="quantity" value="1"
                                        title="Qty"
                                        class="input-text qty text product-quantity" size="4"
                                        pattern="" inputmode="" readonly>
-                                <input type="button" value="+" class="plus">
+                                <input type="button" value="+" class="plus" data-price="{{ product.price_discount }}">
                             </div>
                             <div style="padding-right:10px;">
                                 <button class="btn btn-outline-dark flex-shrink-0 add-to-cart" onclick="cartSnackbar()"
@@ -417,9 +417,11 @@
                 var price = $(this).data("price");
                 var action = "add"
 
+                console.log(price);
+
                 if (!isNaN(currentVal)) {
                     $('.product-quantity').val(currentVal + 1);
-                    changeTotalPrice(currentVal + 1, price, action, action)
+                    changeTotalPrice(currentVal + 1, price, action)
 
                 }
 
@@ -463,6 +465,9 @@
             });
 
             function changeTotalPrice(currentVal, price, action) {
+                {#console.log(totalPrice)#}
+                {#console.log(currentVal)#}
+                {#console.log(price)#}
                 if (action == "add") {
                     totalPrice += parseInt(price);
 
