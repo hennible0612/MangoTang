@@ -516,13 +516,19 @@ def checkoutComplete(request):
 결제 완료 요약
 """
 def checkoutSummery(request, orderId):
-    data = json.loads(request.body)
 
-    print(orderId)
-    print(data)
-    context ={'data':data}
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(orderId)
+        print(data)
+        context = {'data': data}
+        return redirect(request, 'store/checkoutsummery.html')
+    else:
+        return render(request, 'store/checkoutsummery.html')
 
-    return render(request, 'store/checkoutsummery.html', context)
+
+
+
 
 """
 결제 성공
