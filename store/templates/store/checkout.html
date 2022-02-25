@@ -172,18 +172,8 @@
                 buyer_addr: buyer_addr, //주소
                 buyer_postcode: buyer_postcode //우편번호
             }, function (rsp) { // callback
-                if (rsp.success) {
-                    {#console.log(typeof rsp.imp_uid);#}
-                    {#console.log(typeof rsp.merchant_uid);#}
-                    {#var imp_uid = rsp.imp_uid#}
-                    {#var merchant_uid = rsp.merchant_uid#}
-                    {#console.log(typeof imp_uid);#}
-                    {#console.log(typeof merchant_uid);#}
-                    var data = {
-                        'imp_uid': rsp.imp_uid,
-                        'merchant_uid': rsp.merchant_uid
-                    }
-                    jQuery.ajax({
+                if (rsp.success) { //결제 성공식
+                    jQuery.ajax({ //위변조 확인
                         headers: {
                             "X-CSRFToken": csrftoken,
                             "Content-Type": "application/json",
@@ -191,14 +181,24 @@
                         url: "complete/",
                         type: 'POST',
                         dataType: "json",
-                        data: JSON.stringify({'imp_uid': rsp.imp_uid,'merchant_uid': rsp.merchant_uid})
-                    })
+                        data: JSON.stringify({'imp_uid': rsp.imp_uid, 'merchant_uid': rsp.merchant_uid})
+                    }).done(function (data) {
+                        var info = JSON.parse(data)
+                        if (info["response"]["status"] == " paid") {
+                            console.log("paid");
+
+                        } else if (info["response"]["status"] == "forgery") {
+                            alert("자바 스크립트 위조");
+                            location.reload();
+                        } else {
+                            alert(data["response"]["fail_reason"] + " 에러 지속시 고객센터에 문의 주세요");
+                        }
+                    });
 
                 } else {
                     var msg = '결제에 실패하였습니다.';
                     msg += '에러내용 : ' + rsp.error_msg;
                 }
-                alert(msg);
             });
         }
 

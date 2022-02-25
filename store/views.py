@@ -488,22 +488,30 @@ def checkoutComplete(request):
     #아임포트 서버랑 우리 몰 서버 결제 금액 비교
 
     IamportAmount = iamportData["response"]["amount"] # Iamport 서버 결제 금액
+    status = iamportData["response"]["status"] #주문 상태
+
 
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
     localAmount = order.get_total + order.get_deliver_price # 로컬 서버의 결제 금액
 
-    print("아임포트 결제금액", IamportAmount)
-    print("클라이언트 결제금액", localAmount)
+
+    # data= {
+    #     'status':iamportData["response"]["status"],
+    #     'ordernum':iamportData[""]    }
+
 
     if(IamportAmount == localAmount):
         order.order_status = True
-        print("변조 없음")
-        return JsonResponse("변조 없음", safe=False, json_dumps_params={'ensure_ascii': False})
+        order.payment_state = True
+        order.save()
+        json_obj = json.dumps(iamportData)
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+    else: #위조시
+        iamportData["response"]["status"] = "forgery"
+        json_obj = json.dumps(iamportData)
 
-    else:
-        print("변조 있음")
-        return JsonResponse("변조 있음", safe=False, json_dumps_params={'ensure_ascii': False})
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 """
