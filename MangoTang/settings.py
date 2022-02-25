@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+imp_key = '5711640649645563'
+imp_secret = "Z6GUEnHJMK5WKyWtyP6DihjMFVd2tRdsXTnBh5k3Pq0AZW4yMab4suR8q5aTWolTiIuzNPDDfDdfzhNl"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

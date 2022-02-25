@@ -8,6 +8,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 import datetime
 
+from MangoTang import settings
 from .models import *
 
 # Create your views here.
@@ -423,11 +424,10 @@ def checkoutPayment(request):
     order.email = data['data']['email']
     order.save()
 
-
     iamport_data = {
         "merchant_uid": order_id,
         "name": name,
-        "amount": order.get_total+order.get_deliver_price,
+        "amount": order.get_total + order.get_deliver_price,
         "buyer_email": data['data']['email'],
         "buyer_name": data['data']['orderer_name'],
         "buyer_tel": data['data']['orderer_number'],
@@ -440,12 +440,32 @@ def checkoutPayment(request):
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
+
+import requests
+
+
+def getToken():
+    req = 'https://api.iamport.kr/users/getToken'
+
+    data = {
+        'imp_key': settings.imp_key,
+        'imp_secret': settings.imp_secret
+    }
+    req = requests.post(req, data=data)
+    access_res = req.json()
+    print(access_res)
+
+    if access_res['code'] == 0:
+        return access_res['response']['access_token']
+    else:
+        return None
+
+
 def checkoutComplete(request):
     data = json.loads(request.body)
-    print(data['imp_uid'])
-    print(data['merchant_uid'])
-    return JsonResponse("Helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
+    print(getToken())
 
+    return JsonResponse("Helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 """

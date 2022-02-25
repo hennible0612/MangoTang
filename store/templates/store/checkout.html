@@ -180,8 +180,8 @@
                     {#console.log(typeof imp_uid);#}
                     {#console.log(typeof merchant_uid);#}
                     var data = {
-                        'imp_uid': imp_uid,
-                        'merchant_uid': merchant_uid
+                        'imp_uid': rsp.imp_uid,
+                        'merchant_uid': rsp.merchant_uid
                     }
                     jQuery.ajax({
                         headers: {
