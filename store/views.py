@@ -472,7 +472,7 @@ def getPaymentData(access_res,imp_uid):
     access_res = req.json()
 
     if access_res['code'] == 0:
-        return None
+        return access_res
     else:
         return None
 
@@ -483,10 +483,27 @@ def checkoutComplete(request):
     merchant_uid = data['merchant_uid']
 
     access_res = getToken() #토큰 가져오기
-    getPaymentData(access_res,imp_uid) #아임포트 서버에서 결제 확인
+    iamportData = getPaymentData(access_res,imp_uid) #아임포트 서버에서 결제 확인
 
+    #아임포트 서버랑 우리 몰 서버 결제 금액 비교
 
-    return JsonResponse("Helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
+    IamportAmount = iamportData["response"]["amount"] # Iamport 서버 결제 금액
+
+    customer = request.user.customer  # 현재 customer
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+    localAmount = order.get_total + order.get_deliver_price # 로컬 서버의 결제 금액
+
+    print("아임포트 결제금액", IamportAmount)
+    print("클라이언트 결제금액", localAmount)
+
+    if(IamportAmount == localAmount):
+        order.order_status = True
+        print("변조 없음")
+        return JsonResponse("변조 없음", safe=False, json_dumps_params={'ensure_ascii': False})
+
+    else:
+        print("변조 있음")
+        return JsonResponse("변조 있음", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 """
