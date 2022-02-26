@@ -361,6 +361,11 @@
                         'quantity': productQuantity,
                         'option': 'false'
                     })
+                }).done(function (data) {
+                    if (data == 'false') {
+                        alert("로그인을 해주세요")
+                        window.location.replace('/login/')
+                    }
                 })
             });
 
@@ -377,6 +382,11 @@
                         type: 'POST',
                         dataType: "json",
                         data: JSON.stringify(itemObj)
+                    }).done(function (data) {
+                        if (data == 'false') {
+                            alert("로그인을 해주세요")
+                            window.location.replace('/login/')
+                        }
                     })
                 } else {
                     var sellerCode = "{{ product.seller_code }}"
@@ -394,10 +404,14 @@
                             'quantity': productQuantity,
                             'option': 'false'
                         })
+                    }).done(function (data) {
+                        if (data == 'false') {
+                            alert("로그인을 해주세요")
+                            window.location.replace('/login/')
+                        }
                     })
                 }
             });
-
 
 
             $('.option-selector').on('input', function (e) { //input: input 값이 바뀔때 change: 값이 바뀌고 focus 를 잃을때

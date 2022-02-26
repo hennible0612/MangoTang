@@ -232,7 +232,6 @@ def updateItem(request):
                 orderItemOption.save()
             return JsonResponse('Item was added', safe=False)
     else:
-
         return JsonResponse('false', safe=False)
 
 
