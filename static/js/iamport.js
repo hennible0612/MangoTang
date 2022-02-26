@@ -79,7 +79,6 @@ function submitFormData() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // {#"X-CSRFToken": token,#}
             "X-CSRFToken": csrftoken,
 
         },

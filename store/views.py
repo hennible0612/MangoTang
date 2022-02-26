@@ -399,42 +399,48 @@ def getQuestion(request, seller_code, page):
 
 
 def checkoutPayment(request):
+
     data = json.loads(request.body)
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-    order_id = str(customer.id) + str(datetime.now().timestamp())
-    order_id = int(float(order_id))
+    if(order.order_status ==False):
 
-    name = order.get_all_item_name
-    order.total_fee = order.get_total
-    order.order_number = order_id
-    order.shipping_fee = order.get_deliver_price
-    order.post_code = data['data']['post_code']
-    order.recipent_address1 = data['data']['recipent_address1']
-    order.recipent_address2 = data['data']['recipent_address2']
-    order.recipent_number = data['data']['recipent_number']
-    order.orderer_number = data['data']['orderer_number']
-    order.order_request = data['data']['order_request']
-    order.recipent_name = data['data']['recipent_name']
-    order.orderer_name = data['data']['orderer_name']
-    order.email = data['data']['email']
-    order.save()
+        order_id = str(customer.id) + str(datetime.now().timestamp())
+        order_id = int(float(order_id))
 
-    iamport_data = {
-        "merchant_uid": order_id,
-        "name": name,
-        "amount": order.get_total + order.get_deliver_price,
-        "buyer_email": data['data']['email'],
-        "buyer_name": data['data']['orderer_name'],
-        "buyer_tel": data['data']['orderer_number'],
-        "buyer_addr": data['data']['recipent_address1'],
-        "post_code": data['data']['post_code'],
+        name = order.get_all_item_name
+        order.total_fee = order.get_total
+        order.order_number = order_id
+        order.shipping_fee = order.get_deliver_price
+        order.post_code = data['data']['post_code']
+        order.recipent_address1 = data['data']['recipent_address1']
+        order.recipent_address2 = data['data']['recipent_address2']
+        order.recipent_number = data['data']['recipent_number']
+        order.orderer_number = data['data']['orderer_number']
+        order.order_request = data['data']['order_request']
+        order.recipent_name = data['data']['recipent_name']
+        order.orderer_name = data['data']['orderer_name']
+        order.email = data['data']['email']
+        order.save()
 
-    }
+        iamport_data = {
+            "merchant_uid": order_id,
+            "name": name,
+            "amount": order.get_total + order.get_deliver_price,
+            "buyer_email": data['data']['email'],
+            "buyer_name": data['data']['orderer_name'],
+            "buyer_tel": data['data']['orderer_number'],
+            "buyer_addr": data['data']['recipent_address1'],
+            "post_code": data['data']['post_code'],
 
-    json_obj = json.dumps(iamport_data)
+        }
+        json_obj = json.dumps(iamport_data)
 
-    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+    else:
+
+        return render(request, 'permisson.html')
+
 
 
 
@@ -490,10 +496,6 @@ def checkoutComplete(request):
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
     localAmount = order.get_total + order.get_deliver_price # 로컬 서버의 결제 금액
-
-
-
-
 
     if(IamportAmount == localAmount):
         order.order_status = True
