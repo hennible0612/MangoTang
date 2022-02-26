@@ -80,32 +80,24 @@ def productDetail(request, seller_code):
 
 @login_required(login_url='/login')
 def cart(request):
-    if request.user.is_authenticated:  # 로그인 유저일시
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-        items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
-        cartItems = order.get_cart_items
-        itemOption = []
-        # for item in items: #해당 아이템 불리언이 true이면
-        #     if (item.get_option_bool == True):
-        #         print(item , "option is true")
-        #     else:
-        #         print(item , "option is False")
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+    items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
+    cartItems = order.get_cart_items
+    itemOption = []
+    # for item in items: #해당 아이템 불리언이 true이면
+    #     if (item.get_option_bool == True):
+    #         print(item , "option is true")
+    #     else:
+    #         print(item , "option is False")
 
-        if (bool(items) == True):  # 카트 비어있는지 확인
-
-            for item in items:
-                itemOption += OrderItemOption.objects.filter(order_item_option=item)
-        else:
-            itemOption = []
-
-
-
-
+    if (bool(items) == True):  # 카트 비어있는지 확인
+        for item in items:
+            itemOption += OrderItemOption.objects.filter(order_item_option=item)
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cartItems = order['get_cart_items']
+        itemOption = []
+
 
     context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
 
@@ -159,26 +151,28 @@ def register(request):
 
 @login_required(login_url='/login')
 def checkout(request):
-    if request.user.is_authenticated:  # 로그인 유저일시
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-        items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
-        cartItems = order.get_cart_items
-        itemOption = []
-        if (bool(items) == True):
-            for item in items:
-                itemOption += OrderItemOption.objects.filter(order_item_option=item)
-        else:
-            itemOption = []
 
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+    items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
+    cartItems = order.get_cart_items
+    itemOption = []
+    if (bool(items) == True):
+        for item in items:
+            itemOption += OrderItemOption.objects.filter(order_item_option=item)
 
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
     else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cartItems = order['get_cart_items']
+        print("아이템 없음")
+        context = []
+        itemOption = []
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
+
     return render(request, 'store/checkout.html', context)
+
+
+
+
 
 
 """
