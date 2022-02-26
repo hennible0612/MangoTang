@@ -233,7 +233,6 @@ def updateItem(request):
             return JsonResponse('Item was added', safe=False)
     else:
 
-        # return HttpResponseRedirect(reverse('login'))
         return JsonResponse('false', safe=False)
 
 
@@ -530,9 +529,8 @@ def checkoutSummery(request, orderId):
         data = json.loads(request.body)
         print(orderId)
         print(data)
-        context = {'data': data}
-        # return JsonResponse("저장 완료", 'store/checkoutsummery.html')
-        pass
+        # context = {'data': data}
+        return JsonResponse("저장 완료", 'store/checkoutsummery.html')
     else:
         return render(request, 'store/checkoutsummery.html')
 

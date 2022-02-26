@@ -12,7 +12,7 @@ $('.update-cart').click(function (e) {
         if (data == 'false') {
             alert("로그인을 해주세요")
             window.location.replace('/login/')
-        } 
+        }
     }).fail(function () {
     })
 });
