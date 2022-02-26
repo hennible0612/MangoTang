@@ -149,8 +149,13 @@ class Order(models.Model):
         total = sum([item.get_delivery_price for item in orderitems])
         return total
 
+
     def __str__(self):
-        return " 옵션이름 : " + str(self.get_cart_option_total)
+        if self.order_number == None:
+            return "주문번호: -" + " 상태: " + str(self.order_status)
+        else:
+            return "주문번호" + str(self.order_number) + "상태" + str(self.order_status) +"받는이: " + str(self.recipent_name)+"주문자: " + str(self.orderer_name)
+
 
 class ProductOption(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
