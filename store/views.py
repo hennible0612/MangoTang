@@ -498,10 +498,10 @@ def checkoutComplete(request):
     if(IamportAmount == localAmount):
         order.order_status = True
         order.payment_state = True
-
-        print(iamportData)
-
-
+        order.receipt_url = iamportData["response"]["receipt_url"]
+        order.status = iamportData["response"]["status"]
+        order.emb_pg_provider = iamportData["response"]["emb_pg_provider"]
+        order.imp_uid = iamportData["response"]["imp_uid"]
         order.save()
         json_obj = json.dumps(iamportData)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})

@@ -104,6 +104,11 @@ class Order(models.Model):
     orderer_number = models.CharField(max_length=100, null=False)
     orderer_name = models.CharField(max_length=100, null=False)
 
+    receipt_url = models.CharField(max_length=100, null=True,blank=True)
+    status = models.CharField(max_length=100, null=True,blank=True)
+    emb_pg_provider = models.CharField(max_length=100, null=True,blank=True)
+    imp_uid = models.CharField(max_length=100, null=True,blank=True)
+
     @property
     def get_all_item_name(self):
         orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
