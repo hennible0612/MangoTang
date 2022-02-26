@@ -41,6 +41,7 @@ urlpatterns = [
 	# 결제 성공
 	path('payment/success',views.paymentSuccess, name='paymentSuccess'),
 
+
 	# 내페이지
 	path('mypage/', views.mypage, name="mypage"),
 

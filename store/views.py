@@ -162,17 +162,12 @@ def checkout(request):
             itemOption += OrderItemOption.objects.filter(order_item_option=item)
 
         context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
+        return render(request, 'store/checkout.html', context)
+
     else:
-        print("아이템 없음")
-        context = []
-        itemOption = []
 
 
-    return render(request, 'store/checkout.html', context)
-
-
-
-
+        return render(request, 'permisson.html')
 
 
 """
@@ -497,14 +492,16 @@ def checkoutComplete(request):
     localAmount = order.get_total + order.get_deliver_price # 로컬 서버의 결제 금액
 
 
-    # data= {
-    #     'status':iamportData["response"]["status"],
-    #     'ordernum':iamportData[""]    }
+
 
 
     if(IamportAmount == localAmount):
         order.order_status = True
         order.payment_state = True
+
+        print(iamportData)
+
+
         order.save()
         json_obj = json.dumps(iamportData)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
@@ -518,14 +515,14 @@ def checkoutComplete(request):
 """
 def checkoutSummery(request, orderId):
 
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        print(orderId)
-        print(data)
-        # context = {'data': data}
-        return JsonResponse("저장 완료", 'store/checkoutsummery.html')
-    else:
-        return render(request, 'store/checkoutsummery.html')
+    # if request.method == 'POST':
+    #     data = json.loads(request.body)
+    #     print(orderId)
+    #     print(data)
+    #     # context = {'data': data}
+    #     return request("저장 완료", 'store/checkoutsummery.html')
+    # else:
+    return render(request, 'store/checkoutsummery.html')
 
 
 

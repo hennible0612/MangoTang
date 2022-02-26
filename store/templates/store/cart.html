@@ -23,12 +23,8 @@
                             </th>
                             {% if order.get_cart_items == 0 %}
                             <th>
-                                <a style="float:right; margin:5px;" class="btn btn-success no-item" >아이템을 추가해주세요</a>
-                                <script>
-                                    $(".no-item").click(function (e) {
-                                        alert("아이템을 추가해주세요")
-                                    });
-                                </script>
+                                <a style="float:right; margin:5px;" href="/" class="btn btn-success no-item" >아이템을 추가해주세요</a>
+
                             </th>
                             {% else %}
                             <th>
@@ -175,6 +171,13 @@
                 $(".item-divider" + loop).remove()
                 $('.cart-quantity-total').html(info['orderItemTotal'])
                 $('.cart-price-total').text(info['orderItemPriceTotal'] + "원")
+
+                if (info['orderItemTotal'] == 0) {
+                    $('.btn-success').attr('href',"/")
+                    $('.btn-success').html("아이템을 추가해주세요")
+
+                }
+
             }).fail(function () {
             });
         });
@@ -238,7 +241,6 @@
             }).fail(function () {
 
             })
-
 
         });
     </script>
