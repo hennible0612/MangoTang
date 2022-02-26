@@ -2,11 +2,14 @@ import json
 import requests
 
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core.paginator import Paginator
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 import datetime
+
+from django.urls import reverse
 
 from MangoTang import settings
 from .models import *
@@ -75,7 +78,7 @@ def productDetail(request, seller_code):
 내 카트
 """
 
-
+@login_required(login_url='/login')
 def cart(request):
     if request.user.is_authenticated:  # 로그인 유저일시
         customer = request.user.customer
@@ -154,7 +157,7 @@ def register(request):
 결제 화면
 """
 
-
+@login_required(login_url='/login')
 def checkout(request):
     if request.user.is_authenticated:  # 로그인 유저일시
         customer = request.user.customer
@@ -182,51 +185,57 @@ def checkout(request):
 장바구니에 물품 추가 JSON 응답
 """
 
-
 def updateItem(request):
-    data = json.loads(request.body)  # JSON body data에저장
-    option = data["option"]
-    if (option == 'false'):
-        seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
-        action = data['action']
-        quantity = data['quantity']
-        customer = request.user.customer  # 현재 customer
-        product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
-        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
-        orderItem, created = OrderItem.objects.get_or_create(order=order,
-                                                             product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
-        if action == 'add':
-            orderItem.quantity = (orderItem.quantity + 1)
-        elif action == 'remove':
-            orderItem.quantity = (orderItem.quantity - 1)
-        elif action == 'set':
-            orderItem.quantity = quantity
+    if request.user.is_authenticated:  # 로그인 유저일시
 
-        orderItem.save()  # DB에 저장
+        data = json.loads(request.body)  # JSON body data에저장
+        option = data["option"]
+        if (option == 'false'):
+            seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
+            action = data['action']
+            quantity = data['quantity']
+            customer = request.user.customer  # 현재 customer
+            product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+            order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
+            orderItem, created = OrderItem.objects.get_or_create(order=order,
+                                                                 product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
+            if action == 'add':
+                orderItem.quantity = (orderItem.quantity + 1)
+            elif action == 'remove':
+                orderItem.quantity = (orderItem.quantity - 1)
+            elif action == 'set':
+                orderItem.quantity = quantity
 
-        if int(orderItem.quantity) <= 0:
-            orderItem.delete()
+            orderItem.save()  # DB에 저장
 
-        return JsonResponse('Item was added', safe=False)
+            if int(orderItem.quantity) <= 0:
+                orderItem.delete()
+
+            return JsonResponse('Item was added', safe=False)
+        else:
+            seller_code = data['itemSellercode']  # 옵션의 부모 제품 코드
+            productQuantity = data['productQuantity']  # 옵션의 부모 개수
+            customer = request.user.customer  # 현재 customer
+            product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+            order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
+            orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+            orderItem.item_option_bool = True  # 이 orderitem의 옵션은 True이다.
+            orderItem.quantity = productQuantity
+            orderItem.save()
+
+            for x, y in zip(data['options'], data['quantity']):
+                sellerCode = data['options'][x]
+                options = ProductOption.objects.get(option_seller_code=str(sellerCode))  # 해당 sellercode의 옵션 가져오고
+                orderItemOption, created = OrderItemOption.objects.get_or_create(order_item_option=orderItem,
+                                                                                 product_option=options)
+                orderItemOption.quantity = data['quantity'][y]
+                orderItemOption.save()
+            return JsonResponse('Item was added', safe=False)
     else:
-        seller_code = data['itemSellercode']  # 옵션의 부모 제품 코드
-        productQuantity = data['productQuantity']  # 옵션의 부모 개수
-        customer = request.user.customer  # 현재 customer
-        product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
-        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
-        orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
-        orderItem.item_option_bool = True  # 이 orderitem의 옵션은 True이다.
-        orderItem.quantity = productQuantity
-        orderItem.save()
 
-        for x, y in zip(data['options'], data['quantity']):
-            sellerCode = data['options'][x]
-            options = ProductOption.objects.get(option_seller_code=str(sellerCode))  # 해당 sellercode의 옵션 가져오고
-            orderItemOption, created = OrderItemOption.objects.get_or_create(order_item_option=orderItem,
-                                                                             product_option=options)
-            orderItemOption.quantity = data['quantity'][y]
-            orderItemOption.save()
-        return JsonResponse('Item was added', safe=False)
+        # return HttpResponseRedirect(reverse('login'))
+        return JsonResponse('false', safe=False)
+
 
 
 """
@@ -522,7 +531,8 @@ def checkoutSummery(request, orderId):
         print(orderId)
         print(data)
         context = {'data': data}
-        return redirect(request, 'store/checkoutsummery.html')
+        # return JsonResponse("저장 완료", 'store/checkoutsummery.html')
+        pass
     else:
         return render(request, 'store/checkoutsummery.html')
 
@@ -545,26 +555,24 @@ def paymentSuccess(request):
 내페이지
 """
 
-
+@login_required(login_url='/login')
 def mypage(request):
     context = {}
     return render(request, 'store/mypage.html', context)
 
-
+@login_required(login_url='/login')
 def customerservice(request):
     context = {}
     return render(request, 'store/customerservice.html', context)
-
 
 def faq(request):
     context = {}
     return render(request, 'customerservice/faq.html', context)
 
-
+@login_required(login_url='/login')
 def onetoone(request):
     context = {}
     return render(request, 'customerservice/onetoonequestion.html', context)
-
 
 def notice(request):
     context = {}
@@ -572,62 +580,64 @@ def notice(request):
 
 
 # 주문 관리 view
+@login_required(login_url='/login')
 def orderhistory(request):
     context = {}
     return render(request, 'mypage/orderhistory.html', context)
 
-
+@login_required(login_url='/login')
 def ordercancel(request):
     context = {}
     return render(request, 'mypage/ordercancel.html', context)
 
-
+@login_required(login_url='/login')
 def orderrefund(request):
     context = {}
     return render(request, 'mypage/orderrefund.html', context)
 
 
 # 마이페이지
+@login_required(login_url='/login')
 def favoritelist(request):
     context = {}
     return render(request, 'mypage/favoritelist.html', context)
 
-
+@login_required(login_url='/login')
 def couponlist(request):
     context = {}
     return render(request, 'mypage/couponlist.html', context)
 
-
+@login_required(login_url='/login')
 def orderrefund(request):
     context = {}
     return render(request, 'mypage/orderrefund.html', context)
 
-
+@login_required(login_url='/login')
 def pointlist(request):
     context = {}
     return render(request, 'mypage/pointlist.html', context)
 
-
+@login_required(login_url='/login')
 def qnalist(request):
     context = {}
     return render(request, 'mypage/qnalist.html', context)
 
-
+@login_required(login_url='/login')
 def refundlist(request):
     context = {}
     return render(request, 'mypage/refundlist.html', context)
 
-
+@login_required(login_url='/login')
 def reviewlist(request):
     context = {}
     return render(request, 'mypage/reviewlist.html', context)
 
-
+@login_required(login_url='/login')
 def userinfo(request):
     context = {}
     return render(request, 'mypage/userinfo.html', context)
 
-
+@login_required(login_url='/login')
 def orderdetail(request):
     context = {}
     return render(request, 'mypage/orderdetail.html', context)

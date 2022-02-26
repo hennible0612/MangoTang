@@ -165,29 +165,9 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data)
-
             }).then((response) => {
                 window.location.replace(url)
             })
-
-            {#url = "complete/" + data["response"]["merchant_uid"] + '/'#}
-            {#jQuery.ajax({#}
-            {#        headers: {#}
-            {#            "X-CSRFToken": csrftoken,#}
-            {#            "Content-Type": "application/json",#}
-            {#        },#}
-            {#        url: url,#}
-            {#        type: 'POST',#}
-            {#        dataType: "json",#}
-            {#        data: JSON.stringify(data)#}
-            {#    }#}
-            {#).done(function () {#}
-            {##}
-            {#    console.log("redirect")#}
-            {#    window.location.replace(url)            });#}
-
-
-
         }
 
         function requestPay(merchant_uid, name, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, buyer_postcode) {
@@ -208,6 +188,7 @@
                 if (rsp.success) { //결제 성공식
                     jQuery.ajax({ //위변조 확인
                         headers: {
+
                             "X-CSRFToken": csrftoken,
                             "Content-Type": "application/json",
                         },
@@ -261,7 +242,9 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    "X-CSRFToken": token,
+                    {#"X-CSRFToken": token,#}
+                    "X-CSRFToken": csrftoken,
+
                 },
                 body: JSON.stringify({'data': data})
             }).then((response) => response.json())
@@ -278,13 +261,8 @@
         var form = document.getElementById('form')
         form.addEventListener('submit', function (e) { //결제 버튼 클릭시
             e.preventDefault()
-
             submitFormData();
-
-
         });
-
-
     </script>
     <script type=text/javascript>
         //전화번호 정수만 입력했는지 확인
