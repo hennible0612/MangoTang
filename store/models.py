@@ -170,6 +170,10 @@ class OrderHistory(models.Model):
     imp_uid = models.CharField(max_length=100, null=True,blank=True)
     pay_method = models.CharField(max_length=100, null=True,blank=True)
 
+    @property
+    def get_total(self):
+        total = self.total_fee + self.shipping_fee
+        return total
 
 class ProductOption(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)

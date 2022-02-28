@@ -540,15 +540,13 @@ def checkoutComplete(request):
 결제 완료 요약
 """
 def checkoutSummery(request, orderId):
-
     if request.user.is_authenticated:  # 로그인 유저일시
         customer = request.user.customer
-        try:
-            order = Order.objects.get_or_create(customer=customer, order_status=True, order_number=orderId)
-            return render(request, 'store/checkoutsummery.html')
-        except:
-            return render(request, 'permisson.html')
+        orderhistory = OrderHistory.objects.get(customer=customer, order_number=orderId)
 
+        context = {'orderhistory': orderhistory}
+
+        return render(request, 'store/checkoutsummery.html', context)
 
     else:
         return render(request, 'permisson.html')
@@ -561,6 +559,9 @@ def checkoutSummery(request, orderId):
 
 def paymentSuccess(request):
     print("결제 성공")
+
+
+
     json_obj = {}
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 

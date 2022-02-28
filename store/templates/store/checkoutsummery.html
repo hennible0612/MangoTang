@@ -1,5 +1,39 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+
+            <div class="row d-flex justify-content-center  h-100">
+                <div class=" text-center align-items-center"
+                     style="background-color: ghostwhite; padding-top: 100px;  border-radius: 85px;">
+
+                    <h2>구매가 정상적으로 완료 되었습니다!</h2><br>
+                    <h2>주문번호: {{ orderhistory.order_number }}</h2>
+                    <h2>주문금액: {{ orderhistory.get_total }} </h2><br>
+
+                    <a href="{% url 'orderhistory' %}" class="btn btn-primary">구매 내역 확인</a>
+
+                    <a href="/" class="btn btn-primary">쇼핑 계속하기</a>
+
+                    <a href="{{ orderhistory.receipt_url }}" class="btn btn-primary">영수증 신청하기</a>
+                </div>
+                <div class=" text-center">
+
+                </div>
+            </div>
+    </section>
 
 
-<body>
-ㅗㅗ
-</body>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
