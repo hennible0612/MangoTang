@@ -78,6 +78,7 @@ def productDetail(request, seller_code):
 내 카트
 """
 
+
 @login_required(login_url='/login')
 def cart(request):
     customer = request.user.customer
@@ -97,7 +98,6 @@ def cart(request):
     else:
         items = []
         itemOption = []
-
 
     context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
 
@@ -149,9 +149,9 @@ def register(request):
 결제 화면
 """
 
+
 @login_required(login_url='/login')
 def checkout(request):
-
     customer = request.user.customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
     items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
@@ -166,13 +166,13 @@ def checkout(request):
 
     else:
 
-
         return render(request, 'permisson.html')
 
 
 """
 장바구니에 물품 추가 JSON 응답
 """
+
 
 def updateItem(request):
     if request.user.is_authenticated:  # 로그인 유저일시
@@ -185,7 +185,8 @@ def updateItem(request):
             quantity = data['quantity']
             customer = request.user.customer  # 현재 customer
             product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
-            order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
+            order, created = Order.objects.get_or_create(customer=customer,
+                                                         order_status=False)  # 주문객체  만들거나 가져옴 상태 False
             orderItem, created = OrderItem.objects.get_or_create(order=order,
                                                                  product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
             if action == 'add':
@@ -222,7 +223,6 @@ def updateItem(request):
             return JsonResponse('Item was added', safe=False)
     else:
         return JsonResponse('false', safe=False)
-
 
 
 """
@@ -399,11 +399,10 @@ def getQuestion(request, seller_code, page):
 
 
 def checkoutPayment(request):
-
     data = json.loads(request.body)
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-    if(order.order_status ==False):
+    if (order.order_status == False):
 
         order_id = str(customer.id) + str(datetime.now().timestamp())
         order_id = int(float(order_id))
@@ -442,11 +441,11 @@ def checkoutPayment(request):
         return render(request, 'permisson.html')
 
 
-
-
 """
 아임포트 토큰 가져오기
 """
+
+
 def getToken():
     url = 'https://api.iamport.kr/users/getToken'
 
@@ -462,15 +461,18 @@ def getToken():
     else:
         return None
 
+
 """
 아임포트 결제 정보 확인
 """
-def getPaymentData(access_res,imp_uid):
-    url = 'https://api.iamport.kr/payments/'+imp_uid
-    headers ={
-        "Authorization":access_res
+
+
+def getPaymentData(access_res, imp_uid):
+    url = 'https://api.iamport.kr/payments/' + imp_uid
+    headers = {
+        "Authorization": access_res
     }
-    req = requests.get(url,headers=headers)
+    req = requests.get(url, headers=headers)
     access_res = req.json()
 
     if access_res['code'] == 0:
@@ -484,23 +486,21 @@ def checkoutComplete(request):
     imp_uid = data['imp_uid']
     merchant_uid = data['merchant_uid']
 
-    access_res = getToken() #토큰 가져오기
-    iamportData = getPaymentData(access_res,imp_uid) #아임포트 서버에서 결제 확인
+    access_res = getToken()  # 토큰 가져오기
+    iamportData = getPaymentData(access_res, imp_uid)  # 아임포트 서버에서 결제 확인
 
-    #아임포트 서버랑 우리 몰 서버 결제 금액 비교
+    # 아임포트 서버랑 우리 몰 서버 결제 금액 비교
 
-    IamportAmount = iamportData["response"]["amount"] # Iamport 서버 결제 금액
-    status = iamportData["response"]["status"] #주문 상태
-
+    IamportAmount = iamportData["response"]["amount"]  # Iamport 서버 결제 금액
+    status = iamportData["response"]["status"]  # 주문 상태
 
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-    localAmount = order.get_total + order.get_deliver_price # 로컬 서버의 결제 금액
-
+    localAmount = order.get_total + order.get_deliver_price  # 로컬 서버의 결제 금액
 
     orderhistory = OrderHistory.objects.create(customer=customer)
 
-    if(IamportAmount == localAmount):
+    if (IamportAmount == localAmount):
         order.order_status = True
         order.payment_state = True
 
@@ -531,23 +531,38 @@ def checkoutComplete(request):
         # order.save()
         json_obj = json.dumps(iamportData)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
-    else: #위조시
+    else:  # 위조시
         iamportData["response"]["status"] = "forgery"
         json_obj = json.dumps(iamportData)
 
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
+
 """
 결제 완료 요약
 """
+
+
 def checkoutSummery(request, orderId):
     if request.user.is_authenticated:  # 로그인 유저일시
         customer = request.user.customer
-        orderhistory = OrderHistory.objects.get(customer=customer, order_number=orderId)
+        order = OrderHistory.objects.filter(customer=customer, order_number=orderId)
 
-        context = {'orderhistory': orderhistory}
+        if order.exists():
+            orderhistory = OrderHistory.objects.get(customer=customer, order_number=orderId)
 
-        return render(request, 'store/checkoutsummery.html', context)
+            context = {'orderhistory': orderhistory}
+            print(context)
+            return render(request, 'store/checkoutsummery.html', context)
+        else:
+            return render(request, 'permisson.html')
 
+        # if OrderHistory.objects.get(customer=customer, order_number=orderId).DoesNotExist:
+        #     return render(request, 'permisson.html')
+        #
+        # else:
+        #     orderhistory = OrderHistory.objects.get(customer=customer, order_number=orderId)
+        #     context = {'orderhistory': orderhistory}
     else:
         return render(request, 'permisson.html')
 
@@ -560,8 +575,6 @@ def checkoutSummery(request, orderId):
 def paymentSuccess(request):
     print("결제 성공")
 
-
-
     json_obj = {}
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
@@ -570,24 +583,29 @@ def paymentSuccess(request):
 내페이지
 """
 
+
 @login_required(login_url='/login')
 def mypage(request):
     context = {}
     return render(request, 'store/mypage.html', context)
+
 
 @login_required(login_url='/login')
 def customerservice(request):
     context = {}
     return render(request, 'store/customerservice.html', context)
 
+
 def faq(request):
     context = {}
     return render(request, 'customerservice/faq.html', context)
+
 
 @login_required(login_url='/login')
 def onetoone(request):
     context = {}
     return render(request, 'customerservice/onetoonequestion.html', context)
+
 
 def notice(request):
     context = {}
@@ -600,10 +618,12 @@ def orderhistory(request):
     context = {}
     return render(request, 'mypage/orderhistory.html', context)
 
+
 @login_required(login_url='/login')
 def ordercancel(request):
     context = {}
     return render(request, 'mypage/ordercancel.html', context)
+
 
 @login_required(login_url='/login')
 def orderrefund(request):
@@ -617,40 +637,48 @@ def favoritelist(request):
     context = {}
     return render(request, 'mypage/favoritelist.html', context)
 
+
 @login_required(login_url='/login')
 def couponlist(request):
     context = {}
     return render(request, 'mypage/couponlist.html', context)
+
 
 @login_required(login_url='/login')
 def orderrefund(request):
     context = {}
     return render(request, 'mypage/orderrefund.html', context)
 
+
 @login_required(login_url='/login')
 def pointlist(request):
     context = {}
     return render(request, 'mypage/pointlist.html', context)
+
 
 @login_required(login_url='/login')
 def qnalist(request):
     context = {}
     return render(request, 'mypage/qnalist.html', context)
 
+
 @login_required(login_url='/login')
 def refundlist(request):
     context = {}
     return render(request, 'mypage/refundlist.html', context)
+
 
 @login_required(login_url='/login')
 def reviewlist(request):
     context = {}
     return render(request, 'mypage/reviewlist.html', context)
 
+
 @login_required(login_url='/login')
 def userinfo(request):
     context = {}
     return render(request, 'mypage/userinfo.html', context)
+
 
 @login_required(login_url='/login')
 def orderdetail(request):

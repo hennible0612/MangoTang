@@ -2,9 +2,12 @@
 {% load static %}
 
 {% block content %}
-
+    {% if order == none %}
+        <script>
+            alert("주문없네")
+        </script>
+    {% endif %}
     <body class="bg-light">
-
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="{% static 'nscreen_logo/5_망고땡_로고(영문)_정사각.png' %}" alt=""
