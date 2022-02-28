@@ -498,7 +498,7 @@ def checkoutComplete(request):
     localAmount = order.get_total + order.get_deliver_price # 로컬 서버의 결제 금액
 
 
-    orderhistory, created = OrderHistory.objects.get_or_create(customer=customer)
+    orderhistory = OrderHistory.objects.create(customer=customer)
 
     if(IamportAmount == localAmount):
         order.order_status = True
@@ -526,9 +526,9 @@ def checkoutComplete(request):
         orderhistory.emb_pg_provider = iamportData["response"]["emb_pg_provider"]
         orderhistory.imp_uid = iamportData["response"]["imp_uid"]
         orderhistory.pay_method = iamportData["response"]["pay_method"]
-
+        order.delete()
         orderhistory.save()
-        order.save()
+        # order.save()
         json_obj = json.dumps(iamportData)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else: #위조시

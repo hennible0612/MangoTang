@@ -127,7 +127,6 @@ class Order(models.Model):
     def get_total(self): #옵션 포함 해당 order의 모든 가격
         orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
         total = sum([item.get_total for item in orderitems])  # 다더함함
-        orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
         optionTotal = sum([item.get_option_cart_total for item in orderitems])  # 다더함함
         return total + optionTotal
 
@@ -137,6 +136,13 @@ class Order(models.Model):
         total = sum([item.get_delivery_price for item in orderitems])
         return total
 
+    @property
+    def get_all_price(self):
+        orderitems = self.orderitem_set.all()
+        deliverTotal = sum([item.get_delivery_price for item in orderitems])
+        itemTotal = sum([item.get_total for item in orderitems])  # 다더함함
+        optionTotal = sum([item.get_option_cart_total for item in orderitems])  # 다더함함
+        return int(deliverTotal + itemTotal + optionTotal)
 
     def __str__(self):
         if self.order_number == None:
