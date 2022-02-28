@@ -1,11 +1,6 @@
 function paymentComplete(data) {
-
     url = "complete/" + data["response"]["merchant_uid"] + '/'
-    // fetch(url, {
-    //     method: 'GET',
-    // }).then((response) => {
     window.location.replace(url)
-    // })
 }
 
 function requestPay(merchant_uid, name, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, buyer_postcode) {

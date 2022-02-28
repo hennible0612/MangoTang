@@ -516,18 +516,18 @@ def checkoutComplete(request):
 결제 완료 요약
 """
 def checkoutSummery(request, orderId):
-    print("checkout summery")
-    print(orderId)
 
-    # if request.user.is_authenticated:  # 로그인 유저일시
-    #     customer = request.user.customer
-    #     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-    #     items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
-    #     cartItems = order.get_cart_items
-    return render(request, 'store/checkoutsummery.html')
-
+    if request.user.is_authenticated:  # 로그인 유저일시
+        customer = request.user.customer
+        try:
+            order = Order.objects.get_or_create(customer=customer, order_status=True, order_number=orderId)
+            return render(request, 'store/checkoutsummery.html')
+        except:
+            return render(request, 'permisson.html')
 
 
+    else:
+        return render(request, 'permisson.html')
 
 
 """
