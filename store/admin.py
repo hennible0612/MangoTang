@@ -11,4 +11,5 @@ admin.site.register(ProductReview)
 admin.site.register(ProductQuestion)
 admin.site.register(ProductOption)
 admin.site.register(OrderItemOption)
+admin.site.register(OrderHistory)
 

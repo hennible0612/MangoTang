@@ -497,13 +497,37 @@ def checkoutComplete(request):
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
     localAmount = order.get_total + order.get_deliver_price # 로컬 서버의 결제 금액
 
+
+    orderhistory, created = OrderHistory.objects.get_or_create(customer=customer)
+
     if(IamportAmount == localAmount):
         order.order_status = True
         order.payment_state = True
-        order.receipt_url = iamportData["response"]["receipt_url"]
-        order.status = iamportData["response"]["status"]
-        order.emb_pg_provider = iamportData["response"]["emb_pg_provider"]
-        order.imp_uid = iamportData["response"]["imp_uid"]
+
+        orderhistory.date_ordered = order.date_ordered
+        orderhistory.date_completed = datetime.now()
+        orderhistory.payment_state = order.payment_state
+
+        orderhistory.shipping_fee = order.shipping_fee
+        orderhistory.order_number = order.order_number
+        orderhistory.email = order.email
+        orderhistory.total_fee = order.total_fee
+        orderhistory.post_code = order.post_code
+        orderhistory.recipent_address1 = order.recipent_address1
+        orderhistory.recipent_address2 = order.recipent_address2
+        orderhistory.recipent_number = order.recipent_number
+        orderhistory.recipent_name = order.recipent_name
+        orderhistory.order_request = order.order_request
+        orderhistory.orderer_number = order.orderer_number
+        orderhistory.orderer_name = order.orderer_name
+
+        orderhistory.receipt_url = iamportData["response"]["receipt_url"]
+        orderhistory.status = iamportData["response"]["status"]
+        orderhistory.emb_pg_provider = iamportData["response"]["emb_pg_provider"]
+        orderhistory.imp_uid = iamportData["response"]["imp_uid"]
+        orderhistory.pay_method = iamportData["response"]["pay_method"]
+
+        orderhistory.save()
         order.save()
         json_obj = json.dumps(iamportData)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})

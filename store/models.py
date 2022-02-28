@@ -28,16 +28,11 @@ class Customer(models.Model):
     )
 
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)  # Customer 하나당 User하나
-
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=200)
     phone_number = models.CharField(max_length=50, null=False)
-    # birth_date = models.DateField(blank=True, null=True)
-    # gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     mileage = models.IntegerField(null=True, blank=True)
     join_date = models.DateTimeField(default=datetime.now)
-    # address1 = models.CharField(max_length=200, null=False)
-    # address2 = models.CharField(max_length=200, null=False)
 
     def __str__(self):
         return self.name
@@ -90,12 +85,10 @@ class Order(models.Model):
     order_status = models.BooleanField(default=False)
     payment_state = models.BooleanField(default=False)
     shipping_fee = models.IntegerField(null=True, blank=True)
-    track_number = models.IntegerField(null=True, blank=True)
     order_number = models.IntegerField(null=True, blank=True)
     email = models.EmailField(null=True,blank=True)
     total_fee = models.IntegerField(null=True, blank=True)
     post_code = models.CharField(max_length=200, null=True, blank=True)
-
     recipent_address1 = models.CharField(max_length=200, null=False)
     recipent_address2 = models.CharField(max_length=200, null=False)
     recipent_number = models.CharField(max_length=50, null=False)
@@ -103,11 +96,6 @@ class Order(models.Model):
     order_request = models.CharField(max_length=100, null=False)
     orderer_number = models.CharField(max_length=100, null=False)
     orderer_name = models.CharField(max_length=100, null=False)
-
-    receipt_url = models.CharField(max_length=100, null=True,blank=True)
-    status = models.CharField(max_length=100, null=True,blank=True)
-    emb_pg_provider = models.CharField(max_length=100, null=True,blank=True)
-    imp_uid = models.CharField(max_length=100, null=True,blank=True)
 
     @property
     def get_all_item_name(self):
@@ -155,6 +143,32 @@ class Order(models.Model):
             return "주문번호: -" + " 상태: " + str(self.order_status)
         else:
             return "주문번호" + str(self.order_number) + "상태" + str(self.order_status) +"받는이: " + str(self.recipent_name)+"주문자: " + str(self.orderer_name)
+
+class OrderHistory(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+    date_ordered = models.DateTimeField(auto_now_add=True)
+    date_completed = models.DateTimeField(null=True, blank=True)
+    track_number = models.IntegerField(null=True, blank=True)
+
+    payment_state = models.BooleanField(default=False)
+    shipping_fee = models.IntegerField(null=True, blank=True)
+    order_number = models.IntegerField(null=True, blank=True)
+    email = models.EmailField(null=True,blank=True)
+    total_fee = models.IntegerField(null=True, blank=True)
+    post_code = models.CharField(max_length=200, null=True, blank=True)
+    recipent_address1 = models.CharField(max_length=200, null=False)
+    recipent_address2 = models.CharField(max_length=200, null=False)
+    recipent_number = models.CharField(max_length=50, null=False)
+    recipent_name = models.CharField(max_length=50, null=False)
+    order_request = models.CharField(max_length=100, null=False)
+    orderer_number = models.CharField(max_length=100, null=False)
+    orderer_name = models.CharField(max_length=100, null=False)
+
+    receipt_url = models.CharField(max_length=100, null=True,blank=True)
+    status = models.CharField(max_length=100, null=True,blank=True)
+    emb_pg_provider = models.CharField(max_length=100, null=True,blank=True)
+    imp_uid = models.CharField(max_length=100, null=True,blank=True)
+    pay_method = models.CharField(max_length=100, null=True,blank=True)
 
 
 class ProductOption(models.Model):
