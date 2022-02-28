@@ -103,6 +103,7 @@ class Order(models.Model):
         data = ""
         for name in orderitems:
             data += name.get_name +", "
+        data.strip(', ')
         return data
 
     @property
@@ -152,6 +153,7 @@ class Order(models.Model):
 
 class OrderHistory(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+    order_name = models.CharField(max_length=200, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     date_completed = models.DateTimeField(null=True, blank=True)
     track_number = models.IntegerField(null=True, blank=True)
@@ -170,7 +172,7 @@ class OrderHistory(models.Model):
     orderer_number = models.CharField(max_length=100, null=False)
     orderer_name = models.CharField(max_length=100, null=False)
 
-    receipt_url = models.CharField(max_length=100, null=True,blank=True)
+    receipt_url = models.CharField(max_length=500, null=True,blank=True)
     status = models.CharField(max_length=100, null=True,blank=True)
     emb_pg_provider = models.CharField(max_length=100, null=True,blank=True)
     imp_uid = models.CharField(max_length=100, null=True,blank=True)

@@ -503,7 +503,7 @@ def checkoutComplete(request):
     if (IamportAmount == localAmount):
         order.order_status = True
         order.payment_state = True
-
+        orderhistory.orderer_name = order.get_all_item_name
         orderhistory.date_ordered = order.date_ordered
         orderhistory.date_completed = datetime.now()
         orderhistory.payment_state = order.payment_state
@@ -557,12 +557,6 @@ def checkoutSummery(request, orderId):
         else:
             return render(request, 'permisson.html')
 
-        # if OrderHistory.objects.get(customer=customer, order_number=orderId).DoesNotExist:
-        #     return render(request, 'permisson.html')
-        #
-        # else:
-        #     orderhistory = OrderHistory.objects.get(customer=customer, order_number=orderId)
-        #     context = {'orderhistory': orderhistory}
     else:
         return render(request, 'permisson.html')
 
@@ -615,7 +609,11 @@ def notice(request):
 # 주문 관리 view
 @login_required(login_url='/login')
 def orderhistory(request):
-    context = {}
+    customer = request.user.customer
+    orderHistory = OrderHistory.objects.filter(customer=customer)
+
+    context = {'orderHistory': orderHistory}
+
     return render(request, 'mypage/orderhistory.html', context)
 
 

@@ -6,12 +6,14 @@
             <h3>주문내역</h3>
             <hr>
         </div>
+        {% for order in orderHistory %}
 
         <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
             <div class="item" style="padding-top: 10px">
-                <div><h5>2021/12/20 주문<a class="orderlist-detail" href="{% url 'orderdetail' %}" style="float: right">주문 상세보기</a></h5>
+                <div><h5>{{ order.date_completed}}주문<a class="orderlist-detail" href="{% url 'orderdetail' %}" style="float: right">주문 상세보기</a></h5>
                 </div>
             </div>
+
             <div class="item" style="padding: 10px; height: 200px">
                 <div class="container-orderlist" style="flex-direction: row;">
 
@@ -24,8 +26,8 @@
                         <span><img src="{% static 'images/dot.png' %}" width="9" height="9"></span>
                         <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>
                         <hr>
-                        <h4>메디플라워 더 시크릿가든 5종 </h4>
-                        <span>50,000원<span>1개</span> </span>
+                        <h4>{{ order.order_name}}</h4>
+                        <span>{{ order.total_fee}}원<span> 1개</span> </span>
 
                     </div>
 
@@ -57,57 +59,8 @@
         </div>
         <hr style="clear: both; visibility: hidden;">
 
-        <div class=" container" id="rcorners2" style="height: 15rem;"><!--주문내역 컨테이너-->
-
-            <div class="item" style="padding-top: 10px">
-                <div><h5>2021/12/20 주문<a class="orderlist-detail" href="#" style="float: right">주문 상세보기</a></h5>
-
-                </div>
-            </div>
-            <div class="item" style=" padding: 10px; height: 200px">
-                <div class="container-orderlist" style="flex-direction: row;">
-
-                    <div class="item-orderlist-picture">
-                        <img src="https://dummyimage.com/180x160/dee2e6/6c757d.jpg" alt="..."/>
-                    </div>
-
-                    <div class="item-orderlist-info" style=" margin: 10px;">
-                        <span style="font-size: 25px; "><b>배송 실패</b></span>
-                        <span><img src="{% static 'images/dot.png' %}" width="9" height="9"></span>
-                        <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>
-                        <hr>
-                        <h4>메디플라워 더 시크릿가든 5종 핸드크림 + 쇼핑백</h4>
-                        <span>50,000원<span>1개</span> </span>
-
-                    </div>
-
-                    <div class="item-orderlist-button">
-                        <div class="center-orderlist-option">
-                            <button class=" btn btn-outline-dark flex-shrink-0 " style=" width:150px; ">
-                                배송조회
-                            </button>
-                        </div>
-                        <div class="center-orderlist-option">
-
-                            <button class=" btn btn-outline-dark flex-shrink-0 "
-                                    style=" width:150px; outline-offset: 10px; ">
-                                교환, 반품 신청
-                            </button>
-                        </div>
-                        <div class="center-orderlist-option">
-
-                            <button class=" btn btn-outline-dark flex-shrink-0 " style=" width:150px">
-                                리뷰 작성하기
-                            </button>
-                        </div>
-
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
+        {% endfor %}
 
     </div>
+
 {% endblock mypage %}
