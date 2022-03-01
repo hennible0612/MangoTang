@@ -21,7 +21,6 @@ function requestPay(merchant_uid, name, amount, buyer_email, buyer_name, buyer_t
         if (rsp.success) { //결제 성공식
             jQuery.ajax({ //위변조 확인
                 headers: {
-
                     "X-CSRFToken": csrftoken,
                     "Content-Type": "application/json",
                 },

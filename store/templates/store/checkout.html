@@ -2,11 +2,6 @@
 {% load static %}
 
 {% block content %}
-    {% if order == none %}
-        <script>
-            alert("주문없네")
-        </script>
-    {% endif %}
     <body class="bg-light">
     <div class="container">
         <div class="py-5 text-center">
@@ -131,13 +126,9 @@
                         <label for="order request">요청사항<span class="text-muted">(선택사항)</span></label>
                         <input type="text" class="form-control" id="request" name="order_request" placeholder="요청사항">
                     </div>
-
-
                     <hr class="mb-4">
 
-
                     <h4 class="mb-3">결제</h4>
-
 
                     <button class="btn btn-primary btn-lg btn-block submit" type="submit">결제하기</button>
                 </form>

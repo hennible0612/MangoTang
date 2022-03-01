@@ -492,7 +492,6 @@ def checkoutComplete(request):
     # 아임포트 서버랑 우리 몰 서버 결제 금액 비교
 
     IamportAmount = iamportData["response"]["amount"]  # Iamport 서버 결제 금액
-    status = iamportData["response"]["status"]  # 주문 상태
 
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
