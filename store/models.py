@@ -159,6 +159,8 @@ class OrderHistory(models.Model):
     date_completed = models.DateTimeField(null=True, blank=True)
     track_number = models.IntegerField(null=True, blank=True)
 
+    deliver_state = models.CharField(max_length=200, null=True, blank=True)
+
     payment_state = models.BooleanField(default=False)
     shipping_fee = models.IntegerField(null=True, blank=True)
     order_number = models.IntegerField(null=True, blank=True)

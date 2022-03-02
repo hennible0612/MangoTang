@@ -504,6 +504,7 @@ def checkoutComplete(request):
 
     if (IamportAmount == localAmount):
 
+
         for item in orderItem:
             item.orderHistory = orderhistory
             item.save()
@@ -515,7 +516,7 @@ def checkoutComplete(request):
         orderhistory.date_ordered = order.date_ordered
         orderhistory.date_completed = datetime.now()
         orderhistory.payment_state = order.payment_state
-
+        orderhistory.deliver_state = "prepare" #"shipping" "complete"
         orderhistory.shipping_fee = order.shipping_fee
         orderhistory.order_number = order.order_number
         orderhistory.email = order.email
@@ -619,10 +620,15 @@ def notice(request):
 def orderhistory(request):
     customer = request.user.customer
     orderHistory = OrderHistory.objects.filter(customer=customer)
-    orderItem = OrderItem.objects.get(orderHistory=orderHistory)
-    # questions = product.productquestion_set.all().order_by('-date_added')  # 여기에 모든 리뷰 들어있음
+    # orderItem = OrderItem.objects.get(orderHistory=orderHistory)
+    orderItem = []
+    for order in orderHistory:
+        orderItem += order.orderitem_set.all()
 
-    context = {'orderHistory': orderHistory}
+
+
+    # questions = product.productquestion_set.all().order_by('-date_added')  # 여기에 모든 리뷰 들어있음
+    context = {'orderHistory':orderHistory,'orderItem':orderItem}
 
     return render(request, 'mypage/orderhistory.html', context)
 
