@@ -103,7 +103,8 @@ class Order(models.Model):
         data = ""
         for name in orderitems:
             data += name.get_name +", "
-        data.strip(', ')
+
+        data = data.strip(', ')
         return data
 
     @property
@@ -197,6 +198,7 @@ class ProductOption(models.Model):
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    orderHistory = models.ForeignKey(OrderHistory, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     item_option_bool = models.BooleanField(default=False, blank=False, null=True)

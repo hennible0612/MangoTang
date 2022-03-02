@@ -499,10 +499,16 @@ def checkoutComplete(request):
 
     orderhistory = OrderHistory.objects.create(customer=customer)
 
+
+    orderItem = OrderItem.objects.get(order=order) #wer
+
     if (IamportAmount == localAmount):
+
+        orderItem.orderHistory = orderhistory
+        orderItem.save()
         order.order_status = True
         order.payment_state = True
-        orderhistory.orderer_name = order.get_all_item_name
+        orderhistory.order_name = order.get_all_item_name
         orderhistory.date_ordered = order.date_ordered
         orderhistory.date_completed = datetime.now()
         orderhistory.payment_state = order.payment_state
