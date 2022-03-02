@@ -235,7 +235,6 @@ def updateCartItem(request):
     data = json.loads(request.body)  # JSON body data에저장
     option = data['option']
     if (option == False):
-        print("option == False")
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
         # quantity = data['quantity']
@@ -499,13 +498,17 @@ def checkoutComplete(request):
 
     orderhistory = OrderHistory.objects.create(customer=customer)
 
+    # questions = product.productquestion_set.all().order_by('-date_added')  # 여기에 모든 리뷰 들어있음
 
-    orderItem = OrderItem.objects.get(order=order) #wer
+    orderItem = order.orderitem_set.all()
 
     if (IamportAmount == localAmount):
 
-        orderItem.orderHistory = orderhistory
-        orderItem.save()
+        for item in orderItem:
+            item.orderHistory = orderhistory
+            item.save()
+
+
         order.order_status = True
         order.payment_state = True
         orderhistory.order_name = order.get_all_item_name
@@ -616,6 +619,8 @@ def notice(request):
 def orderhistory(request):
     customer = request.user.customer
     orderHistory = OrderHistory.objects.filter(customer=customer)
+    orderItem = OrderItem.objects.get(orderHistory=orderHistory)
+    # questions = product.productquestion_set.all().order_by('-date_added')  # 여기에 모든 리뷰 들어있음
 
     context = {'orderHistory': orderHistory}
 
