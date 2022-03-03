@@ -506,7 +506,7 @@ def checkoutComplete(request):
 
         for item in orderItem:
             item.orderHistory = orderhistory
-            item.deliver_state = "prepare"
+            item.deliver_state = "prepare" # "shipping" "complete"
             item.save()
 
         order.order_status = True
@@ -515,7 +515,7 @@ def checkoutComplete(request):
         orderhistory.date_ordered = order.date_ordered
         orderhistory.date_completed = datetime.now()
         orderhistory.payment_state = order.payment_state
-        orderhistory.deliver_state = "prepare"  # "shipping" "complete"
+        # orderhistory.deliver_state = "prepare"  #
         orderhistory.shipping_fee = order.shipping_fee
         orderhistory.order_number = order.order_number
         orderhistory.email = order.email

@@ -1,21 +1,37 @@
 {% extends 'store/mypage.html' %}
 {% load static %}
 {% block mypage %}
+    <form id="form">
+        <h1>원하는 해결 방법</h1>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="radio" id="radio" value="exchange"
+                   checked>
+            <label class="form-check-label" for="radio">
+                교환
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="radio" id="radio" value="refund"
+                   checked>
+            <label class="form-check-label" for="radio">
+                환불
+            </label>
+        </div>
+        <h1>사유</h1>
+        <textarea style="height: 300px;" class="form-control" id="validationTextarea" placeholder="사유를 입력해주세요"
+                  required></textarea>
+        <button style="margin-top: 20px" class="btn btn-primary btn-lg btn-block submit" type="submit">전송하기</button>
+    </form>
+<script>
+var form = document.getElementById('form')
+form.addEventListener('submit', function (e) { //결제 버튼 클릭시
+    e.preventDefault()
+    submitFormData();
+});
 
-    <h1>원하는 해결 방법</h1>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-        <label class="form-check-label" for="exampleRadios1">
-            교환
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-        <label class="form-check-label" for="exampleRadios1">
-            환불
-        </label>
-    </div>
-    <h1>사유</h1>
-    <textarea style="height: 300px;" class="form-control" id="validationTextarea" placeholder="사유를 입력해주세요" required></textarea>
-
+function submitFormData() {
+    alert("sdfasdfasdfsadf")
+    console.log("Sdfsdfsdfsdfsdfsdf")
+}
+</script>
 {% endblock %}

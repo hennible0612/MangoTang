@@ -103,7 +103,6 @@ class Order(models.Model):
         data = ""
         for name in orderitems:
             data += name.get_name +", "
-
         data = data.strip(', ')
         return data
 
@@ -321,4 +320,13 @@ class ProductQuestion(models.Model):
             url_image = ''
 
         return url_image
+
+class CAExchangeRefundList(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    orderItem = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True)
+
+    rqstExrfn = models.CharField(max_length=200, null=True, blank=True)
+    reason = models.CharField(max_length=300, null=True, blank=True)
+    date_sent = models.DateTimeField(default=datetime.now)
+
 
