@@ -14,7 +14,7 @@
                         <div class="card h-100">
                             <!-- Product image-->
                             {#                        <a href="/product_detail/{{ product.seller_code }}">#}
-                            <a onclick="test()" href="{% url 'product_detail' product.seller_code %}">
+                            <a href="{% url 'product_detail' product.seller_code %}">
                                 <img class="card-img-top" height="300" width="300" src={{ product.image_title.url }}/>
                             </a>
                             <!-- Product details-->

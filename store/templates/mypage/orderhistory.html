@@ -16,7 +16,6 @@
 
             <div class="item" style="padding: 10px; height: 200px">
                 <div class="container-orderlist" style="flex-direction: row;">
-{#{{ item.product.image_title.url }}#}
                     <div class="item-orderlist-picture">
                         <img style="width: 160px; height: 180px" src={{ item.product.image_title.url }}  alt="..."/>
                     </div>
@@ -28,7 +27,6 @@
                         <hr>
                         <h4>{{ item.product.product_name }}</h4>
 
-{#                        <span>{{ item.get_total | floatformat:0 }} 원<span> {{ item.quantity}} 개</span> </span>#}
                         <span>{{ item.get_total | floatformat:0 }} 원<span> {{ item.quantity}} 개</span> </span>
                     </div>
 
@@ -38,8 +36,9 @@
 
                         </div>
                         <div class="center-orderlist-option" >
+{#                            href="{% url 'product_detail' product.seller_code %}"#}
 
-                            <a class="nav-link-mypage btn" style="border-style: groove; border-color: black; width: 150px" href="{% url 'cs' %}" >교환, 반품 신청</a>
+                            <a class="nav-link-mypage btn" style="border-style: groove; border-color: black; width: 150px" href="{% url 'cs' %} " >교환, 반품 신청</a>
 
 
                         </div>
