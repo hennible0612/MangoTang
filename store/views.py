@@ -623,8 +623,6 @@ def orderhistory(request):
     orderItem = []
     for order in orderHistory:
         orderItem += order.orderitem_set.all()
-        print(orderItem)
-        print(order)
     context = {'orderHistory': orderHistory, 'orderItem': orderItem}
 
     return render(request, 'mypage/orderhistory.html', context)
@@ -634,8 +632,14 @@ def orderhistory(request):
 @login_required(login_url='/login')
 def csform(request, orderNumber, sellerCode):
     customer = request.user.customer
+    orderHistory = OrderHistory.objects.get(customer=customer, order_number=orderNumber)
+    itemData = []
+    orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
+    for item in orderItem:
+        if int(item.product.seller_code) == int(sellerCode):
+            itemData = item
 
-    context = {}
+    context = {'itemData':itemData}
 
     return render(request, 'mypage/csform.html', context)
 
@@ -643,6 +647,8 @@ def csform(request, orderNumber, sellerCode):
 # 교환 환부 ㄹ요청
 
 def reqstExrfn(request):
+
+    
     return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
 

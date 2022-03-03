@@ -247,7 +247,7 @@ class OrderItem(models.Model):
 
 
     def __str__(self):
-        return "아이템"+str(self.get_option_cart_total)
+        return "아이템"+str(self.get_option_cart_total) + "아이템 이름: "+  self.product.product_name
 
 class OrderItemOption(models.Model):
     order_item_option = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True)
