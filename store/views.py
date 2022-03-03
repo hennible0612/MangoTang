@@ -504,11 +504,9 @@ def checkoutComplete(request):
 
     if (IamportAmount == localAmount):
 
-
         for item in orderItem:
             item.orderHistory = orderhistory
             item.save()
-
 
         order.order_status = True
         order.payment_state = True
@@ -516,7 +514,7 @@ def checkoutComplete(request):
         orderhistory.date_ordered = order.date_ordered
         orderhistory.date_completed = datetime.now()
         orderhistory.payment_state = order.payment_state
-        orderhistory.deliver_state = "prepare" #"shipping" "complete"
+        orderhistory.deliver_state = "prepare"  # "shipping" "complete"
         orderhistory.shipping_fee = order.shipping_fee
         orderhistory.order_number = order.order_number
         orderhistory.email = order.email
@@ -625,12 +623,20 @@ def orderhistory(request):
     for order in orderHistory:
         orderItem += order.orderitem_set.all()
 
-
-
-    # questions = product.productquestion_set.all().order_by('-date_added')  # 여기에 모든 리뷰 들어있음
-    context = {'orderHistory':orderHistory,'orderItem':orderItem}
+    context = {'orderHistory': orderHistory, 'orderItem': orderItem}
 
     return render(request, 'mypage/orderhistory.html', context)
+
+# 교환 환불 페이지지
+@login_required(login_url='/login')
+def csform(request):
+    customer = request.user.customer
+
+
+    context = {}
+
+    return render(request, 'mypage/csform.html', context)
+
 
 
 @login_required(login_url='/login')

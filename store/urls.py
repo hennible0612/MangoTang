@@ -49,7 +49,11 @@ urlpatterns = [
 	path('customerservice/faq', views.faq, name="faq"),
 	path('customerservice/onetoone', views.onetoone, name="onetoone"),
 	path('customerservice/notice', views.notice, name="notice"),
-	path('mypage/orderhistory', views.orderhistory, name="orderhistory"),
+	# 주문내역 페이지
+	path('mypage/orderhistory/', views.orderhistory, name="orderhistory"),
+	# cs 교화 반품 신청
+	path('mypage/orderhistory/cs', views.csform, name="cs"),
+
 	path('mypage/ordercancel', views.ordercancel, name="ordercancel"),
 	path('mypage/orderrefund', views.orderrefund, name="orderrefund"),
 	path('mypage/couponlist', views.couponlist, name="couponlist"),
