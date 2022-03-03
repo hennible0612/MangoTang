@@ -206,8 +206,14 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     item_option_bool = models.BooleanField(default=False, blank=False, null=True)
 
-    def __str__(self):
-        return self.product.product_name
+    @property
+    def get_all_option_name(self):
+        orderOptions = self.orderitemoption_set.all()  # 해당 order의 자식 가져와서
+        data = ""
+        for name in orderOptions:
+            data += name.get_option_name +", "
+        data = data.strip(', ')
+        return data
 
     @property
     def get_name(self):
@@ -217,20 +223,28 @@ class OrderItem(models.Model):
     def get_option_bool(self):
         return self.item_option_bool
 
-    @property
+    @property #배송비
     def get_delivery_price(self):
         return self.product.shipment_price
 
-    @property
+    @property#제품 가격
     def get_total(self):
         total = self.product.price_discount * self.quantity
         return total
 
-    @property
+    @property #옵션 가격
     def get_option_cart_total(self):
         orderOptions = self.orderitemoption_set.all()  # 해당 order의 자식 가져와서
         total = sum([item.get_total for item in orderOptions])  # 다더함함
         return total
+
+    @property #옵션 포함 가격
+    def get_all_total(self):
+        total = self.product.price_discount * self.quantity
+        orderOptions = self.orderitemoption_set.all()  # 해당 order의 자식 가져와서
+        total += sum([item.get_total for item in orderOptions])  # 다더함함
+        return total
+
 
     def __str__(self):
         return "아이템"+str(self.get_option_cart_total)
@@ -239,6 +253,10 @@ class OrderItemOption(models.Model):
     order_item_option = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True)
     product_option = models.ForeignKey(ProductOption, on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
+
+    @property
+    def get_option_name(self):
+        return self.product_option.option_name
 
     @property
     def get_total(self):

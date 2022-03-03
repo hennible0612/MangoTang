@@ -506,7 +506,7 @@ def checkoutComplete(request):
 
         for item in orderItem:
             item.orderHistory = orderhistory
-            item.deliver_state = "prepare" # "shipping" "complete"
+            item.deliver_state = "prepare"  # "shipping" "complete"
             item.save()
 
         order.order_status = True
@@ -623,26 +623,26 @@ def orderhistory(request):
     orderItem = []
     for order in orderHistory:
         orderItem += order.orderitem_set.all()
-
+        print(orderItem)
+        print(order)
     context = {'orderHistory': orderHistory, 'orderItem': orderItem}
 
     return render(request, 'mypage/orderhistory.html', context)
 
+
 # 교환 환불 페이지지
 @login_required(login_url='/login')
-def csform(request, orderNumber):
+def csform(request, orderNumber, sellerCode):
     customer = request.user.customer
-
 
     context = {}
 
     return render(request, 'mypage/csform.html', context)
 
+
 # 교환 환부 ㄹ요청
 
 def reqstExrfn(request):
-
-
     return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
