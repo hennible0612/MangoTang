@@ -41,9 +41,12 @@ urlpatterns = [
 	# 결제 성공
 	path('payment/success',views.paymentSuccess, name='paymentSuccess'),
 
-
 	# 내페이지
 	path('mypage/', views.mypage, name="mypage"),
+
+	# 교환 환불 신청
+	path('submit/reqstExrfn', views.reqstExrfn, name="reqstExrfn"),
+
 
 	path('customerservice/', views.customerservice, name="customerservice"),
 	path('customerservice/faq', views.faq, name="faq"),

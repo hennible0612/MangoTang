@@ -638,6 +638,12 @@ def csform(request, orderNumber):
 
     return render(request, 'mypage/csform.html', context)
 
+# 교환 환부 ㄹ요청
+
+def reqstExrfn(request):
+
+
+    return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 @login_required(login_url='/login')
