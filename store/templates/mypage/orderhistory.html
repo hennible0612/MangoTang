@@ -6,6 +6,7 @@
             <h3>주문내역</h3>
             <hr>
         </div>
+    {% for order in orderHistory %}
         {% for item in orderItem %}
 
         <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
@@ -38,7 +39,7 @@
                         <div class="center-orderlist-option" >
 {#                            href="{% url 'product_detail' product.seller_code %}"#}
 
-                            <a class="nav-link-mypage btn" style="border-style: groove; border-color: black; width: 150px" href="{% url 'cs' %} " >교환, 반품 신청</a>
+                            <a class="nav-link-mypage btn" style="border-style: groove; border-color: black; width: 150px" href="{% url 'cs' order.order_number %} " >교환, 반품 신청</a>
 
 
                         </div>
@@ -57,7 +58,7 @@
         <hr style="clear: both; visibility: hidden;">
 
         {% endfor %}
-
+    {% endfor %}
     </div>
 
 {% endblock mypage %}

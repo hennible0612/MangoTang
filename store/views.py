@@ -506,6 +506,7 @@ def checkoutComplete(request):
 
         for item in orderItem:
             item.orderHistory = orderhistory
+            item.deliver_state = "prepare"
             item.save()
 
         order.order_status = True
@@ -629,7 +630,7 @@ def orderhistory(request):
 
 # 교환 환불 페이지지
 @login_required(login_url='/login')
-def csform(request):
+def csform(request, orderNumber):
     customer = request.user.customer
 
 

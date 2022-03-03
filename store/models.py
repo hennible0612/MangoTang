@@ -159,7 +159,7 @@ class OrderHistory(models.Model):
     date_completed = models.DateTimeField(null=True, blank=True)
     track_number = models.IntegerField(null=True, blank=True)
 
-    deliver_state = models.CharField(max_length=200, null=True, blank=True)
+    # deliver_state = models.CharField(max_length=200, null=True, blank=True)
 
     payment_state = models.BooleanField(default=False)
     shipping_fee = models.IntegerField(null=True, blank=True)
@@ -199,8 +199,10 @@ class ProductOption(models.Model):
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     orderHistory = models.ForeignKey(OrderHistory, on_delete=models.SET_NULL, null=True)
+    deliver_state = models.CharField(max_length=200, null=True, blank=True)
+
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     item_option_bool = models.BooleanField(default=False, blank=False, null=True)
