@@ -647,8 +647,31 @@ def csform(request, orderNumber, sellerCode):
 # 교환 환부 ㄹ요청
 
 def reqstExrfn(request):
+    data = json.loads(request.body)
+    customer = request.user.customer
+    reqstExrfn = data["data"]["reqstExrfn"]
+    reason = data["data"]["reason"]
+    orderNumber = data["data"]["orderNumber"]
+    sellerCode = data["data"]["sellerCode"]
 
-    
+    itemData = []
+    orderHistory = OrderHistory.objects.get(customer=customer, order_number=orderNumber)
+    orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
+    for item in orderItem:
+        if int(item.product.seller_code) == int(sellerCode):
+            print(type(item))
+            itemData = item
+            print(type(itemData))
+
+    # CAExchangeRefundList 생성
+    refundList, created = CAExchangeRefundList.objects.get_or_create(customer=customer, orderItem=itemData)
+    refundList.reason = reason
+    refundList.rqstExrfn = reqstExrfn
+    refundList.date_submitted = datetime.now()
+    refundList.save()
+
+
+
     return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
 

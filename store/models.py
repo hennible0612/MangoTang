@@ -345,5 +345,6 @@ class CAExchangeRefundList(models.Model):
     rqstExrfn = models.CharField(max_length=200, null=True, blank=True)
     reason = models.CharField(max_length=300, null=True, blank=True)
     date_sent = models.DateTimeField(default=datetime.now)
+    problem_solved = models.BooleanField(default=False, blank=False, null=True)
 
 
