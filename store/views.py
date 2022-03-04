@@ -644,8 +644,13 @@ def csform(request, orderNumber, sellerCode):
     return render(request, 'mypage/csform.html', context)
 
 
-# 교환 환부 ㄹ요청
 
+# 아임포트 서버에 환불요청
+def iamportRefundRequest(refundAmount,orderNumber,reason):
+    
+    return 0
+
+# 교환 환부 ㄹ요청
 def reqstExrfn(request):
     data = json.loads(request.body)
     customer = request.user.customer
@@ -668,14 +673,20 @@ def reqstExrfn(request):
     refundList.date_submitted = datetime.now()
     refundList.save()
 
-    if(refundList.rqstExrfn == "checking"):
+
+    if(str(itemData.deliver_state) == "checking"):
+        refundAmount = itemData.get_all_total + itemData.get_delivery_price# 환불할 총 가격
+        iamportRefundRequest(refundAmount,orderNumber,reason)
+
+        return JsonResponse("환불완료", safe=False, json_dumps_params={'ensure_ascii': False})
+
+    return JsonResponse("환불 신청 완료", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
-    return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
-
+#w주문 취소 요청 받음
 def paymentCancel(request):
 
-    
+
     return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
 

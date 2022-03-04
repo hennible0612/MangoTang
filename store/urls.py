@@ -47,6 +47,9 @@ urlpatterns = [
 	# 교환 환불 신청
 	path('submit/reqstExrfn', views.reqstExrfn, name="reqstExrfn"),
 
+	# 주문 취소
+	path('payment/cancel', views.paymentCancel, name="paymentCancel"),
+
 
 	path('customerservice/', views.customerservice, name="customerservice"),
 	path('customerservice/faq', views.faq, name="faq"),
