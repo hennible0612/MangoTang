@@ -506,7 +506,7 @@ def checkoutComplete(request):
 
         for item in orderItem:
             item.orderHistory = orderhistory
-            item.deliver_state = "prepare"  # "shipping" "complete"
+            item.deliver_state = "checking"  # "shipping" "complete"
             item.save()
 
         order.order_status = True
@@ -659,9 +659,7 @@ def reqstExrfn(request):
     orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
     for item in orderItem:
         if int(item.product.seller_code) == int(sellerCode):
-            print(type(item))
             itemData = item
-            print(type(itemData))
 
     # CAExchangeRefundList 생성
     refundList, created = CAExchangeRefundList.objects.get_or_create(customer=customer, orderItem=itemData)
@@ -670,8 +668,14 @@ def reqstExrfn(request):
     refundList.date_submitted = datetime.now()
     refundList.save()
 
+    if(refundList.rqstExrfn == "checking"):
 
 
+    return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
+
+def paymentCancel(request):
+
+    
     return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
 
 

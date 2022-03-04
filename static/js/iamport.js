@@ -30,9 +30,17 @@ function requestPay(merchant_uid, name, amount, buyer_email, buyer_name, buyer_t
                 data: JSON.stringify({'imp_uid': rsp.imp_uid, 'merchant_uid': rsp.merchant_uid})
             }).done(function (data) {
                 var info = JSON.parse(data)
+
+                // if (info["response"]["status"] == "ready") {
+                //     var vbank_num = info["response"]["vbank_num"]
+                //     var vbank_date = info["response"]["vbank_date"]
+                //     var vbank_name = info["response"]["vbank_name"]
+                // }
+
+
                 if (info["response"]["status"] == "paid") {
                     alert("결제 성공");
-                    paymentComplete(info)
+                    paymentComplete(info);
                 } else if (info["response"]["status"] == "forgery") {
                     alert("자바 스크립트 위조");
                     location.reload();
