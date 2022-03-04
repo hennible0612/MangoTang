@@ -647,7 +647,27 @@ def csform(request, orderNumber, sellerCode):
 
 # 아임포트 서버에 환불요청
 def iamportRefundRequest(refundAmount,orderNumber,reason):
-    
+    token = getToken()
+
+    url = 'https://api.iamport.kr/payments/cancel'
+    headers = {
+        "Authorization": token
+    }
+    data = {
+        'merchant_uid':orderNumber,
+        'amount':refundAmount,
+        'checksum':refundAmount,
+        'reason':reason
+    }
+
+    req = requests.post(url, headers=headers,data=data)
+
+
+    access_res = req.json()
+    if access_res['code'] == 0:
+        return access_res
+    else:
+        return None
     return 0
 
 # 교환 환부 ㄹ요청
@@ -673,11 +693,10 @@ def reqstExrfn(request):
     refundList.date_submitted = datetime.now()
     refundList.save()
 
-
     if(str(itemData.deliver_state) == "checking"):
         refundAmount = itemData.get_all_total + itemData.get_delivery_price# 환불할 총 가격
-        iamportRefundRequest(refundAmount,orderNumber,reason)
-
+        response = iamportRefundRequest(refundAmount,orderNumber,reason)
+        # if(response["code"] == )
         return JsonResponse("환불완료", safe=False, json_dumps_params={'ensure_ascii': False})
 
     return JsonResponse("환불 신청 완료", safe=False, json_dumps_params={'ensure_ascii': False})
@@ -687,7 +706,9 @@ def reqstExrfn(request):
 def paymentCancel(request):
 
 
-    return JsonResponse("helloworld", safe=False, json_dumps_params={'ensure_ascii': False})
+    #iamportRefundRequest(refundAmount, orderNumber, reason)
+
+    return JsonResponse("취소 완료", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 @login_required(login_url='/login')
