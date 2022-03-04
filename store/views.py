@@ -664,6 +664,7 @@ def iamportRefundRequest(refundAmount,orderNumber,reason):
 
 
     access_res = req.json()
+
     if access_res['code'] == 0:
         return access_res
     else:
@@ -696,10 +697,19 @@ def reqstExrfn(request):
     if(str(itemData.deliver_state) == "checking"):
         refundAmount = itemData.get_all_total + itemData.get_delivery_price# 환불할 총 가격
         response = iamportRefundRequest(refundAmount,orderNumber,reason)
-        # if(response["code"] == )
-        return JsonResponse("환불완료", safe=False, json_dumps_params={'ensure_ascii': False})
+        if(response["code"] == 0):
 
-    return JsonResponse("환불 신청 완료", safe=False, json_dumps_params={'ensure_ascii': False})
+            #환불 성공 후 할일
+
+
+            item.delete()
+            return JsonResponse("refundSuccessful", safe=False, json_dumps_params={'ensure_ascii': False})
+        else:
+            #환불 과정 중 실패
+            return JsonResponse("err", safe=False, json_dumps_params={'ensure_ascii': False})
+
+
+    return JsonResponse("refundRequestCompleted", safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 #w주문 취소 요청 받음
