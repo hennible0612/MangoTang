@@ -10,7 +10,7 @@
 
             <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
                 <div class="item" style="padding-top: 10px">
-                    <div><h5>{{ item.orderHistory.date_completed }}주문<a class="orderlist-detail" href="{% url 'orderdetail' %}"
+                    <div><h5>{{ item.orderHistory.date_completed }} 주문 | 주문번호: {{ item.orderHistory.order_number }} <a class="orderlist-detail" href="{% url 'orderdetail' %}"
                                                                  style="float: right">주문 상세보기</a></h5>
                     </div>
                 </div>

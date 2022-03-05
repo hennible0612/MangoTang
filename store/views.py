@@ -699,7 +699,7 @@ def reqstExrfn(request):
         if(response["code"] == 0):
 
             #환불 성공 후 할일
-
+            print("환불성공")
 
             item.delete()
             return JsonResponse("refundSuccessful", safe=False, json_dumps_params={'ensure_ascii': False})
