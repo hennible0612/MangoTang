@@ -308,6 +308,7 @@
         }
 
         var itemObj = {
+            buyNow : false,
             itemSellercode: {{ product.seller_code }},
             options: {},
             quantity: {}
@@ -496,6 +497,7 @@
         });
         $('.buy-now').click(function (e) {
             console.log("buy now clicked")
+            itemObj.buyNow = true
             $.ajax({
                 headers: {"X-CSRFToken": token},
                 url: '/checkout/buynow',
