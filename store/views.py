@@ -705,7 +705,8 @@ def reqstExrfn(request):
             orderHistory.total_fee = orderHistory.total_fee - itemData.get_all_total
             orderHistory.save()
 
-            itemData.delete()
+            itemData.deliver_state = "refunded"
+            itemData.save()
 
             msg = "refundSuccessful"
             json_obj = json.dumps(msg)
@@ -775,7 +776,14 @@ def qnalist(request):
 
 @login_required(login_url='/login')
 def refundlist(request):
-    context = {}
+    customer = request.user.customer
+    orderHistory = OrderHistory.objects.filter(customer=customer)
+    # orderItem = OrderItem.objects.get(orderHistory=orderHistory)
+    orderItem = []
+    for order in orderHistory:
+        orderItem += order.orderitem_set.all()
+
+    context = {'orderItem': orderItem}
     return render(request, 'mypage/refundlist.html', context)
 
 

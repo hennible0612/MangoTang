@@ -1,9 +1,72 @@
 {% extends 'store/mypage.html' %}
 {% load static %}
 {% block mypage %}
-<div class="container">
-    환불리스트
-    <hr>
+    <div class="container" style=" height: 90rem"> <!--전체 컨테이너-->
+        <div class="item">
+            <h3>환불 내역</h3>
+            <hr>
+        </div>
+        {% for item in orderItem %}
+            {% if item.deliver_state == "refunded" %}
+                <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
+                    <div class="item" style="padding-top: 10px">
+                        <div><h5>{{ item.orderHistory.date_completed | date:'y/m/d' }}
+                            주문번호: {{ item.orderHistory.order_number }} <a class="orderlist-detail"
+                                                                          href="#"
+                                                                          style="float: right">환불 상세정보</a></h5>
+                        </div>
+                    </div>
 
-</div>
+                    <div class="item" style="padding: 10px; height: 200px">
+                        <div class="container-orderlist" style="flex-direction: row;">
+                            <div class="item-orderlist-picture">
+                                <img style="width: 160px; height: 180px"
+                                     src={{ item.product.image_title.url }}  alt="..."/>
+                            </div>
+
+                            <div class="item-orderlist-info" style=" margin: 10px;">
+                                <span style="font-size: 25px; "><b>환불 완료</b></span>
+                                <span><img src="{% static 'images/dot.png' %}" width="9" height="9"></span>
+
+                                <hr>
+                                {% if item.item_option_bool == True %}
+                                    <h4>{{ item.product.product_name }} | 옵션: {{ item.get_all_option_name }}</h4>
+                                {% else %}
+                                    <h4>{{ item.product.product_name }}</h4>
+
+                                {% endif %}
+                                <span>{{ item.get_all_total | floatformat:0 }} 원 <span> {{ item.quantity }} 개</span> 배송비 : {{ item.get_delivery_price }}</span>
+                            </div>
+
+                            <div class="item-orderlist-button">
+                                <div class="center-orderlist-option">
+                                    <a class="nav-link-mypage btn"
+                                       style="border-style: groove; border-color: black; width: 150px" href="/">-</a>
+
+                                </div>
+                                <div class="center-orderlist-option">
+
+                                    <a class="nav-link-mypage btn"
+                                       style="border-style: groove; border-color: black; width: 150px"
+                                       href="{% url 'cs' item.orderHistory.order_number item.product.seller_code %} ">-</a>
+
+
+                                </div>
+                                <div class="center-orderlist-option">
+
+                                    <a class="nav-link-mypage btn"
+                                       style="border-style: groove; border-color: black; width: 150px" href="/">-</a>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <hr style="clear: both; visibility: hidden;">
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock mypage %}
