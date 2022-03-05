@@ -10,7 +10,7 @@
 
             <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
                 <div class="item" style="padding-top: 10px">
-                    <div><h5>{{ item.orderHistory.date_completed }} 주문 | 주문번호: {{ item.orderHistory.order_number }} <a class="orderlist-detail" href="{% url 'orderdetail' %}"
+                    <div><h5>{{ item.orderHistory.date_completed | date:'y/m/d' }} 주문번호: {{ item.orderHistory.order_number }} <a class="orderlist-detail" href="{% url 'orderdetail' %}"
                                                                  style="float: right">주문 상세보기</a></h5>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="item-orderlist-info" style=" margin: 10px;">
-                            <span style="font-size: 25px; "><b>배송 준비중</b></span>
+                            <span style="font-size: 25px; "><b>주문 확인중</b></span>
                             <span><img src="{% static 'images/dot.png' %}" width="9" height="9"></span>
                             <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>
                             <hr>
