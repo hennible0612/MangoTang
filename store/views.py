@@ -645,7 +645,7 @@ def csform(request, orderNumber, sellerCode):
 
 
 # 아임포트 서버에 환불요청
-def iamportRefundRequest(refundAmount,orderNumber,reason):
+def iamportRefundRequest(refundAmount,orderNumber,reason,checkSum):
     token = getToken()
 
     url = 'https://api.iamport.kr/payments/cancel'
@@ -655,20 +655,21 @@ def iamportRefundRequest(refundAmount,orderNumber,reason):
     data = {
         'merchant_uid':orderNumber,
         'amount':refundAmount,
-        'checksum':refundAmount,
+        'checksum':checkSum, # 총 환불 가능한 금액
         'reason':reason
     }
 
     req = requests.post(url, headers=headers,data=data)
 
-
     access_res = req.json()
+    print(access_res)
 
     if access_res['code'] == 0:
+        print("성공")
         return access_res
     else:
+        print("실패")
         return None
-    return 0
 
 # 교환 환부 ㄹ요청
 def reqstExrfn(request):
@@ -691,24 +692,33 @@ def reqstExrfn(request):
     refundList.reason = reason
     refundList.rqstExrfn = reqstExrfn
     refundList.date_submitted = datetime.now()
+
     refundList.save()
 
     if(str(itemData.deliver_state) == "checking"):
         refundAmount = itemData.get_all_total + itemData.get_delivery_price# 환불할 총 가격
-        response = iamportRefundRequest(refundAmount,orderNumber,reason)
+        checkSum = orderHistory.get_total
+        response = iamportRefundRequest(refundAmount,orderNumber,reason,checkSum)
         if(response["code"] == 0):
 
-            #환불 성공 후 할일
-            print("환불성공")
+            orderHistory.shipping_fee = orderHistory.shipping_fee - itemData.get_delivery_price
+            orderHistory.total_fee = orderHistory.total_fee - itemData.get_all_total
+            orderHistory.save()
 
-            item.delete()
-            return JsonResponse("refundSuccessful", safe=False, json_dumps_params={'ensure_ascii': False})
+            itemData.delete()
+
+            msg = "refundSuccessful"
+            json_obj = json.dumps(msg)
+            return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
         else:
             #환불 과정 중 실패
-            return JsonResponse("err", safe=False, json_dumps_params={'ensure_ascii': False})
-
-
-    return JsonResponse("refundRequestCompleted", safe=False, json_dumps_params={'ensure_ascii': False})
+            msg = "err"
+            json_obj = json.dumps(msg)
+            return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+    else:
+        msg = "refundRequestCompleted"
+        json_obj = json.dumps(msg)
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 #w주문 취소 요청 받음

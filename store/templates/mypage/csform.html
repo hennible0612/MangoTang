@@ -18,62 +18,62 @@
             </label>
         </div>
         <h1>사유</h1>
-        <textarea style="height: 300px;" class="form-control" name= "reason" id="validationTextarea" placeholder="사유를 입력해주세요"
+        <textarea style="height: 300px;" class="form-control" name="reason" id="validationTextarea"
+                  placeholder="사유를 입력해주세요"
                   required></textarea>
         <button style="margin-top: 20px" class="btn btn-primary btn-lg btn-block submit" type="submit">전송하기</button>
     </form>
-<script>
-var form = document.getElementById('form')
-form.addEventListener('submit', function (e) { //결제 버튼 클릭시
-    e.preventDefault()
-    submitFormData();
-});
+    <script>
+        var form = document.getElementById('form')
+        form.addEventListener('submit', function (e) { //결제 버튼 클릭시
+            e.preventDefault()
+            submitFormData();
+        });
 
-function submitFormData() {
-    var data = {
-        'reqstExrfn': null,
-        'reason':null,
-        'orderNumber':{{ itemData.orderHistory.order_number }},
-        'sellerCode':{{ itemData.product.seller_code }}
-    }
+        function submitFormData() {
+            var data = {
+                'reqstExrfn': null,
+                'reason': null,
+                'orderNumber':{{ itemData.orderHistory.order_number }},
+                'sellerCode':{{ itemData.product.seller_code }}
+            }
 
 
+            data.reqstExrfn = form.radio.value
+            data.reason = form.reason.value
 
-    data.reqstExrfn = form.radio.value
-    data.reason = form.reason.value
+            {#var url = {% url 'reqstExrfn' %};#}
+            var url = "/submit/reqstExrfn";
+            console.log(url)
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({'data': data})
 
-    {#var url = {% url 'reqstExrfn' %};#}
-    var url = "/submit/reqstExrfn";
-    console.log(url)
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken,
-        },
-        body: JSON.stringify({'data': data})
+            }).then((response) => response.json())
+                .then((data) => {
 
-    }).then((response) => response.json()).then((data)=>{
-        obj = JSON.parse(data);
-        if (obj == "refundSuccessful") {//환불성공
-            alert("환불 성공")
-            window.location.replace({% url 'orderhistory' %})
+                    var msg = JSON.parse(data);
+                    console.log(msg)
+                    if (msg == "refundSuccessful") {//환불성공
+                        alert("환불 성공")
+                        window.location.replace('/mypage/orderhistory/')
 
-        }else if (obj == "refundRequestCompleted"){ //환불신청완료료
-            alert("환불 신청 완료")
-            window.location.replace({% url 'orderhistory' %})
+                    } else if (msg == "refundRequestCompleted") { //환불신청완료료
+                        alert("환불 신청 완료")
+                        window.location.replace('/mypage/orderhistory/')
 
-        }else if(obj=="err") { //환불과정중에러
-            alert("환불 신청 과정 중 에러 오류가 계속 나면 고객센터로 연락 부탁드립니다.")
-            window.location.replace({% url 'orderhistory' %})
+                    } else if (msg == "err") { //환불과정중에러
+                        alert("환불 신청 과정 중 에러 오류가 계속 나면 고객센터로 연락 부탁드립니다.")
+
+                    }
+
+                })
+
 
         }
-
-    })
-
-
-    console.log(data)
-
-}
-</script>
+    </script>
 {% endblock %}
