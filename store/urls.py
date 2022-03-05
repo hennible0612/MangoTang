@@ -35,6 +35,9 @@ urlpatterns = [
 	#결제 완료 요약
 	path('checkout/complete/<int:orderId>/', views.checkoutSummery, name="checkoutSummery"),
 
+	#지금 바로 구매하기
+	path('checkout/buynow', views.buyNow, name="buyNow"),
+
 	# 제품 문의 API
 	path('product/question/<int:seller_code>/<int:page>/', views.getQuestion, name="getQuestion"),
 
@@ -55,6 +58,7 @@ urlpatterns = [
 	path('customerservice/faq', views.faq, name="faq"),
 	path('customerservice/onetoone', views.onetoone, name="onetoone"),
 	path('customerservice/notice', views.notice, name="notice"),
+
 	# 주문내역 페이지
 	path('mypage/orderhistory/', views.orderhistory, name="orderhistory"),
 	# cs 교화 반품 신청

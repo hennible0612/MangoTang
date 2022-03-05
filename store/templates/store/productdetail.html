@@ -97,7 +97,7 @@
                                 </button>
                             </div>
                             <div style="padding-right:10px;">
-                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <button class="btn btn-outline-dark flex-shrink-0 buy-now" type="button">
                                     바로 구매하기
                                 </button>
                             </div>
@@ -128,7 +128,7 @@
                                 </button>
                             </div>
                             <div style="padding-right:10px;">
-                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <button class="btn btn-outline-dark flex-shrink-0 buy-now" type="button">
                                     <i class="bi-cart-fill me-1"></i>
                                     바로 구매하기
                                 </button>
@@ -493,6 +493,17 @@
 
             }
 
+        });
+        $('.buy-now').click(function (e) {
+            console.log("buy now clicked")
+            $.ajax({
+                headers: {"X-CSRFToken": token},
+                url: '/checkout/buynow',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify(itemObj)
+
+            })
         });
 
 

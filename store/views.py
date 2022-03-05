@@ -167,6 +167,11 @@ def checkout(request):
 
         return render(request, 'permisson.html')
 
+def buyNow(request):
+    print("buyNow")
+    data = json.loads(request.body)  # JSON body data에저장
+    print(data)
+    return JsonResponse("sdf")
 
 """
 장바구니에 물품 추가 JSON 응답
