@@ -97,10 +97,10 @@
                                 </button>
                             </div>
                             <div style="padding-right:10px;">
-                                <button class="btn btn-outline-dark flex-shrink-0 buy-now" type="button">
-{#                                    <a href="{% url 'checkout' %}">바로 구매하기</a>#}
-                                    바로 구매하기
-                                </button>
+                                {#                                <button class="btn btn-outline-dark flex-shrink-0 buy-now" type="button">#}
+                                {#                                    <a href="{% url 'checkout' %}">바로 구매하기</a>#}
+                                {#                                    바로 구매하기#}
+                                {#                                </button>#}
                             </div>
                             <div style="text-align: center">
                                 <p style="color: #ee7d18; font-size: 1.5rem"
@@ -128,12 +128,12 @@
                                     카트에 넣기
                                 </button>
                             </div>
-                            <div style="padding-right:10px;">
-                                <button class="btn btn-outline-dark flex-shrink-0 buy-now"  type="button">
-                                    <i class="bi-cart-fill me-1"></i>
-                                    바로 구매하기
-                                </button>
-                            </div>
+                            {#                            <div style="padding-right:10px;">#}
+                            {#                                <button class="btn btn-outline-dark flex-shrink-0 buy-now"  type="button">#}
+                            {#                                    <i class="bi-cart-fill me-1"></i>#}
+                            {#                                    바로 구매하기#}
+                            {#                                </button>#}
+                            {#                            </div>#}
                             <div style="text-align: center">
                                 <p style="color: #ee7d18; font-size: 1.5rem"
                                    class="total-price">{{ product.price_discount | floatformat:0 }}원</p>
@@ -300,6 +300,7 @@
     <!--snack bar-->
     <text id="snackbar">장바구니에 담겼습니다. <a class="nav-link-cart" href={% url 'cart' %}> 바로 가기</a></text>
     <script>
+
         function cartSnackbar() {
             var x = document.getElementById("snackbar");
             x.className = "show";
@@ -309,7 +310,7 @@
         }
 
         var itemObj = {
-            buyNow : false,
+            buyNow: false,
             itemSellercode: {{ product.seller_code }},
             options: {},
             quantity: {}
@@ -319,8 +320,20 @@
 
             itemObj['option'] = 'true';
             itemObj['action'] = 'set'
-            itemObj['options']['optionSellercode' + id] = sellerCode;
-            itemObj['quantity']['itemQuantity' + id] = parseInt($('.option_quantity' + id).val());
+
+            if (itemObj['options']['optionSellercode' + id] == sellerCode) {
+
+                return false;
+            } else {
+                itemObj['option'] = 'true';
+                itemObj['action'] = 'set'
+                itemObj['options']['optionSellercode' + id] = sellerCode;
+                itemObj['quantity']['itemQuantity' + id] = parseInt($('.option_quantity' + id).val());
+                return true;
+            }
+
+
+
 
         }
 
@@ -421,9 +434,15 @@
                 var counter = $(this).find("option:selected").data("id");
                 var optionPrice = $(this).find("option:selected").data("price");
 
-                changeTotalPrice(totalPrice, optionPrice, "add")
-                addItem(sellerCode, counter)
-                $('.' + sellerCode).show()
+
+                var bool = addItem(sellerCode, counter)
+                if (bool == true) {
+                    changeTotalPrice(totalPrice, optionPrice, "add");
+
+                } else {
+                    alert("이미 선택된 옵션입니다.")
+                }
+                $('.' + sellerCode).show();
             });
 
 
@@ -433,7 +452,6 @@
                 var price = $(this).data("price");
                 var action = "add"
 
-                console.log(price);
 
                 if (!isNaN(currentVal)) {
                     $('.product-quantity').val(currentVal + 1);
