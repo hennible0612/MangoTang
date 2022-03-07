@@ -38,11 +38,8 @@
                 'sellerCode':{{ itemData.product.seller_code }}
             }
 
-
             data.reqstExrfn = form.radio.value
             data.reason = form.reason.value
-
-            {#var url = {% url 'reqstExrfn' %};#}
             var url = "/submit/reqstExrfn";
             console.log(url)
             fetch(url, {

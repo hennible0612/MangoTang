@@ -151,25 +151,23 @@ def register(request):
 
 @login_required(login_url='/login')
 def checkout(request):
+    
 
-    if request.method == "GET":
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-        items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
-        cartItems = order.get_cart_items
-        itemOption = []
-        if (bool(items) == True):
-            for item in items:
-                itemOption += OrderItemOption.objects.filter(order_item_option=item)
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+    items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
+    cartItems = order.get_cart_items
+    itemOption = []
+    if (bool(items) == True):
+        for item in items:
+            itemOption += OrderItemOption.objects.filter(order_item_option=item)
 
-            context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
-            return render(request, 'store/checkout.html', context)
-        else:
-            return render(request, 'permisson.html')
-    elif request.method == "POST":
-        print("POSTOSOTOST")
-
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
+        return render(request, 'store/checkout.html', context)
+    else:
         return render(request, 'permisson.html')
+
+
 
 def buyNow(request):
     data = json.loads(request.body)  # JSON body data에저장
