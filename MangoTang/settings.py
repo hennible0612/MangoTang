@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-+fh07mf&#!zl0g)k(th=k0a@&)35dn@o28n+-g&abf%1nx)n*9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = [] 나중에 고정 아이피 입력
 
 
