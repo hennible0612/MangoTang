@@ -1,10 +1,15 @@
 from datetime import datetime
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.contrib.auth import get_user_model
+
+from allauth.socialaccount.signals import pre_social_login
+
+from allauth.account.signals import user_logged_in
+
 
 class UserForm(UserCreationForm):
     name = forms.CharField(label="이름")
@@ -17,7 +22,20 @@ class UserForm(UserCreationForm):
         model = User
         fields = ("username", "password1", "password2", "name", "email", "phone_number")
 
+# User = get_user_model()
+#
+# def pre_social_login_reciver(request, sociallogin):
+#     print(request)
+#     print(sociallogin)
+#
+# pre_social_login.connect(pre_social_login, sociallogin)
 
+#
+# def user_logged_in_receiver(request, sociallogin, **kwargs):
+#     print(request)
+#     print(sociallogin)
+#
+# user_logged_in.connect(user_logged_in_receiver, sender=User)
 # Create your models here.
 
 class Customer(models.Model):
