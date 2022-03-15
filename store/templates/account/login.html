@@ -1,4 +1,5 @@
-{% extends "account/base.html" %}
+{#{% extends "account/base.html" %}#}
+{% extends "store/main.html" %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -6,41 +7,85 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center" style="padding: 10px">
+                            <h3 class="mb-5">로그인</h3>
 
-<h1>{% trans "Sign In" %}</h1>
 
-{% get_providers as socialaccount_providers %}
+                            <form method="post" class="post-form" action="{% url 'login' %}">
+                                {% csrf_token %}
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+                                {% include "store/form_errors.html" %}
+                                <div class="form-group">
+                                    <label for="username">사용자ID</label>
+                                    <input class="form-control form-control-lg" type="text" placeholder="아이디"
+                                           class="form-control" name="username" id="username"
+                                           value="{{ form.username.value|default_if_none:'' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">비밀번호</label>
+                                    <input class="form-control form-control-lg" type="password" placeholder="비밀번호"
+                                           class="form-control" name="password" id="password"
+                                           value="{{ form.password.value|default_if_none:'' }}">
+                                </div>
 
-<div class="socialaccount_ballot">
+                                <!-- checkbox -->
+                                <div class="flex-column">
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+                                    <a href="{% url 'register' %}" class='nav-link-cart' style="padding-right: 10px">회원가입</a>
+                                    <a href="{% url 'account_reset_password' %}" class='nav-link-cart'
+                                       style="padding-right:10px;">비밀번호찾기</a>
+                                    <a href="#!" class='nav-link-cart'>아이디찾기</a>
 
-  <div class="login-or">{% trans 'or' %}</div>
 
-</div>
+                                </div>
+                                <br>
+                                <button class="btn btn-primary btn-block"
+                                        style="width:20em; background-color:#ee7d18" type="submit">로그인
+                                </button>
+                            </form>
+                            {% get_providers as socialaccount_providers %}
+                            <hr class="my-4 ">
 
-{% include "socialaccount/snippets/login_extra.html" %}
+                            <div>
+                                <button class="btn btn-block btn-primary mb-3"
+                                        style="background-color: #19ce60; width: 20em; " type="submit"><i class="fa-solid fa-n"></i>네이버 로그인
+                                </button>
+                            </div>
+                            {% if socialaccount_providers %}
+                                <div class="socialaccount_ballot">
 
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
+                                    <ul class="socialaccount_providers">
+                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                                    </ul>
+                                </div>
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
+                                {% include "socialaccount/snippets/login_extra.html" %}
 
+                            {% else %}
+                                <p>{% blocktrans %}If you have not created an account yet, then please
+                                    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+                            {% endif %}
+                            {#                            <form class="login" method="POST" action="{% url 'account_login' %}">#}
+                            {#                                {% csrf_token %}#}
+                            {#                                {{ form.as_p }}#}
+                            {#                                {% if redirect_field_value %}#}
+                            {#                                    <input type="hidden" name="{{ redirect_field_name }}"#}
+                            {#                                           value="{{ redirect_field_value }}"/>#}
+                            {#                                {% endif %}#}
+                            {#                                <a class="button secondaryAction"#}
+                            {#                                   href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>#}
+                            {#                                <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>#}
+                            {#                            </form>#}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
