@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 import datetime
-
+from allauth.socialaccount.models import SocialAccount
 from django.urls import reverse
 
 from MangoTang import settings
@@ -29,7 +29,18 @@ def store(request):
             cartItems = order.get_cart_items
         except:
             user = request.user
-            customer = Customer.objects.create(user=user)
+
+            social = SocialAccount.objects.get(user=user)
+            print(social.provider)
+            print(social.uid)
+            print(social.last_login)
+            print(social.date_joined)
+            print(social.user_id)
+            print(social.extra_data)
+
+
+            customer = Customer.objects.create(user=user,name=social.extra_data.name,email=social.extra_data.mobile,join_date=datetime.now())
+            customer.save()
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items
