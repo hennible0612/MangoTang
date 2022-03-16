@@ -30,13 +30,30 @@ def store(request):
         except: #social login
             user = request.user
             social = SocialAccount.objects.get(user=user)
-            print(social.provider)
-            print(social.uid)
-            print(social.last_login)
-            print(social.date_joined)
-            print(social.user_id)
-            print(social.extra_data['name'])
-            customer = Customer.objects.create(user=user,name=social.extra_data['name'],email=social.extra_data['email'],phone_number=social.extra_data['mobile'],join_date=datetime.now())
+            if(social.provider == "Naver"):
+                customer = Customer.objects.create(user=user, name=social.extra_data['name'],
+                                                   email=social.extra_data['email'],
+                                                   phone_number=social.extra_data['mobile'], join_date=datetime.now())
+            elif(social.provider == "kakao"):
+                customer = Customer.objects.create(user=user, name=social.extra_data["kakao_account"]["profile"]["nickname"],
+                                                   email=social.extra_data["kakao_account"]["email"],
+                                                   phone_number="0000", join_date=datetime.now())
+            # print(social.provider)
+            # print(social.uid)
+            # print(social.last_login)
+            # print(social.date_joined)
+            # print(social.user_id)
+            # print(social.extra_data)
+            # print(social.extra_data["kakao_account"]["profile"]["nickname"])
+            # print(social.extra_data["kakao_account"]["has_email"]) #Email 있는지 확인 True
+            # print(social.extra_data["kakao_account"]["email"])
+
+            # print(social.provider)
+            # print(social.uid)
+            # print(social.last_login)
+            # print(social.date_joined)
+            # print(social.user_id)
+            # print(social.extra_data)
             customer.save()
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
