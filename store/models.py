@@ -47,8 +47,9 @@ class Customer(models.Model):
 
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)  # Customer 하나당 User하나
     name = models.CharField(max_length=200, null=True)
-    email = models.EmailField(max_length=200)
-    phone_number = models.CharField(max_length=50, null=False)
+    email = models.EmailField(max_length=200,null=True, blank=True)
+    # phone_number = models.CharField(max_length=50, null=False)
+    phone_number = models.CharField(max_length=50,null=True, blank=True)
     mileage = models.IntegerField(null=True, blank=True)
     join_date = models.DateTimeField(default=datetime.now)
 
