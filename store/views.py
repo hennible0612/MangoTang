@@ -27,19 +27,16 @@ def store(request):
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items
-        except:
+        except: #social login
             user = request.user
-
             social = SocialAccount.objects.get(user=user)
             print(social.provider)
             print(social.uid)
             print(social.last_login)
             print(social.date_joined)
             print(social.user_id)
-            print(social.extra_data)
-
-
-            customer = Customer.objects.create(user=user,name=social.extra_data.name,email=social.extra_data.mobile,join_date=datetime.now())
+            print(social.extra_data['name'])
+            customer = Customer.objects.create(user=user,name=social.extra_data['name'],email=social.extra_data['email'],phone_number=social.extra_data['mobile'],join_date=datetime.now())
             customer.save()
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
