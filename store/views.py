@@ -39,12 +39,16 @@ def store(request):
                                                    email=social.extra_data["kakao_account"]["email"],
                                                    phone_number="0000", join_date=datetime.now())
             elif(social.provider == "google"):
-                print(social.provider)
-                print(social.uid)
-                print(social.last_login)
-                print(social.date_joined)
-                print(social.user_id)
-                print(social.extra_data)
+                customer = Customer.objects.create(user=user, name=social.extra_data["name"],
+                                                   email=social.extra_data["email"],
+                                                   phone_number="none", join_date=datetime.now())
+
+                # print(social.provider)
+                # print(social.uid)
+                # print(social.last_login)
+                # print(social.date_joined)
+                # print(social.user_id)
+                # print(social.extra_data)
 
             # print(social.provider)
             # print(social.uid)

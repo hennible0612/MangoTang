@@ -65,20 +65,27 @@
                                     카카오 로그인</a>
                                 </button>
                             </div>
-                            {% if socialaccount_providers %}
-                                <div class="socialaccount_ballot">
-
-                                    <ul class="socialaccount_providers">
-                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                                    </ul>
-                                </div>
-
-                                {% include "socialaccount/snippets/login_extra.html" %}
-
-                            {% else %}
-                                <p>{% blocktrans %}If you have not created an account yet, then please
-                                    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-                            {% endif %}
+                            <div>
+                                <button class="btn btn-block btn-primary mb-2"
+                                        style="background-color: red; width: 20em; " type="submit">
+                                    <a href="/accounts/google/login/?process=login">
+                                    구글 로그인</a>
+                                </button>
+                            </div>
+{#                            {% if socialaccount_providers %}#}
+{#                                <div class="socialaccount_ballot">#}
+{##}
+{#                                    <ul class="socialaccount_providers">#}
+{#                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}#}
+{#                                    </ul>#}
+{#                                </div>#}
+{##}
+{#                                {% include "socialaccount/snippets/login_extra.html" %}#}
+{##}
+{#                            {% else %}#}
+{#                                <p>{% blocktrans %}If you have not created an account yet, then please#}
+{#                                    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>#}
+{#                            {% endif %}#}
                             {#                            <form class="login" method="POST" action="{% url 'account_login' %}">#}
                             {#                                {% csrf_token %}#}
                             {#                                {{ form.as_p }}#}
