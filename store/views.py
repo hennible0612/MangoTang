@@ -4,6 +4,7 @@ import requests
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -27,7 +28,7 @@ def store(request):
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items
-        except: #social login
+        except ObjectDoesNotExist: #social login
             user = request.user
             social = SocialAccount.objects.get(user=user)
             if(social.provider == "Naver"):
@@ -43,29 +44,7 @@ def store(request):
                                                    email=social.extra_data["email"],
                                                    phone_number="none", join_date=datetime.now())
 
-                # print(social.provider)
-                # print(social.uid)
-                # print(social.last_login)
-                # print(social.date_joined)
-                # print(social.user_id)
-                # print(social.extra_data)
 
-            # print(social.provider)
-            # print(social.uid)
-            # print(social.last_login)
-            # print(social.date_joined)
-            # print(social.user_id)
-            # print(social.extra_data)
-            # print(social.extra_data["kakao_account"]["profile"]["nickname"])
-            # print(social.extra_data["kakao_account"]["has_email"]) #Email 있는지 확인 True
-            # print(social.extra_data["kakao_account"]["email"])
-
-            # print(social.provider)
-            # print(social.uid)
-            # print(social.last_login)
-            # print(social.date_joined)
-            # print(social.user_id)
-            # print(social.extra_data)
             customer.save()
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
