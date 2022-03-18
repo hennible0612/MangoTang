@@ -21,34 +21,34 @@ from .models import *
 """
 
 import logging
+
 # logger = logging.getLogger('warning')
-CRITICAL_logger = logging.getLogger("critical")
-logger = logging.getLogger('store')
+# CRITICAL_logger = logging.getLogger("critical")
+logger = logging.getLogger(__name__)
+
 
 def store(request):
-    # user = request.user
-    # logger.warning("main hompage loaded in : "+str(datetime.now()) + str(user))
-    CRITICAL_logger.critical("critical hompage loaded in : "+str(datetime.now()))
-    logger.info('info logger')
-    logger.critical('critical logger')
+
     if request.user.is_authenticated:  # 로그인 유저일시
         try:
             customer = request.user.customer
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items
-        except ObjectDoesNotExist: #social login
+        except ObjectDoesNotExist:  # social login
+
             user = request.user
             social = SocialAccount.objects.get(user=user)
-            if(social.provider == "Naver"):
+            if (social.provider == "Naver"):
                 customer = Customer.objects.create(user=user, name=social.extra_data['name'],
                                                    email=social.extra_data['email'],
                                                    phone_number=social.extra_data['mobile'], join_date=datetime.now())
-            elif(social.provider == "kakao"):
-                customer = Customer.objects.create(user=user, name=social.extra_data["kakao_account"]["profile"]["nickname"],
+            elif (social.provider == "kakao"):
+                customer = Customer.objects.create(user=user,
+                                                   name=social.extra_data["kakao_account"]["profile"]["nickname"],
                                                    email=social.extra_data["kakao_account"]["email"],
                                                    phone_number="0000", join_date=datetime.now())
-            elif(social.provider == "google"):
+            elif (social.provider == "google"):
                 customer = Customer.objects.create(user=user, name=social.extra_data["name"],
                                                    email=social.extra_data["email"],
                                                    phone_number="none", join_date=datetime.now())
@@ -56,6 +56,10 @@ def store(request):
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items
+        except Exception as e:
+            logger.critical("exception error: "+ str(e) + 'view store 소셜 로그인 과정중에 에러')
+            return render(request, 'error.html')
+
 
     else:
         items = []
@@ -85,11 +89,9 @@ def productDetail(request, seller_code):
 
     reviews = product.productreview_set.all().order_by('-date_added')
     questions = product.productquestion_set.all().order_by('-date_added')
-
     # 리뷰 페이징
     review_paginator = Paginator(reviews, 5)
     review_obj = review_paginator.get_page(review_page)
-
     # 제품 질문 페이징
     question_paginator = Paginator(questions, 5)
     question_obj = question_paginator.get_page(question_page)
@@ -117,11 +119,6 @@ def cart(request):
     items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
     cartItems = order.get_cart_items
     itemOption = []
-    # for item in items: #해당 아이템 불리언이 true이면
-    #     if (item.get_option_bool == True):
-    #         print(item , "option is true")
-    #     else:
-    #         print(item , "option is False")
 
     if (bool(items) == True):  # 카트 비어있는지 확인
         for item in items:
@@ -341,7 +338,6 @@ def updateCartItem(request):
 카트에서 아이템 삭제
 """
 
-
 def deleteCartItem(request, seller_code):
     data = json.loads(request.body)  # JSON body data에저장
     option = data['option']
@@ -434,49 +430,53 @@ def getQuestion(request, seller_code, page):
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
-
+"""
+결제창
+"""
 def checkoutPayment(request):
-    data = json.loads(request.body)
-    customer = request.user.customer  # 현재 customer
-    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-    if (order.order_status == False):
+    try:
+        data = json.loads(request.body)
+        customer = request.user.customer  # 현재 customer
+        order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+        if (order.order_status == False):
 
-        order_id = str(customer.id) + str(datetime.now().timestamp())
-        order_id = int(float(order_id))
+            order_id = str(customer.id) + str(datetime.now().timestamp())
+            order_id = int(float(order_id))
 
-        name = order.get_all_item_name
-        order.total_fee = order.get_total
-        order.order_number = order_id
-        order.shipping_fee = order.get_deliver_price
-        order.post_code = data['data']['post_code']
-        order.recipent_address1 = data['data']['recipent_address1']
-        order.recipent_address2 = data['data']['recipent_address2']
-        order.recipent_number = data['data']['recipent_number']
-        order.orderer_number = data['data']['orderer_number']
-        order.order_request = data['data']['order_request']
-        order.recipent_name = data['data']['recipent_name']
-        order.orderer_name = data['data']['orderer_name']
-        order.email = data['data']['email']
-        order.save()
+            name = order.get_all_item_name
+            order.total_fee = order.get_total
+            order.order_number = order_id
+            order.shipping_fee = order.get_deliver_price
+            order.post_code = data['data']['post_code']
+            order.recipent_address1 = data['data']['recipent_address1']
+            order.recipent_address2 = data['data']['recipent_address2']
+            order.recipent_number = data['data']['recipent_number']
+            order.orderer_number = data['data']['orderer_number']
+            order.order_request = data['data']['order_request']
+            order.recipent_name = data['data']['recipent_name']
+            order.orderer_name = data['data']['orderer_name']
+            order.email = data['data']['email']
+            order.save()
 
-        iamport_data = {
-            "merchant_uid": order_id,
-            "name": name,
-            "amount": order.get_total + order.get_deliver_price,
-            "buyer_email": data['data']['email'],
-            "buyer_name": data['data']['orderer_name'],
-            "buyer_tel": data['data']['orderer_number'],
-            "buyer_addr": data['data']['recipent_address1'],
-            "post_code": data['data']['post_code'],
+            iamport_data = {
+                "merchant_uid": order_id,
+                "name": name,
+                "amount": order.get_total + order.get_deliver_price,
+                "buyer_email": data['data']['email'],
+                "buyer_name": data['data']['orderer_name'],
+                "buyer_tel": data['data']['orderer_number'],
+                "buyer_addr": data['data']['recipent_address1'],
+                "post_code": data['data']['post_code'],
 
-        }
-        json_obj = json.dumps(iamport_data)
+            }
+            json_obj = json.dumps(iamport_data)
 
-        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
-    else:
-
-        return render(request, 'permisson.html')
-
+            return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+        else:
+            return render(request, 'permisson.html')
+    except Exception as e:
+        logger.critical("exception error: " + str(e) + 'view checkoutPayment 결제 정보 전달 받는 중에 에러러')
+        return render(request, 'error.html')
 
 """
 아임포트 토큰 가져오기
@@ -522,9 +522,18 @@ def checkoutComplete(request):
     data = json.loads(request.body)
     imp_uid = data['imp_uid']
     merchant_uid = data['merchant_uid']
+    try:
+        access_res = getToken()  # 토큰 가져오기
+    except Exception as e:
+        logger.critical("exception error: "+ str(e) + 'view checkoutComplete 아임포트 getToken중에러')
+        return render(request, 'error.html')
 
-    access_res = getToken()  # 토큰 가져오기
-    iamportData = getPaymentData(access_res, imp_uid)  # 아임포트 서버에서 결제 확인
+    try:
+        iamportData = getPaymentData(access_res, imp_uid)  # 아임포트 서버에서 결제 확인
+    except Exception as e:
+        logger.critical("exception error: "+ str(e) + 'view checkoutComplete 아임포트 getPaymentData중 에러')
+        return render(request, 'error.html')
+
 
     # 아임포트 서버랑 우리 몰 서버 결제 금액 비교
 
@@ -553,7 +562,6 @@ def checkoutComplete(request):
         orderhistory.date_ordered = order.date_ordered
         orderhistory.date_completed = datetime.now()
         orderhistory.payment_state = order.payment_state
-        # orderhistory.deliver_state = "prepare"  #
         orderhistory.shipping_fee = order.shipping_fee
         orderhistory.order_number = order.order_number
         orderhistory.email = order.email
@@ -574,7 +582,6 @@ def checkoutComplete(request):
         orderhistory.pay_method = iamportData["response"]["pay_method"]
         order.delete()
         orderhistory.save()
-        # order.save()
         json_obj = json.dumps(iamportData)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:  # 위조시
@@ -602,7 +609,6 @@ def checkoutSummery(request, orderId):
             return render(request, 'store/checkoutsummery.html', context)
         else:
             return render(request, 'permisson.html')
-
     else:
         return render(request, 'permisson.html')
 
