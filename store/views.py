@@ -20,8 +20,17 @@ from .models import *
 스토어 메인화면
 """
 
+import logging
+# logger = logging.getLogger('warning')
+CRITICAL_logger = logging.getLogger("critical")
+logger = logging.getLogger('store')
 
 def store(request):
+    # user = request.user
+    # logger.warning("main hompage loaded in : "+str(datetime.now()) + str(user))
+    CRITICAL_logger.critical("critical hompage loaded in : "+str(datetime.now()))
+    logger.info('info logger')
+    logger.critical('critical logger')
     if request.user.is_authenticated:  # 로그인 유저일시
         try:
             customer = request.user.customer
@@ -43,8 +52,6 @@ def store(request):
                 customer = Customer.objects.create(user=user, name=social.extra_data["name"],
                                                    email=social.extra_data["email"],
                                                    phone_number="none", join_date=datetime.now())
-
-
             customer.save()
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
