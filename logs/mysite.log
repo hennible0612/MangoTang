@@ -1,0 +1,139 @@
+2022-03-18 17:10:27,675 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:10:28,771 [INFO] store: info logger
+2022-03-18 17:10:28,771 [CRITICAL] store: critical logger
+2022-03-18 17:25:47,878 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\settings.py changed, reloading.
+2022-03-18 17:25:48,703 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:26:15,751 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:26:16,977 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:26:18,569 [INFO] store: info logger
+2022-03-18 17:26:18,577 [CRITICAL] store: critical logger
+2022-03-18 17:26:34,590 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:26:35,370 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:28:51,590 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:28:52,543 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:29:39,191 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:29:40,062 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:29:41,132 [INFO] store.views: info logger
+2022-03-18 17:29:41,133 [CRITICAL] store.views: critical logger
+2022-03-18 17:32:59,892 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:33:00,716 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:33:52,064 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:33:52,854 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:34:12,310 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:34:13,273 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:36:03,381 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:36:04,205 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:37:23,326 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:37:24,230 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:38:15,849 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:38:16,657 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:39:20,534 [INFO] store.views: info logger
+2022-03-18 17:39:20,535 [CRITICAL] store.views: critical logger
+2022-03-18 17:39:21,115 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 17:39:21,969 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 17:39:26,072 [INFO] store.views: info logger
+2022-03-18 17:39:26,072 [CRITICAL] store.views: critical logger
+2022-03-18 17:43:52,628 [INFO] store.views: info logger
+2022-03-18 17:43:52,628 [CRITICAL] store.views: critical logger
+2022-03-18 17:44:07,361 [INFO] store.views: info logger
+2022-03-18 17:44:07,361 [CRITICAL] store.views: critical logger
+2022-03-18 17:44:11,691 [INFO] store.views: info logger
+2022-03-18 17:44:11,691 [CRITICAL] store.views: critical logger
+2022-03-18 17:44:30,423 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-18 17:44:30,431 [WARNING] django.request: Not Found: /product/question//1/
+2022-03-18 17:44:30,448 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-18 17:44:30,463 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-18 18:19:06,516 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:19:07,394 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:19:09,246 [INFO] store.views: info logger
+2022-03-18 18:19:09,247 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:13,330 [INFO] store.views: info logger
+2022-03-18 18:19:13,331 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:14,299 [INFO] store.views: info logger
+2022-03-18 18:19:14,300 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:17,272 [INFO] store.views: info logger
+2022-03-18 18:19:17,272 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:18,022 [INFO] store.views: info logger
+2022-03-18 18:19:18,022 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:19,858 [INFO] store.views: info logger
+2022-03-18 18:19:19,858 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:37,426 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:19:38,220 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:19:43,851 [INFO] store.views: info logger
+2022-03-18 18:19:43,852 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:43,948 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 71, in store
+    context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length, 'cartItems': cartItems}
+UnboundLocalError: local variable 'cartItems' referenced before assignment
+2022-03-18 18:20:05,995 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:20:06,801 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:20:26,001 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:20:27,125 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:20:30,488 [INFO] store.views: info logger
+2022-03-18 18:20:30,488 [CRITICAL] store.views: critical logger
+2022-03-18 18:20:39,214 [INFO] store.views: info logger
+2022-03-18 18:20:39,215 [CRITICAL] store.views: critical logger
+2022-03-18 18:20:42,564 [INFO] store.views: info logger
+2022-03-18 18:20:42,564 [CRITICAL] store.views: critical logger
+2022-03-18 18:21:15,340 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:21:16,113 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:21:19,154 [INFO] store.views: info logger
+2022-03-18 18:21:19,154 [CRITICAL] store.views: critical logger
+2022-03-18 18:21:27,214 [INFO] store.views: info logger
+2022-03-18 18:21:27,214 [CRITICAL] store.views: critical logger
+2022-03-18 18:21:27,422 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 38, in store
+    customer = request.user.customer
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\utils\functional.py", line 247, in inner
+    return func(self._wrapped, *args)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 421, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.customer.RelatedObjectDoesNotExist: User has no customer.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 43, in store
+    logger.critical(e + ' ------customer')
+TypeError: unsupported operand type(s) for +: 'RelatedObjectDoesNotExist' and 'str'
+2022-03-18 18:21:39,764 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:21:41,122 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:21:52,071 [INFO] store.views: info logger
+2022-03-18 18:21:52,071 [CRITICAL] store.views: critical logger
+2022-03-18 18:21:52,080 [CRITICAL] store.views: User has no customer. ------customer
+2022-03-18 18:22:13,012 [INFO] store.views: info logger
+2022-03-18 18:22:13,012 [CRITICAL] store.views: critical logger
+2022-03-18 18:27:12,248 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:27:13,309 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:29:22,386 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:29:23,221 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:37:07,869 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:37:08,704 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:38:19,301 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:38:20,081 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:58:13,046 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:58:14,504 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:58:21,927 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:58:22,745 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 18:58:38,680 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 18:58:39,515 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 19:07:23,017 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 19:07:24,353 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 19:07:44,691 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 19:07:45,994 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 19:14:41,936 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 19:14:43,070 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-18 19:15:11,087 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-18 19:15:12,107 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-19 11:08:01,837 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-19 11:08:47,010 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

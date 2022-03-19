@@ -1,0 +1,23 @@
+2022-03-18 17:10:28,771 [CRITICAL] store: critical logger
+2022-03-18 17:26:18,577 [CRITICAL] store: critical logger
+2022-03-18 17:29:41,133 [CRITICAL] store.views: critical logger
+2022-03-18 17:39:20,535 [CRITICAL] store.views: critical logger
+2022-03-18 17:39:26,072 [CRITICAL] store.views: critical logger
+2022-03-18 17:43:52,628 [CRITICAL] store.views: critical logger
+2022-03-18 17:44:07,361 [CRITICAL] store.views: critical logger
+2022-03-18 17:44:11,691 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:09,247 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:13,331 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:14,300 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:17,272 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:18,022 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:19,858 [CRITICAL] store.views: critical logger
+2022-03-18 18:19:43,852 [CRITICAL] store.views: critical logger
+2022-03-18 18:20:30,488 [CRITICAL] store.views: critical logger
+2022-03-18 18:20:39,215 [CRITICAL] store.views: critical logger
+2022-03-18 18:20:42,564 [CRITICAL] store.views: critical logger
+2022-03-18 18:21:19,154 [CRITICAL] store.views: critical logger
+2022-03-18 18:21:27,214 [CRITICAL] store.views: critical logger
+2022-03-18 18:21:52,071 [CRITICAL] store.views: critical logger
+2022-03-18 18:21:52,080 [CRITICAL] store.views: User has no customer. ------customer
+2022-03-18 18:22:13,012 [CRITICAL] store.views: critical logger

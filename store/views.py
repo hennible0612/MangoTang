@@ -28,7 +28,6 @@ logger = logging.getLogger(__name__)
 
 
 def store(request):
-
     if request.user.is_authenticated:  # 로그인 유저일시
         try:
             customer = request.user.customer
@@ -57,7 +56,7 @@ def store(request):
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items
         except Exception as e:
-            logger.critical("exception error: "+ str(e) + 'view store 소셜 로그인 과정중에 에러')
+            logger.critical("exception error: " + str(e) + 'view store 소셜 로그인 과정중에 에러')
             return render(request, 'error.html')
 
 
@@ -338,6 +337,7 @@ def updateCartItem(request):
 카트에서 아이템 삭제
 """
 
+
 def deleteCartItem(request, seller_code):
     data = json.loads(request.body)  # JSON body data에저장
     option = data['option']
@@ -430,9 +430,12 @@ def getQuestion(request, seller_code, page):
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
+
 """
 결제창
 """
+
+
 def checkoutPayment(request):
     try:
         data = json.loads(request.body)
@@ -477,6 +480,7 @@ def checkoutPayment(request):
     except Exception as e:
         logger.critical("exception error: " + str(e) + 'view checkoutPayment 결제 정보 전달 받는 중에 에러러')
         return render(request, 'error.html')
+
 
 """
 아임포트 토큰 가져오기
@@ -525,15 +529,14 @@ def checkoutComplete(request):
     try:
         access_res = getToken()  # 토큰 가져오기
     except Exception as e:
-        logger.critical("exception error: "+ str(e) + 'view checkoutComplete 아임포트 getToken중에러')
+        logger.critical("exception error: " + str(e) + 'view checkoutComplete 아임포트 getToken중에러')
         return render(request, 'error.html')
 
     try:
         iamportData = getPaymentData(access_res, imp_uid)  # 아임포트 서버에서 결제 확인
     except Exception as e:
-        logger.critical("exception error: "+ str(e) + 'view checkoutComplete 아임포트 getPaymentData중 에러')
+        logger.critical("exception error: " + str(e) + 'view checkoutComplete 아임포트 getPaymentData중 에러러')
         return render(request, 'error.html')
-
 
     # 아임포트 서버랑 우리 몰 서버 결제 금액 비교
 
