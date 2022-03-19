@@ -1,5 +1,6 @@
 {#{% extends "account/base.html" %}#}
 {% extends "store/main.html" %}
+{% load static %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -52,40 +53,47 @@
                             <hr class="my-4 ">
 
                             <div>
-                                <button class="btn btn-block btn-primary mb-3"
-                                        style="background-color: #19ce60; width: 20em; " type="submit"><i
-                                        class="fa-solid fa-n"></i><a href="/accounts/naver/login/?process=login"> 네이버
-                                    로그인</a>
-                                </button>
+                                <a href="/accounts/naver/login/?process=login">
+                                    <button class="btn btn-block btn-primary mb-2"
+                                            style="background-color: #19ce60; width: 20em; border-color: #19ce60" type="submit"><i
+                                            class="fa-solid fa-n"></i>
+                                        네이버 로그인
+                                    </button>
+                                </a>
                             </div>
                             <div>
-                                <button class="btn btn-block btn-primary mb-2"
-                                        style="background-color: #fee500; width: 20em; " type="submit">
-                                    <a href="/accounts/kakao/login/?process=login">
-                                    카카오 로그인</a>
-                                </button>
+                                <a href="/accounts/kakao/login/?process=login">
+                                    <button class="btn btn-block btn-primary mb-2"
+                                            style="background-color: #fee500; width: 20em; border-color: #fee500" type="submit">
+                                        <i class="fa-solid fa-k"></i>
+                                        카카오 로그인
+                                    </button>
+                                </a>
                             </div>
                             <div>
-                                <button class="btn btn-block btn-primary mb-2"
-                                        style="background-color: red; width: 20em; " type="submit">
-                                    <a href="/accounts/google/login/?process=login">
-                                    구글 로그인</a>
-                                </button>
+                                <a href="/accounts/google/login/?process=login">
+
+                                    <button class="btn btn-block btn-primary mb-2"
+                                            style="background-color: red; width: 20em; border-color: red; " type="submit">
+                                        <i class="fa-brands fa-google"></i>
+                                        구글 로그인
+                                    </button>
+                                </a>
                             </div>
-{#                            {% if socialaccount_providers %}#}
-{#                                <div class="socialaccount_ballot">#}
-{##}
-{#                                    <ul class="socialaccount_providers">#}
-{#                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}#}
-{#                                    </ul>#}
-{#                                </div>#}
-{##}
-{#                                {% include "socialaccount/snippets/login_extra.html" %}#}
-{##}
-{#                            {% else %}#}
-{#                                <p>{% blocktrans %}If you have not created an account yet, then please#}
-{#                                    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>#}
-{#                            {% endif %}#}
+                            {#                            {% if socialaccount_providers %}#}
+                            {#                                <div class="socialaccount_ballot">#}
+                            {##}
+                            {#                                    <ul class="socialaccount_providers">#}
+                            {#                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}#}
+                            {#                                    </ul>#}
+                            {#                                </div>#}
+                            {##}
+                            {#                                {% include "socialaccount/snippets/login_extra.html" %}#}
+                            {##}
+                            {#                            {% else %}#}
+                            {#                                <p>{% blocktrans %}If you have not created an account yet, then please#}
+                            {#                                    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>#}
+                            {#                            {% endif %}#}
                             {#                            <form class="login" method="POST" action="{% url 'account_login' %}">#}
                             {#                                {% csrf_token %}#}
                             {#                                {{ form.as_p }}#}
