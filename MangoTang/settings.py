@@ -243,7 +243,6 @@ LOGGING = {
         },
     }
 }
-
 # LOGGING = {
 #     # 로그의 버전
 #     'version': 1,
