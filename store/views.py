@@ -168,7 +168,7 @@ def register(request):
 
             user = User.objects.get(username=username)
 
-            Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number,allowPromotions=str(allowPromotions))
+            Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number,allowPromotions=allowPromotions)
             user = authenticate(username=username, password=raw_password)  # 사용자 인증
             login(request, user)  # 로그인
             return redirect('store')
