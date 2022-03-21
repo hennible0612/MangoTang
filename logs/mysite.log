@@ -345,3 +345,180 @@ django.template.exceptions.TemplateSyntaxError: 'blocktrans' doesn't allow other
 2022-03-19 17:43:56,378 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-19 17:44:08,682 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\settings.py changed, reloading.
 2022-03-19 17:44:09,457 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 09:59:25,371 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 10:39:24,853 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-21 10:40:05,365 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 10:40:06,287 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 10:40:12,599 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 10:40:13,301 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 10:41:09,220 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 10:41:10,091 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 11:44:45,038 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 11:44:45,777 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 11:45:04,766 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 11:45:55,325 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 11:45:55,995 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:42:41,312 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:43:18,701 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 12:43:20,122 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:43:48,789 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 12:43:49,600 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:43:50,707 [ERROR] django.request: Internal Server Error: /mypage/orderhistory/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 669, in orderhistory
+    orderHistory = orderHistory.objects.order_by('-date_completed')
+AttributeError: 'QuerySet' object has no attribute 'objects'
+2022-03-21 12:43:51,025 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-21 12:44:45,458 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 12:44:46,575 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:44:50,685 [ERROR] django.request: Internal Server Error: /mypage/orderhistory/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 668, in orderhistory
+    orderHistory = OrderHistory.objects.filter(customer=customer).filter('-date_completed')
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 941, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 961, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 968, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\query.py", line 1393, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\query.py", line 1412, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\query.py", line 1283, in build_filter
+    arg, value = filter_expr
+ValueError: too many values to unpack (expected 2)
+2022-03-21 12:44:56,515 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 12:44:57,347 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:46:08,065 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 12:46:08,976 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:46:43,595 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 12:46:44,389 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:47:29,958 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 12:47:30,787 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 12:47:36,308 [ERROR] django.request: Internal Server Error: /mypage/orderhistory/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 668, in orderhistory
+    orderHistory = OrderHistory.objects.filter(customer=customer,date_completed='-date_completed')
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 941, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 961, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 968, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\query.py", line 1393, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\query.py", line 1412, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\query.py", line 1347, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\query.py", line 1193, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 25, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 77, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1406, in get_prep_value
+    value = super().get_prep_value(value)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1266, in get_prep_value
+    return self.to_python(value)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1388, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['¡°-date_completed¡± value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] format.']
+2022-03-21 13:02:50,245 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:02:51,523 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 13:50:19,778 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:50:20,581 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 13:53:07,812 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:53:08,637 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 13:53:52,036 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:53:52,829 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 13:53:53,968 [ERROR] django.request: Internal Server Error: /mypage/orderhistory/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 678, in orderhistory
+    orderItem.sort('-date_completed')
+TypeError: sort() takes no positional arguments
+2022-03-21 13:54:06,346 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:54:07,167 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 13:54:57,041 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:54:57,839 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 13:55:01,364 [ERROR] django.request: Internal Server Error: /mypage/orderhistory/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 679, in orderhistory
+    orderItem = orderItem.objects.order_by('-date_completed')
+AttributeError: 'list' object has no attribute 'objects'
+2022-03-21 13:55:10,786 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:55:11,644 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 13:55:12,333 [ERROR] django.request: Internal Server Error: /mypage/orderhistory/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 679, in orderhistory
+    orderItem = orderItem.objects.fitler('-date_completed')
+AttributeError: 'list' object has no attribute 'objects'
+2022-03-21 13:55:14,039 [ERROR] django.request: Internal Server Error: /mypage/orderhistory/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 679, in orderhistory
+    orderItem = orderItem.objects.fitler('-date_completed')
+AttributeError: 'list' object has no attribute 'objects'
+2022-03-21 13:57:41,983 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:57:42,869 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 13:57:45,390 [ERROR] django.request: Internal Server Error: /mypage/orderhistory/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 679, in orderhistory
+    orderItem = orderItem.objects.filter('-date_completed')
+AttributeError: 'list' object has no attribute 'objects'
+2022-03-21 13:58:44,465 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 13:58:45,223 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 14:28:46,286 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 14:28:47,159 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 14:29:09,145 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 14:29:09,980 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

@@ -665,12 +665,15 @@ def notice(request):
 @login_required(login_url='account_login')
 def orderhistory(request):
     customer = request.user.customer
-    orderHistory = OrderHistory.objects.filter(customer=customer)
-    # orderItem = OrderItem.objects.get(orderHistory=orderHistory)
+    orderHistory = OrderHistory.objects.filter(customer=customer).order_by('-date_completed')
+    
     orderItem = []
     for order in orderHistory:
+
         orderItem += order.orderitem_set.all()
+
     context = {'orderHistory': orderHistory, 'orderItem': orderItem}
+
 
     return render(request, 'mypage/orderhistory.html', context)
 
@@ -680,6 +683,7 @@ def orderhistory(request):
 def csform(request, orderNumber, sellerCode):
     customer = request.user.customer
     orderHistory = OrderHistory.objects.get(customer=customer, order_number=orderNumber)
+    # orderHistory = orderHistory.objects.filter('-date_completed')
     itemData = []
     orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
     for item in orderItem:
