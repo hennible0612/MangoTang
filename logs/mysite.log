@@ -522,3 +522,9 @@ AttributeError: 'list' object has no attribute 'objects'
 2022-03-21 14:28:47,159 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-21 14:29:09,145 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-03-21 14:29:09,980 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 14:30:41,391 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 14:30:42,281 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 14:38:15,614 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\models.py changed, reloading.
+2022-03-21 14:38:16,739 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 14:38:55,095 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\models.py changed, reloading.
+2022-03-21 14:38:56,059 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

@@ -25,9 +25,15 @@
                             </div>
 
                             <div class="item-orderlist-info" style=" margin: 10px;">
-                                <span style="font-size: 25px; "><b>주문 확인중</b></span>
-                                <span><img src="{% static 'images/dot.png' %}" width="9" height="9"></span>
-                                <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>
+                                {% if item.deliver_state == "checking" %}
+                                    <span style="font-size: 25px; "><b>주문 확인중</b></span>
+                                {% elif item.deliver_state == "delivering" %}
+                                    <span style="font-size: 25px; "><b>배송중 </b> 송장번호 : 2354456456></span>
+                                {% elif item.deliver_state == "arrived" %}
+                                    <span style="font-size: 25px; "><b>도착 </b> 송장번호 : 2354456456></span>
+                                {% endif %}
+                                {#                                <span><img src="{% static 'images/dot.png' %}" width="9" height="9"></span>#}
+                                {#                                <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>#}
                                 <hr>
                                 {% if item.item_option_bool == True %}
                                     <h4>{{ item.product.product_name }} | 옵션: {{ item.get_all_option_name }}</h4>

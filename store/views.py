@@ -666,7 +666,7 @@ def notice(request):
 def orderhistory(request):
     customer = request.user.customer
     orderHistory = OrderHistory.objects.filter(customer=customer).order_by('-date_completed')
-    
+
     orderItem = []
     for order in orderHistory:
 

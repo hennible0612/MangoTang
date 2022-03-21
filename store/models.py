@@ -4,39 +4,16 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.contrib.auth import get_user_model
-
-from allauth.socialaccount.signals import pre_social_login
-
-from allauth.account.signals import user_logged_in
-
 
 class UserForm(UserCreationForm):
     name = forms.CharField(label="이름")
     email = forms.EmailField(label="이메일")
     phone_number = forms.CharField(label="전화번호")
-    # address1 = forms.CharField(label="주소")
-    # address2 = forms.CharField(label="상세주소")
+
 
     class Meta:
         model = User
         fields = ("username", "password1", "password2", "name", "email", "phone_number")
-
-# User = get_user_model()
-#
-# def pre_social_login_reciver(request, sociallogin):
-#     print(request)
-#     print(sociallogin)
-#
-# pre_social_login.connect(pre_social_login, sociallogin)
-
-#
-# def user_logged_in_receiver(request, sociallogin, **kwargs):
-#     print(request)
-#     print(sociallogin)
-#
-# user_logged_in.connect(user_logged_in_receiver, sender=User)
-# Create your models here.
 
 class Customer(models.Model):
     GENDER_CHOICES = (
@@ -48,7 +25,6 @@ class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)  # Customer 하나당 User하나
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=200,null=True, blank=True)
-    # phone_number = models.CharField(max_length=50, null=False)
     phone_number = models.CharField(max_length=50,null=True, blank=True)
     mileage = models.IntegerField(null=True, blank=True)
     join_date = models.DateTimeField(default=datetime.now)
@@ -218,6 +194,9 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     item_option_bool = models.BooleanField(default=False, blank=False, null=True)
+
+    deliver_company = models.CharField(max_length=200, null=True, blank=True)
+    track_number = models.IntegerField(null=True, blank=True)
 
     @property
     def get_all_option_name(self):

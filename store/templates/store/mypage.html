@@ -29,18 +29,13 @@
                 <div class=" item-mypage-info-holder">
                     <div class="container" style="flex-direction: column">
                         <div class="item" style="text-align: center">
-
                             <i class="fas fa-truck  fa-5x"></i>
-
                         </div>
                         <div class="item" style="text-align: center">
-
                             <b>배송</b>
                         </div>
                         <hr>
-
                         <div class="item" style="text-align: center">
-
                             <b>0</b>
                         </div>
                     </div>
@@ -48,11 +43,9 @@
                 <div class=" item-mypage-info-holder">
                     <div class="container" style="flex-direction: column;">
                         <div class="item" style="text-align: center">
-
                             <i class="fas fa-money-bill-alt  fa-5x"></i><br>
                         </div>
                         <div class="item" style="text-align: center">
-
                             <b>포인트</b>
                         </div>
                         <hr>
@@ -110,63 +103,61 @@
             <!-- 리스트 메뉴 -->
             <div class="container-mypage" style=" height: 90rem">
                 <div class="item-mypage-list ">
-                    <nav class="sb-sidenav" >
+                    <nav class="sb-sidenav">
                         <div class="sb-sidenav-menu" style="width: 10em;">
                             <div class="nav">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                   data-bs-target="#collapseLayouts" aria-expanded="false"
-                                   aria-controls="collapseLayouts">
-                                    <text style="color: black">주문관리</text>
-                                </a>
+                                {#                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"#}
+                                {#                                   data-bs-target="#collapseLayouts" aria-expanded="false"#}
+                                {#                                   aria-controls="collapseLayouts">#}
+                                {#                                    <text style="color: black">주문관리</text>#}
+                                {#                                </a>#}
+                                {#                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"#}
+                                {#                                     data-bs-parent="#sidenavAccordion">#}
+                                {#                                    <nav class="sb-sidenav-menu-nested nav">#}
+                                {#                                        <a class="nav-link nav-link-mypage" href="{% url 'orderhistory' %}" >주문/배송내역</a>#}
+                                {#                                        <a class="nav-link nav-link-mypage" href="{% url 'ordercancel' %}">주문취소내역</a>#}
+                                {#                                        <a class="nav-link nav-link-mypage" href="{% url 'orderrefund' %}">교환반품내역</a>#}
+                                {#                                    </nav>#}
+                                {#                                </div>#}
+                                <hr>
+                                <a class="nav-link nav-link-mypage" href="{% url 'orderhistory' %}">주문/배송내역</a>
 
-                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                                     data-bs-parent="#sidenavAccordion">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link nav-link-mypage" href="{% url 'orderhistory' %}" >주문/배송내역</a>
-                                        <a class="nav-link nav-link-mypage" href="{% url 'ordercancel' %}">주문취소내역</a>
-                                        <a class="nav-link nav-link-mypage" href="{% url 'orderrefund' %}">교환반품내역</a>
-                                    </nav>
-                                </div>
                                 <hr>
                                 <a class="nav-link nav-link-mypage" href="{% url 'favoritelist' %}">찜내역</a>
 
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="{% url 'pointlist' %}">포인트
-                                </a>
-                                <hr>
+                                {#                                <a class="nav-link nav-link-mypage" href="{% url 'pointlist' %}">포인트#}
+                                {#                                </a>#}
+                                {#                                <hr>#}
 
-                                <a class="nav-link nav-link-mypage" href="{% url 'couponlist' %}">쿠폰
-                                </a>
-                                <hr>
+                                {#                                <a class="nav-link nav-link-mypage" href="{% url 'couponlist' %}">쿠폰#}
+                                {#                                </a>#}
+                                {#                                <hr>#}
 
                                 <a class="nav-link nav-link-mypage" href="{% url 'reviewlist' %}">구매 후기
                                 </a>
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="{% url 'refundlist' %}">환불 서비스
+                                <a class="nav-link nav-link-mypage" href="{% url 'refundlist' %}">환불 내역
                                 </a>
                                 <hr>
 
-                                <a class="nav-link nav-link-mypage" href="{% url 'qnalist' %}">1:1문의 내역
-                                </a>
-
-                                <hr>
-
-                                <a class="nav-link nav-link-mypage" href="{% url 'userinfo' %}">회원 정보 수정</a>
+                                {#                                <a class="nav-link nav-link-mypage" href="{% url 'qnalist' %}">1:1문의 내역#}
+                                {#                                </a>#}
+                                {##}
+                                {#                                <hr>#}
+                                {##}
+                                {#                                <a class="nav-link nav-link-mypage" href="{% url 'userinfo' %}">회원 정보 수정</a>#}
+                                {#                            </div>#}
                             </div>
-                        </div>
 
                     </nav>
 
                 </div>
                 <div class="item-mypage-info">
                     {% block mypage %}
-{#                    <div class="container">#}
-{#                        sdsfsdfsdfsdf#}
-{#                        <hr>#}
-{##}
-{#                    </div>#}
+
                     {% endblock mypage %}
 
                 </div>

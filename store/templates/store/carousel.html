@@ -1,33 +1,20 @@
 {% load static %}
-<!--https://www.w3schools.com/bootstrap5/bootstrap_carousel.php-->
-<!-- Carousel -->
 <div id="demo" id= myCarousel' class="carousel slide" data-bs-ride="carousel">
 
-    <!-- Indicators/dots -->
-{#    <div class="carousel-indicators" id="carousel">#}
-        {#    {% for i in range( 0, carousel_length) %}#}
-        {#        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>#}
-        {#        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>#}
-        {#        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>#}
-        {#        {% endfor %}#}
-        {#        {% for carousels in carousel %}#}
-        {#            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>#}
-        {##}
-        {#        {% endfor %}#}
-{#    </div>#}
 
     <!-- The slideshow/carousel -->
     <div class="carousel-inner">
         {% for carousels in carousel %}
             <div class="carousel-item{% if forloop.first %} active{% endif %}">
                 <a href= {{ carousels.href }}>
-
                     <img src={{ carousels.image.url }}  class="d-block" style="width:100%">
                 </a>
 
                 <div class="carousel-caption">
+                    {% if carousels.banner_title != None %}
                     <h3>{{ carousels.banner_title }}</h3>
                     <p>{{ carousels.banner_description }}</p>
+                    {% endif %}
                 </div>
             </div>
 
