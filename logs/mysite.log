@@ -528,3 +528,47 @@ AttributeError: 'list' object has no attribute 'objects'
 2022-03-21 14:38:16,739 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-21 14:38:55,095 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\models.py changed, reloading.
 2022-03-21 14:38:56,059 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 16:05:50,724 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 16:05:52,067 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 16:06:05,530 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 16:06:06,601 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 16:36:01,499 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 16:36:02,434 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:23:36,185 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:23:36,972 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:24:08,401 [ERROR] django.request: Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 163, in register
+    allowPromotions = form.get('allowPromotions')
+AttributeError: 'UserForm' object has no attribute 'get'
+2022-03-21 17:24:08,553 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-21 17:24:31,044 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:24:31,852 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:27:43,598 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:27:44,371 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:30:31,535 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:30:32,376 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:31:46,618 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:31:47,360 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:33:12,390 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:33:13,195 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:33:42,686 [ERROR] django.request: Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 156, in register
+    print('df' + f)
+TypeError: can only concatenate str (not "BoundField") to str
+2022-03-21 17:33:42,801 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-21 17:33:55,296 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:33:56,415 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:34:11,802 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:34:12,576 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:35:09,541 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-21 17:35:10,317 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

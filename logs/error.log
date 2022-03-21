@@ -311,3 +311,21 @@ Traceback (most recent call last):
   File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 679, in orderhistory
     orderItem = orderItem.objects.filter('-date_completed')
 AttributeError: 'list' object has no attribute 'objects'
+2022-03-21 17:24:08,401 [ERROR] django.request: Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 163, in register
+    allowPromotions = form.get('allowPromotions')
+AttributeError: 'UserForm' object has no attribute 'get'
+2022-03-21 17:33:42,686 [ERROR] django.request: Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 156, in register
+    print('df' + f)
+TypeError: can only concatenate str (not "BoundField") to str

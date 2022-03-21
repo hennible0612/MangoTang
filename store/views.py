@@ -152,13 +152,16 @@ def register(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
+
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             email = form.cleaned_data.get('email')
             name = form.cleaned_data.get('name')
             phone_number = form.cleaned_data.get('phone_number')
-            # address1 = form.cleaned_data.get('address1')
-            # address2 = form.cleaned_data.get('address2')
+            allowPromotions = form.data.get('allowPromotions')
+
+            print(allowPromotions)
+
             user = User.objects.get(username=username)
 
             Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number)
