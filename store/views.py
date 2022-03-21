@@ -38,7 +38,7 @@ def store(request):
 
             user = request.user
             social = SocialAccount.objects.get(user=user)
-            if (social.provider == "Naver"):
+            if (social.provider == "naver"):
                 customer = Customer.objects.create(user=user, name=social.extra_data['name'],
                                                    email=social.extra_data['email'],
                                                    phone_number=social.extra_data['mobile'], join_date=datetime.now())
@@ -51,7 +51,11 @@ def store(request):
                 customer = Customer.objects.create(user=user, name=social.extra_data["name"],
                                                    email=social.extra_data["email"],
                                                    phone_number="none", join_date=datetime.now())
+            else:
+                logger.critical("exception error: " + 'view store 소셜 로그인 과정중에 에러')
+                return render(request, 'error.html')
             customer.save()
+
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
             items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items

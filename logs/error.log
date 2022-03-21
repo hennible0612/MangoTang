@@ -329,3 +329,83 @@ Traceback (most recent call last):
   File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 156, in register
     print('df' + f)
 TypeError: can only concatenate str (not "BoundField") to str
+2022-03-21 17:39:54,748 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 33, in store
+    customer = request.user.customer
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\utils\functional.py", line 247, in inner
+    return func(self._wrapped, *args)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 421, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.customer.RelatedObjectDoesNotExist: User has no customer.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 54, in store
+    customer.save()
+UnboundLocalError: local variable 'customer' referenced before assignment
+2022-03-21 17:42:42,856 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 33, in store
+    customer = request.user.customer
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\utils\functional.py", line 247, in inner
+    return func(self._wrapped, *args)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 421, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.customer.RelatedObjectDoesNotExist: User has no customer.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 58, in store
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+UnboundLocalError: local variable 'customer' referenced before assignment
+2022-03-21 17:44:05,937 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 33, in store
+    customer = request.user.customer
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\utils\functional.py", line 247, in inner
+    return func(self._wrapped, *args)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 421, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.customer.RelatedObjectDoesNotExist: User has no customer.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 41, in store
+    print(social.provier)
+AttributeError: 'SocialAccount' object has no attribute 'provier'
+2022-03-21 17:44:27,908 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 33, in store
+    customer = request.user.customer
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\utils\functional.py", line 247, in inner
+    return func(self._wrapped, *args)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 421, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.customer.RelatedObjectDoesNotExist: User has no customer.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 59, in store
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+UnboundLocalError: local variable 'customer' referenced before assignment
