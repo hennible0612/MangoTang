@@ -5,15 +5,16 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+
 class UserForm(UserCreationForm):
     name = forms.CharField(label="이름")
     email = forms.EmailField(label="이메일")
     phone_number = forms.CharField(label="전화번호")
 
-
     class Meta:
         model = User
         fields = ("username", "password1", "password2", "name", "email", "phone_number")
+
 
 class Customer(models.Model):
     GENDER_CHOICES = (
@@ -24,9 +25,11 @@ class Customer(models.Model):
 
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)  # Customer 하나당 User하나
     name = models.CharField(max_length=200, null=True)
-    email = models.EmailField(max_length=200,null=True, blank=True)
-    phone_number = models.CharField(max_length=50,null=True, blank=True)
+    email = models.EmailField(max_length=200, null=True, blank=True)
+    phone_number = models.CharField(max_length=50, null=True, blank=True)
     mileage = models.IntegerField(null=True, blank=True)
+    allowPromotions = models.BooleanField(default=False, null=True, blank=True)
+
     join_date = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
@@ -75,7 +78,7 @@ class Order(models.Model):
     payment_state = models.BooleanField(default=False)
     shipping_fee = models.IntegerField(null=True, blank=True)
     order_number = models.IntegerField(null=True, blank=True)
-    email = models.EmailField(null=True,blank=True)
+    email = models.EmailField(null=True, blank=True)
     total_fee = models.IntegerField(null=True, blank=True)
     post_code = models.CharField(max_length=200, null=True, blank=True)
     recipent_address1 = models.CharField(max_length=200, null=False)
@@ -91,7 +94,7 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
         data = ""
         for name in orderitems:
-            data += name.get_name +", "
+            data += name.get_name + ", "
         data = data.strip(', ')
         return data
 
@@ -114,7 +117,7 @@ class Order(models.Model):
         return total
 
     @property
-    def get_total(self): #옵션 포함 해당 order의 모든 가격
+    def get_total(self):  # 옵션 포함 해당 order의 모든 가격
         orderitems = self.orderitem_set.all()  # 해당 order의 자식 가져와서
         total = sum([item.get_total for item in orderitems])  # 다더함함
         optionTotal = sum([item.get_option_cart_total for item in orderitems])  # 다더함함
@@ -138,7 +141,9 @@ class Order(models.Model):
         if self.order_number == None:
             return "주문번호: -" + " 상태: " + str(self.order_status)
         else:
-            return "주문번호" + str(self.order_number) + "상태" + str(self.order_status) +"받는이: " + str(self.recipent_name)+"주문자: " + str(self.orderer_name)
+            return "주문번호" + str(self.order_number) + "상태" + str(self.order_status) + "받는이: " + str(
+                self.recipent_name) + "주문자: " + str(self.orderer_name)
+
 
 class OrderHistory(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
@@ -152,7 +157,7 @@ class OrderHistory(models.Model):
     payment_state = models.BooleanField(default=False)
     shipping_fee = models.IntegerField(null=True, blank=True)
     order_number = models.IntegerField(null=True, blank=True)
-    email = models.EmailField(null=True,blank=True)
+    email = models.EmailField(null=True, blank=True)
     total_fee = models.IntegerField(null=True, blank=True)
     post_code = models.CharField(max_length=200, null=True, blank=True)
     recipent_address1 = models.CharField(max_length=200, null=False)
@@ -163,16 +168,17 @@ class OrderHistory(models.Model):
     orderer_number = models.CharField(max_length=100, null=False)
     orderer_name = models.CharField(max_length=100, null=False)
 
-    receipt_url = models.CharField(max_length=500, null=True,blank=True)
-    status = models.CharField(max_length=100, null=True,blank=True)
-    emb_pg_provider = models.CharField(max_length=100, null=True,blank=True)
-    imp_uid = models.CharField(max_length=100, null=True,blank=True)
-    pay_method = models.CharField(max_length=100, null=True,blank=True)
+    receipt_url = models.CharField(max_length=500, null=True, blank=True)
+    status = models.CharField(max_length=100, null=True, blank=True)
+    emb_pg_provider = models.CharField(max_length=100, null=True, blank=True)
+    imp_uid = models.CharField(max_length=100, null=True, blank=True)
+    pay_method = models.CharField(max_length=100, null=True, blank=True)
 
     @property
     def get_total(self):
         total = self.total_fee + self.shipping_fee
         return total
+
 
 class ProductOption(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
@@ -184,6 +190,7 @@ class ProductOption(models.Model):
 
     def __str__(self):
         return " 옵션이름 : " + self.option_name
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -203,7 +210,7 @@ class OrderItem(models.Model):
         orderOptions = self.orderitemoption_set.all()  # 해당 order의 자식 가져와서
         data = ""
         for name in orderOptions:
-            data += name.get_option_name +", "
+            data += name.get_option_name + ", "
         data = data.strip(', ')
         return data
 
@@ -215,31 +222,31 @@ class OrderItem(models.Model):
     def get_option_bool(self):
         return self.item_option_bool
 
-    @property #배송비
+    @property  # 배송비
     def get_delivery_price(self):
         return self.product.shipment_price
 
-    @property#제품 가격
+    @property  # 제품 가격
     def get_total(self):
         total = self.product.price_discount * self.quantity
         return total
 
-    @property #옵션 가격
+    @property  # 옵션 가격
     def get_option_cart_total(self):
         orderOptions = self.orderitemoption_set.all()  # 해당 order의 자식 가져와서
         total = sum([item.get_total for item in orderOptions])  # 다더함함
         return total
 
-    @property #옵션 포함 가격
+    @property  # 옵션 포함 가격
     def get_all_total(self):
         total = self.product.price_discount * self.quantity
         orderOptions = self.orderitemoption_set.all()  # 해당 order의 자식 가져와서
         total += sum([item.get_total for item in orderOptions])  # 다더함함
         return total
 
-
     def __str__(self):
-        return "아이템"+str(self.get_option_cart_total) + "아이템 이름: "+  self.product.product_name
+        return "아이템" + str(self.get_option_cart_total) + "아이템 이름: " + self.product.product_name
+
 
 class OrderItemOption(models.Model):
     order_item_option = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True)
@@ -256,7 +263,9 @@ class OrderItemOption(models.Model):
         return total
 
     def __str__(self):
-        return "부모 아이템 이름: "+ str(self.order_item_option.product.product_name) + "옵션 이름: "+ self.product_option.option_name +" 옵션 가격: "+ str(self.get_total)
+        return "부모 아이템 이름: " + str(
+            self.order_item_option.product.product_name) + "옵션 이름: " + self.product_option.option_name + " 옵션 가격: " + str(
+            self.get_total)
 
 
 class ShippingAddress(models.Model):
@@ -290,8 +299,9 @@ class ProductReview(models.Model):
     image = models.ImageField(null=True, blank=True)
     review_bool = models.BooleanField(default=False, blank=False, null=True)
 
-    review_user_name = models.CharField(default="",blank=True,null=True, max_length=200)
-    image_url = models.CharField(default="",blank=True,null=True, max_length=200)
+    review_user_name = models.CharField(default="", blank=True, null=True, max_length=200)
+    image_url = models.CharField(default="", blank=True, null=True, max_length=200)
+
     @property
     def get_user_name(self):
         return self.customer.name
@@ -306,7 +316,8 @@ class ProductReview(models.Model):
         return url_image
 
     def __str__(self):
-        return " 주문자 : " + self.customer.name + " 제품이름: "+self.product.product_name +" 리뷰  : " + self.short_review
+        return " 주문자 : " + self.customer.name + " 제품이름: " + self.product.product_name + " 리뷰  : " + self.short_review
+
 
 class ProductQuestion(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
@@ -318,7 +329,7 @@ class ProductQuestion(models.Model):
     question_state = models.BooleanField(default=False, blank=False)
     question_public = models.BooleanField(default=False, blank=False)
 
-    review_user_name = models.CharField(default="",blank=True,null=True, max_length=200)
+    review_user_name = models.CharField(default="", blank=True, null=True, max_length=200)
 
     def __str__(self):
         return " 질문 : " + self.question_body + " 질문자 : " + self.customer.name
@@ -331,6 +342,7 @@ class ProductQuestion(models.Model):
 
         return url_image
 
+
 class CAExchangeRefundList(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     orderItem = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True)
@@ -338,5 +350,3 @@ class CAExchangeRefundList(models.Model):
     reason = models.CharField(max_length=300, null=True, blank=True)
     date_sent = models.DateTimeField(default=datetime.now)
     problem_solved = models.BooleanField(default=False, blank=False, null=True)
-
-

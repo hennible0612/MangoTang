@@ -666,3 +666,21 @@ UnboundLocalError: local variable 'customer' referenced before assignment
 2022-03-21 17:46:08,800 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-21 17:53:00,257 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-03-21 17:53:01,146 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:56:08,519 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\models.py changed, reloading.
+2022-03-21 17:56:09,322 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:56:19,449 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,604 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,658 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,704 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,751 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,802 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:21,506 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:24,605 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:25,197 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:25,893 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:38,116 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:56:38,528 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:58,459 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\models.py changed, reloading.
+2022-03-21 17:56:59,286 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-21 17:58:26,649 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\models.py changed, reloading.
+2022-03-21 17:58:27,680 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

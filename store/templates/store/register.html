@@ -36,11 +36,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">이메일</label>
-                                    <input type="text" class="form-control" name="email" id="email" value="{{ form.email.value|default_if_none:'' }}">
+                                    <input type="text" class="form-control" name="email" id="email"
+                                           value="{{ form.email.value|default_if_none:'' }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone_number">전화번호</label>
-                                    <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{ form.phone_number.value|default_if_none:'' }}">
+                                    <input type="text" class="form-control" name="phone_number" id="phone_number"
+                                           value="{{ form.phone_number.value|default_if_none:'' }}">
                                 </div>
                                 <hr>
 
@@ -56,19 +58,24 @@
                                         <div class=" input__check">
                                             <input type="checkbox" name="termsOfService" id="termsOfService"
                                                    required/>
-                                            <label for="termsOfService" class="required"><a href="#" class="term-service nav-link-cart">망고땡 이용약관</a> (필수)</label>
+                                            <label for="termsOfService" class="required"><a href="#"
+                                                                                            class="term-service nav-link-cart">망고땡
+                                                이용약관</a> (필수)</label>
                                         </div>
                                     </div>
                                     <div class="terms__box form-group">
                                         <div class="input__check">
                                             <input type="checkbox" name="privacyPolicy" id="privacyPolicy"
                                                    required/>
-                                            <label for="privacyPolicy" class="required"><a href="#" class="term-service nav-link-cart">개인정보 수집 및 이용 동의</a> (필수)</label>
+                                            <label for="privacyPolicy" class="required"><a href="#"
+                                                                                           class="term-service nav-link-cart">개인정보
+                                                수집 및 이용 동의</a> (필수)</label>
                                         </div>
                                     </div>
                                     <div class="terms__box">
                                         <div class="input__check">
-                                            <input type="checkbox" name="allowPromotions" id="allowPromotions" value="false"/>
+                                            <input type="checkbox" name="allowPromotions" id="allowPromotions"
+                                                   value="False"/>
                                             <label for="allowPromotions">프로모션 정보 수신 동의 (선택)</label>
                                         </div>
 
@@ -87,6 +94,7 @@
         const checkAll = document.querySelector(".terms__check__all input");
         const checkBoxes = document.querySelectorAll(".input__check input");
         const submitButton = document.querySelector("button");
+        const allowPromotions = document.getElementById('allowPromotions')
 
         const agreements = {
             termsOfService: false,
@@ -97,6 +105,7 @@
         checkBoxes.forEach((item) => item.addEventListener("input", toggleCheckbox));
 
         function toggleCheckbox(e) {
+
             const {checked, id} = e.target;
             agreements[id] = checked;
             this.parentNode.classList.toggle("active");
@@ -107,9 +116,14 @@
         function checkAllStatus() {
             const {termsOfService, privacyPolicy, allowPromotions} = agreements;
             if (termsOfService && privacyPolicy && allowPromotions) {
+                allowPromotions.setAttribute('value', 'True');
+
                 checkAll.checked = true;
             } else {
+                allowPromotions.setAttribute('value', 'False');
+
                 checkAll.checked = false;
+
             }
         }
 
@@ -122,25 +136,29 @@
             }
         }
 
-        const allowPromotions = document.getElementById('allowPromotions')
         allowPromotions.addEventListener('click', function () {
-            if (allowPromotions.getAttribute('value') == 'false') {
-                allowPromotions.setAttribute('value', 'true');
+            if (allowPromotions.getAttribute('value') == 'False') {
+                allowPromotions.setAttribute('value', 'True');
             } else {
-                allowPromotions.setAttribute('value', 'false');
+                allowPromotions.setAttribute('value', 'False');
             }
         });
+
 
         checkAll.addEventListener("click", (e) => {
             const {checked} = e.target;
             if (checked) {
                 checkBoxes.forEach((item) => {
+                    allowPromotions.setAttribute('value', 'True');
+
                     item.checked = true;
                     agreements[item.id] = true;
                     item.parentNode.classList.add("active");
                 });
             } else {
                 checkBoxes.forEach((item) => {
+                    allowPromotions.setAttribute('value', 'False');
+
                     item.checked = false;
                     agreements[item.id] = false;
                     item.parentNode.classList.remove("active");

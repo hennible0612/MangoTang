@@ -409,3 +409,14 @@ Traceback (most recent call last):
   File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 59, in store
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
 UnboundLocalError: local variable 'customer' referenced before assignment
+2022-03-21 17:56:19,449 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,604 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,658 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,704 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,751 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:19,802 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:21,506 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:24,605 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:25,197 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:25,893 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
+2022-03-21 17:56:38,528 [CRITICAL] store.views: exception error: no such column: store_customer.order_statusview store 소셜 로그인 과정중에 에러
