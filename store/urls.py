@@ -73,6 +73,6 @@ urlpatterns = [
 	path('mypage/refundlist', views.refundlist, name="refundlist"),
 	path('mypage/userinfo', views.userinfo, name="userinfo"),
 	path('mypage/reviewlist', views.reviewlist, name="reviewlist"),
-	path('mypage/orderlist/orderdetail', views.orderdetail, name="orderdetail"), #주문번호로 변경
+	path('mypage/orderlist/orderdetail/<int:orderNumber>/<int:sellerCode>', views.orderdetail, name="orderdetail"), #주문번호로 변경
 
 ]

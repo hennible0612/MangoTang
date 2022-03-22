@@ -9,7 +9,7 @@
 
         <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
             <div class="item" style="padding-top: 10px">
-                <div><h5>2021/12/20 주문<a class="orderlist-detail" href="{% url 'orderdetail' %}" style="float: right">주문
+                <div><h5>2021/12/20 주문<a class="orderlist-detail" href="#" style="float: right">주문
                     상세보기</a></h5>
                 </div>
             </div>
@@ -21,11 +21,16 @@
                     </div>
 
                     <div class="item-orderlist-info" style=" margin: 10px;">
-                        <span style="font-size: 25px; "><b>배송 준비중</b></span>
+                        <span style="font-size: 25px; "><b></b></span>
                         <span><img src="{% static 'images/dot.png' %}" width="9" height="9"></span>
                         <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>
                         <hr>
-                        <h4>메디플라워 더 시크릿가든 5종 </h4>
+{#                        {% if orderItem.item_option_bool == True %}#}
+{#                            <h4>{{ orderItem.product.product_name }} | 옵션: {{ item.get_all_option_name }}</h4>#}
+{#                        {% else %}#}
+{#                            <h4>{{ orderItem.product.product_name }}</h4>#}
+{##}
+{#                        {% endif %}#}
                         <span>50,000원<span>1개</span> </span>
 
                     </div>

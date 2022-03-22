@@ -168,7 +168,8 @@ def register(request):
 
             user = User.objects.get(username=username)
 
-            Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number,allowPromotions=allowPromotions)
+            Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number,
+                                    allowPromotions=allowPromotions)
             user = authenticate(username=username, password=raw_password)  # 사용자 인증
             login(request, user)  # 로그인
             return redirect('store')
@@ -194,7 +195,8 @@ def checkout(request):
         for item in items:
             itemOption += OrderItemOption.objects.filter(order_item_option=item)
 
-        context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption}
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'itemOption': itemOption,
+                   'customer': customer}
         return render(request, 'store/checkout.html', context)
     else:
         return render(request, 'permisson.html')
@@ -676,11 +678,9 @@ def orderhistory(request):
 
     orderItem = []
     for order in orderHistory:
-
         orderItem += order.orderitem_set.all()
 
     context = {'orderHistory': orderHistory, 'orderItem': orderItem}
-
 
     return render(request, 'mypage/orderhistory.html', context)
 
@@ -857,6 +857,18 @@ def userinfo(request):
 
 
 @login_required(login_url='account_login')
-def orderdetail(request):
-    context = {}
+def orderdetail(request, orderNumber, sellerCode):
+    print(orderNumber)
+    print(sellerCode)
+    customer = request.user.customer
+    orderHistory = OrderHistory.objects.filter(customer=customer, order_number=orderNumber)
+    print(orderHistory)
+    product = Product.objects.filter(seller_code=sellerCode)
+    print(product)
+    # orderItem = OrderItem.objects.filter(orderHistory=orderHistory, product=product)
+    #
+    # for i in orderItem:
+    #     print(i)
+
+    # context = {'orderItem': orderItem}
     return render(request, 'mypage/orderdetail.html', context)

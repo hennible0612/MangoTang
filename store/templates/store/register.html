@@ -41,8 +41,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phone_number">전화번호</label>
-                                    <input type="text" class="form-control" name="phone_number" id="phone_number"
-                                           value="{{ form.phone_number.value|default_if_none:'' }}">
+                                    <input type="number" class="form-control" name="phone_number" id="phone_number"
+                                           value="{{ form.phone_number.value|default_if_none:'' }}" placeholder="'-'을 제외한 휴대폰번호를 입력해주세요" maxlength="11" oninput="maxLengthCheck(this)">
                                 </div>
                                 <hr>
 
@@ -166,6 +166,13 @@
             }
             toggleSubmitButton();
         });
+
+        function maxLengthCheck(object) {
+            object.value = object.value.replace(/[^0-9]/gi, '');
+            if (object.value.length > object.maxLength) {
+                object.value = object.value.slice(0, object.maxLength)
+            }
+        }
     </script>
     </body>
 

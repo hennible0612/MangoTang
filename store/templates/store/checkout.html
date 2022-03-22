@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="sender">보내는 사람</label>
-                            <input type="text" class="form-control" id="sender" name="orderer_name" placeholder=""
+                            <input type="text" class="form-control" value="{{ customer.name }}" id="sender" name="orderer_name" placeholder=""
                                    value="" required="">
                         </div>
                         <div class="col-md-6 mb-3">
@@ -73,7 +73,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="email">이메일 <span class="text-muted"></span></label>
-                        <input type="email" class="form-control" id="email" name="email"
+                        <input type="email" value="{{ customer.email }}" class="form-control" id="email" name="email"
                                placeholder=mango@mangotang.com required="">
                     </div>
                     <div class="row">

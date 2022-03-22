@@ -12,7 +12,8 @@
                     <div class="item" style="padding-top: 10px">
                         <div><h5>{{ item.orderHistory.date_completed | date:'y/m/d' }}
                             주문번호: {{ item.orderHistory.order_number }} <a class="orderlist-detail"
-                                                                          href="{% url 'orderdetail' %}"
+                                                                          href="{% url 'orderdetail' item.orderHistory.order_number item.product.seller_code %}"
+
                                                                           style="float: right">주문 상세보기</a></h5>
                         </div>
                     </div>
