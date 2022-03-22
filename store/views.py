@@ -858,18 +858,29 @@ def userinfo(request):
 
 @login_required(login_url='account_login')
 def orderdetail(request, orderNumber, sellerCode):
-    print(orderNumber)
-    print(sellerCode)
+
     customer = request.user.customer
     orderHistory = OrderHistory.objects.filter(customer=customer, order_number=orderNumber)
-    print(orderHistory)
     product = Product.objects.filter(seller_code=sellerCode)
-    print(product)
     orderItem = OrderItem.objects.get(orderHistory__in=orderHistory,product__in=product) #이미 쿼리셋한 쿼리셋으로 쿼리셋을 할려면 __in 필요
-    print(orderItem.quantity)
     #
     # for i in orderItem:
     #     print(i)
 
     context = {'orderItem': orderItem}
     return render(request, 'mypage/orderdetail.html', context)
+
+@login_required(login_url='account_login')
+def reviewform(request, orderNumber, sellerCode):
+    customer = request.user.customer
+    orderHistory = OrderHistory.objects.get(customer=customer, order_number=orderNumber)
+    # orderHistory = orderHistory.objects.filter('-date_completed')
+    itemData = []
+    orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
+    for item in orderItem:
+        if int(item.product.seller_code) == int(sellerCode):
+            itemData = item
+
+    context = {'itemData': itemData}
+
+    return render(request, 'mypage/reviewform.html', context)

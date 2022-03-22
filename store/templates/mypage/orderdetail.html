@@ -9,7 +9,7 @@
 
         <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
             <div class="item" style="padding-top: 10px">
-                <div><h5>결제일 : {{ orderItem.orderHistory.date_completed | date:'y/m/d' }}
+                <div><h5>결제일 : {{ orderItem.orderHistory.date_completed | date:'y/m/d' }}</h5>
                 </div>
             </div>
             <div class="item" style="padding: 10px; height: 200px">
@@ -32,7 +32,7 @@
                         {#                        <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>#}
                         <hr>
                         {% if orderItem.item_option_bool == True %}
-                            <h4>{{ orderItem.product.product_name }} | 옵션: {{ item.get_all_option_name }}</h4>
+                            <h4>{{ orderItem.product.product_name }} | 옵션: {{ orderItem.get_all_option_name }}</h4>
                         {% else %}
                             <h4>{{ orderItem.product.product_name }}</h4>
                         {% endif %}
@@ -42,27 +42,20 @@
 
                     <div class="item-orderlist-button">
                         <div class="center-orderlist-option">
-                            <button class=" btn btn-outline-dark flex-shrink-0 " style=" width:150px; ">
-                                배송조회
-                            </button>
+                            <a class="nav-link-mypage btn"
+                               style="border-style: groove; border-color: black; width: 150px" href="/">배송조회</a>
                         </div>
                         <div class="center-orderlist-option">
-
-                            <button class=" btn btn-outline-dark flex-shrink-0 "
-                                    style=" width:150px; outline-offset: 10px; ">
-                                교환, 반품 신청
-                            </button>
+                            <a class="nav-link-mypage btn"
+                               style="border-style: groove; border-color: black; width: 150px"
+                               href="#">교환,
+                                반품 신청</a>
                         </div>
                         <div class="center-orderlist-option">
-
-                            <button class=" btn btn-outline-dark flex-shrink-0 " id="review" style=" width:150px">
-                                리뷰 작성하기
-                            </button>
+                            <a class="nav-link-mypage btn"
+                               style="border-style: groove; border-color: black; width: 150px" onclick="reviewButton()"
+                               href="#">리뷰쓰기</a>
                         </div>
-                        <script>
-                            {#const reviewButton = #}
-                            
-                        </script>
 
                     </div>
 
@@ -78,19 +71,19 @@
         <div class="item">
             <div class="container-orderdetail" style="display: flex">
                 <div class="item-orderdetail-topic">받는 사람</div>
-                <div class="item-orderdetail-info">{{ orderItem.orderHistory.recipent_name}}</div>
+                <div class="item-orderdetail-info">{{ orderItem.orderHistory.recipent_name }}</div>
             </div>
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">연락처</div>
-                <div class="item-orderdetail-info"> {{ orderItem.orderHistory.recipent_number}}</div>
+                <div class="item-orderdetail-info"> {{ orderItem.orderHistory.recipent_number }}</div>
             </div>
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">받는주소</div>
-                <div class="item-orderdetail-info"> {{ orderItem.orderHistory.recipent_address1}} {{ orderItem.orderHistory.recipent_address2}}</div>
+                <div class="item-orderdetail-info"> {{ orderItem.orderHistory.recipent_address1 }} {{ orderItem.orderHistory.recipent_address2 }}</div>
             </div>
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">배송요청사항</div>
-                <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request}}</div>
+                <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request }}</div>
             </div>
         </div>
         <hr style="clear: both; visibility: hidden;">
@@ -102,14 +95,14 @@
                 <div class="item-orderdetail-topic">결제 수단</div>
                 <div class="item-orderdetail-info">카드</div>
             </div>
-{#            <div class="container-orderdetail">#}
-{#                <div class="item-orderdetail-topic">마일리지 할인</div>#}
-{#                <div class="item-orderdetail-info">0</div>#}
-{#            </div>#}
-{#            <div class="container-orderdetail">#}
-{#                <div class="item-orderdetail-topic">쿠폰할인</div>#}
-{#                <div class="item-orderdetail-info">0</div>#}
-{#            </div>#}
+            {#            <div class="container-orderdetail">#}
+            {#                <div class="item-orderdetail-topic">마일리지 할인</div>#}
+            {#                <div class="item-orderdetail-info">0</div>#}
+            {#            </div>#}
+            {#            <div class="container-orderdetail">#}
+            {#                <div class="item-orderdetail-topic">쿠폰할인</div>#}
+            {#                <div class="item-orderdetail-info">0</div>#}
+            {#            </div>#}
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">제품 비용</div>
                 <div class="item-orderdetail-info">{{ orderItem.orderHistory.total_fee }} 원</div>
@@ -125,7 +118,19 @@
             </div>
         </div>
     </div>
+    <script>
+        {#console.log({{ orderItem.deliver_state })#}
 
+        function reviewButton() {
+            if ("{{orderItem.deliver_state}}" != "delivered") {
+                alert("제품이 도착한 후 리뷰를 적어주세요!");
+            } else {
+                url = "/mypage/item/review/" + {{ orderItem.orderHistory.order_number }}+"/" + {{ orderItem.product.seller_code }}
+                    window.location.replace(url)
+            }
+        }
+
+    </script>
 
 
 {% endblock mypage %}
