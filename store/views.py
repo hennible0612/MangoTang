@@ -865,10 +865,11 @@ def orderdetail(request, orderNumber, sellerCode):
     print(orderHistory)
     product = Product.objects.filter(seller_code=sellerCode)
     print(product)
-    # orderItem = OrderItem.objects.filter(orderHistory=orderHistory, product=product)
+    orderItem = OrderItem.objects.get(orderHistory__in=orderHistory,product__in=product) #이미 쿼리셋한 쿼리셋으로 쿼리셋을 할려면 __in 필요
+    print(orderItem.quantity)
     #
     # for i in orderItem:
     #     print(i)
 
-    # context = {'orderItem': orderItem}
+    context = {'orderItem': orderItem}
     return render(request, 'mypage/orderdetail.html', context)

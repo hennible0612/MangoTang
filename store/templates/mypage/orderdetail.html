@@ -3,35 +3,40 @@
 {% block mypage %}
     <div class="container" style=" height: 90rem"> <!--전체 컨테이너-->
         <div class="item">
-            <span><h3 style="color: grey">주문번호: 3249023482039</h3></span>
+            <span><h3 style="color: grey">주문번호: {{ orderItem.orderHistory.order_number }}</h3></span>
             <hr>
         </div>
 
         <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
             <div class="item" style="padding-top: 10px">
-                <div><h5>2021/12/20 주문<a class="orderlist-detail" href="#" style="float: right">주문
-                    상세보기</a></h5>
+                <div><h5>결제일 : {{ orderItem.orderHistory.date_completed | date:'y/m/d' }}
                 </div>
             </div>
             <div class="item" style="padding: 10px; height: 200px">
                 <div class="container-orderlist" style="flex-direction: row;">
 
                     <div class="item-orderlist-picture">
-                        <img src="https://dummyimage.com/180x160/dee2e6/6c757d.jpg" alt="..."/>
+                        <img style="width: 160px; height: 180px"
+                             src={{ orderItem.product.image_title.url }}  alt="..."/>
                     </div>
 
                     <div class="item-orderlist-info" style=" margin: 10px;">
-                        <span style="font-size: 25px; "><b></b></span>
-                        <span><img src="{% static 'images/dot.png' %}" width="9" height="9"></span>
-                        <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>
+
+                        {% if orderItem.deliver_state == "checking" %}
+                            <span style="font-size: 25px; "><b>주문 확인중</b></span>
+                        {% elif item.deliver_state == "delivering" %}
+                            <span style="font-size: 25px; "><b>배송중 </b> 송장번호 : 2354456456></span>
+                        {% elif orderItem.deliver_state == "arrived" %}
+                            <span style="font-size: 25px; "><b>도착 </b> 송장번호 : 2354456456></span>
+                        {% endif %}
+                        {#                        <span style="font-size: 25px; padding-bottom: 5px">12/21 도착 </span>#}
                         <hr>
-{#                        {% if orderItem.item_option_bool == True %}#}
-{#                            <h4>{{ orderItem.product.product_name }} | 옵션: {{ item.get_all_option_name }}</h4>#}
-{#                        {% else %}#}
-{#                            <h4>{{ orderItem.product.product_name }}</h4>#}
-{##}
-{#                        {% endif %}#}
-                        <span>50,000원<span>1개</span> </span>
+                        {% if orderItem.item_option_bool == True %}
+                            <h4>{{ orderItem.product.product_name }} | 옵션: {{ item.get_all_option_name }}</h4>
+                        {% else %}
+                            <h4>{{ orderItem.product.product_name }}</h4>
+                        {% endif %}
+                        <span>{{ orderItem.get_all_total | floatformat:0 }} 원 <span> {{ orderItem.quantity }} 개</span> 배송비 : {{ orderItem.get_delivery_price }}</span>
 
                     </div>
 
@@ -50,11 +55,14 @@
                         </div>
                         <div class="center-orderlist-option">
 
-                            <button class=" btn btn-outline-dark flex-shrink-0 " style=" width:150px">
+                            <button class=" btn btn-outline-dark flex-shrink-0 " id="review" style=" width:150px">
                                 리뷰 작성하기
                             </button>
                         </div>
-
+                        <script>
+                            {#const reviewButton = #}
+                            
+                        </script>
 
                     </div>
 
@@ -70,19 +78,19 @@
         <div class="item">
             <div class="container-orderdetail" style="display: flex">
                 <div class="item-orderdetail-topic">받는 사람</div>
-                <div class="item-orderdetail-info">우</div>
+                <div class="item-orderdetail-info">{{ orderItem.orderHistory.recipent_name}}</div>
             </div>
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">연락처</div>
-                <div class="item-orderdetail-info"> 010-1234-1234</div>
+                <div class="item-orderdetail-info"> {{ orderItem.orderHistory.recipent_number}}</div>
             </div>
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">받는주소</div>
-                <div class="item-orderdetail-info">서울특별기 강남구 일원로 (일원동)</div>
+                <div class="item-orderdetail-info"> {{ orderItem.orderHistory.recipent_address1}} {{ orderItem.orderHistory.recipent_address2}}</div>
             </div>
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">배송요청사항</div>
-                <div class="item-orderdetail-info"> 관리실 앞</div>
+                <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request}}</div>
             </div>
         </div>
         <hr style="clear: both; visibility: hidden;">
@@ -92,24 +100,28 @@
         <div class="item">
             <div class="container-orderdetail" style="display: flex">
                 <div class="item-orderdetail-topic">결제 수단</div>
-                <div class="item-orderdetail-info">카카오뱅크카드 일시불</div>
+                <div class="item-orderdetail-info">카드</div>
             </div>
+{#            <div class="container-orderdetail">#}
+{#                <div class="item-orderdetail-topic">마일리지 할인</div>#}
+{#                <div class="item-orderdetail-info">0</div>#}
+{#            </div>#}
+{#            <div class="container-orderdetail">#}
+{#                <div class="item-orderdetail-topic">쿠폰할인</div>#}
+{#                <div class="item-orderdetail-info">0</div>#}
+{#            </div>#}
             <div class="container-orderdetail">
-                <div class="item-orderdetail-topic">마일리지 할인</div>
-                <div class="item-orderdetail-info">0</div>
-            </div>
-            <div class="container-orderdetail">
-                <div class="item-orderdetail-topic">쿠폰할인</div>
-                <div class="item-orderdetail-info">0</div>
+                <div class="item-orderdetail-topic">제품 비용</div>
+                <div class="item-orderdetail-info">{{ orderItem.orderHistory.total_fee }} 원</div>
             </div>
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">배송비</div>
-                <div class="item-orderdetail-info">5000원</div>
+                <div class="item-orderdetail-info">{{ orderItem.orderHistory.shipping_fee }}</div>
             </div>
             <hr class="hr-orderdetail-totalpay">
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">총 결제금액</div>
-                <div class="item-orderdetail-info"><b>55,000원</b></div>
+                <div class="item-orderdetail-info"><b>{{ orderItem.orderHistory.get_total }} 원</b></div>
             </div>
         </div>
     </div>

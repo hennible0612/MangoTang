@@ -10,7 +10,7 @@
             {% if item.deliver_state != "refunded" %}
                 <div class=" container" id="rcorners2" style=" height: 15rem;"><!--주문내역 컨테이너-->
                     <div class="item" style="padding-top: 10px">
-                        <div><h5>{{ item.orderHistory.date_completed | date:'y/m/d' }}
+                        <div><h5>결제일 : {{ item.orderHistory.date_completed | date:'y/m/d' }}
                             주문번호: {{ item.orderHistory.order_number }} <a class="orderlist-detail"
                                                                           href="{% url 'orderdetail' item.orderHistory.order_number item.product.seller_code %}"
 
@@ -40,7 +40,6 @@
                                     <h4>{{ item.product.product_name }} | 옵션: {{ item.get_all_option_name }}</h4>
                                 {% else %}
                                     <h4>{{ item.product.product_name }}</h4>
-
                                 {% endif %}
                                 <span>{{ item.get_all_total | floatformat:0 }} 원 <span> {{ item.quantity }} 개</span> 배송비 : {{ item.get_delivery_price }}</span>
                             </div>
