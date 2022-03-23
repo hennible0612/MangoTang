@@ -2403,3 +2403,9 @@ Traceback (most recent call last):
     raise self.model.DoesNotExist(
 store.models.OrderItem.DoesNotExist: OrderItem matching query does not exist.
 2022-03-23 16:33:40,761 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-23 16:45:58,333 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 17:04:44,382 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 17:04:58,907 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-23 18:00:14,573 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-23 18:26:18,260 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-23 18:46:53,479 [WARNING] django.request: Not Found: /favicon.ico
