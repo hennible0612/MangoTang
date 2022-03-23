@@ -2215,3 +2215,30 @@ store.models.Product.DoesNotExist: Product matching query does not exist.
 2022-03-22 17:10:45,435 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-22 17:11:45,958 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-03-22 17:11:46,783 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-22 19:28:31,607 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-23 10:05:37,179 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 10:38:18,012 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-23 10:48:09,395 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 10:48:10,425 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 11:42:38,094 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 11:42:39,026 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 11:43:44,165 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 11:43:45,620 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 11:46:56,004 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 11:46:57,094 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 11:55:18,355 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 11:55:19,174 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 11:59:53,746 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 12:35:54,224 [ERROR] django.request: Internal Server Error: /mypage/item/review/11647919691/12312
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 892, in reviewform
+    return render(request, 'mypage/reviewform.html', context)
+UnboundLocalError: local variable 'context' referenced before assignment
+2022-03-23 12:36:38,409 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 12:36:39,196 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

@@ -877,10 +877,18 @@ def reviewform(request, orderNumber, sellerCode):
     # orderHistory = orderHistory.objects.filter('-date_completed')
     itemData = []
     orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
-    for item in orderItem:
-        if int(item.product.seller_code) == int(sellerCode):
-            itemData = item
+    if(request.method == "POST"):
+        print("review post request")
+        data = json.loads(request.body)  # JSON body data에저장
 
-    context = {'itemData': itemData}
+        print(data)
+        return render(request, 'error.html')
 
-    return render(request, 'mypage/reviewform.html', context)
+    else:
+
+        for item in orderItem:
+            if int(item.product.seller_code) == int(sellerCode):
+                itemData = item
+
+        context = {'itemData': itemData}
+        return render(request, 'mypage/reviewform.html', context)
