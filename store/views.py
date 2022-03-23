@@ -877,13 +877,24 @@ def reviewform(request, orderNumber, sellerCode):
     # orderHistory = orderHistory.objects.filter('-date_completed')
     itemData = []
     orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
+
     if(request.method == "POST"):
         data = json.loads(request.body)  # JSON body data에저장
         print(data)
-
+        product = Product.objects.get(seller_code=sellerCode)
         print(data["data"]["starRating"])
-        ProductReview.objects.create(customer__in=customer, product__in=orderItem.product, star_rating=data["data"]["starRating"]
-                                     ,short_review=data["data"]["shortReview"], long_review=["data"]["longReview"])
+
+        review, created = ProductReview.objects.get_or_create(customer=customer, product=product)
+        review.star_rating = int(data["data"]["starRating"])
+        review.short_review = int(data["data"]["shortReview"])
+        review.long_review = int(data["data"]["longReview"])
+        review.save()
+
+
+        # ProductReview.objects.create(customer=customer, product=product, star_rating=int(data["data"]["starRating"])
+        #                              ,short_review=str(data["data"]["shortReview"]), long_review=str(data["data"]["longReview"]))
+        # ProductReview.objects.create(customer=customer, product=product, star_rating=int(data["data"]["starRating"])
+        #                              ,short_review="sdfsdfsdfeer6645ffgg", long_review="sdfsdfsdfsdfsdfsdfsdf")
         print("review post request")
 
         return render(request, 'error.html')
