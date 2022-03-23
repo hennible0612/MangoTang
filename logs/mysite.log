@@ -2364,3 +2364,9 @@ TypeError: ProductReview() got an unexpected keyword argument 'customer__in'
 2022-03-23 15:38:15,041 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-23 15:51:46,043 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-03-23 15:51:47,090 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 16:01:19,604 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\models.py changed, reloading.
+2022-03-23 16:01:20,428 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 16:02:00,802 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 16:02:01,616 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 16:03:30,907 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 16:03:32,077 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

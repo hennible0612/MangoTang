@@ -293,6 +293,9 @@ class ProductReview(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     star_rating = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True,
                                       null=True)
+    order_number = models.IntegerField(null=True,blank=True)
+
+
     short_review = models.CharField(max_length=50, null=True, blank=True)
     long_review = models.CharField(max_length=200, null=True, blank=True)
     date_added = models.DateTimeField(default=datetime.now)
