@@ -48,7 +48,7 @@
                         <div class="center-orderlist-option">
                             <a class="nav-link-mypage btn"
                                style="border-style: groove; border-color: black; width: 150px"
-                               href="#">교환,
+                               href="{% url 'cs' orderItem.orderHistory.order_number orderItem.product.seller_code %}" >교환,
                                 반품 신청</a>
                         </div>
                         <div class="center-orderlist-option">

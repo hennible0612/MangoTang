@@ -882,11 +882,12 @@ def reviewform(request, orderNumber, sellerCode):
         product = Product.objects.get(seller_code=sellerCode)
         review, created = ProductReview.objects.get_or_create(customer=customer, product=product,order_number=orderNumber)
         review.star_rating = int(data["data"]["starRating"])
-        review.short_review = int(data["data"]["shortReview"])
-        review.long_review = int(data["data"]["longReview"])
+        review.short_review = str(data["data"]["shortReview"])
+        review.long_review = str(data["data"]["longReview"])
         review.save()
-
-        return render(request, 'error.html')
+        msg = "complete"
+        json_obj = json.dumps(msg)
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
         for item in orderItem:
             if int(item.product.seller_code) == int(sellerCode):

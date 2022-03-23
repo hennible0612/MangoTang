@@ -1966,3 +1966,29 @@ Traceback (most recent call last):
   File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\base.py", line 503, in __init__
     raise TypeError("%s() got an unexpected keyword argument '%s'" % (cls.__name__, kwarg))
 TypeError: ProductReview() got an unexpected keyword argument 'customer__in'
+2022-03-23 16:16:44,581 [ERROR] django.request: Internal Server Error: /mypage/item/review/11647919691/12312
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 885, in reviewform
+    review.short_review = int(data["data"]["shortReview"])
+ValueError: invalid literal for int() with base 10: 'fgd'
+2022-03-23 16:33:40,586 [ERROR] django.request: Internal Server Error: /mypage/orderlist/orderdetail/1164803320639/1004
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 865, in orderdetail
+    orderItem = OrderItem.objects.get(orderHistory__in=orderHistory,product__in=product) #이미 쿼리셋한 쿼리셋으로 쿼리셋을 할려면 __in 필요
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 435, in get
+    raise self.model.DoesNotExist(
+store.models.OrderItem.DoesNotExist: OrderItem matching query does not exist.
