@@ -1871,3 +1871,14 @@ Traceback (most recent call last):
   File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 892, in reviewform
     return render(request, 'mypage/reviewform.html', context)
 UnboundLocalError: local variable 'context' referenced before assignment
+2022-03-23 14:20:33,457 [ERROR] django.request: Internal Server Error: /mypage/item/review/11647919691/12312
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 884, in reviewform
+    print(data["starRating"])
+KeyError: 'starRating'

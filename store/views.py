@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 import datetime
 from allauth.socialaccount.models import SocialAccount
@@ -878,10 +878,14 @@ def reviewform(request, orderNumber, sellerCode):
     itemData = []
     orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
     if(request.method == "POST"):
-        print("review post request")
         data = json.loads(request.body)  # JSON body data에저장
-
         print(data)
+
+        print(data["data"]["starRating"])
+        ProductReview.objects.create(customer__in=customer, product__in=orderItem.product, star_rating=data["data"]["starRating"]
+                                     ,short_review=data["data"]["shortReview"], long_review=["data"]["longReview"])
+        print("review post request")
+
         return render(request, 'error.html')
 
     else:
