@@ -2409,3 +2409,28 @@ store.models.OrderItem.DoesNotExist: OrderItem matching query does not exist.
 2022-03-23 18:00:14,573 [WARNING] django.request: Not Found: /favicon.ico
 2022-03-23 18:26:18,260 [WARNING] django.request: Not Found: /favicon.ico
 2022-03-23 18:46:53,479 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-23 18:55:54,939 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 18:55:54,945 [WARNING] django.request: Not Found: /product/question//1/
+2022-03-23 18:55:54,957 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 18:55:54,968 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 19:11:32,063 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 19:11:32,079 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 19:11:32,085 [WARNING] django.request: Not Found: /product/question//1/
+2022-03-23 19:11:32,097 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 19:13:27,488 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\urls.py changed, reloading.
+2022-03-23 19:13:28,221 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 19:16:47,310 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\urls.py changed, reloading.
+2022-03-23 19:16:48,090 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 19:20:31,182 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 19:20:31,873 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 19:23:03,836 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 19:23:04,546 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 19:25:53,373 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 19:25:54,047 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 19:26:36,932 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-23 19:26:37,632 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-23 19:28:46,873 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-23 19:40:46,027 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 19:40:46,042 [WARNING] django.request: Not Found: /product/question//1/
+2022-03-23 19:40:46,049 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 19:40:46,060 [WARNING] django.request: Not Found: /product/review//1/

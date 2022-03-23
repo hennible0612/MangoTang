@@ -846,7 +846,11 @@ def refundlist(request):
 
 @login_required(login_url='account_login')
 def reviewlist(request):
-    context = {}
+    customer = request.user.customer
+    productReview = ProductReview.objects.filter(customer=customer)
+    print(productReview)
+
+    context = {'productReview':productReview}
     return render(request, 'mypage/reviewlist.html', context)
 
 
