@@ -2434,3 +2434,4 @@ store.models.OrderItem.DoesNotExist: OrderItem matching query does not exist.
 2022-03-23 19:40:46,042 [WARNING] django.request: Not Found: /product/question//1/
 2022-03-23 19:40:46,049 [WARNING] django.request: Not Found: /product/review//1/
 2022-03-23 19:40:46,060 [WARNING] django.request: Not Found: /product/review//1/
+2022-03-23 19:45:38,728 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
