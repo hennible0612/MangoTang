@@ -2435,3 +2435,33 @@ store.models.OrderItem.DoesNotExist: OrderItem matching query does not exist.
 2022-03-23 19:40:46,049 [WARNING] django.request: Not Found: /product/review//1/
 2022-03-23 19:40:46,060 [WARNING] django.request: Not Found: /product/review//1/
 2022-03-23 19:45:38,728 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 10:59:18,641 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 11:39:36,590 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 11:40:10,568 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-24 12:12:14,498 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-24 12:18:26,336 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 13:05:05,569 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 13:06:39,569 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-24 13:11:58,098 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 13:12:30,889 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 33, in store
+    customer = request.user.customer
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\utils\functional.py", line 247, in inner
+    return func(self._wrapped, *args)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 421, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.customer.RelatedObjectDoesNotExist: User has no customer.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 47, in store
+    name=social.extra_data["kakao_account"]["profile"]["nickname"],
+KeyError: 'kakao_account'
+2022-03-24 13:12:31,140 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-24 13:18:04,574 [WARNING] django.request: Not Found: /favicon.ico
