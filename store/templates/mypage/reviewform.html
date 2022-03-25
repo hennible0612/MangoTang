@@ -106,7 +106,6 @@
             data.shortReview = form.shortReview.value
             data.longReview = form.longReview.value
             var url = "/mypage/item/review/" + data.orderNumber + "/" + data.sellerCode;
-            console.log(url)
             fetch(url, {
                 method: 'POST',
                 headers: {

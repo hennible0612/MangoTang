@@ -906,3 +906,28 @@ def reviewform(request, orderNumber, sellerCode):
 
         context = {'itemData': itemData}
         return render(request, 'mypage/reviewform.html', context)
+
+
+def checkDelivery(request):
+    data = json.loads(request.body)
+    settings.sweet_tracker_key
+    print(data)
+
+    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+"05"+'&t_invoice='+"413664801583"
+    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+"04"+'&t_invoice='+"520037688840"
+    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+"06"+'&t_invoice='+"32467347496"
+
+    #level 6 가 완료료
+
+   req = requests.get(url)
+
+    access_res = req.json()
+    print("checkDelivery")
+    print(access_res)
+    # customer = request.user.customer
+    # orderHistory = OrderHistory.objects.get(customer=customer)
+    # itemData = []
+    # orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
+
+
+    return render(request, 'error.html')
