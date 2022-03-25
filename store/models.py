@@ -17,11 +17,7 @@ class UserForm(UserCreationForm):
 
 
 class Customer(models.Model):
-    GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('M', 'Female'),
-        ('N', 'Unknown'),
-    )
+
 
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)  # Customer 하나당 User하나
     name = models.CharField(max_length=200, null=True)
@@ -193,6 +189,16 @@ class ProductOption(models.Model):
 
 
 class OrderItem(models.Model):
+
+    DELIVER_COMPANY = (
+        ('04', 'CJ대한통운'),
+        ('05', '한진택배'),
+        ('08', '롯데택배'),
+        ('06', '로젠택배'),
+        ('01', '우체국택배'),
+        ('46', 'CU편의점택배'),
+        ('24', 'GS Postbox 택배	'),
+    )
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     orderHistory = models.ForeignKey(OrderHistory, on_delete=models.SET_NULL, null=True)
@@ -202,7 +208,7 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     item_option_bool = models.BooleanField(default=False, blank=False, null=True)
 
-    deliver_company = models.CharField(max_length=200, null=True, blank=True)
+    deliver_company = models.CharField(max_length=200, choices=DELIVER_COMPANY, null=True, blank=True)
     track_number = models.IntegerField(null=True, blank=True)
 
     @property

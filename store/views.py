@@ -886,7 +886,6 @@ def reviewform(request, orderNumber, sellerCode):
     customer = request.user.customer
     orderHistory = OrderHistory.objects.get(customer=customer, order_number=orderNumber)
     itemData = []
-    orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
 
     if(request.method == "POST"):
         data = json.loads(request.body)
@@ -900,6 +899,7 @@ def reviewform(request, orderNumber, sellerCode):
         json_obj = json.dumps(msg)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
+        orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
         for item in orderItem:
             if int(item.product.seller_code) == int(sellerCode):
                 itemData = item
@@ -912,22 +912,21 @@ def checkDelivery(request):
     data = json.loads(request.body)
     settings.sweet_tracker_key
     print(data)
+    print(data['data']['orderNumber'])
+    customer = request.user.customer
+    orderHistory = OrderHistory.objects.get(customer=customer, order_number=data['data']['orderNumber'])
+    product = Product.objects.get(seller_code=(data['data']['sellerCode']))
+    orderItem = OrderItem.objects.get(orderHistory=orderHistory, product=product)
+    # print(orderItem.deliver_company)
 
-    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+"05"+'&t_invoice='+"413664801583"
-    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+"04"+'&t_invoice='+"520037688840"
-    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+"06"+'&t_invoice='+"32467347496"
+    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str(orderItem.deliver_company)+'&t_invoice='+str(orderItem.track_number)
 
     #level 6 가 완료료
 
-   req = requests.get(url)
-
+    req = requests.get(url)
     access_res = req.json()
-    print("checkDelivery")
-    print(access_res)
-    # customer = request.user.customer
-    # orderHistory = OrderHistory.objects.get(customer=customer)
-    # itemData = []
-    # orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
+    print(access_res[])
+
 
 
     return render(request, 'error.html')

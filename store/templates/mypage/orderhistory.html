@@ -46,7 +46,7 @@
                                 <div class="center-orderlist-option">
                                     <a class="nav-link-mypage btn"
                                        style="border-style: groove; border-color: black; width: 150px"
-                                       onclick="deliverCheck({{ item.track_number |default_if_none:'null' }})">배송조회</a>
+                                       onclick="deliverCheck({{ item.track_number |default_if_none:'null' }}, {{ item.product.seller_code }},{{ item.orderHistory.order_number }})">배송조회</a>
 
                                 </div>
                                 <div class="center-orderlist-option">
@@ -86,13 +86,15 @@
             }
         }
 
-        function deliverCheck(trackNumber) {
+        function deliverCheck(trackNumber,sellerCode,orderNumber) {
             if (trackNumber == null) {
                 alert("송장번호를 등록 전입니다!");
 
             } else {
                 data={
                     'trackNumber': trackNumber,
+                    'sellerCode': sellerCode,
+                    'orderNumber': orderNumber,
                 }
                 var url = "/track/delivery";
                 fetch(url, {
