@@ -17,7 +17,7 @@
                 </li>
             {% endif %}
             {% if user.is_superuser %}
-                        <a class="nav-link" href={% url 'admin:index' %}>어드민페이지</a>
+                <a class="nav-link" href={% url 'admin:index' %}>어드민페이지</a>
             {% endif %}
 
         </ul>
@@ -57,11 +57,30 @@
                 <li class="nav-item"><a class="nav-link dropdown-menu-size" href="#!">망고픽</a></li>
 
             </ul>
-            <form class="d-flex">
-                <button class="btn" type="submit"></button>
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+
+            {#            검색#}
+            {#            <div class="d-flex">#}
+            {#                <input class="form-control me-2 kw" type="search" placeholder="Search" aria-label="Search"#}
+            {#                       value="{{ kw|default_if_none:'' }}">#}
+            {#                <button class="btn btn-outline-success" type="button" id="btn_search"><i class="fas fa-search"></i>#}
+            {#                </button>#}
+            {#            </div>#}
+            <div class="row justify-content-end my-3">
+                <div class="d-flex input-group">
+                    <input class="form-control me-2 kw" type="text" style="width: 200px"
+                           placeholder="Search" aria-label="Search"
+                           value="{{ kw|default_if_none:'' }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success" type="button" id="btn_search"><i
+                                class="fas fa-search"></i></button>
+
+                    </div>
+                </div>
+            </div>
+            <form id="searchForm" method="get" action="{% url 'store' %}">
+                <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
             </form>
+
             <a href="{% url 'cart' %}" class="nav-link-cart">
 
                 <button class="btn btn-outline-dark" type="submit">
@@ -71,7 +90,15 @@
 
                 </button>
             </a>
+            <script>
+                $(document).ready(function () {
+                    $("#btn_search").on('click', function () {
 
+                        $("#kw").val($(".kw").val())
+                        $("#searchForm").submit();
+                    });
+                });
+            </script>
         </div>
     </div>
 </nav>

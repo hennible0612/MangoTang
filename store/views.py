@@ -14,7 +14,7 @@ from django.urls import reverse
 
 from MangoTang import settings
 from .models import *
-
+from django.db.models import Q
 # Create your views here.
 """
 스토어 메인화면
@@ -28,6 +28,9 @@ logger = logging.getLogger(__name__)
 
 
 def store(request):
+
+    kw = request.GET.get('kw','')
+
     if request.user.is_authenticated:  # 로그인 유저일시
         try:
             customer = request.user.customer
@@ -68,6 +71,10 @@ def store(request):
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
+
+    if kw:
+        print("there is keyword")
+        print(kw)
 
     products = Product.objects.all()  # product 정보 다가져옴
     carousel = Carosel.objects.all()  # 캐러솔 가져옴
@@ -487,7 +494,7 @@ def checkoutPayment(request):
         else:
             return render(request, 'permisson.html')
     except Exception as e:
-        logger.critical("exception error: " + str(e) + 'view checkoutPayment 결제 정보 전달 받는 중에 에러러')
+        logger.critical("exception error: " + str(e) + 'view checkoutPayment 결제 정보 전달 받는 중에 에러')
         return render(request, 'error.html')
 
 

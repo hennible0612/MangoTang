@@ -2465,3 +2465,64 @@ Traceback (most recent call last):
 KeyError: 'kakao_account'
 2022-03-24 13:12:31,140 [WARNING] django.request: Not Found: /favicon.ico
 2022-03-24 13:18:04,574 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-24 14:43:02,278 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 15:49:01,040 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-24 16:32:44,960 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 78, in store
+    return render(request, 'store/store.html', context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\loader_tags.py", line 195, in render
+    return template.render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\template\defaulttags.py", line 449, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\urls\base.py", line 86, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\urls\resolvers.py", line 698, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'index' not found. 'index' is not a valid view function or pattern name.
+2022-03-24 16:32:45,187 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-24 17:02:36,855 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-24 17:02:38,369 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 17:03:48,873 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-24 17:03:49,649 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 17:04:02,071 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-24 17:04:02,810 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 17:17:08,872 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-24 17:17:09,723 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-24 17:20:23,194 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-25 12:17:33,234 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-25 12:17:42,470 [WARNING] django.request: Not Found: /favicon.ico

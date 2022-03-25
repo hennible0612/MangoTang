@@ -53,6 +53,7 @@ imp_secret = "kJpt2VHoDJvMt53xSj6FPz8RVoccZSUkBkNEfu3TeyFIEJgw2mcSWkKRIW4IOY2qjQ
 
 naver_client_id = '8y1JvVjIAl65X1BNl6ru'
 naver_client_secret = 'riyyIr0uGt'
+sweet_tracker_key = 'DeRHsNZkFuzJS0Dbv9p95Q'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
