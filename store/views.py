@@ -911,8 +911,6 @@ def reviewform(request, orderNumber, sellerCode):
 def checkDelivery(request):
     data = json.loads(request.body)
     settings.sweet_tracker_key
-    print(data)
-    print(data['data']['orderNumber'])
     customer = request.user.customer
     orderHistory = OrderHistory.objects.get(customer=customer, order_number=data['data']['orderNumber'])
     product = Product.objects.get(seller_code=(data['data']['sellerCode']))
@@ -920,12 +918,13 @@ def checkDelivery(request):
     # print(orderItem.deliver_company)
 
     url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str(orderItem.deliver_company)+'&t_invoice='+str(orderItem.track_number)
+    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str("06")+'&t_invoice='+str(32503569895)
 
     #level 6 가 완료료
 
     req = requests.get(url)
     access_res = req.json()
-    print(access_res[])
+    print(access_res["lastStateDetail"]["level"])
 
 
 
