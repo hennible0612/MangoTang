@@ -2870,3 +2870,5 @@ requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} mus
 2022-03-28 14:31:50,546 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-28 14:45:57,661 [WARNING] django.request: Not Found: /favicon.ico
 2022-03-28 15:22:04,823 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-28 16:41:59,216 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\urls.py changed, reloading.
+2022-03-28 16:41:59,997 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

@@ -54,7 +54,7 @@ urlpatterns = [
 	path('payment/cancel', views.paymentCancel, name="paymentCancel"),
 
 	# 택배 조회 api
-	path('track/delivery',views.checkDelivery, name="checkDelivery"),
+	# path('track/delivery',views.checkDelivery, name="checkDelivery"),
 
 	path('customerservice/', views.customerservice, name="customerservice"),
 	path('customerservice/faq', views.faq, name="faq"),

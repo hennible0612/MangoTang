@@ -909,7 +909,7 @@ def reviewform(request, orderNumber, sellerCode):
         context = {'itemData': itemData}
         return render(request, 'mypage/reviewform.html', context)
 
-
+# check delivery
 def checkDelivery(request):
     data = json.loads(request.body)
     settings.sweet_tracker_key
@@ -928,13 +928,24 @@ def checkDelivery(request):
     access_res = req.json()
     print(access_res["lastStateDetail"]["level"])
 
-    headers = {
-        "t_key": str(settings.sweet_tracker_key),
-        "t_code": "06",
-        "t_invoice": str("32503569895"),
-    }
-    url = "http://info.sweettracker.co.kr/tracking/5"
-    req = requests.post(url, headers=headers)
+    return render(request, 'error.html')
+
+def checkDeliveryState(request):
+    data = json.loads(request.body)
+    settings.sweet_tracker_key
+    customer = request.user.customer
+    orderHistory = OrderHistory.objects.get(customer=customer, order_number=data['data']['orderNumber'])
+    product = Product.objects.get(seller_code=(data['data']['sellerCode']))
+    orderItem = OrderItem.objects.get(orderHistory=orderHistory, product=product)
+    # print(orderItem.deliver_company)
+
+    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=' + settings.sweet_tracker_key + '&t_code=' + str(
+        orderItem.deliver_company) + '&t_invoice=' + str(orderItem.track_number)
+    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str("06")+'&t_invoice='+str(32503569895)
+    # level 6 가 완료료
+
+    req = requests.get(url)
     access_res = req.json()
-    print(access_res)
+    print(access_res["lastStateDetail"]["level"])
+
     return render(request, 'error.html')
