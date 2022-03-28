@@ -15,6 +15,7 @@ from django.urls import reverse
 from MangoTang import settings
 from .models import *
 from django.db.models import Q
+
 # Create your views here.
 """
 스토어 메인화면
@@ -28,8 +29,7 @@ logger = logging.getLogger(__name__)
 
 
 def store(request):
-
-    kw = request.GET.get('kw','')
+    kw = request.GET.get('kw', '')
 
     if request.user.is_authenticated:  # 로그인 유저일시
         try:
@@ -857,7 +857,7 @@ def reviewlist(request):
     productReview = ProductReview.objects.filter(customer=customer)
     print(productReview)
 
-    context = {'productReview':productReview}
+    context = {'productReview': productReview}
     return render(request, 'mypage/reviewlist.html', context)
 
 
@@ -869,11 +869,11 @@ def userinfo(request):
 
 @login_required(login_url='account_login')
 def orderdetail(request, orderNumber, sellerCode):
-
     customer = request.user.customer
     orderHistory = OrderHistory.objects.filter(customer=customer, order_number=orderNumber)
     product = Product.objects.filter(seller_code=sellerCode)
-    orderItem = OrderItem.objects.get(orderHistory__in=orderHistory,product__in=product) #이미 쿼리셋한 쿼리셋으로 쿼리셋을 할려면 __in 필요
+    orderItem = OrderItem.objects.get(orderHistory__in=orderHistory,
+                                      product__in=product)  # 이미 쿼리셋한 쿼리셋으로 쿼리셋을 할려면 __in 필요
     #
     # for i in orderItem:
     #     print(i)
@@ -881,16 +881,18 @@ def orderdetail(request, orderNumber, sellerCode):
     context = {'orderItem': orderItem}
     return render(request, 'mypage/orderdetail.html', context)
 
+
 @login_required(login_url='account_login')
 def reviewform(request, orderNumber, sellerCode):
     customer = request.user.customer
     orderHistory = OrderHistory.objects.get(customer=customer, order_number=orderNumber)
     itemData = []
 
-    if(request.method == "POST"):
+    if (request.method == "POST"):
         data = json.loads(request.body)
         product = Product.objects.get(seller_code=sellerCode)
-        review, created = ProductReview.objects.get_or_create(customer=customer, product=product,order_number=orderNumber)
+        review, created = ProductReview.objects.get_or_create(customer=customer, product=product,
+                                                              order_number=orderNumber)
         review.star_rating = int(data["data"]["starRating"])
         review.short_review = str(data["data"]["shortReview"])
         review.long_review = str(data["data"]["longReview"])
@@ -917,15 +919,22 @@ def checkDelivery(request):
     orderItem = OrderItem.objects.get(orderHistory=orderHistory, product=product)
     # print(orderItem.deliver_company)
 
-    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str(orderItem.deliver_company)+'&t_invoice='+str(orderItem.track_number)
+    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=' + settings.sweet_tracker_key + '&t_code=' + str(
+        orderItem.deliver_company) + '&t_invoice=' + str(orderItem.track_number)
     # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str("06")+'&t_invoice='+str(32503569895)
-
-    #level 6 가 완료료
+    # level 6 가 완료료
 
     req = requests.get(url)
     access_res = req.json()
     print(access_res["lastStateDetail"]["level"])
 
-
-
+    headers = {
+        "t_key": str(settings.sweet_tracker_key),
+        "t_code": "06",
+        "t_invoice": str("32503569895"),
+    }
+    url = "http://info.sweettracker.co.kr/tracking/5"
+    req = requests.post(url, headers=headers)
+    access_res = req.json()
+    print(access_res)
     return render(request, 'error.html')

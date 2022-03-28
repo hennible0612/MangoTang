@@ -2743,3 +2743,130 @@ TypeError: can only concatenate str (not "int") to str
 2022-03-26 15:37:15,280 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-26 15:37:55,218 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-03-26 15:37:56,685 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 15:44:57,953 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 15:44:59,640 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 15:45:01,492 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 15:45:02,483 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:18:29,796 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:18:30,592 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:18:40,899 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:18:41,658 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:19:34,717 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:19:35,425 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:20:29,642 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:20:30,395 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:20:49,653 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:20:50,474 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:22:51,415 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:22:52,193 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:23:29,212 [ERROR] django.request: Internal Server Error: /track/delivery
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1024, in check_header_validity
+    if not pat.match(value):
+TypeError: expected string or bytes-like object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 937, in checkDelivery
+    req = requests.post(url, headers=headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 515, in request
+    prep = self.prepare_request(req)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 443, in prepare_request
+    p.prepare(
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 319, in prepare
+    self.prepare_headers(headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 453, in prepare_headers
+    check_header_validity(header)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1027, in check_header_validity
+    raise InvalidHeader("Value for header {%s: %s} must be of type str or "
+requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} must be of type str or bytes, not <class 'int'>
+2022-03-26 17:24:07,364 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:24:08,179 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:30:04,048 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:30:04,797 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:31:51,286 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:31:52,034 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:34:04,551 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:34:05,299 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:34:12,613 [ERROR] django.request: Internal Server Error: /track/delivery
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1024, in check_header_validity
+    if not pat.match(value):
+TypeError: expected string or bytes-like object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 938, in checkDelivery
+    req = requests.post(url, headers=headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 515, in request
+    prep = self.prepare_request(req)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 443, in prepare_request
+    p.prepare(
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 319, in prepare
+    self.prepare_headers(headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 453, in prepare_headers
+    check_header_validity(header)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1027, in check_header_validity
+    raise InvalidHeader("Value for header {%s: %s} must be of type str or "
+requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} must be of type str or bytes, not <class 'int'>
+2022-03-26 17:34:30,904 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:34:31,620 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:34:33,264 [ERROR] django.request: Internal Server Error: /track/delivery
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1024, in check_header_validity
+    if not pat.match(value):
+TypeError: expected string or bytes-like object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 938, in checkDelivery
+    req = requests.post(url, headers=headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 515, in request
+    prep = self.prepare_request(req)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 443, in prepare_request
+    p.prepare(
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 319, in prepare
+    self.prepare_headers(headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 453, in prepare_headers
+    check_header_validity(header)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1027, in check_header_validity
+    raise InvalidHeader("Value for header {%s: %s} must be of type str or "
+requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} must be of type str or bytes, not <class 'int'>
+2022-03-26 17:34:48,907 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:34:49,645 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:35:30,226 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:35:30,982 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:44:26,279 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:44:27,054 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-26 17:44:58,491 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-26 17:44:59,234 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-28 14:31:50,546 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-28 14:45:57,661 [WARNING] django.request: Not Found: /favicon.ico
+2022-03-28 15:22:04,823 [WARNING] django.request: Not Found: /favicon.ico

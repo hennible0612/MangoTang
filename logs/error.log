@@ -2164,3 +2164,93 @@ Traceback (most recent call last):
   File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 924, in checkDelivery
     url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+"06"+'&t_invoice='+orderItem.track_number
 TypeError: can only concatenate str (not "int") to str
+2022-03-26 17:23:29,212 [ERROR] django.request: Internal Server Error: /track/delivery
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1024, in check_header_validity
+    if not pat.match(value):
+TypeError: expected string or bytes-like object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 937, in checkDelivery
+    req = requests.post(url, headers=headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 515, in request
+    prep = self.prepare_request(req)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 443, in prepare_request
+    p.prepare(
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 319, in prepare
+    self.prepare_headers(headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 453, in prepare_headers
+    check_header_validity(header)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1027, in check_header_validity
+    raise InvalidHeader("Value for header {%s: %s} must be of type str or "
+requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} must be of type str or bytes, not <class 'int'>
+2022-03-26 17:34:12,613 [ERROR] django.request: Internal Server Error: /track/delivery
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1024, in check_header_validity
+    if not pat.match(value):
+TypeError: expected string or bytes-like object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 938, in checkDelivery
+    req = requests.post(url, headers=headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 515, in request
+    prep = self.prepare_request(req)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 443, in prepare_request
+    p.prepare(
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 319, in prepare
+    self.prepare_headers(headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 453, in prepare_headers
+    check_header_validity(header)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1027, in check_header_validity
+    raise InvalidHeader("Value for header {%s: %s} must be of type str or "
+requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} must be of type str or bytes, not <class 'int'>
+2022-03-26 17:34:33,264 [ERROR] django.request: Internal Server Error: /track/delivery
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1024, in check_header_validity
+    if not pat.match(value):
+TypeError: expected string or bytes-like object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 938, in checkDelivery
+    req = requests.post(url, headers=headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 515, in request
+    prep = self.prepare_request(req)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\sessions.py", line 443, in prepare_request
+    p.prepare(
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 319, in prepare
+    self.prepare_headers(headers)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\models.py", line 453, in prepare_headers
+    check_header_validity(header)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\requests\utils.py", line 1027, in check_header_validity
+    raise InvalidHeader("Value for header {%s: %s} must be of type str or "
+requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} must be of type str or bytes, not <class 'int'>
