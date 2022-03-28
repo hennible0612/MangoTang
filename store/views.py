@@ -930,22 +930,16 @@ def checkDelivery(request):
 
     return render(request, 'error.html')
 
-def checkDeliveryState(request):
-    data = json.loads(request.body)
-    settings.sweet_tracker_key
-    customer = request.user.customer
-    orderHistory = OrderHistory.objects.get(customer=customer, order_number=data['data']['orderNumber'])
-    product = Product.objects.get(seller_code=(data['data']['sellerCode']))
-    orderItem = OrderItem.objects.get(orderHistory=orderHistory, product=product)
-    # print(orderItem.deliver_company)
+def checkDeliveryState():
+    print("hello")
+    # orderItem = OrderItem.objects.filter(deliver_state="delivering")
+    #
+    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=' + settings.sweet_tracker_key + '&t_code=' + str(
+    #     orderItem.deliver_company) + '&t_invoice=' + str(orderItem.track_number)
+    # # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str("06")+'&t_invoice='+str(32503569895)
+    # # level 6 가 완료료
+    #
+    # req = requests.get(url)
+    # access_res = req.json()
+    # print(access_res["lastStateDetail"]["level"])
 
-    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=' + settings.sweet_tracker_key + '&t_code=' + str(
-        orderItem.deliver_company) + '&t_invoice=' + str(orderItem.track_number)
-    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str("06")+'&t_invoice='+str(32503569895)
-    # level 6 가 완료료
-
-    req = requests.get(url)
-    access_res = req.json()
-    print(access_res["lastStateDetail"]["level"])
-
-    return render(request, 'error.html')

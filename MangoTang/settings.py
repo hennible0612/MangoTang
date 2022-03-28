@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+
     'store.apps.StoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django_crontab',
 
     'django.contrib.sites',
     'allauth',
@@ -47,6 +49,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.kakao',
     'allauth.socialaccount.providers.google',
 ]
+# CRONJOBS = [
+#     ('* * * * *','MangoTang.cron.every_minute','>> /logs/criticall.log')
+# ]
 
 imp_key = '5711640649645563'
 imp_secret = "kJpt2VHoDJvMt53xSj6FPz8RVoccZSUkBkNEfu3TeyFIEJgw2mcSWkKRIW4IOY2qjQ5yl8rzH7ilRySU"

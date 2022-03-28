@@ -2872,3 +2872,15 @@ requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} mus
 2022-03-28 15:22:04,823 [WARNING] django.request: Not Found: /favicon.ico
 2022-03-28 16:41:59,216 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\urls.py changed, reloading.
 2022-03-28 16:41:59,997 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-28 16:59:24,632 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-03-28 16:59:25,639 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-28 17:02:33,185 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\settings.py changed, reloading.
+2022-03-28 17:31:58,089 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-28 17:39:17,138 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\settings.py changed, reloading.
+2022-03-28 17:39:17,886 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-28 17:41:35,378 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\settings.py changed, reloading.
+2022-03-28 17:41:36,169 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-28 17:46:34,148 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\settings.py changed, reloading.
+2022-03-28 17:46:34,954 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-03-28 17:48:38,860 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\settings.py changed, reloading.
+2022-03-28 17:48:39,656 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
