@@ -1,5 +1,7 @@
 {#{% load store_filter %}#}
 {% load static %}
+<button id="myBtn">문의 하기</button>
+
 <div class="container mt-3">
 
 
@@ -7,7 +9,7 @@
         <thead class="table-light">
         <tr>
             <th>답변상태</th>
-            <th>제목</th>
+            <th>문의내용</th>
             <th>문의자</th>
             <th>등록일</th>
         </tr>
@@ -59,6 +61,91 @@
     {#        </li>#}
     {#    {% endif %}#}
 </ul>
+
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <form id="form">
+            {% csrf_token %}
+
+            {% include "store/form_errors.html" %}
+
+            <h1>질문 공개 비공개</h1>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radio" value="exchange"
+                       checked>
+                <label class="form-check-label" for="radio">
+                    공개
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radio" value="refund"
+                       checked>
+                <label class="form-check-label" for="radio">
+                    비공개
+                </label>
+            </div>
+
+
+            <h1>질문 내용</h1>
+            <textarea style="height: 300px;" class="form-control" name="reason" id="validationTextarea"
+                      placeholder="사유를 입력해주세요"
+                      required></textarea>
+
+            <br>
+            <label for="cars">Choose a car:</label>
+            <select id="cars" name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+            <button class="btn btn-primary btn-block"
+                    style="width:20em; background-color:#ee7d18" type="submit">질문하기
+            </button>
+
+
+        </form>
+
+    </div>
+</div>
+<script>
+    var form = document.getElementById('form')
+    form.addEventListener('submit', function (e) { //결제 버튼 클릭시
+        e.preventDefault()
+        submitFormData();
+    });
+</script>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+</script>
 <!-- 페이징처리 끝 -->
 <script>
     var token = '{{csrf_token}}';

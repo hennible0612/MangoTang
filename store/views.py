@@ -930,6 +930,14 @@ def checkDelivery(request):
 
     return render(request, 'error.html')
 
+def productquestion(reqeust):
+
+
+
+    return JsonResponse("Sdf")
+
+
+
 def checkDeliveryState():
     print("hello")
     # orderItem = OrderItem.objects.filter(deliver_state="delivering")

@@ -66,6 +66,9 @@ urlpatterns = [
 	# cs 교화 반품 신청
 	path('mypage/orderhistory/cs/<int:orderNumber>/<int:sellerCode>', views.csform, name="cs"),
 
+	# cs 교화 반품 신청
+	path('product/question', views.productquestion, name="productquestion"),
+
 	path('mypage/ordercancel', views.ordercancel, name="ordercancel"),
 	path('mypage/orderrefund', views.orderrefund, name="orderrefund"),
 	path('mypage/couponlist', views.couponlist, name="couponlist"),

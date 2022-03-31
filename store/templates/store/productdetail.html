@@ -160,6 +160,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#menu3">문의({{ total_question }})</a>
             </li>
+
         </ul>
 
         <!-- Tab panes -->
@@ -297,8 +298,15 @@
         </div>
 
     </section>
+
+
+
     <!--snack bar-->
     <text id="snackbar">장바구니에 담겼습니다. <a class="nav-link-cart" href={% url 'cart' %}> 바로 가기</a></text>
+
+
+
+
     <script>
 
         function cartSnackbar() {
@@ -331,8 +339,6 @@
                 itemObj['quantity']['itemQuantity' + id] = parseInt($('.option_quantity' + id).val());
                 return true;
             }
-
-
 
 
         }
