@@ -784,6 +784,8 @@ def reqstExrfn(request):
             return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
         msg = "refundRequestCompleted"
+
+
         json_obj = json.dumps(msg)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
@@ -930,12 +932,23 @@ def checkDelivery(request):
 
     return render(request, 'error.html')
 
-def productquestion(reqeust):
+def productquestion(request):
+    data = json.loads(request.body)
+    print(data)
+    customer = request.user.customer
+    product = Product.objects.get(seller_code=data["data"]["sellerCode"])
 
+    if (data["data"]["privacy"] == "public"):
+        ProductQuestion.objects.create(product=product, customer=customer
+                                       , question_body=data["data"]["question"], question_public=True)
+    else:
+        ProductQuestion.objects.create(product=product, customer=customer
+                                       , question_body=data["data"]["question"], question_public=False)
 
+    msg = "complete"
 
-    return JsonResponse("Sdf")
-
+    json_obj = json.dumps(msg)
+    return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 def checkDeliveryState():

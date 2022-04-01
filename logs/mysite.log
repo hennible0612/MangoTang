@@ -2892,3 +2892,216 @@ requests.exceptions.InvalidHeader: Value for header {t_invoice: 32467347496} mus
 2022-03-31 20:32:35,006 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-03-31 20:35:59,418 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\urls.py changed, reloading.
 2022-03-31 20:36:00,240 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 10:28:39,613 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 16:29:50,813 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 16:30:03,241 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 938, in productquestion
+    return JsonResponse("Sdf")
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\http\response.py", line 596, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-04-01 16:50:43,029 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 16:50:43,966 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 16:51:19,942 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 16:51:20,797 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 16:57:21,617 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-01 17:08:36,767 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 17:08:37,635 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 17:09:20,863 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 17:09:21,716 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 17:10:02,586 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 17:10:03,454 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:10:46,388 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:21:00,309 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 938, in productquestion
+    productquestion = ProductQuestion.objects.get(product=product)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 431, in get
+    num = len(clone)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 262, in __len__
+    self._fetch_all()
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1162, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 528, in as_sql
+    where, w_params = self.compile(self.where) if self.where is not None else ("", [])
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 445, in compile
+    sql, params = node.as_sql(self, self.connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\where.py", line 81, in as_sql
+    sql, params = compiler.compile(child)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 445, in compile
+    sql, params = node.as_sql(self, self.connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 132, in as_sql
+    return super().as_sql(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 315, in as_sql
+    return super().as_sql(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 194, in as_sql
+    rhs_sql, rhs_params = self.process_rhs(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 297, in process_rhs
+    raise ValueError(
+ValueError: The QuerySet value for an exact lookup must be limited to one result using slicing.
+2022-04-01 20:21:48,979 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 938, in productquestion
+    productquestion = ProductQuestion.objects.get(product=product)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 431, in get
+    num = len(clone)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 262, in __len__
+    self._fetch_all()
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1162, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 528, in as_sql
+    where, w_params = self.compile(self.where) if self.where is not None else ("", [])
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 445, in compile
+    sql, params = node.as_sql(self, self.connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\where.py", line 81, in as_sql
+    sql, params = compiler.compile(child)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 445, in compile
+    sql, params = node.as_sql(self, self.connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 132, in as_sql
+    return super().as_sql(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 315, in as_sql
+    return super().as_sql(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 194, in as_sql
+    rhs_sql, rhs_params = self.process_rhs(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 297, in process_rhs
+    raise ValueError(
+ValueError: The QuerySet value for an exact lookup must be limited to one result using slicing.
+2022-04-01 20:22:17,839 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:22:25,945 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 957, in productquestion
+    return JsonResponse("Sdf")
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\http\response.py", line 596, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-04-01 20:25:03,394 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 20:25:04,254 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:25:07,763 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 958, in productquestion
+    return JsonResponse("Sdf")
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\http\response.py", line 596, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-04-01 20:33:55,232 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 958, in productquestion
+    return JsonResponse("Sdf")
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\http\response.py", line 596, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-04-01 20:34:21,145 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 20:34:22,030 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:34:24,853 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 938, in productquestion
+    productquestion = ProductQuestion.objects.get(product=product)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 431, in get
+    num = len(clone)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 262, in __len__
+    self._fetch_all()
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1162, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 528, in as_sql
+    where, w_params = self.compile(self.where) if self.where is not None else ("", [])
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 445, in compile
+    sql, params = node.as_sql(self, self.connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\where.py", line 81, in as_sql
+    sql, params = compiler.compile(child)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\sql\compiler.py", line 445, in compile
+    sql, params = node.as_sql(self, self.connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 132, in as_sql
+    return super().as_sql(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 315, in as_sql
+    return super().as_sql(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 194, in as_sql
+    rhs_sql, rhs_params = self.process_rhs(compiler, connection)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\lookups.py", line 297, in process_rhs
+    raise ValueError(
+ValueError: The QuerySet value for an exact lookup must be limited to one result using slicing.
+2022-04-01 20:38:41,967 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 20:38:43,290 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:38:52,511 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 940, in productquestion
+    ProductQuestion.objects.create(product=product, customer=customer
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\query.py", line 451, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\base.py", line 485, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 215, in __set__
+    raise ValueError(
+ValueError: Cannot assign "<QuerySet [<Product: 에스피씨 웰메이드 마스크 (대형) 50매>]>": "ProductQuestion.product" must be a "Product" instance.
+2022-04-01 20:39:28,139 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 20:39:29,137 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:39:39,575 [ERROR] django.request: Internal Server Error: /product/question
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 949, in productquestion
+    return JsonResponse("Sdf")
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\http\response.py", line 596, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-04-01 20:40:10,228 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 20:40:11,076 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:40:23,880 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 20:40:24,860 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-01 20:40:41,224 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-01 20:50:18,051 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-01 20:50:19,773 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
