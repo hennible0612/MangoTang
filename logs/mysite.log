@@ -3105,3 +3105,34 @@ TypeError: In order to allow non-dict objects to be serialized set the safe para
 2022-04-01 20:40:41,224 [WARNING] django.request: Not Found: /favicon.ico
 2022-04-01 20:50:18,051 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-04-01 20:50:19,773 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-04 16:32:00,232 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-04 17:22:13,486 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-04 17:23:44,421 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-04 17:23:45,328 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-04 17:54:39,290 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-04 17:54:40,331 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-04 17:54:44,039 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 85, in store
+    products = shuffle(products)
+  File "C:\Users\henni\AppData\Local\Programs\Python\Python310\lib\random.py", line 394, in shuffle
+    x[i], x[j] = x[j], x[i]
+TypeError: 'QuerySet' object does not support item assignment
+2022-04-04 17:54:44,239 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-04 17:54:49,536 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 85, in store
+    products = shuffle(products)
+  File "C:\Users\henni\AppData\Local\Programs\Python\Python310\lib\random.py", line 394, in shuffle
+    x[i], x[j] = x[j], x[i]
+TypeError: 'QuerySet' object does not support item assignment
+2022-04-04 17:54:56,576 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-04 17:54:57,363 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

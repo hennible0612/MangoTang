@@ -1,6 +1,6 @@
 import json
 import requests
-
+from random import shuffle
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
@@ -30,6 +30,9 @@ logger = logging.getLogger(__name__)
 
 def store(request):
     kw = request.GET.get('kw', '')
+    products = Product.objects.all()  # product 정보 다가져옴
+    carousel = Carosel.objects.all()  # 캐러솔 가져옴
+    carousel_length = len(carousel)
 
     if request.user.is_authenticated:  # 로그인 유저일시
         try:
@@ -73,13 +76,13 @@ def store(request):
         cartItems = order['get_cart_items']
 
     if kw:
-        print("there is keyword")
-        print(kw)
+        products = Product.objects.filter(product_name__contains=kw)  # product 정보 다가져옴
+        context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length,
+                   'cartItems': cartItems}
 
-    products = Product.objects.all()  # product 정보 다가져옴
-    carousel = Carosel.objects.all()  # 캐러솔 가져옴
-    carousel_length = len(carousel)
+        return render(request, 'store/store.html', context)
 
+    # products = shuffle(products)
     context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length, 'cartItems': cartItems}
 
     return render(request, 'store/store.html', context)

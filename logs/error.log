@@ -2437,3 +2437,25 @@ Traceback (most recent call last):
   File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\http\response.py", line 596, in __init__
     raise TypeError(
 TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-04-04 17:54:44,039 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 85, in store
+    products = shuffle(products)
+  File "C:\Users\henni\AppData\Local\Programs\Python\Python310\lib\random.py", line 394, in shuffle
+    x[i], x[j] = x[j], x[i]
+TypeError: 'QuerySet' object does not support item assignment
+2022-04-04 17:54:49,536 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py", line 85, in store
+    products = shuffle(products)
+  File "C:\Users\henni\AppData\Local\Programs\Python\Python310\lib\random.py", line 394, in shuffle
+    x[i], x[j] = x[j], x[i]
+TypeError: 'QuerySet' object does not support item assignment
