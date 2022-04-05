@@ -82,6 +82,7 @@ def store(request):
 
         return render(request, 'store/store.html', context)
 
+    products = products.order_by("?")
     # products = shuffle(products)
     context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length, 'cartItems': cartItems}
 
