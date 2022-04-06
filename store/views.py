@@ -868,12 +868,26 @@ def reviewlist(request):
 
 @login_required(login_url='account_login')
 def userinfo(request):
-    user = request.user
-    customer = request.user.customer
 
-    context = {'user': user, 'customer': customer}
-    return render(request, 'mypage/userinfo.html', context)
+    if request.method == "GET":
+        user = request.user
+        customer = request.user.customer
 
+        context = {'user': user, 'customer': customer}
+        return render(request, 'mypage/userinfo.html', context)
+    else:
+        data = json.loads(request.body)
+
+        customer = request.user.customer
+        customer.post_code = data["data"]["postCode"]
+        customer.recipent_address1 = data["data"]["address1"]
+        customer.recipent_address2 = data["data"]["address2"]
+        customer.save()
+
+        msg = "complete"
+
+        json_obj = json.dumps(msg)
+        return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 @login_required(login_url='account_login')
 def orderdetail(request, orderNumber, sellerCode):

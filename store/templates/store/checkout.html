@@ -76,33 +76,93 @@
                         <input type="email" value="{{ customer.email }}" class="form-control" id="email" name="email"
                                placeholder=mango@mangotang.com required="">
                     </div>
-                    <div class="row">
-                        <div class="col-md-2 mb-3">
-                            <label for="address">우편</label>
-                            <input type="text" class="form-control address_kakao" name="post_code"
-                                   id="post_kakao" placeholder="우편"
-                                   required=""
-                                   readonly>
-                        </div>
-                        <div class="col-md-8 mb-3">
-                            <label for="address">주소</label>
-                            <input type="text" class="form-control address_kakao" name="recipent_address1"
-                                   id="address_kakao" placeholder="주소"
-                                   required=""
-                                   readonly>
-                        </div>
-                        <div class="col-md-2 mb-3">
-                            <label for="addressButton">주소 찾기</label>
-                            <br>
-                            <button class="address_kakao" type="button" value="ignore" formnovalidate>검색</button>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="address2">상세주소</label>
-                        <input type="text" class="form-control" name="recipent_address2" id="address2" placeholder="주소"
-                               required="">
 
-                    </div>
+                                        {% if customer.recipent_address1 != None %}
+                        <div class="row">
+                            <div class="col-md-2 mb-3">
+                                <label for="address">우편</label>
+                                <input type="text" class="form-control address_kakao" name="post_code"
+                                       id="post_kakao" placeholder="우편" value="{{ customer.post_code }}"
+                                       required=""
+                                       readonly>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="address">주소</label>
+                                <input type="text" class="form-control address_kakao" name="recipent_address1"
+                                       id="address_kakao" placeholder="주소" value="{{ customer.recipent_address1 }}"
+                                       required=""
+                                       readonly>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label for="addressButton">주소 찾기</label>
+                                <br>
+                                <button class="address_kakao" type="button" value="ignore" formnovalidate>검색</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address2">상세주소</label>
+                            <input type="text" class="form-control" name="recipent_address2" id="address2"
+                                   placeholder="주소"
+                                   required="" value="{{ customer.recipent_address2 }} ">
+
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-md-2 mb-3">
+                                <label for="address">우편</label>
+                                <input type="text" class="form-control address_kakao" name="post_code"
+                                       id="post_kakao" placeholder="우편"
+                                       required=""
+                                       readonly>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="address">주소</label>
+                                <input type="text" class="form-control address_kakao" name="recipent_address1"
+                                       id="address_kakao" placeholder="주소"
+                                       required=""
+                                       readonly>
+                            </div>
+                            {#                        <div class="col-md-2 mb-3">#}
+                            {#                            <label for="addressButton">주소 찾기</label>#}
+                            {#                            <br>#}
+                            {#                            <button class="address_kakao" type="button" value="ignore" formnovalidate>검색</button>#}
+                            {#                        </div>#}
+                        </div>
+                        <div class="mb-3">
+                            <label for="address2">상세주소</label>
+                            <input type="text" class="form-control" name="recipent_address2" id="address2"
+                                   placeholder="주소"
+                                   required="">
+
+                        </div>
+                    {% endif %}
+{#                    <div class="row">#}
+{#                        <div class="col-md-2 mb-3">#}
+{#                            <label for="address">우편</label>#}
+{#                            <input type="text" class="form-control address_kakao" name="post_code"#}
+{#                                   id="post_kakao" placeholder="우편"#}
+{#                                   required=""#}
+{#                                   readonly>#}
+{#                        </div>#}
+{#                        <div class="col-md-8 mb-3">#}
+{#                            <label for="address">주소</label>#}
+{#                            <input type="text" class="form-control address_kakao" name="recipent_address1"#}
+{#                                   id="address_kakao" placeholder="주소"#}
+{#                                   required=""#}
+{#                                   readonly>#}
+{#                        </div>#}
+{#                        <div class="col-md-2 mb-3">#}
+{#                            <label for="addressButton">주소 찾기</label>#}
+{#                            <br>#}
+{#                            <button class="address_kakao" type="button" value="ignore" formnovalidate>검색</button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="mb-3">#}
+{#                        <label for="address2">상세주소</label>#}
+{#                        <input type="text" class="form-control" name="recipent_address2" id="address2" placeholder="주소"#}
+{#                               required="">#}
+{##}
+{#                    </div>#}
 
                     <div class="mb-3">
                         <label for="receiver_number">수령인 전화번호</label>

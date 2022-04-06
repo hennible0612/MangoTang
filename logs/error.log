@@ -2459,3 +2459,21 @@ Traceback (most recent call last):
   File "C:\Users\henni\AppData\Local\Programs\Python\Python310\lib\random.py", line 394, in shuffle
     x[i], x[j] = x[j], x[i]
 TypeError: 'QuerySet' object does not support item assignment
+2022-04-06 16:00:29,868 [ERROR] django.request: Internal Server Error: /mypage/userinfo
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 188, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 309, in check_response
+    raise ValueError(
+ValueError: The view store.views.userinfo didn't return an HttpResponse object. It returned None instead.
+2022-04-06 16:00:29,887 [ERROR] django.request: Internal Server Error: /mypage/userinfo
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 188, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 309, in check_response
+    raise ValueError(
+ValueError: The view store.views.userinfo didn't return an HttpResponse object. It returned None instead.
