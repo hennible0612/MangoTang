@@ -1,9 +1,52 @@
 {% extends 'store/mypage.html' %}
 {% load static %}
 {% block mypage %}
-<div class="container">
-    고객정보리스트
-    <hr>
+    <div class="container">
+        <div class="item">
+            <h3>사용자정보</h3>
+            <hr>
 
-</div>
+            <div class="item">
+                <div class="container-orderdetail" style="display: flex">
+                    <div class="item-orderdetail-topic">유저 ID</div>
+                    <div class="item-orderdetail-info">{{ user.username }}</div>
+                </div>
+                <div class="container-orderdetail">
+                    <div class="item-orderdetail-topic">이름</div>
+                    <div class="item-orderdetail-info">{{ customer.name }}</div>
+                </div>
+                <div class="container-orderdetail">
+                    <div class="item-orderdetail-topic">메일주소</div>
+                    <div class="item-orderdetail-info">{{ customer.email }}</div>
+
+                </div>
+                <div class="container-orderdetail">
+                    <div class="item-orderdetail-topic">핸드폰 번호</div>
+                    <div class="item-orderdetail-info">{{customer.phone_number}}</div>
+                </div>
+                <div class="container-orderdetail">
+                    <div class="item-orderdetail-topic">프로모션 승낙여부</div>
+                    <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request }}</div>
+                </div>
+                <div class="container-orderdetail">
+                    <div class="item-orderdetail-topic">주소1</div>
+                    <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request }}</div>
+                </div>
+                <div class="container-orderdetail">
+                    <div class="item-orderdetail-topic">주소2</div>
+                    <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request }}</div>
+                </div>
+            </div>
+            {#            <form>#}
+            {#                {% csrf_token %}#}
+            {##}
+            {#                {% include "store/form_errors.html" %}#}
+            {#                <button class="btn btn-primary btn-block"#}
+            {#                        style="width:20em; background-color:#ee7d18" type="submit">login#}
+            {#                </button>#}
+            {#            </form>#}
+
+        </div>
+
+    </div>
 {% endblock mypage %}

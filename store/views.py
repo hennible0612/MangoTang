@@ -789,7 +789,6 @@ def reqstExrfn(request):
     else:
         msg = "refundRequestCompleted"
 
-
         json_obj = json.dumps(msg)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
@@ -869,7 +868,10 @@ def reviewlist(request):
 
 @login_required(login_url='account_login')
 def userinfo(request):
-    context = {}
+    user = request.user
+    customer = request.user.customer
+
+    context = {'user': user, 'customer': customer}
     return render(request, 'mypage/userinfo.html', context)
 
 
@@ -915,6 +917,7 @@ def reviewform(request, orderNumber, sellerCode):
         context = {'itemData': itemData}
         return render(request, 'mypage/reviewform.html', context)
 
+
 # check delivery
 def checkDelivery(request):
     data = json.loads(request.body)
@@ -935,6 +938,7 @@ def checkDelivery(request):
     print(access_res["lastStateDetail"]["level"])
 
     return render(request, 'error.html')
+
 
 def productquestion(request):
     data = json.loads(request.body)
@@ -967,4 +971,3 @@ def checkDeliveryState():
     # req = requests.get(url)
     # access_res = req.json()
     # print(access_res["lastStateDetail"]["level"])
-
