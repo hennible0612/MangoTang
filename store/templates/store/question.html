@@ -71,15 +71,15 @@
 
             <h1>질문 공개 비공개</h1>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radio" value="public"
-                       checked>
+                <input class="form-check-input" type="radio" name="radio" value="public" checked>
+
                 <label class="form-check-label" for="radio">
                     공개
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radio" value="private"
-                       >
+                <input class="form-check-input" type="radio" name="radio" value="private">
+
                 <label class="form-check-label" for="radio">
                     비공개
                 </label>
@@ -88,12 +88,12 @@
 
             <h1>질문 내용</h1>
             <textarea style="height: 300px;" class="form-control" name="question" id="validationTextarea"
-                      placeholder="사유를 입력해주세요"
+                      placeholder="질문 내용을 입력해주세요"
                       required></textarea>
 
             <br>
 
-            <button style="margin-top: 20px" class="btn btn-primary btn-lg btn-block submit" type="submit">질문하기기
+            <button style="margin-top: 20px" class="btn btn-primary btn-lg btn-block submit" type="submit">질문하기
             </button>
 
 
@@ -109,8 +109,6 @@
     });
 
     function submitFormData() {
-        alert("submit alert")
-
         var data = {
             'privacy': null,
             'question': null,

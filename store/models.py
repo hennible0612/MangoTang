@@ -23,6 +23,7 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=50, null=True, blank=True)
     mileage = models.IntegerField(null=True, blank=True)
     allowPromotions = models.BooleanField(default=False, null=True, blank=True)
+    post_code = models.CharField(max_length=50, null=True, blank=True)
     recipent_address1 = models.CharField(max_length=200, null=True, blank=True)
     recipent_address2 = models.CharField(max_length=200, null=True, blank=True)
     join_date = models.DateTimeField(default=datetime.now)

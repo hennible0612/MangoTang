@@ -1,6 +1,9 @@
 {% extends 'store/mypage.html' %}
 {% load static %}
 {% block mypage %}
+    <style>
+
+    </style>
     <div class="container">
         <div class="item">
             <h3>사용자정보</h3>
@@ -22,31 +25,91 @@
                 </div>
                 <div class="container-orderdetail">
                     <div class="item-orderdetail-topic">핸드폰 번호</div>
-                    <div class="item-orderdetail-info">{{customer.phone_number}}</div>
+                    <div class="item-orderdetail-info">{{ customer.phone_number }}</div>
                 </div>
-                <div class="container-orderdetail">
-                    <div class="item-orderdetail-topic">프로모션 승낙여부</div>
-                    <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request }}</div>
-                </div>
-                <div class="container-orderdetail">
-                    <div class="item-orderdetail-topic">주소1</div>
-                    <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request }}</div>
-                </div>
-                <div class="container-orderdetail">
-                    <div class="item-orderdetail-topic">주소2</div>
-                    <div class="item-orderdetail-info">{{ orderItem.orderHistory.order_request }}</div>
-                </div>
+
+                <br>
+
+                <h5>사용자 주소</h5>
+                <hr>
+                <form id="form">
+                    {% if customer.recipent_address1 != None %}
+                        <div class="row">
+                            <div class="col-md-2 mb-3">
+                                <label for="address">우편</label>
+                                <input type="text" class="form-control address_kakao" name="post_code"
+                                       id="post_kakao" placeholder="우편" value="{{ customer.post_code }}"
+                                       required=""
+                                       readonly>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="address">주소</label>
+                                <input type="text" class="form-control address_kakao" name="recipent_address1"
+                                       id="address_kakao" placeholder="주소" value="{{ customer.recipent_address1 }}"
+                                       required=""
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address2">상세주소</label>
+                            <input type="text" class="form-control" name="recipent_address2" id="address2"
+                                   placeholder="주소"
+                                   required="" value="{{ customer.recipent_address2 }} ">
+
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-md-2 mb-3">
+                                <label for="address">우편</label>
+                                <input type="text" class="form-control address_kakao" name="post_code"
+                                       id="post_kakao" placeholder="우편"
+                                       required=""
+                                       readonly>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="address">주소</label>
+                                <input type="text" class="form-control address_kakao" name="recipent_address1"
+                                       id="address_kakao" placeholder="주소"
+                                       required=""
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address2">상세주소</label>
+                            <input type="text" class="form-control" name="recipent_address2" id="address2"
+                                   placeholder="주소"
+                                   required="">
+
+                        </div>
+                    {% endif %}
+
+                    <button class="button submit" type="submit"> 수정하기</button>
+                </form>
             </div>
-            {#            <form>#}
-            {#                {% csrf_token %}#}
-            {##}
-            {#                {% include "store/form_errors.html" %}#}
-            {#                <button class="btn btn-primary btn-block"#}
-            {#                        style="width:20em; background-color:#ee7d18" type="submit">login#}
-            {#                </button>#}
-            {#            </form>#}
+
 
         </div>
 
     </div>
+
+    <script type="text/javascript" src="{% static 'js/kakao_address.js' %}"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        var form = document.getElementById('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            changeAddress();
+        });
+
+        function changeAddress() {
+            var data = {
+                'postCode': form.post_code.value,
+                'address1': form.recipent_address1.value,
+                'address2': form.recipent_address2.value,
+            }
+            console.log(data)
+
+        }
+    </script>
+
 {% endblock mypage %}

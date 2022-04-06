@@ -882,9 +882,7 @@ def orderdetail(request, orderNumber, sellerCode):
     product = Product.objects.filter(seller_code=sellerCode)
     orderItem = OrderItem.objects.get(orderHistory__in=orderHistory,
                                       product__in=product)  # 이미 쿼리셋한 쿼리셋으로 쿼리셋을 할려면 __in 필요
-    #
-    # for i in orderItem:
-    #     print(i)
+
 
     context = {'orderItem': orderItem}
     return render(request, 'mypage/orderdetail.html', context)
