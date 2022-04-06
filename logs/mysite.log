@@ -3152,3 +3152,5 @@ TypeError: 'QuerySet' object does not support item assignment
 2022-04-06 10:42:12,702 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-04-06 10:43:46,576 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-04-06 10:43:47,453 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-06 10:53:24,926 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\models.py changed, reloading.
+2022-04-06 10:53:25,750 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
