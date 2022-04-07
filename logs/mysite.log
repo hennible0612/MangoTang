@@ -3200,3 +3200,20 @@ ValueError: The view store.views.userinfo didn't return an HttpResponse object. 
 2022-04-06 16:25:04,726 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-04-06 16:25:49,086 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-04-06 16:25:50,656 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-06 17:01:40,874 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-07 10:25:07,932 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-07 10:27:42,575 [WARNING] django.request: Not Found: /product/question//1/
+2022-04-07 10:27:42,582 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-07 10:27:42,601 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-07 10:27:42,617 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-07 10:45:39,628 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-07 16:04:11,079 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-07 16:17:39,951 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-07 16:17:39,960 [WARNING] django.request: Not Found: /product/question//1/
+2022-04-07 16:17:39,976 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-07 16:17:39,992 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-07 16:17:49,208 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-07 17:59:52,111 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-07 18:03:08,665 [WARNING] django.request: Not Found: /images/agency/logo-inverse-140x37.png
+2022-04-07 18:03:36,592 [WARNING] django.request: Not Found: /images/agency/logo-inverse-140x37.png
+2022-04-07 18:03:38,910 [WARNING] django.request: Not Found: /images/agency/logo-inverse-140x37.png
