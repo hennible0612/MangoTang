@@ -3217,3 +3217,30 @@ ValueError: The view store.views.userinfo didn't return an HttpResponse object. 
 2022-04-07 18:03:08,665 [WARNING] django.request: Not Found: /images/agency/logo-inverse-140x37.png
 2022-04-07 18:03:36,592 [WARNING] django.request: Not Found: /images/agency/logo-inverse-140x37.png
 2022-04-07 18:03:38,910 [WARNING] django.request: Not Found: /images/agency/logo-inverse-140x37.png
+2022-04-08 15:34:22,928 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 15:36:07,175 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 15:36:08,024 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 15:36:20,444 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 15:36:21,269 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 15:37:07,506 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 15:37:08,272 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 15:37:34,551 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 15:37:35,486 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 16:09:30,265 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 16:09:31,098 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 17:13:34,215 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 17:13:35,176 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 17:19:11,719 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 17:19:12,554 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 17:42:20,137 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 17:42:20,937 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 17:43:45,746 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 17:43:46,652 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 17:44:04,975 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 17:44:06,080 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 17:44:16,631 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 17:44:17,409 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 17:44:22,454 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 17:44:23,251 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-08 17:44:34,922 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-08 17:44:35,761 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

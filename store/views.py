@@ -26,22 +26,20 @@ import logging
 # logger = logging.getLogger('warning')
 # CRITICAL_logger = logging.getLogger("critical")
 logger = logging.getLogger(__name__)
-
-
+"""
+메인페이지
+"""
 def store(request):
     kw = request.GET.get('kw', '')
     products = Product.objects.all()  # product 정보 다가져옴
     carousel = Carosel.objects.all()  # 캐러솔 가져옴
-    carousel_length = len(carousel)
-
+    carousel_length = len(carousel)   # 캐러솔 길이
     if request.user.is_authenticated:  # 로그인 유저일시
         try:
             customer = request.user.customer
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-            items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items
-        except ObjectDoesNotExist:  # social login
-
+        except ObjectDoesNotExist:  # 소셜로그인 아이디가 customer가 없을경우
             user = request.user
             social = SocialAccount.objects.get(user=user)
             if (social.provider == "naver"):
@@ -61,29 +59,22 @@ def store(request):
                 logger.critical("exception error: " + 'view store 소셜 로그인 과정중에 에러')
                 return render(request, 'error.html')
             customer.save()
-
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-            items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
             cartItems = order.get_cart_items
         except Exception as e:
             logger.critical("exception error: " + str(e) + 'view store 소셜 로그인 과정중에 에러')
             return render(request, 'error.html')
-
-
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
-
-    if kw:
+    if kw: # 검색 kw가 있을 경우
         products = Product.objects.filter(product_name__contains=kw)  # product 정보 다가져옴
         context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length,
                    'cartItems': cartItems}
-
         return render(request, 'store/store.html', context)
 
     products = products.order_by("?")
-    # products = shuffle(products)
     context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length, 'cartItems': cartItems}
 
     return render(request, 'store/store.html', context)
@@ -115,9 +106,12 @@ def productDetail(request, seller_code):
     else:
         options = None
 
+    # context = {'product': product, 'review_page': review_page, 'review_obj': review_obj
+    #     , 'question_page': question_page, 'questions': questions, 'total_review': len(reviews)
+    #     , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews, 'options': options}
     context = {'product': product, 'review_page': review_page, 'review_obj': review_obj
-        , 'question_page': question_page, 'questions': questions, 'total_review': len(reviews)
-        , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews, 'options': options}
+        , 'question_page': question_page, 'total_review': len(reviews)
+        , 'total_question': len(questions), 'question_obj': question_obj,  'options': options}
     return render(request, 'store/productdetail.html', context)
 
 
@@ -230,7 +224,6 @@ def buyNow(request):
 
 def updateItem(request):
     if request.user.is_authenticated:  # 로그인 유저일시
-
         data = json.loads(request.body)  # JSON body data에저장
         option = data["option"]
         if (option == 'false'):
@@ -249,7 +242,6 @@ def updateItem(request):
                 orderItem.quantity = (orderItem.quantity - 1)
             elif action == 'set':
                 orderItem.quantity = quantity
-
             orderItem.save()  # DB에 저장
 
             if int(orderItem.quantity) <= 0:
@@ -896,7 +888,6 @@ def orderdetail(request, orderNumber, sellerCode):
     product = Product.objects.filter(seller_code=sellerCode)
     orderItem = OrderItem.objects.get(orderHistory__in=orderHistory,
                                       product__in=product)  # 이미 쿼리셋한 쿼리셋으로 쿼리셋을 할려면 __in 필요
-
 
     context = {'orderItem': orderItem}
     return render(request, 'mypage/orderdetail.html', context)

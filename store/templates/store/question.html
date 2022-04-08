@@ -216,12 +216,12 @@
         $.each(jQuery.parseJSON(data), function (id, data) {
 
             if (data.fields.question_state == true && data.fields.question_public == true) {
-                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counterQuestion}" class="button more-comment-question"
+                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counterQuestion}" class=" more-comment-question"
                            href="javascript:void(0)">${data.fields.question_body}</a></td><td>${data.fields.review_user_name}</td>
                 <td>${data.fields.date_added}</td></tr>
             <tr id="answer${counterQuestion}" style="display: none"><td colspan="4">${data.fields.question_answer}</td></tr>`);
             } else if (data.fields.question_state == true && data.fields.question_public == false && data.fields.review_user_name == user) {
-                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counterQuestion}" class="button more-comment-question"
+                $('#product-question').append(`<tr><td class="text-success">[답변완료]</td><td><a data-id="answer${counterQuestion}" class=" more-comment-question"
                            href="javascript:void(0)">${data.fields.question_body}</a></td><td>${data.fields.review_user_name}</td>
                 <td>${data.fields.date_added}</td></tr>
             <tr id="answer${counterQuestion}" style="display: none"><td colspan="4">${data.fields.question_answer}</td></tr>`);

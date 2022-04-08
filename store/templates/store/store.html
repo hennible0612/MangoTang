@@ -2,7 +2,6 @@
 
 {% load static %}
 {% block content %}
-
     {% include "store/carousel.html" %}
     <!-- 제품 목록-->
     <section class="py-5">
@@ -30,7 +29,8 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <button data-product="{{ product.seller_code }}" onclick="cartSnackbar()" data-action="set"
+                                    <button data-product="{{ product.seller_code }}" onclick="cartSnackbar()"
+                                            data-action="set"
                                             class="btn btn-outline-dark mt-auto update-cart">장바구니 추가
                                     </button>
                                 </div>
@@ -39,16 +39,12 @@
                     </div>
                 {% endfor %}
 
-
-
-
             </div>
         </div>
-                <div class="container" style="display: flex; justify-content: center">
-                <div class="item">ss</div>
-                <div class="item">dd</div>
-
-            </div>
+        <div class="container" style="display: flex; justify-content: center">
+            <div class="item">ss</div>
+            <div class="item">dd</div>
+        </div>
     </section>
 
     <text id="snackbar">장바구니에 담겼습니다. <a class="nav-link-cart" href={% url 'cart' %}> 바로 가기</a></text>

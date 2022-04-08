@@ -324,13 +324,11 @@
             quantity: {}
         };
 
+        {#아이템 추가하기#}
         function addItem(sellerCode, id) {
-
             itemObj['option'] = 'true';
             itemObj['action'] = 'set'
-
             if (itemObj['options']['optionSellercode' + id] == sellerCode) {
-
                 return false;
             } else {
                 itemObj['option'] = 'true';
@@ -339,8 +337,6 @@
                 itemObj['quantity']['itemQuantity' + id] = parseInt($('.option_quantity' + id).val());
                 return true;
             }
-
-
         }
 
         var price = '{{ product.price }}'
@@ -349,6 +345,7 @@
         var token = '{{csrf_token}}';
 
         $(document).ready(function () { //DOM이 준비가 되면
+
             $('.option-cancel').click(function (e) {
                 var counter = $(this).data("id");
                 var sellerCode = $(this).data("code");
@@ -368,6 +365,7 @@
                 }
             });
 
+            {#Order에 추가하기 #}
             $('.add-to-cart').click(function (e) {
                 var sellerCode = "{{ product.seller_code }}"
                 var productQuantity = $('.product-quantity').val();
@@ -391,6 +389,7 @@
             });
 
 
+            {#Order에 추가하기 옵션#}
             $('.add-to-cart-option').click(function (e) {
                 cartSnackbar()
                 var productQuantity = $('.product-quantity').val(); //부모 의 갯수
@@ -412,8 +411,6 @@
                 } else {
                     var sellerCode = "{{ product.seller_code }}"
                     var productQuantity = 1
-                    console.log("item has no option")
-
                     $.ajax({
                         headers: {"X-CSRFToken": token},
                         url: '/update_item/',
@@ -439,8 +436,6 @@
                 var sellerCode = $(this).find("option:selected").data("product");
                 var counter = $(this).find("option:selected").data("id");
                 var optionPrice = $(this).find("option:selected").data("price");
-
-
                 var bool = addItem(sellerCode, counter)
                 if (bool == true) {
                     changeTotalPrice(totalPrice, optionPrice, "add");
@@ -451,27 +446,21 @@
                 $('.' + sellerCode).show();
             });
 
-
             $('.plus').click(function (e) {
                 e.preventDefault();
                 var currentVal = parseInt($('.product-quantity').val());
                 var price = $(this).data("price");
                 var action = "add"
-
-
                 if (!isNaN(currentVal)) {
                     $('.product-quantity').val(currentVal + 1);
                     changeTotalPrice(currentVal + 1, price, action)
-
                 }
-
             });
             $('.minus').click(function (e) {
                 e.preventDefault();
                 var currentVal = parseInt($('.product-quantity').val());
                 var price = $(this).data("price");
                 var action = "minus"
-
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.product-quantity').val(currentVal - 1);
                     changeTotalPrice(currentVal - 1, price, action)
@@ -482,21 +471,17 @@
                 var optionPrice = $(this).data("price");
                 var currentVal = parseInt($('.option_quantity' + optionId).val());
                 var action = "add"
-
                 if (!isNaN(currentVal)) {
                     $('.option_quantity' + optionId).val(currentVal + 1);
                     changeTotalPrice(currentVal + 1, optionPrice, action)
                     itemObj['quantity']['itemQuantity' + optionId] = currentVal + 1;
-
                 }
             });
-
             $('.option-minus').click(function (e) {
                 var optionId = $(this).data("id");
                 var optionPrice = $(this).data("price");
                 var currentVal = parseInt($('.option_quantity' + optionId).val());
                 var action = "minus"
-
                 if (!isNaN(currentVal) && currentVal > 1) {
                     $('.option_quantity' + optionId).val(currentVal - 1);
                     changeTotalPrice(currentVal - 1, optionPrice, action)
@@ -505,9 +490,6 @@
             });
 
             function changeTotalPrice(currentVal, price, action) {
-                {#console.log(totalPrice)#}
-                {#console.log(currentVal)#}
-                {#console.log(price)#}
                 if (action == "add") {
                     totalPrice += parseInt(price);
 
