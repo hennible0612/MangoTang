@@ -455,9 +455,9 @@ def checkoutPayment(request):
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)
         if (order.order_status == False):
 
+            # 결제 정보 order에 저장
             order_id = str(customer.id) + str(datetime.now().timestamp())
             order_id = int(float(order_id))
-
             name = order.get_all_item_name
             order.total_fee = order.get_total
             order.order_number = order_id
@@ -473,6 +473,7 @@ def checkoutPayment(request):
             order.email = data['data']['email']
             order.save()
 
+            # 아임포트에 넘겨줄 데이터
             iamport_data = {
                 "merchant_uid": order_id,
                 "name": name,
