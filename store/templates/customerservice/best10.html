@@ -1,45 +1,121 @@
-{#<ul style="list-style-type: none">#}
-{#    <li>#}
-{#        <strong>첫 번째 질문</strong>#}
-{#        <div>#}
-{#            <p>망고땡 몰에서는 항상 고객 여러분께</p>#}
-{#            <p>신선한 상품을 제공하고자 노력하고 있습니다.</p>#}
-{#            <p>구입하신 상품 중</p>#}
-{#            <p>품질에 이상이 있는 상품을 구입하신 고객님께서는</p>#}
-{#            <p>Self 환불 서비스를 이용해 신청 주십시오.</p>#}
-{#            <p>확인 후 즉시 환불해 드리겠습니다.</p>#}
-{#        </div>#}
-{#    </li>#}
-{##}
-{#</ul>#}
-<table class="table">
-    <thead class="table-light">
-    <tr id="product-review-topic">
 
-    </tr>
-    <tr>
-        <th>많이 물어보는 질문 top 10</th>
+{% load static %}
+<div class="container mt-3">
 
-    </tr>
-    </thead>
-    <tbody id="product-reivew">
-    <tr>
-        <td>
-            신선 상품의 상태가 좋지 않아요.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p>망고땡 몰에서는 항상 고객 여러분께</p>
-            <p>신선한 상품을 제공하고자 노력하고 있습니다.</p>
-            <p>&nbsp;</p>
-            <p>구입하신 상품 중</p>
-            <p>품질에 이상이 있는 상품을 구입하신 고객님께서는</p>
-            <p>Self 환불 서비스를 이용해 신청 주십시오.</p>
-            <p>&nbsp;</p>
-            <p>확인 후 즉시 환불해 드리겠습니다.</p>
-        </td>
-    </tr>
 
-    </tbody>
-</table>
+    <table class="table">
+        <thead class="table-light">
+        <tr id="product-review-topic">
+
+        </tr>
+        <tr>
+            <th>많이 물어보는 질문 top 5</th>
+
+        </tr>
+        </thead>
+        <tbody id="product-reivew">
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="nav-link-mypage best-question " onclick="questionAnswer('1')"> <b
+                    style="flex: 25px">신선 상품의 상태가 좋지 않아요.</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer1" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>망고땡 몰에서는 항상 고객 여러분께</p>
+                <p>신선한 상품을 제공하고자 노력하고 있습니다.</p>
+                <p>&nbsp;</p>
+                <p>구입하신 상품 중</p>
+                <p>품질에 이상이 있는 상품을 구입하신 고객님께서는</p>
+                <p>Self 환불 서비스를 이용해 신청 주십시오.</p>
+                <p>&nbsp;</p>
+                <p>확인 후 즉시 환불해 드리겠습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question" onclick="questionAnswer('2')"> <b
+                    style="flex: 25px">상품을 받았는데 누락된 상품이 있어요</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer2" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>구매하신 상품 중 </p>
+                <p>품절 및 포장 담당자의 실수로 인하여</p>
+                <p>누락 상품 발생 시 환불 서비스를 받으 실 수 있습니다.</p>
+                <p>&nbsp;</p>
+                <p>품절 상품 발생 시 </p>
+                <p>고객님께 별도의 문자 연락을 드리며</p>
+                <p>상품 누락 발생 시 즉시 고객센터 1:1상담 </p>
+                <p>또는 환불 서비스에 신청해주세요</p>
+                <p>&nbsp;</p>
+                <p>확인 후 즉시 배송해 드리겠습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question" onclick="questionAnswer('3')"> <b
+                    style="flex: 25px">환불/보상/반품 규정은 어떻게 되나요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer3" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>상품 불량으로 인한 </p>
+                <p>교환 및 환불은 원칙적으로 7일 이내에 가능합니다.</p>
+                <p>- 일반 가공식품·생활용품은 7일 이내</p>
+                <p>- 주방/가전제품 배송완료 기준 7일 이내</p>
+                <p>&nbsp;</p>
+                <p>※ 아래의 경우 교환/반품이 불가능합니다.</p>
+                <p>- 냉동 상품을 구매했을 경우</p>
+                <p>- 고객님의 책임 사유로 인해 상품 등이 멸실 또는 훼손된 경우</p>
+                <p>- 개봉 및 포장이 훼손으로 상품가치가 현저히 상실된 경우</p>
+                <p>- 시간 경과에 의해 재판매가 어려울정도로 상품 가치가 현저히 저하된 경우</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question" onclick="questionAnswer('4')"> <b
+                    style="flex: 25px">제품이 파손돼서(깨져서) 왔어요</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer4" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>고객님께 믿음을 드릴 수 있는</p>
+                <p>안전한 배송을 위하여</p>
+                <p>제품의 포장 상태 등을 체크하여 </p>
+                <p>배송 드리고 있습니다.</p>
+                <p>&nbsp;</p>
+                <p>구입하신 제품 중 파손 상품 발생 시</p>
+                <p>환불 서비스를 통해 신고하여 주시면</p>
+                <p>&nbsp;</p>
+                <p>확인 후 환불/교환 해드리겠습니다.</p>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question" onclick="questionAnswer('5')"> <b
+                    style="flex: 25px">배송이 언제오나요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer5" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>업체에서 송장번호가 나오면</p>
+                <p>마이페이지에서 위치추적이 가능합니다.</p>
+                <p>빠른 배송을 위해 노력하겠습니다.</p>
+
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function questionAnswer(id) {
+        $(".best-answer" + id).toggle()
+    }
+
+
+</script>

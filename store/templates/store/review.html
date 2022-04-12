@@ -99,7 +99,7 @@
         $.each(jQuery.parseJSON(data), function (id, data) {
             stars = getStars(data.fields.star_rating)
             if (data.fields.image_url == "") {
-                $('#product-reivew').append(`<tr><td>${stars}</td><td><a data-id="moreComment${counterReview}" class=" more-comment-review" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td></tr>
+                $('#product-reivew').append(`<tr><td>${stars}</td><td><a data-id="moreComment${counterReview}" class="more-comment-review" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td></tr>
                                         <tr id="moreComment${counterReview}" style="display: none"><td colspan="4">${data.fields.long_review}</td></tr>`);
             } else {
                 $('#product-reivew').append(`<tr><td>${stars}</td><td><a data-id="moreComment${counterReview}" class="button more-comment-review" href="javascript:void(0)">${data.fields.short_review}</a></td><td>${data.fields.review_user_name}</td><td>${data.fields.date_added}</td></tr>
@@ -110,6 +110,7 @@
         $(".more-comment-review").click(function (e) {
             e.preventDefault();
             var data = this.dataset.id
+            console.log("hello world")
             $('#' + data).toggle()
         });
     }
