@@ -3255,3 +3255,27 @@ ValueError: The view store.views.userinfo didn't return an HttpResponse object. 
 2022-04-08 19:13:37,536 [WARNING] django.request: Not Found: /product/question//1/
 2022-04-08 19:13:37,553 [WARNING] django.request: Not Found: /product/review//1/
 2022-04-08 19:13:37,574 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:18:13,718 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-12 10:18:32,847 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-12 10:18:43,226 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:18:43,249 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:18:43,254 [WARNING] django.request: Not Found: /product/question//1/
+2022-04-12 10:18:43,265 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:50,181 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:50,186 [WARNING] django.request: Not Found: /product/question//1/
+2022-04-12 10:23:50,201 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:50,213 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:58,482 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:58,494 [WARNING] django.request: Not Found: /product/question//1/
+2022-04-12 10:23:58,501 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:58,510 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:59,284 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:59,297 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:59,308 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:23:59,319 [WARNING] django.request: Not Found: /product/question//1/
+2022-04-12 10:48:39,796 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:48:39,801 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:48:39,805 [WARNING] django.request: Not Found: /product/question//1/
+2022-04-12 10:48:46,291 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:48:46,295 [WARNING] django.request: Not Found: /product/review//1/
+2022-04-12 10:48:46,301 [WARNING] django.request: Not Found: /product/question//1/
