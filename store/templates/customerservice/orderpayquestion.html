@@ -1,0 +1,92 @@
+{% load static %}
+<div class="container mt-3">
+
+
+    <table class="table">
+        <thead class="table-light">
+        <tr id="product-review-topic">
+
+        </tr>
+        <tr>
+            <th>주문 결제 질문</th>
+
+        </tr>
+        </thead>
+        <tbody id="product-reivew">
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; "
+                                                class="nav-link-mypage best-question " onclick="questionAnswer('1')"> <b
+                    style="flex: 25px">비회원 구매가 가능한가요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer1" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>망고땡 몰은 비회원 주문을 지원하지 않습니다.</p>
+                <p>상품 주문은 회원만 가능하므로 회원가입 후 이용해 주시기 바랍니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question"
+                                                onclick="questionAnswer('2')"> <b
+                    style="flex: 25px">상품은 어떻게 구매하나요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer2" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>장바구니에 등록된 상품 중 원하는 상품을 선택하거나 상품 자세히보기 화면에서 구매하기를 통해 구매 하실 수 있습니다.</p>
+                <p></p>
+                <p>1. 상품 자세히보기 화면에서 원하는 수량을 선택한 후 "장바구니 추가"를 선택합니다.</p>
+                <p>2. 메인 페이지 상단에 있는 카트를 클릭합니다.</p>
+                <p>3. 상품을 수령하실 배송지 정보와 원하시는 결제수단을 선택한 후 결제 및 구매하실 수 있습니다. </p>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question"
+                                                onclick="questionAnswer('3')"> <b
+                    style="flex: 25px">상품 주문 상태에 대해 단계별로 알려주세요.</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer3" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>망고땡 몰 상품 주문 상태는 다음과 같이 이루어집니다.</p>
+                <p></p>
+                <p><b>[주문 확인중]</b></p>
+                <p>- 관리자가 주문을 확인 전입니다.</p>
+                <p><b>[배송 준비중]</b></p>
+                <p>- 관리자가 주문을 준비중입니다.</p>
+                <p><b>[배송중]</b></p>
+                <p>- 관리자가 송장번호를 등록 했습니다.</p>
+                <p>- 송장번호로 배송 확인이 가능합니다.</p>
+                <p><b>[도착]</b></p>
+                <p>- 상품이 도착이 완료 했습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question"
+                                                onclick="questionAnswer('4')"> <b
+                    style="flex: 25px">주문한 내역은 어디에서 확인하나요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer4" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>"주문/배송 조회" 를 통해 구매하신 상품 및 내역을 확인하실 수 있습니다.</p>
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function questionAnswer(id) {
+        $(".best-answer" + id).toggle()
+    }
+
+
+</script>

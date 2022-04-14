@@ -1,0 +1,105 @@
+
+{% load static %}
+<div class="container mt-3">
+
+
+    <table class="table">
+        <thead class="table-light">
+        <tr id="product-review-topic">
+
+        </tr>
+        <tr>
+            <th>최소/교환/반품</th>
+
+        </tr>
+        </thead>
+        <tbody id="product-reivew">
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="nav-link-mypage best-question " onclick="questionAnswer('1')"> <b
+                    style="flex: 25px">상품을 교환하고 싶어요. 어떻게 해야하나요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer1" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>"주문 내역"에서 신청이 가능합니다.</p>
+                <p>&nbsp;</p>
+                <p><b>[교환 시 주의사항]</b></p>
+                <p>- 단순변심 및 일반 사유에 의한 교환 시에는 교환(왕복) 배송비를 부담하셔야 합니다.</p>
+                <p>- 사은품 및 구성품 누락 시에는 교환이 제한됩니다.</p>
+                <p>- 상품이 사용/손상/훼손된 경우에는 교환이 불가능합니다.</p>
+                <p>- 최초 수령한 상품이 입고되면 검수를 통해 확인 후 새 상품이 발송됩니다. </p>
+                <p>- 냉동 제품은 교환이 불가능합니다. </p>
+                <p>&nbsp;</p>
+                <p>확인 후 즉시 환불해 드리겠습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question" onclick="questionAnswer('2')"> <b
+                    style="flex: 25px">상품을 반품하고 싶어요. 어떻게 해야 하나요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer2" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>"주문 내역"에서 신청이 가능합니다.</p>
+                <p>&nbsp;</p>
+                <p><b>[반품 시 주의사항]</b></p>
+                <p>- 단순변심 및 일반 사유에 의한 반품 시에는 반품 배송비를 부담하셔야 합니다.</p>
+                <p>- 사은품 및 구성품 누락 시에는 반품이 제한됩니다.</p>
+                <p>- 상품이 사용/손상/훼손된 경우에는 반품이 불가능합니다.</p>
+                <p>- 최초 수령한 상품이 입고되면 검수를 통해 확인 후 반품 완료가 됩니다. </p>
+                <p>- 냉동 제품은 반품이 불가능합니다. </p>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question" onclick="questionAnswer('3')"> <b
+                    style="flex: 25px">교환, 반품 신청을 철회하고 싶어요</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer3" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>교환 및 반품하실 상품을 아직 발송하지 않은 경우, 오아시스 고객센터 070-4407-4279로 문의주시면 확인 후 철회처리 해 드리도록 하겠습니다. </p>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question" onclick="questionAnswer('4')"> <b
+                    style="flex: 25px">구매 취소했는데 , 언제 환불 되나요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer4" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>- 신용카드 : 3~5일 이내, 카드사 승인취소</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fa-solid fa-q"></i><a style="text-decoration: none; color: inherit; " class="best-question" onclick="questionAnswer('5')"> <b
+                    style="flex: 25px">구매한 상품을 취소하고 싶어요. 어떻게 해야 하나요?</b></a>
+            </td>
+        </tr>
+        <tr class="best-answer5" style="display: none;">
+            <td style="background-color: #f9f9f9">
+                <p>마이페이지 > 주문내역에서 취소 하실 수 있습니다.</p>
+                <p>단, 상품이 배송중 또는 배송이 완료된 경우에는 구매취소가 불가하니 이러한 경우에는 망고땡 몰 고객센터</p>
+                <p> 070-4407-4279로 연락 주시면 신솏하게 처리해 드리도록 하겠습니다.</p>
+
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function questionAnswer(id) {
+        $(".best-answer" + id).toggle()
+    }
+
+
+</script>
