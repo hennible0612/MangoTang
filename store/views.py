@@ -548,7 +548,7 @@ def checkoutComplete(request):
     try:
         iamportData = getPaymentData(access_res, imp_uid)  # 아임포트 서버에서 결제 확인
     except Exception as e:
-        logger.critical("exception error: " + str(e) + 'view checkoutComplete 아임포트 getPaymentData중 에러러')
+        logger.critical("exception error: " + str(e) + 'view checkoutComplete 아임포트 getPaymentData중 에러')
         return render(request, 'error.html')
 
     # 아임포트 서버랑 우리 몰 서버 결제 금액 비교
@@ -590,7 +590,6 @@ def checkoutComplete(request):
         orderhistory.order_request = order.order_request
         orderhistory.orderer_number = order.orderer_number
         orderhistory.orderer_name = order.orderer_name
-
         orderhistory.receipt_url = iamportData["response"]["receipt_url"]
         orderhistory.status = iamportData["response"]["status"]
         orderhistory.emb_pg_provider = iamportData["response"]["emb_pg_provider"]
@@ -616,7 +615,6 @@ def checkoutSummery(request, orderId):
     if request.user.is_authenticated:  # 로그인 유저일시
         customer = request.user.customer
         order = OrderHistory.objects.filter(customer=customer, order_number=orderId)
-
         if order.exists():
             orderhistory = OrderHistory.objects.get(customer=customer, order_number=orderId)
 
