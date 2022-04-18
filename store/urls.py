@@ -5,8 +5,10 @@ from . import views
 urlpatterns = [
 	#로그아웃 요청
 	path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-	#로그인 요청
+
+	#로그인 페이지 요청
 	path('login/', auth_views.LoginView.as_view(template_name='store/login.html'), name="login"),
+
 	# 장바구니에 추가 요청
 	path('update_item/', views.updateItem, name="update_item"),
 	# 장바구니에 추가 요청

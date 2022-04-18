@@ -1,5 +1,3 @@
-import json
-import requests
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
@@ -7,16 +5,16 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-import datetime
 from allauth.socialaccount.models import SocialAccount
 from MangoTang import settings
 from .models import *
-
+import json
+import requests
 import logging
+import datetime
 
-# logger = logging.getLogger('warning')
-# CRITICAL_logger = logging.getLogger("critical")
 logger = logging.getLogger(__name__)
+
 """
 메인페이지
 """
@@ -24,9 +22,9 @@ logger = logging.getLogger(__name__)
 
 def store(request):
     kw = request.GET.get('kw', '')
-    products = Product.objects.all()  # product 정보 다가져옴
-    carousel = Carosel.objects.all()  # 캐러솔 가져옴
-    carousel_length = len(carousel)  # 캐러솔 길이
+    products = Product.objects.all()
+    carousel = Carosel.objects.all()
+    carousel_length = len(carousel)
     if request.user.is_authenticated:  # 로그인 유저일시
         try:
             customer = request.user.customer
@@ -61,8 +59,9 @@ def store(request):
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
-    if kw:  # 검색 kw가 있을 경우
-        products = Product.objects.filter(product_name__contains=kw)  # product 정보 다가져옴
+
+    if kw:  # 검색 키워드가 있을 경우
+        products = Product.objects.filter(product_name__contains=kw)
         context = {'products': products, 'carousel': carousel, 'carousel_length': carousel_length,
                    'cartItems': cartItems}
         return render(request, 'store/store.html', context)
@@ -75,16 +74,18 @@ def store(request):
 
 """
 제품 설명
-메인화면에서 클릭시 이동할 제품 페이지
+메인화면에서 클릭한 제품을
+요청하는 페이지
 """
 
 
 def productDetail(request, seller_code):
+    # 쿼리는 제품 고유의 seller_code 사용
     product = Product.objects.get(seller_code=seller_code)
 
     review_page = request.GET.get('page', 1)  # 리뷰 페이지
     question_page = request.GET.get('page', 1)  # 리뷰 페이지
-
+    # 날짜순 정렬
     reviews = product.productreview_set.all().order_by('-date_added')
     questions = product.productquestion_set.all().order_by('-date_added')
     # 리뷰 페이징
@@ -94,14 +95,12 @@ def productDetail(request, seller_code):
     question_paginator = Paginator(questions, 5)
     question_obj = question_paginator.get_page(question_page)
 
+    # 옵션이 있을 경우 해당 제품의 옵션 쿼리
     if (product.option_bool == True):
         options = product.productoption_set.all()
     else:
         options = None
 
-    # context = {'product': product, 'review_page': review_page, 'review_obj': review_obj
-    #     , 'question_page': question_page, 'questions': questions, 'total_review': len(reviews)
-    #     , 'total_question': len(questions), 'question_obj': question_obj, 'reviews': reviews, 'options': options}
     context = {'product': product, 'review_page': review_page, 'review_obj': review_obj
         , 'question_page': question_page, 'total_review': len(reviews)
         , 'total_question': len(questions), 'question_obj': question_obj, 'options': options}
@@ -110,6 +109,8 @@ def productDetail(request, seller_code):
 
 """
 내 카트
+현재 customer의 아이템들과 그 옵션들을 쿼리
+쇼핑몰의 카트
 """
 
 
@@ -117,11 +118,12 @@ def productDetail(request, seller_code):
 def cart(request):
     customer = request.user.customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
-    items = order.orderitem_set.all()  # orderitem은 Order의 자식 그래서 쿼리 가능
+    items = order.orderitem_set.all()
     cartItems = order.get_cart_items
     itemOption = []
 
-    if (bool(items) == True):  # 카트 비어있는지 확인
+    # 카트 비어있는지 확인 없을시 빈 객체 return
+    if (bool(items) == True):
         for item in items:
             itemOption += OrderItemOption.objects.filter(order_item_option=item)
     else:
@@ -134,68 +136,72 @@ def cart(request):
 
 
 """
-로그인 요청 처리
+로그인 페이지 요청 처리
 """
 
 
 def user_login(request):
-    context = {}
-    return render(request, 'store/login.html', context)
+    return render(request, 'store/login.html')
 
 
 """
-회원가입 요청 처리
+회원가입
+쇼핑몰 자체 회원가입
 """
 
 
 def register(request):
+    # 비회원 회원가입시
     if request.method == "POST":
 
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
+        try:
 
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            email = form.cleaned_data.get('email')
-            name = form.cleaned_data.get('name')
-            phone_number = form.cleaned_data.get('phone_number')
-            allowPromotions = form.data.get('allowPromotions')
+            form = UserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password1')
+                email = form.cleaned_data.get('email')
+                name = form.cleaned_data.get('name')
+                phone_number = form.cleaned_data.get('phone_number')
+                allowPromotions = form.data.get('allowPromotions')
+                user = User.objects.get(username=username)
 
-            print(allowPromotions)
-
-            user = User.objects.get(username=username)
-
-            Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number,
-                                    allowPromotions=allowPromotions)
-            user = authenticate(username=username, password=raw_password)  # 사용자 인증
-            login(request, user)  # 로그인
-            return redirect('store')
+                Customer.objects.create(user=user, name=name, email=email, phone_number=phone_number,
+                                        allowPromotions=allowPromotions)
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                return redirect('store')
+        except Exception as e:
+            logger.critical("exception error: " + str(e) + '쇼핑몰 회원가입중 에러')
     else:
+        # GET 요청시
         form = UserForm()
-
     return render(request, 'store/register.html', {'form': form})
 
 
 """
-장바구니에 물품 추가 JSON 응답
+장바구니에 물품 추가
 """
 
 
 def updateItem(request):
-    if request.user.is_authenticated:  # 로그인 유저일시
-        data = json.loads(request.body)  # JSON body data에저장
+    if request.user.is_authenticated:
+        data = json.loads(request.body)  # 카트에 추가하는 아이템 정보
         option = data["option"]
-        if (option == 'false'):
-            seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
+        if (option == 'false'):  # 메인 제품만 있을 경우
+            seller_code = data['sellerCode']
             action = data['action']
             quantity = data['quantity']
-            customer = request.user.customer  # 현재 customer
-            product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
+            customer = request.user.customer
+            product = Product.objects.get(seller_code=seller_code)
+
             order, created = Order.objects.get_or_create(customer=customer,
                                                          order_status=False)  # 주문객체  만들거나 가져옴 상태 False
             orderItem, created = OrderItem.objects.get_or_create(order=order,
-                                                                 product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
+                                                                 product=product)  # 해당 order와 해당 product를 가지고 있는 orderitem 생성
+
+            #  받은 action에 따라 기능 수행
             if action == 'add':
                 orderItem.quantity = (orderItem.quantity + 1)
             elif action == 'remove':
@@ -208,20 +214,21 @@ def updateItem(request):
                 orderItem.delete()
 
             return JsonResponse('Item was added', safe=False)
-        else:
+        else:  # 메인제품 + 옵션이 있을 경우
             seller_code = data['itemSellercode']  # 옵션의 부모 제품 코드
             productQuantity = data['productQuantity']  # 옵션의 부모 개수
-            customer = request.user.customer  # 현재 customer
+            customer = request.user.customer
             product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
             order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
             orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
-            orderItem.item_option_bool = True  # 이 orderitem의 옵션은 True이다.
+            orderItem.item_option_bool = True  # 해당 아이템 옵션 유뮤 True로 변경
             orderItem.quantity = productQuantity
             orderItem.save()
 
+            # 메인제품의 옵션 추가
             for x, y in zip(data['options'], data['quantity']):
                 sellerCode = data['options'][x]
-                options = ProductOption.objects.get(option_seller_code=str(sellerCode))  # 해당 sellercode의 옵션 가져오고
+                options = ProductOption.objects.get(option_seller_code=str(sellerCode))
                 orderItemOption, created = OrderItemOption.objects.get_or_create(order_item_option=orderItem,
                                                                                  product_option=options)
                 orderItemOption.quantity = data['quantity'][y]
@@ -232,34 +239,33 @@ def updateItem(request):
 
 
 """
-카트에서 업데이트 아이템
-
+카트에서 메인제품과 메인제품의 옵션들
+ add, sub, delete
 """
 
 
 def updateCartItem(request):
-    data = json.loads(request.body)  # JSON body data에저장
+    data = json.loads(request.body)
     option = data['option']
-    if (option == False):
-        seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
+    if (option == False):  # 옵션이 없을 경우
+        seller_code = data['sellerCode']
         action = data['action']
-        # quantity = data['quantity']
 
-        customer = request.user.customer  # 현재 customer
-        product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
-        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
+        customer = request.user.customer
+        product = Product.objects.get(seller_code=seller_code)
+        order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+        orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
-        orderItem, created = OrderItem.objects.get_or_create(order=order,
-                                                             product=product)  # 해당 orderd와 해당 product를 가지고 있는 orderitem 생성
-        if orderItem.quantity == 1 and action == 'remove':
+        if orderItem.quantity == 1 and action == 'remove':  # 화살표로 제품 삭제 방지
             pass
         elif action == 'add':
             orderItem.quantity = (orderItem.quantity + 1)
         elif action == 'remove':
             orderItem.quantity = (orderItem.quantity - 1)
 
-        orderItem.save()  # DB에 저장
+        orderItem.save()
 
+        # 카트의 수량 제품비 합을 change 하기 위해 필요 정보 전달
         data = {
             "itemQuantity": orderItem.quantity,
             "itemDiscountPrice": orderItem.product.price_discount,
@@ -273,34 +279,36 @@ def updateCartItem(request):
 
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
-        print("option == True")
-
         seller_code = data['sellerCode']  # 각각 body에 있는 필요한 값저장
         action = data['action']
         code = data['code']  # 부모 코드
 
         customer = request.user.customer  # 현재 customer
-        product = Product.objects.get(seller_code=code)  # 해당하는 productId가져옴
+        product = Product.objects.get(seller_code=code)  # 해당하는 productId 가져옴
         order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
 
         orderItem = OrderItem.objects.get(order=order, product=product)
 
         options = ProductOption.objects.get(option_seller_code=seller_code)
         orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
-        if orderItemOption.quantity == 1 and action == 'remove':
+
+        if orderItemOption.quantity == 1 and action == 'remove':  # 화살표로 제품 옵셥 삭제 방지
             pass
         elif action == 'add':
             orderItemOption.quantity = orderItemOption.quantity + 1
         elif action == 'remove':
             orderItemOption.quantity = orderItemOption.quantity - 1
+
         orderItemOption.save()
+
+        # 변경된 아이템 옵션의 수량, 가격을 return
         data = {
             "itemOptionQuantity": orderItemOption.quantity,
             "itemOptionPrice": orderItemOption.product_option.option_price,
             "orderItemPriceTotal": order.get_cart_total,
             "cartTotal": order.get_total,
-
         }
+
         json_obj = json.dumps(data)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
@@ -313,14 +321,15 @@ def updateCartItem(request):
 def deleteCartItem(request, seller_code):
     data = json.loads(request.body)  # JSON body data에저장
     option = data['option']
+    customer = request.user.customer  # 현재 customer
+    product = Product.objects.get(seller_code=seller_code)
+    order, created = Order.objects.get_or_create(customer=customer, order_status=False)
+
+    # 옵션이 있을 경우
     if (option == False):
-        customer = request.user.customer  # 현재 customer
-        product = Product.objects.get(seller_code=seller_code)  # 해당하는 productId가져옴
-        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 주문객체  만들거나 가져옴 상태 False
         orderItem, created = OrderItem.objects.get_or_create(order=order,
                                                              product=product)
         orderItem.delete()
-
         data = {
             "orderItemTotal": order.get_cart_items,
             "orderItemPriceTotal": order.get_cart_total
@@ -329,22 +338,16 @@ def deleteCartItem(request, seller_code):
 
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
-        # 각각 body에 있는 필요한 값저장
-        customer = request.user.customer  # 현재 customer
-        order, created = Order.objects.get_or_create(customer=customer, order_status=False)  # 현재 고객 주문
-        product = Product.objects.get(seller_code=seller_code)
         orderItem = OrderItem.objects.get(order=order, product=product)
         option_code = data['optionCode']
-
         options = ProductOption.objects.get(option_seller_code=option_code)
         orderItemOption = OrderItemOption.objects.get(order_item_option=orderItem, product_option=options)
         orderItemOption.delete()
         data = {
             "orderItemPriceTotal": order.get_total
         }
-        itemOption = orderItem.orderitemoption_set.all()  # 아이템 있는지 테스트용
+        itemOption = orderItem.orderitemoption_set.all()
         if (bool(itemOption) == True):
-
             pass
         else:
             orderItem.item_option_bool = False
@@ -402,32 +405,12 @@ def getQuestion(request, seller_code, page):
 
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
-@login_required(login_url='account_login')
-def customerservice(request):
-    context = {}
-    return render(request, 'store/customerservice.html', context)
+
+"""
+제품 배송 체크 api
+"""
 
 
-def faq(request):
-    context = {}
-    return render(request, 'customerservice/faq.html', context)
-
-@login_required(login_url='account_login')
-def onetoone(request):
-    context = {}
-    return render(request, 'customerservice/onetoonequestion.html', context)
-
-def notice(request):
-    context = {}
-    return render(request, 'customerservice/notice.html', context)
-
-@login_required(login_url='account_login')
-def orderrefund(request):
-    context = {}
-    return render(request, 'mypage/orderrefund.html', context)
-
-
-# check delivery
 def checkDelivery(request):
     data = json.loads(request.body)
     settings.sweet_tracker_key
@@ -435,7 +418,6 @@ def checkDelivery(request):
     orderHistory = OrderHistory.objects.get(customer=customer, order_number=data['data']['orderNumber'])
     product = Product.objects.get(seller_code=(data['data']['sellerCode']))
     orderItem = OrderItem.objects.get(orderHistory=orderHistory, product=product)
-    # print(orderItem.deliver_company)
 
     url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=' + settings.sweet_tracker_key + '&t_code=' + str(
         orderItem.deliver_company) + '&t_invoice=' + str(orderItem.track_number)
@@ -447,6 +429,11 @@ def checkDelivery(request):
     print(access_res["lastStateDetail"]["level"])
 
     return render(request, 'error.html')
+
+
+"""
+상품 질문 등록
+"""
 
 
 def productquestion(request):
@@ -468,15 +455,33 @@ def productquestion(request):
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
+@login_required(login_url='account_login')
+def customerservice(request):
+    context = {}
+    return render(request, 'store/customerservice.html', context)
+
+
+def faq(request):
+    context = {}
+    return render(request, 'customerservice/faq.html', context)
+
+
+@login_required(login_url='account_login')
+def onetoone(request):
+    context = {}
+    return render(request, 'customerservice/onetoonequestion.html', context)
+
+
+def notice(request):
+    context = {}
+    return render(request, 'customerservice/notice.html', context)
+
+
+@login_required(login_url='account_login')
+def orderrefund(request):
+    context = {}
+    return render(request, 'mypage/orderrefund.html', context)
+
+
 def checkDeliveryState():
     print("hello")
-    # orderItem = OrderItem.objects.filter(deliver_state="delivering")
-    #
-    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=' + settings.sweet_tracker_key + '&t_code=' + str(
-    #     orderItem.deliver_company) + '&t_invoice=' + str(orderItem.track_number)
-    # # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str("06")+'&t_invoice='+str(32503569895)
-    # # level 6 가 완료료
-    #
-    # req = requests.get(url)
-    # access_res = req.json()
-    # print(access_res["lastStateDetail"]["level"])
