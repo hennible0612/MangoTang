@@ -18,8 +18,7 @@ urlpatterns = [
 	path('', views.store, name="store"),
 	# 카트
 	path('cart/', views.cart, name="cart"),
-	# 결제
-	path('checkout/', views.checkout, name="checkout"),
+
 	#회원가입
 	path('register/', views.register, name="register"),
 
@@ -27,35 +26,14 @@ urlpatterns = [
 	path('productDetail/<int:seller_code>/', views.productDetail, name="product_detail"),
 	#제품 리뷰 API
 	path('product/review/<int:seller_code>/<int:page>/', views.getReview, name="getReview"),
-
-	#결제 창
-	path('checkout/payment/', views.checkoutPayment, name="checkoutPayment"),
-	#결제 완료
-	path('checkout/complete/', views.checkoutComplete, name="checkoutComplete"),
-	#결제 완료 요약
-	path('checkout/complete/<int:orderId>/', views.checkoutSummery, name="checkoutSummery"),
-
-	#지금 바로 구매하기
-	path('checkout/buynow', views.buyNow, name="buyNow"),
-
 	# 제품 문의 API
 	path('product/question/<int:seller_code>/<int:page>/', views.getQuestion, name="getQuestion"),
-
-	# 결제 성공
-	path('payment/success',views.paymentSuccess, name='paymentSuccess'),
 
 	# 내페이지
 	path('mypage/', views.mypage, name="mypage"),
 
-	# 교환 환불 신청
-	path('submit/reqstExrfn', views.reqstExrfn, name="reqstExrfn"),
-
-	# 주문 취소
-	path('payment/cancel', views.paymentCancel, name="paymentCancel"),
-
 	# 택배 조회 api
 	# path('track/delivery',views.checkDelivery, name="checkDelivery"),
-
 	path('customerservice/', views.customerservice, name="customerservice"),
 	path('customerservice/faq', views.faq, name="faq"),
 	path('customerservice/onetoone', views.onetoone, name="onetoone"),
@@ -80,7 +58,6 @@ urlpatterns = [
 
 	#마이페이지 리뷰리스ㅡ
 	path('mypage/reviewlist', views.reviewlist, name="reviewlist"),
-
 	path('mypage/orderlist/orderdetail/<int:orderNumber>/<int:sellerCode>', views.orderdetail, name="orderdetail"), #주문번호로 변경
 	path('mypage/item/review/<int:orderNumber>/<int:sellerCode>', views.reviewform, name="reviewform"),
 
