@@ -29,9 +29,6 @@ urlpatterns = [
 	# 제품 문의 API
 	path('product/question/<int:seller_code>/<int:page>/', views.getQuestion, name="getQuestion"),
 
-	# 내페이지
-	path('mypage/', views.mypage, name="mypage"),
-
 	# 택배 조회 api
 	# path('track/delivery',views.checkDelivery, name="checkDelivery"),
 	path('customerservice/', views.customerservice, name="customerservice"),
@@ -39,26 +36,8 @@ urlpatterns = [
 	path('customerservice/onetoone', views.onetoone, name="onetoone"),
 	path('customerservice/notice', views.notice, name="notice"),
 
-	# 주문내역 페이지
-	path('mypage/orderhistory/', views.orderhistory, name="orderhistory"),
-	# cs 교화 반품 신청
-	path('mypage/orderhistory/cs/<int:orderNumber>/<int:sellerCode>', views.csform, name="cs"),
-
 	# cs 교화 반품 신청
 	path('product/question', views.productquestion, name="productquestion"),
 
-	path('mypage/ordercancel', views.ordercancel, name="ordercancel"),
-	path('mypage/orderrefund', views.orderrefund, name="orderrefund"),
-	path('mypage/couponlist', views.couponlist, name="couponlist"),
-	path('mypage/favoritelist', views.favoritelist, name="favoritelist"),
-	path('mypage/pointlist', views.pointlist, name="pointlist"),
-	path('mypage/qnalist', views.qnalist, name="qnalist"),
-	path('mypage/refundlist', views.refundlist, name="refundlist"),
-	path('mypage/userinfo', views.userinfo, name="userinfo"),
-
-	#마이페이지 리뷰리스ㅡ
-	path('mypage/reviewlist', views.reviewlist, name="reviewlist"),
-	path('mypage/orderlist/orderdetail/<int:orderNumber>/<int:sellerCode>', views.orderdetail, name="orderdetail"), #주문번호로 변경
-	path('mypage/item/review/<int:orderNumber>/<int:sellerCode>', views.reviewform, name="reviewform"),
 
 ]
