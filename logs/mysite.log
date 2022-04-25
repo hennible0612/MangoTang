@@ -4132,3 +4132,8 @@ django.urls.exceptions.NoReverseMatch: Reverse for 'login' not found. 'login' is
 2022-04-18 19:26:31,392 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
 2022-04-18 19:26:32,438 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2022-04-18 19:49:57,253 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\store\views.py changed, reloading.
+2022-04-18 19:49:58,054 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-19 17:04:54,894 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-19 17:05:04,640 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-19 17:06:55,199 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\urls.py changed, reloading.
+2022-04-19 17:06:56,044 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

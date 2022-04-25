@@ -419,10 +419,9 @@ def checkDelivery(request):
     product = Product.objects.get(seller_code=(data['data']['sellerCode']))
     orderItem = OrderItem.objects.get(orderHistory=orderHistory, product=product)
 
+    # level 6 가 완료료
     url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=' + settings.sweet_tracker_key + '&t_code=' + str(
         orderItem.deliver_company) + '&t_invoice=' + str(orderItem.track_number)
-    # url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key='+settings.sweet_tracker_key+'&t_code='+str("06")+'&t_invoice='+str(32503569895)
-    # level 6 가 완료료
 
     req = requests.get(url)
     access_res = req.json()
@@ -454,6 +453,10 @@ def productquestion(request):
     json_obj = json.dumps(msg)
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
+
+"""
+개발중
+"""
 
 @login_required(login_url='account_login')
 def customerservice(request):

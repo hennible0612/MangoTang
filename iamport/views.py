@@ -1,23 +1,18 @@
 import json
 from datetime import datetime
-
 import requests
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
-
-# Create your views here.
-import MangoTang.settings
 from MangoTang import settings
 from store.models import Order, OrderItemOption, OrderHistory, OrderItem, CAExchangeRefundList
 import logging
 
-# logger = logging.getLogger('warning')
-# CRITICAL_logger = logging.getLogger("critical")
 logger = logging.getLogger(__name__)
 
 """
 아임포트 결제 정보 확인
+
 """
 
 
@@ -37,6 +32,7 @@ def getPaymentData(access_res, imp_uid):
 
 """
 아임포트 토큰 가져오기
+api 사용을 위한 토큰 발급
 """
 
 
@@ -92,7 +88,7 @@ def checkoutPayment(request):
         if (order.order_status == False):
 
             # 결제 정보 order에 저장
-            order_id = str(customer.id) + str(datetime.now().timestamp())
+            order_id = str(customer.id) + str(datetime.now().timestamp())  # order_id 발급
             order_id = int(float(order_id))
             name = order.get_all_item_name
             order.total_fee = order.get_total
@@ -131,6 +127,12 @@ def checkoutPayment(request):
     return render(request, 'error.html')
 
 
+"""
+결제를 한 후 위조된 결제인지
+아닌지를 확인하는 view
+"""
+
+
 def checkoutComplete(request):
     data = json.loads(request.body)
     imp_uid = data['imp_uid']
@@ -148,16 +150,12 @@ def checkoutComplete(request):
         return render(request, 'error.html')
 
     # 아임포트 서버랑 우리 몰 서버 결제 금액 비교
-
     IamportAmount = iamportData["response"]["amount"]  # Iamport 서버 결제 금액
 
     customer = request.user.customer  # 현재 customer
     order, created = Order.objects.get_or_create(customer=customer, order_status=False)
     localAmount = order.get_total + order.get_deliver_price  # 로컬 서버의 결제 금액
-
     orderhistory = OrderHistory.objects.create(customer=customer)
-
-    # questions = product.productquestion_set.all().order_by('-date_added')  # 여기에 모든 리뷰 들어있음
 
     orderItem = order.orderitem_set.all()
 
@@ -168,8 +166,11 @@ def checkoutComplete(request):
             item.deliver_state = "checking"  # "shipping" "complete"
             item.save()
 
+        # order true로 변경하므로 카트에서 제거
         order.order_status = True
         order.payment_state = True
+
+        # orderhistory에 저장
         orderhistory.order_name = order.get_all_item_name
         orderhistory.date_ordered = order.date_ordered
         orderhistory.date_completed = datetime.now()
@@ -204,6 +205,7 @@ def checkoutComplete(request):
 
 """
 결제 완료 요약
+결제 성공시 주문번호 출력
 """
 
 
@@ -223,16 +225,6 @@ def checkoutSummery(request, orderId):
         return render(request, 'permisson.html')
 
 
-def buyNow(request):
-    data = json.loads(request.body)  # JSON body data에저장
-    customer = request.user.customer
-    # order = Order.objects.create(customer=customer, order_status=False)
-
-    context = {'data': data}
-    # return 0
-    return render(request, 'store/checkout.html', context)
-
-
 """
 결제 성공
 """
@@ -245,7 +237,10 @@ def paymentSuccess(request):
     return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
-# 아임포트 서버에 환불요청
+"""
+환불 처리
+요청된 금액 만큼 환불 처리
+"""
 def iamportRefundRequest(refundAmount, orderNumber, reason, checkSum):
     token = getToken()
 
@@ -263,13 +258,11 @@ def iamportRefundRequest(refundAmount, orderNumber, reason, checkSum):
     req = requests.post(url, headers=headers, data=data)
 
     access_res = req.json()
-    print(access_res)
 
+    # 성공
     if access_res['code'] == 0:
-        print("성공")
         return access_res
     else:
-        print("실패")
         return None
 
 
@@ -279,7 +272,8 @@ def paymentCancel(request):
 
 
 """
-환불
+환불 요청
+iamportRefundRequest() 호출
 """
 
 
@@ -309,7 +303,11 @@ def reqstExrfn(request):
     if (str(itemData.deliver_state) == "checking"):
         refundAmount = itemData.get_all_total + itemData.get_delivery_price  # 환불할 총 가격
         checkSum = orderHistory.get_total
+
+        # 환불요청
         response = iamportRefundRequest(refundAmount, orderNumber, reason, checkSum)
+
+        # 환불 성공
         if (response["code"] == 0):
 
             orderHistory.shipping_fee = orderHistory.shipping_fee - itemData.get_delivery_price
@@ -328,7 +326,19 @@ def reqstExrfn(request):
             json_obj = json.dumps(msg)
             return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
+        # 물품이 배송중이거나 도착 상태일때
         msg = "refundRequestCompleted"
 
         json_obj = json.dumps(msg)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
+
+"""
+개발중
+"""
+def buyNow(request):
+    data = json.loads(request.body)  # JSON body data에저장
+    customer = request.user.customer
+    # order = Order.objects.create(customer=customer, order_status=False)
+
+    context = {'data': data}
+    return render(request, 'store/checkout.html', context)
