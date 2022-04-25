@@ -4137,3 +4137,43 @@ django.urls.exceptions.NoReverseMatch: Reverse for 'login' not found. 'login' is
 2022-04-19 17:05:04,640 [WARNING] django.request: Not Found: /favicon.ico
 2022-04-19 17:06:55,199 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\urls.py changed, reloading.
 2022-04-19 17:06:56,044 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:14:31,981 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:24:44,169 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\mypage\views.py changed, reloading.
+2022-04-25 18:24:44,942 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:25:17,863 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\mypage\views.py changed, reloading.
+2022-04-25 18:25:18,605 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:25:46,128 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\mypage\views.py changed, reloading.
+2022-04-25 18:25:46,857 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:26:57,598 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\mypage\views.py changed, reloading.
+2022-04-25 18:26:58,307 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:27:04,600 [ERROR] django.request: Internal Server Error: /submit/reqstExrfn
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\iamport\views.py", line 311, in reqstExrfn
+    if (response["code"] == 0):
+TypeError: 'NoneType' object is not subscriptable
+2022-04-25 18:28:59,223 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\iamport\views.py changed, reloading.
+2022-04-25 18:28:59,956 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:29:04,736 [ERROR] django.request: Internal Server Error: /submit/reqstExrfn
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\iamport\views.py", line 311, in reqstExrfn
+    if (response["code"] == 0):
+TypeError: 'NoneType' object is not subscriptable
+2022-04-25 18:29:12,627 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-25 18:31:26,862 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\mypage\views.py changed, reloading.
+2022-04-25 18:31:27,746 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:33:01,204 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\mypage\views.py changed, reloading.
+2022-04-25 18:33:02,053 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:41:10,856 [WARNING] django.request: Not Found: /mypage/orderhistory/
+2022-04-25 18:41:10,927 [WARNING] django.request: Not Found: /favicon.ico
+2022-04-25 18:42:52,001 [INFO] django.utils.autoreload: C:\Users\henni\Desktop\MangoTang\MangoTang\MangoTang\urls.py changed, reloading.
+2022-04-25 18:42:52,761 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-04-25 18:42:53,760 [WARNING] django.request: Not Found: /mypage/mypage/favoritelist
+2022-04-25 18:42:54,717 [WARNING] django.request: Not Found: /mypage/mypage/favoritelist

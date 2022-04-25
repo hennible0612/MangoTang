@@ -3216,3 +3216,21 @@ Traceback (most recent call last):
   File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\urls\resolvers.py", line 698, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'login' not found. 'login' is not a valid view function or pattern name.
+2022-04-25 18:27:04,600 [ERROR] django.request: Internal Server Error: /submit/reqstExrfn
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\iamport\views.py", line 311, in reqstExrfn
+    if (response["code"] == 0):
+TypeError: 'NoneType' object is not subscriptable
+2022-04-25 18:29:04,736 [ERROR] django.request: Internal Server Error: /submit/reqstExrfn
+Traceback (most recent call last):
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\henni\Desktop\MangoTang\MangoTang\iamport\views.py", line 311, in reqstExrfn
+    if (response["code"] == 0):
+TypeError: 'NoneType' object is not subscriptable

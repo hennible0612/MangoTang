@@ -1,10 +1,7 @@
 import json
-
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
-
-# Create your views here.
 from store.models import OrderHistory, OrderItem, ProductReview, Product
 
 """
@@ -14,17 +11,18 @@ from store.models import OrderHistory, OrderItem, ProductReview, Product
 
 @login_required(login_url='account_login')
 def mypage(request):
-    context = {}
-    return render(request, 'store/mypage.html', context)
+    return render(request, 'store/mypage.html')
+
 
 """
-주문목록
+주문내역
 """
+
+
 @login_required(login_url='account_login')
 def orderhistory(request):
     customer = request.user.customer
     orderHistory = OrderHistory.objects.filter(customer=customer).order_by('-date_completed')
-
     orderItem = []
     for order in orderHistory:
         orderItem += order.orderitem_set.all()
@@ -37,11 +35,12 @@ def orderhistory(request):
 """
 교환환불 신청서
 """
+
+
 @login_required(login_url='account_login')
 def csform(request, orderNumber, sellerCode):
     customer = request.user.customer
     orderHistory = OrderHistory.objects.get(customer=customer, order_number=orderNumber)
-    # orderHistory = orderHistory.objects.filter('-date_completed')
     itemData = []
     orderItem = OrderItem.objects.filter(orderHistory=orderHistory)
     for item in orderItem:
@@ -51,6 +50,11 @@ def csform(request, orderNumber, sellerCode):
     context = {'itemData': itemData}
 
     return render(request, 'mypage/csform.html', context)
+
+
+"""
+환불된 아이템 목록
+"""
 
 
 @login_required(login_url='account_login')
@@ -63,6 +67,12 @@ def refundlist(request):
 
     context = {'orderItem': orderItem}
     return render(request, 'mypage/refundlist.html', context)
+
+
+"""
+유저 정보
+"""
+
 
 @login_required(login_url='account_login')
 def userinfo(request):
@@ -85,6 +95,12 @@ def userinfo(request):
         json_obj = json.dumps(msg)
         return JsonResponse(json_obj, safe=False, json_dumps_params={'ensure_ascii': False})
 
+
+"""
+리뷰 목록
+"""
+
+
 @login_required(login_url='account_login')
 def reviewlist(request):
     customer = request.user.customer
@@ -92,6 +108,11 @@ def reviewlist(request):
 
     context = {'productReview': productReview}
     return render(request, 'mypage/reviewlist.html', context)
+
+
+"""
+주문 상세정보
+"""
 
 
 @login_required(login_url='account_login')
@@ -104,6 +125,12 @@ def orderdetail(request, orderNumber, sellerCode):
 
     context = {'orderItem': orderItem}
     return render(request, 'mypage/orderdetail.html', context)
+
+
+"""
+리뷰 쓰기
+"""
+
 
 @login_required(login_url='account_login')
 def reviewform(request, orderNumber, sellerCode):
@@ -133,23 +160,10 @@ def reviewform(request, orderNumber, sellerCode):
         return render(request, 'mypage/reviewform.html', context)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 """
 ----------개발중----------
 """
+
 
 @login_required(login_url='account_login')
 def pointlist(request):
@@ -161,6 +175,7 @@ def pointlist(request):
 def qnalist(request):
     context = {}
     return render(request, 'mypage/qnalist.html', context)
+
 
 @login_required(login_url='account_login')
 def ordercancel(request):

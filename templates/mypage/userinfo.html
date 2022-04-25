@@ -27,7 +27,7 @@
                     <div class="item-orderdetail-topic">핸드폰 번호</div>
                     <div class="item-orderdetail-info">{{ customer.phone_number }}</div>
                 </div>
-{#                <button class="button submit-info" type="submit"> 수정하기</button>#}
+                {#                <button class="button submit-info" type="submit"> 수정하기</button>#}
 
                 <br>
 
@@ -85,7 +85,7 @@
                     {% endif %}
 
                 </form>
-                <button class="button submit" type="submit"> 수정하기</button>
+                <button class="button submit" type="submit">수정하기</button>
 
             </div>
 
@@ -97,9 +97,10 @@
     <script type="text/javascript" src="{% static 'js/kakao_address.js' %}"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-        var form = document.getElementById('form');
+        var form = document.getElementById('submit');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
+            alert("alskdjfl")
             changeAddress();
         });
 
