@@ -52,13 +52,11 @@
 
             }).then((response) => response.json())
                 .then((data) => {
-
                     var msg = JSON.parse(data);
                     console.log(msg)
                     if (msg == "refundSuccessful") {//환불성공
                         alert("환불 성공")
                         window.location.replace('/mypage/orderhistory/')
-
                     } else if (msg == "refundRequestCompleted") { //환불신청완료료
                         alert("환불 신청 완료")
                         window.location.replace('/mypage/orderhistory/')
@@ -67,10 +65,7 @@
                         alert("환불 신청 과정 중 에러 오류가 계속 나면 고객센터로 연락 부탁드립니다.")
 
                     }
-
                 })
-
-
         }
     </script>
 {% endblock %}

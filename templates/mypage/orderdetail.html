@@ -95,14 +95,6 @@
                 <div class="item-orderdetail-topic">결제 수단</div>
                 <div class="item-orderdetail-info">카드</div>
             </div>
-            {#            <div class="container-orderdetail">#}
-            {#                <div class="item-orderdetail-topic">마일리지 할인</div>#}
-            {#                <div class="item-orderdetail-info">0</div>#}
-            {#            </div>#}
-            {#            <div class="container-orderdetail">#}
-            {#                <div class="item-orderdetail-topic">쿠폰할인</div>#}
-            {#                <div class="item-orderdetail-info">0</div>#}
-            {#            </div>#}
             <div class="container-orderdetail">
                 <div class="item-orderdetail-topic">제품 비용</div>
                 <div class="item-orderdetail-info">{{ orderItem.orderHistory.total_fee }} 원</div>
@@ -119,7 +111,6 @@
         </div>
     </div>
     <script>
-        {#console.log({{ orderItem.deliver_state })#}
 
         function reviewButton() {
             if ("{{orderItem.deliver_state}}" != "delivered") {

@@ -31,24 +31,6 @@
 </div>
 
 <script type="text/javascript">
-    {#for (var i = 0; i < '{{carousel_length}}'; i++) {#}
-        {#console.log('{{carousel_length}}')#}
-        {#console.log(i)#}
-    {#    if (i != 0) {#}
-    {##}
-    {#        document.getElementById("carousel").innerHTML += '<button type="button" data-bs-target="#demo" data-bs-slide-to=slide ></button>';#}
-    {##}
-    {#    } else {#}
-    {##}
-    {#       document.getElementById("carousel").innerHTML += '<button   type="button" data-bs-target="#demo" data-bs-slide-to=slide class="active"></button>';#}
-    {##}
-    {#    }#}
-    {##}
-
-    {#document.getElementById("carousel").innerHTML +=  '<button  type="button" data-bs-target="#demo" data-bs-slide-to="2" ></button>';#}
-    {#document.getElementById("carousel").innerHTML +=  '<button  type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>';#}
-
-
     var count = 0
 
     function back() {

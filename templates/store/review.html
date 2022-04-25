@@ -26,16 +26,7 @@
 </div>
 <!-- 페이징처리 시작 -->
 <ul class="pagination justify-content-center">
-    <!-- 이전페이지 -->
-    {#    {% if review_obj.has_previous %}#}
-    {#        <li class="page-item">#}
-    {#            <a class="page-link">이전</a>#}
-    {#        </li>#}
-    {#    {% else %}#}
-    {#        <li class="page-item disabled">#}
-    {#            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>#}
-    {#        </li>#}
-    {#    {% endif %}#}
+
     <!-- 페이지리스트 -->
     {% for review_page in review_obj.paginator.page_range %}
         {% if review_page >= review_obj.number|add:-5 and review_page <= review_obj.number|add:5 %}
@@ -52,23 +43,13 @@
             {% endif %}
         {% endif %}
     {% endfor %}
-    <!-- 다음페이지 -->
-    {#    {% if review_obj.has_next %}#}
-    {#        <li class="page-item next">#}
-    {#            <a class="page-link">다음</a>#}
-    {#        </li>#}
-    {#    {% else %}#}
-    {#        <li class="page-item disabled">#}
-    {#            <a class="page-link next" tabindex="-1" aria-disabled="true" href="#">다음</a>#}
-    {#        </li>#}
-    {#    {% endif %}#}
+
 </ul>
 <!-- 페이징처리 끝 -->
 <script>
     $('.review-page').click(function (e) {
         $('.review-page-item').removeClass('active')
-        {#var page = this.dataset.page;#}
-        {#console.log(typeof page)#}
+
     });
 
     $.ajax({
