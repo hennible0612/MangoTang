@@ -9,7 +9,7 @@
 * 백엔드 : django 3.2.12
 * 데이터베이스 : SQLite3
 * 배포 : amazon lightsail, ubuntu 20.04 LTS, nginx, gunicorn
-## BPMN (자세한 내용은 아임포트 폴더 확인)
+## BPMN (자세한 내용은 drawio 폴더 확인)
 draw.io를 사용하여 사용자, 클라이언트백엔드, 관리자 입장의 흐름도를 표현
 <img width="758" alt="bpmn" src="https://user-images.githubusercontent.com/48763809/165433920-d1691d86-2305-490f-aa84-937be6c47f71.png">
 
