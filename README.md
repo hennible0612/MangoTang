@@ -1,7 +1,7 @@
 # MangoTang
 ## 소개
 * 프로젝트 주제 : 쇼핑몰
-* 쇼핑몰 url : ...
+* 쇼핑몰 url : (수정중) https://blog.naver.com/ghdtjddn0612/222647397155
 * 팀원 : 혼자
 
 ## 사용 기술
